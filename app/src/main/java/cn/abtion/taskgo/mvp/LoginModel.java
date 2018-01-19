@@ -6,7 +6,7 @@ package cn.abtion.taskgo.mvp;
  * email fanhongyu@hrsoft.net.
  */
 
-public class LoginModle {
+public class LoginModel {
 
     private String phone;
     private String password;

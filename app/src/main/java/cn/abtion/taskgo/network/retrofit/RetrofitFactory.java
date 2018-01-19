@@ -1,4 +1,4 @@
-package cn.abtion.taskgo.network;
+package cn.abtion.taskgo.network.retrofit;
 
 
 
@@ -15,6 +15,7 @@ import okhttp3.Request;
 import okhttp3.Response;
 import okhttp3.logging.HttpLoggingInterceptor;
 import retrofit2.Retrofit;
+import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory;
 
 /**
  * @author FanHongyu.
@@ -22,26 +23,25 @@ import retrofit2.Retrofit;
  * email fanhongyu@hrsoft.net.
  */
 
-public final class RetrofitClient {
+public final class RetrofitFactory {
 
 
     private static OkHttpClient sOkHttpClient;
     private static Retrofit sRetrofit;
-    private static ApiService sApiService;
+    private static RetrofitService sRetrofitService;
 
 
     /**
-     * 生成API请求
+     * 生成Service接口
      *
-     * @return ApiService
+     * @return RetrofitService
      */
-    public static ApiService getApiService() {
+    public static RetrofitService getRetrofitService() {
 
-        if (sApiService == null) {
-            sApiService = getRetrofit().create(ApiService.class);
+        if (sRetrofitService == null) {
+            sRetrofitService = getRetrofit().create(RetrofitService.class);
         }
-
-        return sApiService;
+        return sRetrofitService;
     }
 
 
@@ -59,7 +59,8 @@ public final class RetrofitClient {
                     .baseUrl(Config.APP_SERVER_BASE_URL)
                     //增加对返回值为自定义Response类型的支持,默认是Gson
                     .addConverterFactory(ResponseConverterFactory.create())
-                    //.addCallAdapterFactory(RxJava2CallAdapterFactory.create())
+                    //增加对RxJava的适配
+                    .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
                     .build();
         }
         return sRetrofit;
@@ -108,7 +109,7 @@ public final class RetrofitClient {
                 if (token == null) {
                     token = "token";
                 }
-                // TODO: 18/1/18 修改保存token的方式
+                // TODO: 18/1/18 token安全性问题
                 //请求时加入token
                 Request request = chain.request().newBuilder()
                         .header("Token", token)
