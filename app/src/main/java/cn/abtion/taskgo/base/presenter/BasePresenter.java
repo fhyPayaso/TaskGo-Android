@@ -16,16 +16,16 @@ public class BasePresenter <T extends BaseContract.View> implements BaseContract
     /**
      * P层构造方法;
      * 创建P层时就将P和V进行双向绑定
-     * @param view V层的引用
+     * @param mView V层的引用
      */
     //忽略 unchecked 警告信息
     @SuppressWarnings("unchecked")
-    public BasePresenter(T view) {
+    public BasePresenter(T mView) {
 
         //将V层的引用捆绑到P层
-        mView = view;
+        this.mView = mView;
         //将P层自身捆绑到V层
-        mView.setPresenter(this);
+        this.mView.setPresenter(this);
     }
 
 
@@ -37,11 +37,14 @@ public class BasePresenter <T extends BaseContract.View> implements BaseContract
     public void destroy() {
 
         T view = mView;
-        //销毁P层对V层的引用
-        mView = null;
+
         //销毁V层对P层的引用
         if(view != null) {
             view.setPresenter(null);
         }
+
+        //销毁P层对V层的引用
+        mView = null;
+
     }
 }

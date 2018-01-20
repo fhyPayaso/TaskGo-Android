@@ -1,7 +1,6 @@
 package cn.abtion.taskgo.network.retrofit;
 
 
-import cn.abtion.taskgo.mvp.LoginModel;
 import cn.abtion.taskgo.network.response.ApiResponse;
 import io.reactivex.Observable;
 import retrofit2.Call;
@@ -19,10 +18,14 @@ public interface RetrofitService {
 
 
     @POST("public/index.php/login")
-    Call<ApiResponse> login(@Body LoginModel loginModle);
+    Call<ApiResponse> login(@Body LoginModel loginModel);
 
-//    @POST("public/index.php/login")
-//    Observable<ApiResponse> login(@Body LoginModel loginModel);
+
+
+    @POST("public/index.php/login")
+    Observable<ApiResponse> rxLogin(@Body LoginModel loginModel);
+
+
 
 
 }
