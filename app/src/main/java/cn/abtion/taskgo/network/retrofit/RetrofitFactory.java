@@ -5,10 +5,16 @@ package cn.abtion.taskgo.network.retrofit;
 import java.io.IOException;
 import java.util.concurrent.TimeUnit;
 
+import javax.xml.transform.Transformer;
+
 import cn.abtion.taskgo.TaskGoApplication;
 import cn.abtion.taskgo.common.Config;
 import cn.abtion.taskgo.common.constants.CacheKey;
 import cn.abtion.taskgo.network.converter.ResponseConverterFactory;
+import io.reactivex.Observable;
+import io.reactivex.ObservableTransformer;
+import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.schedulers.Schedulers;
 import okhttp3.Interceptor;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
@@ -29,6 +35,13 @@ public final class RetrofitFactory {
     private static OkHttpClient sOkHttpClient;
     private static Retrofit sRetrofit;
     private static RetrofitService sRetrofitService;
+
+
+
+
+
+
+
 
 
     /**

@@ -1,6 +1,7 @@
 package cn.abtion.taskgo.mvp.contract;
 
 import cn.abtion.taskgo.base.contract.BaseContract;
+import cn.abtion.taskgo.mvp.model.request.LoginRequest;
 
 /**
  * @author FanHongyu.
@@ -24,7 +25,7 @@ public interface LoginContract {
         /**
          * P层进行登录
          */
-        void requestLogin();
+        void requestLogin(String phone,String password);
     }
 
 }

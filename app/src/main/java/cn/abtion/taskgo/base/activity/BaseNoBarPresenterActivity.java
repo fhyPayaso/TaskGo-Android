@@ -11,7 +11,7 @@ import cn.abtion.taskgo.base.contract.BaseContract;
  * email fanhongyu@hrsoft.net.
  */
 
-public abstract class BaseNoBarPresenterActivity<Presenter extends BaseContract.Presenter> extends BaseActivity
+public abstract class BaseNoBarPresenterActivity<Presenter extends BaseContract.Presenter> extends BaseNoBarActivity
         implements BaseContract.View<Presenter> {
 
     protected Presenter mPresenter;

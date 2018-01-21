@@ -18,7 +18,6 @@ public class BasePresenter <T extends BaseContract.View> implements BaseContract
      * 创建P层时就将P和V进行双向绑定
      * @param mView V层的引用
      */
-    //忽略 unchecked 警告信息
     @SuppressWarnings("unchecked")
     public BasePresenter(T mView) {
 

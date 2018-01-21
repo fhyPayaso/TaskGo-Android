@@ -1,7 +1,10 @@
 package cn.abtion.taskgo.network;
 
 import cn.abtion.taskgo.network.response.ApiException;
+import cn.abtion.taskgo.network.response.ApiResponse;
 import cn.abtion.taskgo.utils.ToastUtil;
+import io.reactivex.Observer;
+import io.reactivex.disposables.Disposable;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -12,7 +15,8 @@ import retrofit2.Response;
  * email fanhongyu@hrsoft.net.
  */
 
-public abstract class DataCallBack<T> implements Callback<T> {
+
+public abstract class ResponseCallBack<T> implements Callback<T> {
 
 
     public abstract void onDataResponse(Call<T> call, Response<T> response);
