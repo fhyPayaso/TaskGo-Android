@@ -23,5 +23,6 @@
     <color name="txt_gray">#979797</color>
     <color name="bg_bottom_tab">#F7F7F7</color>
     <color name="line_bottom_tab">#979797</color>
+    <color name="bg_gray">#EFEFF4</color>
 
 </resources>
