@@ -41,9 +41,6 @@ public final class RetrofitFactory {
 
 
 
-
-
-
     /**
      * 生成Service接口
      *
