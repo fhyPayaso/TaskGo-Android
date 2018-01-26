@@ -2,31 +2,27 @@ package cn.abtion.taskgo.mvp.view.account;
 
 import android.content.Context;
 import android.content.Intent;
-import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 
 import cn.abtion.taskgo.R;
-import cn.abtion.taskgo.base.activity.BaseNoBarPresenterActivity;
+import cn.abtion.taskgo.base.activity.BaseNoBarActivity;
 import cn.abtion.taskgo.base.contract.BaseContract;
 import cn.abtion.taskgo.base.presenter.BasePresenter;
-import cn.abtion.taskgo.mvp.view.MainActivity;
 
-public class RegisterActivity extends BaseNoBarPresenterActivity {
+/**
+ * Created by heaijia on 2018/1/26.
+ */
 
-
-    @Override
-    protected BaseContract.Presenter initPresenter() {
-        return new BasePresenter<>(this);
-    }
+public class UpdatePasswordActivity extends BaseNoBarActivity {
 
     public static void startActivity(Context context) {
-        context.startActivity(new Intent(context, RegisterActivity.class));
+        context.startActivity(new Intent(context, UpdatePasswordActivity.class));
     }
+
 
 
     @Override
     protected int getLayoutId() {
-        return R.layout.activity_register;
+        return R.layout.activity_update_password;
     }
 
     @Override
