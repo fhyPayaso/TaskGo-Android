@@ -27,9 +27,9 @@ public abstract class BaseObserver<T> implements Observer<ApiResponse<T>> {
     @Override
     public void onNext(ApiResponse tApiResponse) {
 
-        if (tApiResponse.getCode() > 400) {
+        if (tApiResponse.getCode() != 1000) {
 
-            // TODO: 2018/1/21 错误信息统一处理
+            GlobalAPIErrorHandler.handler(tApiResponse.getCode());
         } else {
 
             onDataSuccess(tApiResponse);
@@ -40,8 +40,7 @@ public abstract class BaseObserver<T> implements Observer<ApiResponse<T>> {
     public void onError(Throwable e) {
 
         if (e instanceof ApiException) {
-
-            // TODO: 2018/1/21 错误信息统一处理
+            GlobalAPIErrorHandler.handler((ApiException) e);
         } else {
             ToastUtil.showToast("网络连接失败，请稍后再试");
         }

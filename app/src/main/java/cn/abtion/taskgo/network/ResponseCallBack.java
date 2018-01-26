@@ -30,7 +30,8 @@ public abstract class ResponseCallBack<T> implements Callback<T> {
     public void onResponse(Call<T> call, Response<T> response) {
         dismissDialog();
 
-        if (response.code()>=400){
+        if (response.code() != 1000){
+
             GlobalAPIErrorHandler.handler(response.code());
         }else {
             onDataResponse(call, response);

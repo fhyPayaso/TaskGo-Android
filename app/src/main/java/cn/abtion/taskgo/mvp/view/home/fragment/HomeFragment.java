@@ -1,26 +1,22 @@
 package cn.abtion.taskgo.mvp.view.home.fragment;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
-import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.animation.AccelerateInterpolator;
-import android.view.animation.Animation;
-import android.view.animation.TranslateAnimation;
 import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.ViewFlipper;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import butterknife.OnClick;
 import butterknife.Unbinder;
 import cn.abtion.taskgo.R;
 import cn.abtion.taskgo.base.contract.BaseContract;
 import cn.abtion.taskgo.base.frgment.BasePresenterFragment;
-import cn.abtion.taskgo.widget.BannerFlipper;
-
-import static android.view.MotionEvent.ACTION_UP;
+import cn.abtion.taskgo.mvp.view.home.activity.WaterTaskActivity;
+import cn.abtion.taskgo.utils.ToastUtil;
 
 /**
  * @author fhyPayaso
@@ -28,10 +24,16 @@ import static android.view.MotionEvent.ACTION_UP;
  * fhyPayaso@qq.com
  */
 public class HomeFragment extends BasePresenterFragment {
-
-
-    @BindView(R.id.home_banner_flipper)
-    ViewFlipper homeBannerFlipper;
+    @BindView(R.id.flipper_header)
+    ViewFlipper mFlipper;
+    @BindView(R.id.txt_diy_task)
+    TextView mTxtDiyTask;
+    @BindView(R.id.txt_water_task)
+    TextView mTxtWaterTask;
+    @BindView(R.id.txt_lost_task)
+    TextView mTxtLostTask;
+    @BindView(R.id.txt_more_task)
+    TextView mTxtMoreTask;
     Unbinder unbinder;
 
     @Override
@@ -47,35 +49,43 @@ public class HomeFragment extends BasePresenterFragment {
     @Override
     protected void initVariable() {
 
-
     }
 
     @Override
     protected void initView() {
 
-//        ImageView imageView1 = new ImageView(getContext());
-//        imageView1.setImageResource(R.drawable.flipper1);
-//        ImageView imageView2 = new ImageView(getContext());
-//        imageView2.setImageResource(R.drawable.filpper2);
-//        ImageView imageView3 = new ImageView(getContext());
-//        imageView3.setImageResource(R.drawable.filpper3);
-//        ImageView imageView4 = new ImageView(getContext());
-//        imageView4.setImageResource(R.drawable.filpper4);
-//
-//
-//        homeBannerFlipper = (BannerFlipper) getRootView().findViewById(R.id.home_banner_flipper);
-//
-//        homeBannerFlipper.addView(imageView1);
-//        homeBannerFlipper.addView(imageView2);
-//        homeBannerFlipper.addView(imageView3);
-//        homeBannerFlipper.addView(imageView4);
-//        //homeBannerFlipper = new BannerFlipper(getContext());
-
+        initFlipper();
+        initAlpha();
     }
 
     @Override
     protected void loadData() {
 
+    }
+
+
+    private void initFlipper() {
+
+        mFlipper.addView(getImageView(R.drawable.home_banner1));
+        mFlipper.addView(getImageView(R.drawable.home_banner2));
+        mFlipper.addView(getImageView(R.drawable.home_banner3));
+        mFlipper.addView(getImageView(R.drawable.home_banner4));
+        mFlipper.startFlipping();
+    }
+
+    private ImageView getImageView(int res) {
+        ImageView imageView = new ImageView(getContext());
+        imageView.setBackgroundResource(res);
+        return imageView;
+    }
+
+    private void initAlpha() {
+
+        int alpha = 140;
+        mTxtDiyTask.getBackground().setAlpha(alpha);
+        mTxtLostTask.getBackground().setAlpha(alpha);
+        mTxtMoreTask.getBackground().setAlpha(alpha);
+        mTxtWaterTask.getBackground().setAlpha(alpha);
     }
 
     @Override
@@ -92,5 +102,22 @@ public class HomeFragment extends BasePresenterFragment {
         unbinder.unbind();
     }
 
+    @OnClick(R.id.txt_diy_task)
+    public void onMTxtDiyTaskClicked() {
+        ToastUtil.showToast("敬请期待");
+    }
 
+    @OnClick(R.id.txt_water_task)
+    public void onMTxtWaterTaskClicked() {
+        WaterTaskActivity.startActivity(getContext());
+    }
+
+    @OnClick(R.id.txt_lost_task)
+    public void onMTxtLostTaskClicked() {
+    }
+
+    @OnClick(R.id.txt_more_task)
+    public void onMTxtMoreTaskClicked() {
+        ToastUtil.showToast("敬请期待");
+    }
 }

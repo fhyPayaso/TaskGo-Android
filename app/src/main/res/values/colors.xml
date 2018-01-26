@@ -9,10 +9,20 @@
     <color name="primary_dark">#FF324057</color>
     <color name="primary_light">#FF45ABE0</color>
 
-    <color name="accent">#FF45ABE0</color>
+    <color name="accent">#FF007AFF</color>
 
+
+
+
+    <color name="bg_account_btn">#99007AFF</color>
+
+    <!--home模块-->
     <color name="white">#ffffff</color>
     <color name="black">#000000</color>
-
+    <color name="txt_blue">#007AFF</color>
+    <color name="txt_gray">#979797</color>
+    <color name="bg_bottom_tab">#F7F7F7</color>
+    <color name="line_bottom_tab">#979797</color>
+    <color name="bg_gray">#EFEFF4</color>
 
 </resources>

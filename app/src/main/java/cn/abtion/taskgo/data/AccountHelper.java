@@ -20,8 +20,6 @@ import retrofit2.Response;
 public class AccountHelper {
 
 
-    private RetrofitService mRetrofitService = RetrofitFactory.getRetrofitService();
-
     /**
      * 登录请求
      */
