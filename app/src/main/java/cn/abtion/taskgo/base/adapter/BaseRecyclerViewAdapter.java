@@ -159,6 +159,7 @@ public abstract class BaseRecyclerViewAdapter<Data> extends RecyclerView.Adapter
      */
     public interface OnItemClicked<Data> {
 
+
         void onItemClicked(Data data, BaseViewHolder holder);
     }
 

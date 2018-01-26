@@ -7,4 +7,5 @@ package cn.abtion.taskgo.base.adapter;
  */
 
 public class RecyclerScrollListener {
+
 }
