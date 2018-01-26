@@ -13,7 +13,7 @@
     <LinearLayout
         android:layout_marginLeft="10dp"
         android:id="@+id/ly_header"
-        android:layout_marginTop="25dp"
+        android:layout_marginTop="35dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
@@ -25,7 +25,7 @@
             android:paddingLeft="5dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textSize="14dp"
+            android:textSize="16sp"
             android:text="新用户注册"
             android:textColor="@color/txt_blue"
             android:layout_gravity="center"/>
@@ -36,7 +36,7 @@
         android:id="@+id/rl_context"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="35dp"
         android:layout_below="@id/ly_header"
         android:paddingLeft="28dp"
         android:paddingRight="28dp">
@@ -62,7 +62,7 @@
                 android:layout_height="wrap_content"
                 android:background="@null"
                 android:hint="手机号"
-                android:textSize="13sp" />
+                android:textSize="14sp" />
 
         </LinearLayout>
 
@@ -79,7 +79,7 @@
             android:id="@+id/ly_verification_code"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="7dp"
+            android:layout_marginTop="10dp"
             android:layout_below="@id/line3"
             android:gravity="center|left"
             android:orientation="horizontal">
@@ -102,7 +102,7 @@
                 android:gravity="center_vertical"
                 android:background="@null"
                 android:hint="请输入验证码"
-                android:textSize="13sp" />
+                android:textSize="14sp" />
 
          <Button
              android:id="@+id/btn_verification"
@@ -130,7 +130,7 @@
         android:id="@+id/ly_secret"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="7dp"
+        android:layout_marginTop="12dp"
         android:layout_below="@id/line4"
         android:gravity="center|left"
         android:orientation="horizontal">
@@ -148,7 +148,7 @@
             android:layout_height="wrap_content"
             android:background="@null"
             android:hint="请输入密码"
-            android:textSize="13sp" />
+            android:textSize="14sp" />
 
     </LinearLayout>
 
@@ -165,7 +165,7 @@
         android:id="@+id/ly_secret_again"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="7dp"
+        android:layout_marginTop="12dp"
         android:layout_below="@id/line5"
         android:gravity="center|left"
         android:orientation="horizontal">
@@ -183,7 +183,7 @@
             android:layout_height="wrap_content"
             android:background="@null"
             android:hint="请再次输入密码"
-            android:textSize="13sp" />
+            android:textSize="14sp" />
 
     </LinearLayout>
 
@@ -200,7 +200,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        android:paddingLeft="10dp"
+        android:paddingLeft="14dp"
         android:layout_marginTop="16dp"
         android:layout_below="@id/line6">
 
@@ -217,7 +217,7 @@
             android:layout_height="wrap_content"
             android:textColor="@color/txt_blue"
             android:paddingLeft="10dp"
-            android:textSize="13sp"
+            android:textSize="14sp"
             android:layout_gravity="center"
             android:text="我已阅读并同意    "/>
 
@@ -234,7 +234,7 @@
                 android:layout_height="wrap_content"
                 android:text="Taskgo的相关服务条例"
                 android:textColor="@color/txt_blue"
-                android:textSize="13sp"
+                android:textSize="14sp"
                 />
 
             <View
