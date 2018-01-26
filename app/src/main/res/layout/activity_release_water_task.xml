@@ -1,0 +1,266 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@color/bg_gray"
+    >
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="7dp"
+        android:background="@color/white">
+
+
+        <ImageView
+            android:id="@+id/img_address_build"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="20dp"
+            android:layout_marginTop="40dp"
+            android:src="@drawable/ic_task_address"/>
+
+
+        <TextView
+            android:id="@+id/txt_fix_address_build"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBottom="@id/img_address_build"
+            android:layout_marginLeft="10dp"
+            android:layout_toRightOf="@id/img_address_build"
+            android:text="宿舍楼:"
+            android:textColor="@color/black"
+            android:textSize="16sp"/>
+
+        <TextView
+            android:id="@+id/txt_address_build"
+            android:layout_width="70dp"
+            android:layout_height="wrap_content"
+            android:layout_alignBottom="@id/img_address_build"
+            android:layout_marginLeft="90dp"
+            android:layout_toRightOf="@id/img_address_build"
+            android:background="@drawable/bg_task_btn_blue"
+            android:gravity="center"
+            android:paddingBottom="3dp"
+            android:paddingTop="3dp"
+            android:text="校6"
+            android:textColor="@color/white"/>
+
+
+        <ImageView
+            android:id="@+id/img_address_number"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignLeft="@id/img_address_build"
+            android:layout_below="@id/img_address_build"
+            android:layout_marginTop="25dp"
+            android:src="@drawable/ic_task_address"/>
+
+
+        <TextView
+            android:id="@+id/txt_fix_address_number"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBottom="@id/img_address_number"
+            android:layout_alignLeft="@id/txt_fix_address_build"
+            android:text="宿舍号:"
+            android:textColor="@color/black"
+            android:textSize="16sp"/>
+
+        <View
+            android:id="@+id/line"
+            android:layout_width="150dp"
+            android:layout_height="1dp"
+            android:layout_alignBottom="@id/txt_fix_address_number"
+            android:layout_alignLeft="@id/txt_address_build"
+            android:background="@color/txt_gray"/>
+
+        <EditText
+            android:id="@+id/edit_address_number"
+            android:layout_width="150dp"
+            android:layout_height="wrap_content"
+            android:layout_above="@id/line"
+            android:layout_alignLeft="@id/txt_address_build"
+            android:layout_marginBottom="2dp"
+            android:background="@null"
+            android:textSize="16sp"/>
+
+
+        <ImageView
+            android:id="@+id/img_water_task_type"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignLeft="@id/img_address_build"
+            android:layout_below="@id/img_address_number"
+            android:layout_marginLeft="5dp"
+            android:layout_marginTop="25dp"
+            android:src="@drawable/ic_water_task_type"
+            />
+
+
+        <TextView
+            android:id="@+id/txt_water_task_type"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBottom="@id/img_water_task_type"
+            android:layout_alignLeft="@id/txt_fix_address_build"
+            android:text="取水形式:"
+            android:textColor="@color/black"
+            android:textSize="16sp"/>
+
+
+        <TextView
+            android:id="@+id/txt_type_send"
+            android:layout_width="70dp"
+            android:layout_height="wrap_content"
+            android:layout_alignBottom="@id/img_water_task_type"
+            android:layout_alignLeft="@id/txt_address_build"
+            android:background="@drawable/txt_task_type_selector"
+            android:gravity="center"
+            android:paddingBottom="3dp"
+            android:paddingTop="3dp"
+            android:text="送水上门"
+            android:textColor="@color/white"/>
+
+
+        <TextView
+            android:id="@+id/txt_type_self"
+            android:layout_width="70dp"
+            android:layout_height="wrap_content"
+            android:layout_alignBottom="@id/img_water_task_type"
+            android:layout_alignRight="@id/edit_address_number"
+
+            android:background="@drawable/txt_task_type_selector"
+            android:gravity="center"
+            android:paddingBottom="3dp"
+            android:paddingTop="3dp"
+            android:text="自提"
+            android:textColor="@color/white"/>
+
+
+        <ImageView
+            android:id="@+id/img_task_information"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignLeft="@id/img_address_build"
+            android:layout_below="@id/img_water_task_type"
+            android:layout_marginLeft="5dp"
+            android:layout_marginTop="25dp"
+            android:src="@drawable/ic_task_imformation"
+            />
+
+        <TextView
+            android:id="@+id/txt_remark_information"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBottom="@id/img_task_information"
+            android:layout_alignLeft="@id/txt_fix_address_build"
+            android:text="备注信息:"
+            android:textColor="@color/black"
+            android:textSize="16sp"/>
+
+        <LinearLayout
+            android:id="@+id/ly_edit_box"
+            android:layout_width="match_parent"
+            android:layout_height="150dp"
+            android:layout_below="@id/img_task_information"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            android:layout_marginTop="25dp"
+            android:background="@drawable/bg_edit_box"
+            android:padding="10dp"
+            >
+
+
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@null"
+                android:hint="请添加备注"
+                android:textSize="14sp"
+                />
+        </LinearLayout>
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_alignParentBottom="true">
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="2"
+                android:background="@color/bg_gray"
+                android:gravity="center"
+                >
+
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="合计 ¥"
+                    android:textColor="@color/txt_blue"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="9"
+                    android:textColor="@color/txt_blue"
+                    />
+
+
+            </LinearLayout>
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:background="@color/txt_blue"
+                android:gravity="center"
+                android:text="发布任务"
+                android:textColor="@color/white"
+                android:textSize="14sp"/>
+
+
+        </LinearLayout>
+    </RelativeLayout>
+</RelativeLayout>
+
+
+    <!--<TextView-->
+    <!--android:id="@+id/txt_money"-->
+    <!--android:layout_width="wrap_content"-->
+    <!--android:layout_height="wrap_content"-->
+    <!--android:layout_alignRight="@id/ly_edit_box"-->
+    <!--android:layout_below="@id/ly_edit_box"-->
+    <!--android:layout_marginRight="20dp"-->
+    <!--android:layout_marginTop="30dp"-->
+    <!--android:text="9"-->
+    <!--android:textColor="@color/txt_blue"-->
+    <!--android:textSize="40sp"-->
+    <!--/>-->
+
+
+    <!--<ImageView-->
+    <!--android:layout_width="25dp"-->
+    <!--android:layout_height="50dp"-->
+    <!--android:layout_alignBottom="@id/txt_money"-->
+    <!--android:layout_toLeftOf="@id/txt_money"-->
+    <!--android:src="@drawable/ic_money"/>-->
+
+
+    <!--<TextView-->
+    <!--android:id="@+id/txt_release_task"-->
+    <!--android:layout_width="wrap_content"-->
+    <!--android:layout_height="wrap_content"-->
+    <!--android:layout_alignRight="@id/txt_money"-->
+    <!--android:layout_below="@id/txt_money"-->
+    <!--android:background="@drawable/bg_accpte_btn"-->
+    <!--android:paddingBottom="4dp"-->
+    <!--android:paddingLeft="12dp"-->
+    <!--android:paddingRight="12dp"-->
+    <!--android:paddingTop="4dp"-->
+    <!--android:text="提交"-->
+    <!--android:textColor="@color/txt_blue"-->
+    <!--android:textSize="16sp"/>-->

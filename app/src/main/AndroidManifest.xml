@@ -27,7 +27,8 @@
             </intent-filter>
         </activity>
 
-        <activity android:name=".mvp.view.home.activity.WaterTaskActivity"/>
+        <activity android:name=".mvp.view.home.activity.WaterTaskListActivity"/>
+        <activity android:name=".mvp.view.home.activity.ReleaseWaterTaskActivity"/>
 
     </application>
 
