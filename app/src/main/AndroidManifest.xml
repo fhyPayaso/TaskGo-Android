@@ -29,11 +29,10 @@
 
         <activity android:name=".mvp.view.account.RegisterActivity"/>
         <activity android:name=".mvp.view.account.UpdatePasswordActivity"/>
-
-
-
         <activity android:name=".mvp.view.home.activity.WaterTaskListActivity"/>
         <activity android:name=".mvp.view.home.activity.ReleaseWaterTaskActivity"/>
+        <activity android:name=".mvp.view.home.activity.LostAndFoundTaskActivity"/>
+        <activity android:name=".mvp.view.home.activity.SearchTaskActivity"/>
 
     </application>
 

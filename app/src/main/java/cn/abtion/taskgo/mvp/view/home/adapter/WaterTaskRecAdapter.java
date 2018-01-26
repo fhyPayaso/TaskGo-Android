@@ -1,4 +1,4 @@
-package cn.abtion.taskgo.mvp.view.home;
+package cn.abtion.taskgo.mvp.view.home.adapter;
 
 import android.content.Context;
 import android.view.View;
