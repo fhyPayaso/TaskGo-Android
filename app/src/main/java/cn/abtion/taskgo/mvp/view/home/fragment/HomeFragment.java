@@ -15,7 +15,7 @@ import butterknife.Unbinder;
 import cn.abtion.taskgo.R;
 import cn.abtion.taskgo.base.contract.BaseContract;
 import cn.abtion.taskgo.base.frgment.BasePresenterFragment;
-import cn.abtion.taskgo.mvp.view.home.activity.WaterTaskActivity;
+import cn.abtion.taskgo.mvp.view.home.activity.WaterTaskListActivity;
 import cn.abtion.taskgo.utils.ToastUtil;
 
 /**
@@ -109,7 +109,7 @@ public class HomeFragment extends BasePresenterFragment {
 
     @OnClick(R.id.txt_water_task)
     public void onMTxtWaterTaskClicked() {
-        WaterTaskActivity.startActivity(getContext());
+        WaterTaskListActivity.startActivity(getContext());
     }
 
     @OnClick(R.id.txt_lost_task)
