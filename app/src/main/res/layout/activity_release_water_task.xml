@@ -167,7 +167,7 @@
             android:layout_marginLeft="20dp"
             android:layout_marginRight="20dp"
             android:layout_marginTop="25dp"
-            android:background="@drawable/bg_edit_box"
+            android:background="@drawable/bg_edit_information"
             android:padding="10dp"
             >
 
