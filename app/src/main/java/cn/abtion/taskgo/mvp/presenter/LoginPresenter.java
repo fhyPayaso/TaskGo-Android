@@ -43,9 +43,6 @@ public class LoginPresenter extends BasePresenter<LoginContract.View> implements
     private boolean isDataTrue(String phone,String password) {
 
         boolean flag = true;
-
-
-
         return flag;
     }
 

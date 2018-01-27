@@ -12,17 +12,18 @@
 
     <LinearLayout
         android:layout_marginLeft="10dp"
-        android:id="@+id/ly_header"
+        android:id="@+id/ly_header_register"
         android:layout_marginTop="35dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
         <ImageView
+            android:id="@+id/btn_back_register"
             android:layout_width="10dp"
             android:layout_height="18dp"
             android:src="@drawable/btn_back"/>
         <TextView
-            android:paddingLeft="5dp"
+            android:paddingLeft="10dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textSize="16sp"
@@ -37,7 +38,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="35dp"
-        android:layout_below="@id/ly_header"
+        android:layout_below="@id/ly_header_register"
         android:paddingLeft="28dp"
         android:paddingRight="28dp">
 
@@ -105,7 +106,7 @@
                 android:textSize="14sp" />
 
          <Button
-             android:id="@+id/btn_verification"
+             android:id="@+id/btn_verification_register"
              android:layout_width="80dp"
              android:layout_height="26dp"
              android:background="@drawable/bg_verification"

@@ -1,5 +1,7 @@
 package cn.abtion.taskgo.mvp.view.account;
 
+import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -57,6 +59,10 @@ public class LoginActivity extends BaseNoBarPresenterActivity<LoginContract.Pres
 //        ToastUtil.showToast("登录成功");
 //        MainActivity.startActivity(this);
 //        this.finish();
+    }
+
+    public static void startActivity(Context context) {
+        context.startActivity(new Intent(context, RegisterActivity.class));
     }
 
 
