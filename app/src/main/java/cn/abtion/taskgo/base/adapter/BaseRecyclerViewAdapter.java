@@ -26,7 +26,7 @@ public abstract class BaseRecyclerViewAdapter<Data> extends RecyclerView.Adapter
     protected LayoutInflater mInflater;
     private OnItemClicked<Data> onItemClickedListener;
 
-    public BaseRecyclerViewAdapter(Context context,List<Data> dataList) {
+    public BaseRecyclerViewAdapter(Context context, List<Data> dataList) {
         this.mContext = context;
         mDataList = dataList;
         mInflater = LayoutInflater.from(context);
@@ -153,12 +153,17 @@ public abstract class BaseRecyclerViewAdapter<Data> extends RecyclerView.Adapter
     }
 
 
+    /**
+     * 设置点击事件监听
+     */
+    public void setOnItemClickedListener(OnItemClicked<Data> onItemClickedListener) {
+        this.onItemClickedListener = onItemClickedListener;
+    }
 
     /**
      * 点击事件接口
      */
     public interface OnItemClicked<Data> {
-
 
         void onItemClicked(Data data, BaseViewHolder holder);
     }

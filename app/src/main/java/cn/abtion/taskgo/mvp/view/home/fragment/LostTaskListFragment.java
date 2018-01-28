@@ -20,13 +20,14 @@ import cn.abtion.taskgo.base.frgment.BasePresenterFragment;
 import cn.abtion.taskgo.base.presenter.BasePresenter;
 import cn.abtion.taskgo.mvp.model.request.home.LostFindTaskModel;
 import cn.abtion.taskgo.mvp.view.home.adapter.LostFindTaskRecAdapter;
+import cn.abtion.taskgo.mvp.view.home.adapter.TaskListener;
 
 /**
  * @author fhyPayaso
  * @since 2018/1/26 on 下午11:31
  * fhyPayaso@qq.com
  */
-public class LostTaskListFragment extends BasePresenterFragment {
+public class LostTaskListFragment extends BasePresenterFragment implements TaskListener{
 
     @BindView(R.id.rec_lost_find_task)
     RecyclerView recLostFindTask;
@@ -73,6 +74,7 @@ public class LostTaskListFragment extends BasePresenterFragment {
                     "机械键盘", "12-11 08:20"));
         }
         mAdapter = new LostFindTaskRecAdapter(getContext(),list);
+        mAdapter.setTaskListener(this);
         mLayoutManager = new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL, false);
         recLostFindTask.setLayoutManager(mLayoutManager);
         recLostFindTask.setAdapter(mAdapter);
@@ -90,5 +92,15 @@ public class LostTaskListFragment extends BasePresenterFragment {
     public void onDestroyView() {
         super.onDestroyView();
         unbinder.unbind();
+    }
+
+    @Override
+    public void onClickAvatar(int position) {
+
+    }
+
+    @Override
+    public void onClickAccept(int position) {
+
     }
 }

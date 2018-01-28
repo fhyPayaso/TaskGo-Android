@@ -21,6 +21,8 @@ import cn.abtion.taskgo.mvp.model.request.home.LostFindTaskModel;
 public class LostFindTaskRecAdapter extends BaseRecyclerViewAdapter<LostFindTaskModel> {
 
 
+    private TaskListener mTaskListener;
+
     public LostFindTaskRecAdapter(Context context, List<LostFindTaskModel> lostFindTaskModels) {
 
         super(context, lostFindTaskModels);
@@ -32,8 +34,11 @@ public class LostFindTaskRecAdapter extends BaseRecyclerViewAdapter<LostFindTask
         return new ItemHolder(view);
     }
 
+    public void setTaskListener(TaskListener listener) {
+        mTaskListener = listener;
+    }
 
-    static class ItemHolder extends BaseViewHolder<LostFindTaskModel> {
+    class ItemHolder extends BaseViewHolder<LostFindTaskModel> implements View.OnClickListener {
 
         @BindView(R.id.txt_username)
         TextView mTxtUsername;
@@ -43,18 +48,38 @@ public class LostFindTaskRecAdapter extends BaseRecyclerViewAdapter<LostFindTask
         TextView mTxtThingsName;
         @BindView(R.id.txt_release_time)
         TextView mTxtReleaseTime;
-
+        @BindView(R.id.txt_accept_task)
+        TextView txtAcceptTask;
 
         public ItemHolder(View itemView) {
             super(itemView);
+            mAvatar.setOnClickListener(this);
+            txtAcceptTask.setOnClickListener(this);
         }
 
         @Override
         protected void onBind(LostFindTaskModel lostFindTaskModel, int position) {
 
             mTxtUsername.setText(lostFindTaskModel.getUsername() == null ? "N/A" : lostFindTaskModel.getUsername());
-            mTxtThingsName.setText(lostFindTaskModel.getThingsName() == null ? "N/A" : lostFindTaskModel.getThingsName());
-            mTxtReleaseTime.setText(lostFindTaskModel.getReleaseTime() == null ? "N/A" :lostFindTaskModel.getReleaseTime());
+            mTxtThingsName.setText(lostFindTaskModel.getThingsName() == null ? "N/A" : lostFindTaskModel
+                    .getThingsName());
+            mTxtReleaseTime.setText(lostFindTaskModel.getReleaseTime() == null ? "N/A" : lostFindTaskModel
+                    .getReleaseTime());
+        }
+
+        @Override
+        public void onClick(View v) {
+            int position = getAdapterPosition();
+            switch (v.getId()) {
+                case R.id.img_avatar:
+                    mTaskListener.onClickAvatar(position);
+                    break;
+                case R.id.txt_accept_task:
+                    mTaskListener.onClickAccept(position);
+                    break;
+                default:
+                    break;
+            }
         }
     }
 }
