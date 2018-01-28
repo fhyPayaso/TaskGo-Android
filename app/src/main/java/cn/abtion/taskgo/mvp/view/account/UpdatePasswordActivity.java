@@ -58,10 +58,9 @@ public class UpdatePasswordActivity extends BaseNoBarActivity {
     View line6;
     @BindView(R.id.rl_context_forget)
     RelativeLayout rlContextForget;
-    @BindView(R.id.btn_register)
-    Button btnRegister;
     @BindView(R.id.btn_certain)
     Button btnCertain;
+
 
     public static void startActivity(Context context) {
         context.startActivity(new Intent(context, UpdatePasswordActivity.class));
@@ -111,7 +110,7 @@ public class UpdatePasswordActivity extends BaseNoBarActivity {
     @OnClick(R.id.btn_certain)
     public void onViewClicked() {
 
-        ToastUtil.showToast("还没有网络请求，敬请期待");
+        ToastUtil.showToast("敬请期待");
         LoginActivity.startActivity(UpdatePasswordActivity.this);
     }
 }

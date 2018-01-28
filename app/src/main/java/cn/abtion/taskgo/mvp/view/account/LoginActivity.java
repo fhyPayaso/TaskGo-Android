@@ -62,7 +62,7 @@ public class LoginActivity extends BaseNoBarPresenterActivity<LoginContract.Pres
     }
 
     public static void startActivity(Context context) {
-        context.startActivity(new Intent(context, RegisterActivity.class));
+        context.startActivity(new Intent(context, LoginActivity.class));
     }
 
 

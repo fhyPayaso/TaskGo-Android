@@ -55,8 +55,6 @@ public class RegisterActivity extends BaseNoBarPresenterActivity {
     LinearLayout lySecretAgain;
     @BindView(R.id.line6)
     View line6;
-    @BindView(R.id.img_agreement_select)
-    ImageView imgAgreementSelect;
     @BindView(R.id.txt_taskgo_servise)
     TextView txtTaskgoServise;
     @BindView(R.id.line7)
@@ -69,6 +67,8 @@ public class RegisterActivity extends BaseNoBarPresenterActivity {
     RelativeLayout rlContext;
     @BindView(R.id.btn_register)
     Button btnRegister;
+    @BindView(R.id.img_agreement_selector)
+    ImageView imgAgreementSelector;
 
     @Override
     protected BaseContract.Presenter initPresenter() {
@@ -127,6 +127,7 @@ public class RegisterActivity extends BaseNoBarPresenterActivity {
     }
 
 
-
-
+    @OnClick(R.id.img_agreement_selector)
+    public void onViewClicked() {
+    }
 }

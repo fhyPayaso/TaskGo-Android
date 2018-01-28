@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.view.View;
 import android.widget.TextView;
 
 import java.util.ArrayList;
@@ -14,12 +15,11 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import cn.abtion.taskgo.R;
-import cn.abtion.taskgo.base.activity.BaseNoBarPresenterActivity;
 import cn.abtion.taskgo.base.activity.BaseToolBarPresenterActivity;
 import cn.abtion.taskgo.base.contract.BaseContract;
 import cn.abtion.taskgo.base.presenter.BasePresenter;
 import cn.abtion.taskgo.mvp.model.request.home.WaterTaskModel;
-import cn.abtion.taskgo.mvp.view.home.WaterTaskRecAdapter;
+import cn.abtion.taskgo.mvp.view.home.adapter.WaterTaskRecAdapter;
 import cn.abtion.taskgo.utils.ToastUtil;
 
 /**
@@ -83,6 +83,13 @@ public class WaterTaskListActivity extends BaseToolBarPresenterActivity {
 
         setActivityTitle("送水任务");
         setToolBarMenu(R.drawable.ic_search);
+
+        getToolBar().findViewById(R.id.img_toolbar_menu).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                SearchTaskActivity.startActivity(WaterTaskListActivity.this);
+            }
+        });
     }
 
     private void initRecyclerView() {
