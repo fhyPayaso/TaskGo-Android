@@ -18,5 +18,12 @@ public class Config {
      */
     public static final int APP_SERVER_CONNECT_TIME_OUT = 15;
 
+    /**
+     * InitiateActivity 的Page标记
+     */
+    public static final int FLAG_INITIATE_FIRST =0;
+    public static final int FLAG_INITIATE_SECOND =1;
+    public static final int PAGE_SUMS=2;
+
 
 }

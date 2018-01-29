@@ -19,6 +19,7 @@
     <color name="white">#ffffff</color>
     <color name="black">#000000</color>
     <color name="txt_blue">#007AFF</color>
+    <color name="btn_blue">#99007AFF</color>
     <color name="txt_gray">#979797</color>
     <color name="bg_bottom_tab">#F7F7F7</color>
     <color name="line_bottom_tab">#979797</color>

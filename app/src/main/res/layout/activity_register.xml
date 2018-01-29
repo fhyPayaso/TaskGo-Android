@@ -37,7 +37,7 @@
         android:id="@+id/rl_context"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="35dp"
+        android:layout_marginTop="28dp"
         android:layout_below="@id/ly_header_register"
         android:paddingLeft="28dp"
         android:paddingRight="28dp">
@@ -80,7 +80,7 @@
             android:id="@+id/ly_verification_code"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
+            android:layout_marginTop="14dp"
             android:layout_below="@id/line3"
             android:gravity="center|left"
             android:orientation="horizontal">
@@ -131,7 +131,7 @@
         android:id="@+id/ly_secret"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="12dp"
+        android:layout_marginTop="17dp"
         android:layout_below="@id/line4"
         android:gravity="center|left"
         android:orientation="horizontal">
@@ -166,7 +166,7 @@
         android:id="@+id/ly_secret_again"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="12dp"
+        android:layout_marginTop="17dp"
         android:layout_below="@id/line5"
         android:gravity="center|left"
         android:orientation="horizontal">
@@ -201,15 +201,15 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        android:paddingLeft="14dp"
-        android:layout_marginTop="16dp"
+        android:paddingLeft="5dp"
+        android:layout_marginTop="20dp"
         android:layout_below="@id/line6">
 
 
         <ImageView
             android:id="@+id/img_agreement_selector"
-            android:layout_width="12dp"
-            android:layout_height="10dp"
+            android:layout_width="wrap_content"
+            android:layout_height="12dp"
             android:layout_gravity="center"
             android:src="@drawable/img_agreement_selector" />
         <TextView
@@ -239,7 +239,7 @@
 
             <View
                 android:id="@+id/line7"
-                android:layout_width="135dp"
+                android:layout_width="145dp"
                 android:layout_height="1dp"
                 android:layout_marginTop="1dp"
                 android:background="@color/txt_blue"
@@ -260,7 +260,7 @@
         android:background="@drawable/bg_account_btn"
         android:text="注册"
         android:textColor="@color/white"
-        android:layout_marginTop="30dp"
+        android:layout_marginTop="40dp"
         android:textSize="18sp" />
 
 

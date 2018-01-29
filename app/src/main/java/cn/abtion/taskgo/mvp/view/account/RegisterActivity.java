@@ -23,6 +23,8 @@ import cn.abtion.taskgo.utils.ToastUtil;
 public class RegisterActivity extends BaseNoBarPresenterActivity {
 
 
+    VerificationCountDownTimer verificationCountDownTimer;
+
     @BindView(R.id.btn_back_register)
     ImageView btnBackRegister;
     @BindView(R.id.ly_header_register)
@@ -67,6 +69,7 @@ public class RegisterActivity extends BaseNoBarPresenterActivity {
     RelativeLayout rlContext;
     @BindView(R.id.btn_register)
     Button btnRegister;
+
     @BindView(R.id.img_agreement_selector)
     ImageView imgAgreementSelector;
 
@@ -88,6 +91,7 @@ public class RegisterActivity extends BaseNoBarPresenterActivity {
     @Override
     protected void initVariable() {
 
+        initCountDownTimer();
     }
 
     @Override
@@ -105,29 +109,90 @@ public class RegisterActivity extends BaseNoBarPresenterActivity {
         super.onCreate(savedInstanceState);
         // TODO: add setContentView(...) invocation
         ButterKnife.bind(this);
-    }
 
-    @OnClick(R.id.ly_header_register)
-    public void onLyHeaderRegisterClicked() {
-        LoginActivity.startActivity(RegisterActivity.this);
-    }
-
-    @OnClick(R.id.btn_verification_register)
-    public void onBtnVerificationRegisterClicked() {
-        ToastUtil.showToast("你即将获得验证码，请注意查收");
 
     }
+
 
     @OnClick(R.id.btn_register)
     public void onBtnRegisterClicked() {
 
         ToastUtil.showToast("还没有网络请求，敬请期待");
         LoginActivity.startActivity(RegisterActivity.this);
+        verificationCountDownTimer.cancel();
 
     }
 
 
     @OnClick(R.id.img_agreement_selector)
     public void onViewClicked() {
+
+        imgAgreementSelector.setSelected(true);
+
     }
+
+
+
+
+    @OnClick(R.id.ly_header_register)
+    public void onLyHeaderRegisterClicked() {
+        LoginActivity.startActivity(RegisterActivity.this);
+    }
+
+    /**
+     * 绑定 获得验证码 按钮，启动timerStart
+     */
+    @OnClick(R.id.btn_verification_register)
+    public void onBtnVerificationRegisterClicked() {
+        ToastUtil.showToast("你即将获得验证码，请注意查收");
+        verificationCountDownTimer.timerStart(true);
+    }
+
+    /**
+     * 倒计时具体方法
+     */
+    public void initCountDownTimer() {
+
+        if(!VerificationCountDownTimer.FLAG_FIRST_IN&&
+                VerificationCountDownTimer.curMillis+60000>System.currentTimeMillis()) {
+
+            setCountDownTimer(VerificationCountDownTimer.curMillis+60000-System.currentTimeMillis());
+            verificationCountDownTimer.timerStart(false);
+
+        } else {
+
+            setCountDownTimer(60000);
+        }
+    }
+
+    public void setCountDownTimer(final long countDownTime) {
+
+        verificationCountDownTimer = new VerificationCountDownTimer( countDownTime , 1000) {
+
+            @Override
+            public void onTick(long millisUntilFinished) {
+                btnVerificationRegister.setEnabled(false);
+                btnVerificationRegister.setText((millisUntilFinished / 1000) + " s");
+            }
+
+            @Override
+            public void onFinish() {
+
+                btnVerificationRegister.setEnabled(true);
+                btnVerificationRegister.setText(getString(R.string.btn_verification_gain));
+
+                if(countDownTime!=60000) {
+                    setCountDownTimer(60000);
+                }
+            }
+
+        };
+
+    }
+
+
+
+
+
+
 }

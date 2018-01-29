@@ -23,6 +23,7 @@ import cn.abtion.taskgo.utils.ToastUtil;
 
 public class UpdatePasswordActivity extends BaseNoBarActivity {
 
+    VerificationCountDownTimer vCountDownTimer;
 
     @BindView(R.id.btn_back_forget)
     ImageView btnBackForget;
@@ -74,6 +75,7 @@ public class UpdatePasswordActivity extends BaseNoBarActivity {
 
     @Override
     protected void initVariable() {
+        initCountDownTimer();
 
     }
 
@@ -101,11 +103,7 @@ public class UpdatePasswordActivity extends BaseNoBarActivity {
 
     }
 
-    @OnClick(R.id.btn_verification)
-    public void onBtnVerificationClicked() {
 
-        ToastUtil.showToast("你即将获取验证码，请注意查收");
-    }
 
     @OnClick(R.id.btn_certain)
     public void onViewClicked() {
@@ -113,4 +111,57 @@ public class UpdatePasswordActivity extends BaseNoBarActivity {
         ToastUtil.showToast("敬请期待");
         LoginActivity.startActivity(UpdatePasswordActivity.this);
     }
+
+
+
+    @OnClick(R.id.btn_verification)
+    public void onBtnVerificationClicked() {
+
+        ToastUtil.showToast("你即将获取验证码，请注意查收");
+        vCountDownTimer.timerStart(true);
+    }
+
+    /**
+     * 倒计时生物具体方法
+     */
+    public void initCountDownTimer() {
+
+        if(!VerificationCountDownTimer.FLAG_FIRST_IN&&
+                VerificationCountDownTimer.curMillis+60000>System.currentTimeMillis()) {
+
+            setCountDownTimer(VerificationCountDownTimer.curMillis+60000-System.currentTimeMillis());
+            vCountDownTimer.timerStart(false);
+
+        } else {
+
+            setCountDownTimer(60000);
+        }
+    }
+
+    public void setCountDownTimer(final long countDownTime) {
+
+        vCountDownTimer = new VerificationCountDownTimer( countDownTime , 1000) {
+
+            @Override
+            public void onTick(long millisUntilFinished) {
+                btnVerification.setEnabled(false);
+                btnVerification.setText((millisUntilFinished / 1000) + " s");
+            }
+
+            @Override
+            public void onFinish() {
+
+                btnVerification.setEnabled(true);
+                btnVerification.setText(getString(R.string.btn_verification_gain));
+
+                if(countDownTime!=60000) {
+                    setCountDownTimer(60000);
+                }
+            }
+
+        };
+
+    }
+
+
 }
