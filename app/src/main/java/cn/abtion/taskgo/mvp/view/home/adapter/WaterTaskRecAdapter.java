@@ -3,6 +3,7 @@ package cn.abtion.taskgo.mvp.view.home.adapter;
 import android.content.Context;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import java.util.List;
@@ -10,8 +11,11 @@ import java.util.List;
 import butterknife.BindView;
 import cn.abtion.taskgo.R;
 import cn.abtion.taskgo.base.adapter.BaseRecyclerViewAdapter;
+import cn.abtion.taskgo.mvp.contract.LoginContract;
 import cn.abtion.taskgo.mvp.model.request.home.WaterTaskModel;
 import de.hdodenhof.circleimageview.CircleImageView;
+
+import static android.view.View.GONE;
 
 /**
  * @author FanHongyu.
@@ -21,10 +25,7 @@ import de.hdodenhof.circleimageview.CircleImageView;
 
 public class WaterTaskRecAdapter extends BaseRecyclerViewAdapter<WaterTaskModel> {
 
-
-
     private TaskListener mTaskListener;
-
 
     public WaterTaskRecAdapter(Context context, List<WaterTaskModel> waterTaskModels) {
         super(context, waterTaskModels);
@@ -32,6 +33,7 @@ public class WaterTaskRecAdapter extends BaseRecyclerViewAdapter<WaterTaskModel>
 
     @Override
     public BaseViewHolder<WaterTaskModel> onCreateViewHolder(ViewGroup parent, int viewType) {
+
         View view = mInflater.inflate(R.layout.item_water_task, parent, false);
         return new ItemHolder(view);
     }
@@ -91,4 +93,5 @@ public class WaterTaskRecAdapter extends BaseRecyclerViewAdapter<WaterTaskModel>
             }
         }
     }
+
 }

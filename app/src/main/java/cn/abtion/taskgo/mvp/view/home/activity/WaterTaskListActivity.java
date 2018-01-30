@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -21,6 +22,7 @@ import butterknife.OnClick;
 import cn.abtion.taskgo.R;
 import cn.abtion.taskgo.base.activity.BaseToolBarPresenterActivity;
 import cn.abtion.taskgo.base.adapter.BaseRecyclerViewAdapter;
+import cn.abtion.taskgo.base.adapter.RecyclerScrollListener;
 import cn.abtion.taskgo.base.contract.BaseContract;
 import cn.abtion.taskgo.base.presenter.BasePresenter;
 import cn.abtion.taskgo.mvp.model.request.home.WaterTaskModel;
@@ -44,9 +46,12 @@ public class WaterTaskListActivity extends BaseToolBarPresenterActivity implemen
     RecyclerView recWaterTask;
     @BindView(R.id.fresh_task_list)
     SwipeRefreshLayout mSwipeRefresh;
+    @BindView(R.id.btn_release_task)
+    FloatingActionButton btnReleaseTask;
     WaterTaskRecAdapter mAdapter;
     LinearLayoutManager mLayoutManager;
     List<WaterTaskModel> mWaterTaskList;
+
 
 
     @Override
@@ -142,6 +147,14 @@ public class WaterTaskListActivity extends BaseToolBarPresenterActivity implemen
 
             }
         });
+
+
+        recWaterTask.addOnScrollListener(new RecyclerScrollListener(btnReleaseTask) {
+            @Override
+            public void scrolledToLast() {
+                ToastUtil.showToast("到底啦");
+            }
+        });
     }
 
 
@@ -164,7 +177,7 @@ public class WaterTaskListActivity extends BaseToolBarPresenterActivity implemen
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
 
-                        if ( mWaterTaskList .size() == 0) {
+                        if (mWaterTaskList.size() == 0) {
 
                             ToastUtil.showToast("当前没有可接受的任务");
 
@@ -237,4 +250,6 @@ public class WaterTaskListActivity extends BaseToolBarPresenterActivity implemen
                 })
                 .showNativeDialog();
     }
+
+
 }

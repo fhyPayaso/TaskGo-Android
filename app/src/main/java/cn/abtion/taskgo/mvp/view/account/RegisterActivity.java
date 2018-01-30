@@ -185,14 +185,6 @@ public class RegisterActivity extends BaseNoBarPresenterActivity {
                     setCountDownTimer(60000);
                 }
             }
-
         };
-
     }
-
-
-
-
-
-
 }
