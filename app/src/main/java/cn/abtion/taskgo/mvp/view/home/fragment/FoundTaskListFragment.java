@@ -12,26 +12,26 @@ import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
-import butterknife.OnClick;
 import butterknife.Unbinder;
 import cn.abtion.taskgo.R;
 import cn.abtion.taskgo.base.contract.BaseContract;
 import cn.abtion.taskgo.base.frgment.BasePresenterFragment;
 import cn.abtion.taskgo.base.presenter.BasePresenter;
 import cn.abtion.taskgo.mvp.model.request.home.LostFindTaskModel;
-import cn.abtion.taskgo.mvp.view.home.adapter.LostFindTaskRecAdapter;
+import cn.abtion.taskgo.mvp.view.home.adapter.LostFoundTaskRecAdapter;
+import cn.abtion.taskgo.mvp.view.home.adapter.TaskListener;
 
 /**
  * @author fhyPayaso
  * @since 2018/1/26 on 下午11:32
  * fhyPayaso@qq.com
  */
-public class FindTaskListFragment extends BasePresenterFragment {
+public class FoundTaskListFragment extends BasePresenterFragment implements TaskListener {
 
     @BindView(R.id.rec_lost_find_task)
     RecyclerView recLostFindTask;
     Unbinder unbinder;
-    LostFindTaskRecAdapter mAdapter;
+    LostFoundTaskRecAdapter mAdapter;
     LinearLayoutManager mLayoutManager;
 
     @Override
@@ -70,12 +70,12 @@ public class FindTaskListFragment extends BasePresenterFragment {
             list.add(new LostFindTaskModel("111", "fhyPayaso",
                     "呱太", "12-09 14:20"));
         }
-        mAdapter = new LostFindTaskRecAdapter(getContext(),list);
+        mAdapter = new LostFoundTaskRecAdapter(getContext(), list);
+        mAdapter.setTaskListener(this);
         mLayoutManager = new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL, false);
         recLostFindTask.setLayoutManager(mLayoutManager);
         recLostFindTask.setAdapter(mAdapter);
     }
-
 
 
     @Override
@@ -92,4 +92,13 @@ public class FindTaskListFragment extends BasePresenterFragment {
         unbinder.unbind();
     }
 
+    @Override
+    public void onClickAvatar(int position) {
+
+    }
+
+    @Override
+    public void onClickAccept(int position) {
+
+    }
 }

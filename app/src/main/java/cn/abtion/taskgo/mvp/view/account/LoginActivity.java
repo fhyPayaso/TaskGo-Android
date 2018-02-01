@@ -1,7 +1,8 @@
 package cn.abtion.taskgo.mvp.view.account;
 
+import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -17,6 +18,8 @@ import cn.abtion.taskgo.base.activity.BaseNoBarPresenterActivity;
 import cn.abtion.taskgo.mvp.contract.LoginContract;
 import cn.abtion.taskgo.mvp.presenter.LoginPresenter;
 import cn.abtion.taskgo.mvp.view.MainActivity;
+import cn.abtion.taskgo.mvp.view.initiate.InitiateSecondFragment;
+import cn.abtion.taskgo.utils.ToastUtil;
 
 public class LoginActivity extends BaseNoBarPresenterActivity<LoginContract.Presenter> implements LoginContract.View {
 
@@ -59,6 +62,10 @@ public class LoginActivity extends BaseNoBarPresenterActivity<LoginContract.Pres
 //        this.finish();
     }
 
+    public static void startActivity(Activity context) {
+        context.startActivity(new Intent(context, LoginActivity.class));
+    }
+
 
     @Override
     protected LoginContract.Presenter initPresenter() {
@@ -90,7 +97,8 @@ public class LoginActivity extends BaseNoBarPresenterActivity<LoginContract.Pres
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         // TODO: add setContentView(...) invocation
-        ButterKnife.bind(this);
+
+        ToastUtil.showToast("lalalallalalaallala");
     }
 
     @OnClick(R.id.btn_login)

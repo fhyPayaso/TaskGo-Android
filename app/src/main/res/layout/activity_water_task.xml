@@ -1,9 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                xmlns:app="http://schemas.android.com/apk/res-auto"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:background="@color/bg_gray"
-    >
+                android:background="@color/bg_gray">
+
 
     <RelativeLayout
         android:id="@+id/rl_header"
@@ -41,6 +42,7 @@
             android:layout_height="wrap_content"
             android:layout_alignParentRight="true"
             android:layout_alignTop="@id/txt_fix_total_number"
+            android:layout_marginBottom="10dp"
             android:background="@drawable/bg_accpte_btn"
             android:paddingBottom="2dp"
             android:paddingLeft="6dp"
@@ -49,15 +51,14 @@
             android:text="一键接受"
             android:textColor="@color/txt_blue"
             android:textSize="14sp"
-            android:layout_marginBottom="10dp"
             />
     </RelativeLayout>
 
 
     <android.support.design.widget.FloatingActionButton
         android:id="@+id/btn_release_task"
-        android:layout_width="40dp"
-        android:layout_height="40dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:layout_alignParentRight="true"
         android:layout_marginBottom="15dp"
@@ -67,10 +68,12 @@
 
 
     <android.support.v4.widget.SwipeRefreshLayout
+        android:id="@+id/fresh_task_list"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_below="@id/rl_header"
         >
+
 
         <android.support.v7.widget.RecyclerView
             android:id="@+id/rec_water_task"
@@ -78,5 +81,8 @@
             android:layout_height="match_parent">
 
         </android.support.v7.widget.RecyclerView>
+
     </android.support.v4.widget.SwipeRefreshLayout>
+
+
 </RelativeLayout>

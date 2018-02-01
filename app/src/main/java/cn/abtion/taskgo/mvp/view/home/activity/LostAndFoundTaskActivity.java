@@ -3,15 +3,17 @@ package cn.abtion.taskgo.mvp.view.home.activity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.TabLayout;
 import android.support.v4.view.ViewPager;
 import android.view.View;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import butterknife.OnClick;
 import cn.abtion.taskgo.R;
 import cn.abtion.taskgo.base.activity.BaseToolBarActivity;
-import cn.abtion.taskgo.mvp.view.home.adapter.LostAndFoundPagerAdapter;
+import cn.abtion.taskgo.mvp.view.home.adapter.LostFoundPagerAdapter;
 
 /**
  * @author fhyPayaso
@@ -25,7 +27,9 @@ public class LostAndFoundTaskActivity extends BaseToolBarActivity {
     TabLayout mTabLayout;
     @BindView(R.id.vp_lost_and_found)
     ViewPager mViewPager;
-    LostAndFoundPagerAdapter mPagerAdapter;
+    LostFoundPagerAdapter mPagerAdapter;
+    @BindView(R.id.btn_release_task)
+    FloatingActionButton btnReleaseTask;
 
     @Override
     protected int getLayoutId() {
@@ -61,7 +65,7 @@ public class LostAndFoundTaskActivity extends BaseToolBarActivity {
     }
 
     private void initViewPager() {
-        mPagerAdapter = new LostAndFoundPagerAdapter(getSupportFragmentManager());
+        mPagerAdapter = new LostFoundPagerAdapter(getSupportFragmentManager());
         mViewPager.setAdapter(mPagerAdapter);
         mTabLayout.setupWithViewPager(mViewPager);
     }
@@ -75,5 +79,10 @@ public class LostAndFoundTaskActivity extends BaseToolBarActivity {
         super.onCreate(savedInstanceState);
         // TODO: add setContentView(...) invocation
         ButterKnife.bind(this);
+    }
+
+    @OnClick(R.id.btn_release_task)
+    public void onViewClicked() {
+        ReleaseLostFoundTaskActivity.startActivity(this);
     }
 }

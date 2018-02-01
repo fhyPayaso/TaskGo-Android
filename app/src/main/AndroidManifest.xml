@@ -33,6 +33,10 @@
         <activity android:name=".mvp.view.home.activity.ReleaseWaterTaskActivity"/>
         <activity android:name=".mvp.view.home.activity.LostAndFoundTaskActivity"/>
         <activity android:name=".mvp.view.home.activity.SearchTaskActivity"/>
+        <!--<activity android:name=".mvp.view.account.LoginActivity"/>-->
+
+        <activity android:name=".mvp.view.initiate.InitiateActivity"/>
+        <activity android:name=".mvp.view.home.activity.ReleaseLostFoundTaskActivity"/>
 
     </application>
 

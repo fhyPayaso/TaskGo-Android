@@ -83,7 +83,7 @@
             android:layout_alignLeft="@id/txt_address_build"
             android:layout_marginBottom="2dp"
             android:background="@null"
-            android:textSize="16sp"/>
+            android:textSize="14sp"/>
 
 
         <ImageView
@@ -226,41 +226,3 @@
         </LinearLayout>
     </RelativeLayout>
 </RelativeLayout>
-
-
-    <!--<TextView-->
-    <!--android:id="@+id/txt_money"-->
-    <!--android:layout_width="wrap_content"-->
-    <!--android:layout_height="wrap_content"-->
-    <!--android:layout_alignRight="@id/ly_edit_box"-->
-    <!--android:layout_below="@id/ly_edit_box"-->
-    <!--android:layout_marginRight="20dp"-->
-    <!--android:layout_marginTop="30dp"-->
-    <!--android:text="9"-->
-    <!--android:textColor="@color/txt_blue"-->
-    <!--android:textSize="40sp"-->
-    <!--/>-->
-
-
-    <!--<ImageView-->
-    <!--android:layout_width="25dp"-->
-    <!--android:layout_height="50dp"-->
-    <!--android:layout_alignBottom="@id/txt_money"-->
-    <!--android:layout_toLeftOf="@id/txt_money"-->
-    <!--android:src="@drawable/ic_money"/>-->
-
-
-    <!--<TextView-->
-    <!--android:id="@+id/txt_release_task"-->
-    <!--android:layout_width="wrap_content"-->
-    <!--android:layout_height="wrap_content"-->
-    <!--android:layout_alignRight="@id/txt_money"-->
-    <!--android:layout_below="@id/txt_money"-->
-    <!--android:background="@drawable/bg_accpte_btn"-->
-    <!--android:paddingBottom="4dp"-->
-    <!--android:paddingLeft="12dp"-->
-    <!--android:paddingRight="12dp"-->
-    <!--android:paddingTop="4dp"-->
-    <!--android:text="提交"-->
-    <!--android:textColor="@color/txt_blue"-->
-    <!--android:textSize="16sp"/>-->

@@ -6,7 +6,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.ViewFlipper;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -18,15 +17,15 @@ import cn.abtion.taskgo.base.frgment.BasePresenterFragment;
 import cn.abtion.taskgo.mvp.view.home.activity.LostAndFoundTaskActivity;
 import cn.abtion.taskgo.mvp.view.home.activity.WaterTaskListActivity;
 import cn.abtion.taskgo.utils.ToastUtil;
+import cn.abtion.taskgo.widget.BannerPager;
 
 /**
  * @author fhyPayaso
  * @since 2018/1/21 on 下午1:28
  * fhyPayaso@qq.com
  */
-public class HomeFragment extends BasePresenterFragment {
-    @BindView(R.id.flipper_header)
-    ViewFlipper mFlipper;
+public class HomeFragment extends BasePresenterFragment implements BannerPager.OnBannerClick{
+
     @BindView(R.id.txt_diy_task)
     TextView mTxtDiyTask;
     @BindView(R.id.txt_water_task)
@@ -36,6 +35,8 @@ public class HomeFragment extends BasePresenterFragment {
     @BindView(R.id.txt_more_task)
     TextView mTxtMoreTask;
     Unbinder unbinder;
+    @BindView(R.id.flipper_header)
+    BannerPager mFlipper;
 
     @Override
     protected BaseContract.Presenter initPresenter() {
@@ -57,6 +58,8 @@ public class HomeFragment extends BasePresenterFragment {
 
         initFlipper();
         initAlpha();
+
+
     }
 
     @Override
@@ -67,10 +70,12 @@ public class HomeFragment extends BasePresenterFragment {
 
     private void initFlipper() {
 
+
         mFlipper.addView(getImageView(R.drawable.home_banner1));
         mFlipper.addView(getImageView(R.drawable.home_banner2));
         mFlipper.addView(getImageView(R.drawable.home_banner3));
         mFlipper.addView(getImageView(R.drawable.home_banner4));
+        mFlipper.setOnBannerClick(this);
         mFlipper.startFlipping();
     }
 
@@ -101,6 +106,7 @@ public class HomeFragment extends BasePresenterFragment {
     public void onDestroyView() {
         super.onDestroyView();
         unbinder.unbind();
+
     }
 
     @OnClick(R.id.txt_diy_task)
@@ -121,5 +127,10 @@ public class HomeFragment extends BasePresenterFragment {
     @OnClick(R.id.txt_more_task)
     public void onMTxtMoreTaskClicked() {
         ToastUtil.showToast("敬请期待");
+    }
+
+    @Override
+    public void onBannerClick(int position) {
+        ToastUtil.showToast("点击了轮播图");
     }
 }
