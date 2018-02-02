@@ -4,12 +4,12 @@
               android:layout_height="match_parent"
               android:orientation="vertical">
 
-    <ViewFlipper
+    <cn.abtion.taskgo.widget.BannerPager
         android:id="@+id/flipper_header"
         android:layout_width="match_parent"
         android:layout_height="230dp">
 
-    </ViewFlipper>
+    </cn.abtion.taskgo.widget.BannerPager>
 
     <RelativeLayout
         android:layout_width="match_parent"

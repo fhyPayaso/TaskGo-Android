@@ -18,12 +18,12 @@ import cn.abtion.taskgo.mvp.model.request.home.LostFindTaskModel;
  * @since 2018/1/27 on 上午12:27
  * fhyPayaso@qq.com
  */
-public class LostFindTaskRecAdapter extends BaseRecyclerViewAdapter<LostFindTaskModel> {
+public class LostFoundTaskRecAdapter extends BaseRecyclerViewAdapter<LostFindTaskModel> {
 
 
     private TaskListener mTaskListener;
 
-    public LostFindTaskRecAdapter(Context context, List<LostFindTaskModel> lostFindTaskModels) {
+    public LostFoundTaskRecAdapter(Context context, List<LostFindTaskModel> lostFindTaskModels) {
 
         super(context, lostFindTaskModels);
     }

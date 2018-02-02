@@ -40,6 +40,7 @@
         <!--<activity android:name=".mvp.view.account.LoginActivity"/>-->
 
         <activity android:name=".mvp.view.initiate.InitiateActivity"/>
+        <activity android:name=".mvp.view.home.activity.ReleaseLostFoundTaskActivity"/>
 
     </application>
 

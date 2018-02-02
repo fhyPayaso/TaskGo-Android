@@ -12,15 +12,17 @@ import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
-import butterknife.OnClick;
 import butterknife.Unbinder;
 import cn.abtion.taskgo.R;
+import cn.abtion.taskgo.base.adapter.BaseRecyclerViewAdapter;
 import cn.abtion.taskgo.base.contract.BaseContract;
 import cn.abtion.taskgo.base.frgment.BasePresenterFragment;
 import cn.abtion.taskgo.base.presenter.BasePresenter;
 import cn.abtion.taskgo.mvp.model.request.home.LostFindTaskModel;
-import cn.abtion.taskgo.mvp.view.home.adapter.LostFindTaskRecAdapter;
+import cn.abtion.taskgo.mvp.view.home.activity.WaterTaskListActivity;
+import cn.abtion.taskgo.mvp.view.home.adapter.LostFoundTaskRecAdapter;
 import cn.abtion.taskgo.mvp.view.home.adapter.TaskListener;
+import cn.abtion.taskgo.utils.DialogUtil;
 
 /**
  * @author fhyPayaso
@@ -32,7 +34,7 @@ public class LostTaskListFragment extends BasePresenterFragment implements TaskL
     @BindView(R.id.rec_lost_find_task)
     RecyclerView recLostFindTask;
     Unbinder unbinder;
-    LostFindTaskRecAdapter mAdapter;
+    LostFoundTaskRecAdapter mAdapter;
     LinearLayoutManager mLayoutManager;
 
 
@@ -73,11 +75,24 @@ public class LostTaskListFragment extends BasePresenterFragment implements TaskL
             list.add(new LostFindTaskModel("111", "lalala",
                     "机械键盘", "12-11 08:20"));
         }
-        mAdapter = new LostFindTaskRecAdapter(getContext(),list);
+        mAdapter = new LostFoundTaskRecAdapter(getContext(),list);
         mAdapter.setTaskListener(this);
         mLayoutManager = new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL, false);
         recLostFindTask.setLayoutManager(mLayoutManager);
         recLostFindTask.setAdapter(mAdapter);
+        mAdapter.setOnItemClickedListener(new BaseRecyclerViewAdapter.OnItemClicked<LostFindTaskModel>() {
+            @Override
+            public void onItemClicked(LostFindTaskModel lostFindTaskModel, BaseRecyclerViewAdapter.BaseViewHolder holder) {
+
+
+                DialogUtil.CustomAlertDialog dialog = new DialogUtil().new CustomAlertDialog();
+                dialog.initDialog(getContext(), R.layout.dialog_lost_found_information);
+                dialog.setCanceledOntouchOutside(true);
+                dialog.showDialog();
+            }
+        });
+
+
     }
 
     @Override
