@@ -1,6 +1,63 @@
 <resources>
     <string name="app_name">TaskGo</string>
     <string name="empty"></string>
+    <string name="test">N/A</string>
 
     <string name="btn_verification_gain">重新获取</string>
+    
+    
+    
+    <!--home模块-->
+    <string name="txt_home_diy_task">自定义任务</string>
+    <string name="txt_home_water_task">水任务</string>
+    <string name="txt_home_lost_and_found_task">物品任务</string>
+    <string name="txt_home_more_task">更多任务</string>
+    <string name="toast_stay_tuned">敬请期待</string>
+    <string name="txt_cancel">取消</string>
+    <string name="txt_confirm">确认</string>
+    <string name="hint_please_input_key_words">请输入关键字</string>
+
+
+    <string name="title_water_task">送水任务</string>
+    <string name="title_lost_and_found_task">物品任务</string>
+    <string name="title_release_task">发布任务</string>
+    <string name="title_lost">寻物启事</string>
+    <string name="title_found">失物招领</string>
+    <string name="txt_address_number">宿舍号：</string>
+    <string name="txt_address_build">宿舍楼：</string>
+    <string name="txt_water_task_type">取水形式:</string>
+    <string name="txt_water_task_type_send">送水上门</string>
+    <string name="txt_water_task_type_self">自取</string>
+
+    <string name="txt_item_name">物品名称：</string>
+    <string name="txt_lost_found_task_type">任务类型：</string>
+    <string name="txt_item_photo">物品照片：</string>
+    <string name="txt_lost_found_task_type_lost">寻物启事</string>
+    <string name="txt_lost_found_task_type_found">失物招领</string>
+
+
+    <string name="txt_task_information">备注信息:</string>
+    <string name="hint_please_add_task_information">请添加备注信息</string>
+    <string name="txt_release_time">发布时间</string>
+    <string name="btn_release_task">发布任务</string>
+    <string name="btn_accept">接受</string>
+    <string name="btn_accept_all">一键接受</string>
+    <string name="txt_total_number">总数：</string>
+    <string name="txt_total_money">合计 ¥</string>
+    <string name="txt_nine_rmb">9</string>
+    <string name="txt_eight_rmb">8</string>
+    <string name="txt_zero_rmb">0</string>
+    <string name="txt_no_task_information">无</string>
+    <string name="toast_release_task_successful">发布任务成功</string>
+
+    <string name="dialog_add_photo_from_album">从相册中选择</string>
+    <string name="dialog_add_photo_from_camera">拍照</string>
+    <string name="dialog_title_if_accept">是否接受该任务?</string>
+    <string name="dialog_title_if_accept_all">是否接受全部任务?</string>
+    <string name="dialog_message_remove_task">确认后将从任务列表消失</string>
+    <string name="dialog_message_clear_list">确认后将清空列表</string>
+    <string name="toast_accept_successful">接受任务成功</string>
+    <string name="toast_accept_all_successful">一键接受成功</string>
+    <string name="toast_no_task_to_accept">当前没有可接受的任务</string>
+
 </resources>

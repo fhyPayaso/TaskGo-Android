@@ -24,17 +24,16 @@ public final class DialogUtil {
      * 设置两个按钮的方法：setPositiveButton和setNegativeButton
      * 设置单选框方法：setSingleChoice，复选框：setMultiChoice
      * 设置title和Message方法
-     *
+     * <p>
      * 使用时实例化一个对象，同时先调用singleInit方法，使用对象调用方法
-     *
      */
-    public class NativeDialog{
+    public class NativeDialog {
 
         public AlertDialog.Builder getBuilder() {
             return builder;
         }
 
-        private  AlertDialog.Builder builder;
+        private AlertDialog.Builder builder;
 
         public NativeDialog() {
 
@@ -42,10 +41,10 @@ public final class DialogUtil {
 
         /**
          * show
-
+         *
          * @return
          */
-        public AlertDialog.Builder showNativeDialog(){
+        public AlertDialog.Builder showNativeDialog() {
             builder.show();
             return builder;
         }
@@ -53,86 +52,92 @@ public final class DialogUtil {
 
         /**
          * 初始化builder
+         *
          * @param context
          * @return
          */
-        public NativeDialog singleInit(Context context){
-            builder=new AlertDialog.Builder(context);
+        public NativeDialog singleInit(Context context) {
+            builder = new AlertDialog.Builder(context);
             return this;
         }
 
         /**
          * 设置取消按钮
+         *
          * @param negativeButton
          * @param onClickButton
          * @return
          */
-        public NativeDialog setNegativeButton(String negativeButton, DialogInterface.OnClickListener onClickButton){
-            builder.setNegativeButton(negativeButton,onClickButton);
+        public NativeDialog setNegativeButton(String negativeButton, DialogInterface.OnClickListener onClickButton) {
+            builder.setNegativeButton(negativeButton, onClickButton);
 
             return this;
         }
 
-        public NativeDialog setNegativeButton(String negativeButton){
-            builder.setNegativeButton(negativeButton,null);
+        public NativeDialog setNegativeButton(String negativeButton) {
+            builder.setNegativeButton(negativeButton, null);
             return this;
         }
 
         /**
          * 设置确定按钮
+         *
          * @param positiveButton
          * @param onClickButton
          * @return
          */
-        public NativeDialog setPositiveButton(String positiveButton, DialogInterface.OnClickListener onClickButton){
-            builder.setPositiveButton(positiveButton,onClickButton);
+        public NativeDialog setPositiveButton(String positiveButton, DialogInterface.OnClickListener onClickButton) {
+            builder.setPositiveButton(positiveButton, onClickButton);
 
             return this;
         }
 
-        public NativeDialog setPositiveButton(String positiveButton){
-            builder.setPositiveButton(positiveButton,null);
+        public NativeDialog setPositiveButton(String positiveButton) {
+            builder.setPositiveButton(positiveButton, null);
 
             return this;
         }
 
         /**
          * 设置单选框（原生）
+         *
          * @param singleItemString
          * @param onClickListener
          * @return
          */
-        public NativeDialog setSingleChoice(final String singleItemString[], DialogInterface.OnClickListener onClickListener){
-            if(singleItemString!=null){
+        public NativeDialog setSingleChoice(final String singleItemString[], DialogInterface.OnClickListener onClickListener) {
+            if (singleItemString != null) {
                 builder.setSingleChoiceItems(singleItemString, -1, onClickListener);
             }
             return this;
         }
 
-        public NativeDialog setSingleChoice(final String singleItemString[], int checkedId, DialogInterface.OnClickListener onClickListener){
-            if(singleItemString!=null){
+        public NativeDialog setSingleChoice(final String singleItemString[], int checkedId, DialogInterface.OnClickListener onClickListener) {
+            if (singleItemString != null) {
                 builder.setSingleChoiceItems(singleItemString, checkedId, onClickListener);
             }
             return this;
         }
 
-        public NativeDialog setTitle(String title){
+        public NativeDialog setTitle(String title) {
             builder.setTitle(title);
             return this;
         }
-        public NativeDialog setMessage(String message){
+
+        public NativeDialog setMessage(String message) {
             builder.setMessage(message);
             return this;
         }
 
         /**
          * 设置复选框
+         *
          * @param multiItemString
          * @param onClickListener
          * @return
          */
-        public NativeDialog setMultiChoice(final String multiItemString[], DialogInterface.OnMultiChoiceClickListener onClickListener){
-            if(multiItemString!=null) {
+        public NativeDialog setMultiChoice(final String multiItemString[], DialogInterface.OnMultiChoiceClickListener onClickListener) {
+            if (multiItemString != null) {
                 builder.setMultiChoiceItems(multiItemString, null, onClickListener);
             }
             return this;
@@ -146,25 +151,27 @@ public final class DialogUtil {
      * 自定义Dialog类：
      * 使用时要先调用initDialog方法：参数：context，自定义布局id，style的id
      * 类中有view成员，可以使用getView得到，从而使用findViewById绑定对应布局的控件
-     *
      */
     public class CustomAlertDialog {
 
-        private  AlertDialog.Builder builder;
+        private AlertDialog.Builder builder;
+        private AlertDialog alertDialog;
         private View view;
 
-        public CustomAlertDialog showDialog(){
-            builder.show();
+        public CustomAlertDialog showDialog() {
+            alertDialog = builder.show();
             return this;
         }
 
         /**
          * 获取view
+         *
          * @return
          */
-        public View getView(){
+        public View getView() {
             return view;
         }
+
         /**
          * 初始化Dialog，设置view
          *
@@ -172,60 +179,70 @@ public final class DialogUtil {
          * @param itemView
          * @return
          */
-        public CustomAlertDialog initDialog(Context context, @LayoutRes int itemView, int styleId){
-            builder=new AlertDialog.Builder(context,styleId);
-            view= View.inflate(context,itemView,null);
+        public CustomAlertDialog initDialog(Context context, @LayoutRes int itemView, int styleId) {
+            builder = new AlertDialog.Builder(context, styleId);
+            view = View.inflate(context, itemView, null);
             builder.setView(view);
             return this;
         }
 
-        public CustomAlertDialog initDialog(Context context, @LayoutRes int itemView){
-            builder=new AlertDialog.Builder(context);
-            view= View.inflate(context,itemView,null);
+        public CustomAlertDialog initDialog(Context context, @LayoutRes int itemView) {
+            builder = new AlertDialog.Builder(context);
+            view = View.inflate(context, itemView, null);
             builder.setView(view);
-
             return this;
         }
 
         /**
          * 设置gravity
+         *
          * @param gravity
          * @return
          */
-        public CustomAlertDialog setGravity(int gravity){
-            Window window=builder.create().getWindow();
+        public CustomAlertDialog setGravity(int gravity) {
+            Window window = builder.create().getWindow();
             window.setGravity(gravity);
             return this;
         }
 
         /**
+         * 隐藏dialog
+         */
+        public void hideDialog() {
+            if (alertDialog != null) {
+                alertDialog.dismiss();
+            }
+        }
+
+        /**
          * 设置点击外部是否取消
+         *
          * @param bool
          * @return
          */
-        public CustomAlertDialog setCanceledOntouchOutside(boolean bool){
+        public CustomAlertDialog setCanceledOntouchOutside(boolean bool) {
             builder.create().setCanceledOnTouchOutside(bool);
             return this;
         }
 
         /**
          * 设置Dialog的宽高
+         *
          * @param height
          * @param width
          * @return
          */
-        public CustomAlertDialog setHeightAndWidth(int height, int width){
-            Window window=builder.create().getWindow();
-            WindowManager.LayoutParams lp=window.getAttributes();
-            lp.width=width;
-            lp.height=height;
+        public CustomAlertDialog setHeightAndWidth(int height, int width) {
+            Window window = builder.create().getWindow();
+            WindowManager.LayoutParams lp = window.getAttributes();
+            lp.width = width;
+            lp.height = height;
             window.setAttributes(lp);
 
             return this;
         }
 
         /**
-         *
          * 设置padding
          *
          * @param left
@@ -234,51 +251,46 @@ public final class DialogUtil {
          * @param bottom
          * @return
          */
-        public CustomAlertDialog setPadding(int left, int right, int top, int bottom){
-            Window window=builder.create().getWindow();
-            window.getDecorView().setPadding(left,top,right,bottom);
+        public CustomAlertDialog setPadding(int left, int right, int top, int bottom) {
+            Window window = builder.create().getWindow();
+            window.getDecorView().setPadding(left, top, right, bottom);
 
             return this;
         }
 
         /**
          * 设置位置
+         *
          * @param x
          * @param y
          * @return
          */
-        public CustomAlertDialog setPosition(int x, int y){
-            Window window=builder.create().getWindow();
-            WindowManager.LayoutParams lp=window.getAttributes();
-            lp.x=x;
-            lp.y=y;
-
+        public CustomAlertDialog setPosition(int x, int y) {
+            Window window = builder.create().getWindow();
+            WindowManager.LayoutParams lp = window.getAttributes();
+            lp.x = x;
+            lp.y = y;
             window.setAttributes(lp);
-
-
             return this;
         }
 
-        public  AlertDialog.Builder getBuilder() {
+        public AlertDialog.Builder getBuilder() {
             return builder;
         }
 
         /**
          * 设置背景透明度
-
+         *
          * @param transparency
          * @return
          */
-        public CustomAlertDialog setTransparency(int transparency){
-            Window window=builder.create().getWindow();
-            WindowManager.LayoutParams lp=window.getAttributes();
-            lp.alpha=transparency;
+        public CustomAlertDialog setTransparency(int transparency) {
+            Window window = builder.create().getWindow();
+            WindowManager.LayoutParams lp = window.getAttributes();
+            lp.alpha = transparency;
             window.setAttributes(lp);
-
             return this;
         }
-
-
 
 
     }
@@ -291,12 +303,12 @@ public final class DialogUtil {
 
         private ProgressDialog nativeProgressDialog;
 
-        public NativeProgressDialog initDialog(Context context){
-            nativeProgressDialog =new ProgressDialog(context);
+        public NativeProgressDialog initDialog(Context context) {
+            nativeProgressDialog = new ProgressDialog(context);
             return this;
         }
 
-        public NativeProgressDialog setMessage(String message){
+        public NativeProgressDialog setMessage(String message) {
             nativeProgressDialog.setMessage(message);
 
             return this;
@@ -304,10 +316,11 @@ public final class DialogUtil {
 
         /**
          * 显示Dialog
+         *
          * @param context
          * @return
          */
-        public NativeProgressDialog showDialog(Context context){
+        public NativeProgressDialog showDialog(Context context) {
             nativeProgressDialog.show();
 
             return this;
@@ -315,21 +328,23 @@ public final class DialogUtil {
 
         /**
          * 设置标题
+         *
          * @param title
          * @return
          */
-        public NativeProgressDialog setDialogTitle(String title){
+        public NativeProgressDialog setDialogTitle(String title) {
             nativeProgressDialog.setTitle(title);
 
-            return  this;
+            return this;
         }
 
         /**
          * 设置外部点击是否可以取消
+         *
          * @param bool
          * @return
          */
-        public NativeProgressDialog setCanceledOutside(boolean bool){
+        public NativeProgressDialog setCanceledOutside(boolean bool) {
             nativeProgressDialog.setCanceledOnTouchOutside(bool);
 
             return this;
@@ -337,10 +352,11 @@ public final class DialogUtil {
 
         /**
          * 设置进度条的形式
+         *
          * @param style
          * @return
          */
-        public NativeProgressDialog setProgressDialogStyle(int style){
+        public NativeProgressDialog setProgressDialogStyle(int style) {
             nativeProgressDialog.setProgressStyle(style);
 
             return this;
@@ -348,10 +364,11 @@ public final class DialogUtil {
 
         /**
          * 设置title图标
+         *
          * @param titleImage
          * @return
          */
-        public NativeProgressDialog setIcon(int titleImage){
+        public NativeProgressDialog setIcon(int titleImage) {
             nativeProgressDialog.setIcon(titleImage);
 
             return this;
@@ -359,18 +376,17 @@ public final class DialogUtil {
 
         /**
          * 设置内容
+         *
          * @param message
          * @return
          */
-        public NativeProgressDialog setDialogMessage(String message){
+        public NativeProgressDialog setDialogMessage(String message) {
             nativeProgressDialog.setMessage(message);
 
             return this;
         }
 
     }
-
-
 
 
 }

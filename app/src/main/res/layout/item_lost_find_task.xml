@@ -83,7 +83,7 @@
         android:layout_alignParentRight="true"
         android:layout_marginRight="26dp"
         android:layout_marginTop="32dp"
-        android:background="@drawable/bg_accpte_btn"
+        android:background="@drawable/bg_accept_btn"
         android:paddingBottom="4dp"
         android:paddingLeft="20dp"
         android:paddingRight="20dp"

@@ -3,6 +3,7 @@ package cn.abtion.taskgo.base.adapter;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.Toolbar;
 
 /**
  * @author FanHongyu.
@@ -56,6 +57,7 @@ public abstract class RecyclerScrollListener extends RecyclerView.OnScrollListen
         super.onScrolled(recyclerView, dx, dy);
         if (mFloatingButton != null) {
             if (dy < 0) {
+
                 //向下滑动显示按钮
                 mFloatingButton.show();
             } else if (dy > 0) {

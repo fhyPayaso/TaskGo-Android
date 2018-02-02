@@ -13,7 +13,6 @@
         android:paddingBottom="10dp"
         android:paddingTop="40dp">
 
-
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -26,24 +25,19 @@
             android:paddingRight="10dp"
             android:paddingTop="6dp">
 
-
             <ImageView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginRight="10dp"
                 android:src="@drawable/ic_hint_search" />
 
-
             <EditText
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="@null"
-                android:hint="请输入关键字"
+                android:hint="@string/hint_please_input_key_words"
                 android:textSize="12sp" />
-
-
         </LinearLayout>
-
 
         <TextView
             android:id="@+id/txt_cancel"
@@ -52,14 +46,9 @@
             android:layout_alignParentRight="true"
             android:layout_marginLeft="14dp"
             android:layout_marginRight="14dp"
-            android:text="取消"
-            android:textColor="@color/txt_gray"
-            android:textSize="14sp"
             android:layout_marginTop="6dp"
-            />
-
-
+            android:text="@string/txt_cancel"
+            android:textColor="@color/txt_gray"
+            android:textSize="14sp" />
     </RelativeLayout>
-
-
 </LinearLayout>

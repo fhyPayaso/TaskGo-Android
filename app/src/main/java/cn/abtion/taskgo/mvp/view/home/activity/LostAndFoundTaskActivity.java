@@ -54,7 +54,7 @@ public class LostAndFoundTaskActivity extends BaseToolBarActivity {
 
 
     private void initToolBar() {
-        setActivityTitle("物品任务");
+        setActivityTitle(getString(R.string.title_lost_and_found_task));
         setToolBarMenu(R.drawable.ic_search);
         getToolBar().findViewById(R.id.img_toolbar_menu).setOnClickListener(new View.OnClickListener() {
             @Override
@@ -84,5 +84,10 @@ public class LostAndFoundTaskActivity extends BaseToolBarActivity {
     @OnClick(R.id.btn_release_task)
     public void onViewClicked() {
         ReleaseLostFoundTaskActivity.startActivity(this);
+    }
+
+
+    public FloatingActionButton getFloatingButton() {
+        return this.btnReleaseTask;
     }
 }

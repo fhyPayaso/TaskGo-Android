@@ -25,6 +25,7 @@ import cn.abtion.taskgo.base.adapter.BaseRecyclerViewAdapter;
 import cn.abtion.taskgo.base.adapter.RecyclerScrollListener;
 import cn.abtion.taskgo.base.contract.BaseContract;
 import cn.abtion.taskgo.base.presenter.BasePresenter;
+import cn.abtion.taskgo.common.Config;
 import cn.abtion.taskgo.mvp.model.request.home.WaterTaskModel;
 import cn.abtion.taskgo.mvp.view.home.adapter.TaskListener;
 import cn.abtion.taskgo.mvp.view.home.adapter.WaterTaskRecAdapter;
@@ -48,11 +49,12 @@ public class WaterTaskListActivity extends BaseToolBarPresenterActivity implemen
     SwipeRefreshLayout mSwipeRefresh;
     @BindView(R.id.btn_release_task)
     FloatingActionButton btnReleaseTask;
-    WaterTaskRecAdapter mAdapter;
-    LinearLayoutManager mLayoutManager;
-    List<WaterTaskModel> mWaterTaskList;
 
 
+
+    private WaterTaskRecAdapter mAdapter;
+    private List<WaterTaskModel> mWaterTaskList;
+    private DialogUtil.CustomAlertDialog dialogTaskInformation;
 
     @Override
     public BaseContract.Presenter initPresenter() {
@@ -67,34 +69,14 @@ public class WaterTaskListActivity extends BaseToolBarPresenterActivity implemen
     @Override
     protected void initVariable() {
 
-
+        mWaterTaskList = new ArrayList<>();
     }
 
     @Override
     protected void initView() {
 
         initToolBar();
-
-        mWaterTaskList = new ArrayList<>();
-        mSwipeRefresh.setOnRefreshListener(this);
-        mSwipeRefresh.setRefreshing(true);
-        new Timer().schedule(new TimerTask() {
-            @Override
-            public void run() {
-                runOnUiThread(new Runnable() {
-                    @Override
-                    public void run() {
-                        for (int i = 0; i < 10; i++) {
-                            mWaterTaskList.add(new WaterTaskModel("111", "fhyPayaso",
-                                    "7795", "送水上门", "12-09 14:20"));
-                        }
-                        mAdapter.notifyDataSetChanged();
-                        mSwipeRefresh.setRefreshing(false);
-                    }
-                });
-            }
-        }, 2000);
-
+        initRefreshLayout();
         initRecyclerView();
     }
 
@@ -116,11 +98,13 @@ public class WaterTaskListActivity extends BaseToolBarPresenterActivity implemen
     }
 
 
+    /**
+     * 初始化ToolBar
+     */
     private void initToolBar() {
 
-        setActivityTitle("送水任务");
+        setActivityTitle(getString(R.string.title_water_task));
         setToolBarMenu(R.drawable.ic_search);
-
         getToolBar().findViewById(R.id.img_toolbar_menu).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -129,30 +113,74 @@ public class WaterTaskListActivity extends BaseToolBarPresenterActivity implemen
         });
     }
 
+    /**
+     * 初始化SwipeRefreshLayout
+     */
+    private void initRefreshLayout() {
+
+        mSwipeRefresh.setOnRefreshListener(this);
+        mSwipeRefresh.setRefreshing(true);
+        new Timer().schedule(new TimerTask() {
+            @Override
+            public void run() {
+                runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        testAddItem(10);
+                        mAdapter.notifyDataSetChanged();
+                        mSwipeRefresh.setRefreshing(false);
+                    }
+                });
+            }
+        }, Config.REFRESH_TIME);
+    }
+
+    /**
+     * 初始化RecyclerView
+     */
     private void initRecyclerView() {
 
         mAdapter = new WaterTaskRecAdapter(WaterTaskListActivity.this, mWaterTaskList);
         mAdapter.setTaskListener(this);
-        mLayoutManager = new LinearLayoutManager(WaterTaskListActivity.this, LinearLayoutManager.VERTICAL, false);
-        recWaterTask.setLayoutManager(mLayoutManager);
         recWaterTask.setAdapter(mAdapter);
+        recWaterTask.setLayoutManager(new LinearLayoutManager(WaterTaskListActivity.this, LinearLayoutManager.VERTICAL, false));
+
         mAdapter.setOnItemClickedListener(new BaseRecyclerViewAdapter.OnItemClicked<WaterTaskModel>() {
             @Override
             public void onItemClicked(WaterTaskModel waterTaskModel, BaseRecyclerViewAdapter.BaseViewHolder holder) {
-
-                DialogUtil.CustomAlertDialog dialog = new DialogUtil().new CustomAlertDialog();
-                dialog.initDialog(WaterTaskListActivity.this, R.layout.dialog_water_task_information);
-                dialog.setCanceledOntouchOutside(true);
-                dialog.showDialog();
-
+                showDialogTaskInformation(waterTaskModel);
             }
         });
-
 
         recWaterTask.addOnScrollListener(new RecyclerScrollListener(btnReleaseTask) {
             @Override
             public void scrolledToLast() {
                 ToastUtil.showToast("到底啦");
+            }
+        });
+    }
+
+
+    /**
+     * 显示任务详细信息
+     */
+    private void showDialogTaskInformation(WaterTaskModel model) {
+
+        dialogTaskInformation = new DialogUtil().new CustomAlertDialog();
+        dialogTaskInformation.initDialog(WaterTaskListActivity.this, R.layout.dialog_water_task_information);
+        dialogTaskInformation.setCanceledOntouchOutside(true);
+        dialogTaskInformation.showDialog();
+
+        View view= dialogTaskInformation.getView();
+        TextView mTxtAddressNumber = view.findViewById(R.id.txt_address_number);
+        TextView mTxtWaterTaskType = view.findViewById(R.id.txt_water_task_type);
+        TextView mBtnInformationConfirm = view.findViewById(R.id.btn_information_confirm);
+        mTxtAddressNumber.setText(model.getAddress());
+        mTxtWaterTaskType.setText(model.getType());
+        mBtnInformationConfirm.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                dialogTaskInformation.hideDialog();
             }
         });
     }
@@ -164,26 +192,25 @@ public class WaterTaskListActivity extends BaseToolBarPresenterActivity implemen
         DialogUtil.NativeDialog dialogAcceptAll = new DialogUtil().new NativeDialog();
         dialogAcceptAll
                 .singleInit(WaterTaskListActivity.this)
-                .setTitle("是否接受全部任务?")
-                .setMessage("确认后将清空列表")
-                .setNegativeButton("取消", new DialogInterface.OnClickListener() {
+                .setTitle(getString(R.string.dialog_title_if_accept_all))
+                .setMessage(getString(R.string.dialog_message_clear_list))
+                .setNegativeButton(getString(R.string.txt_cancel), new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         dialog.dismiss();
                         mAdapter.clearAllItems();
                     }
                 })
-                .setPositiveButton("确认", new DialogInterface.OnClickListener() {
+                .setPositiveButton(getString(R.string.txt_confirm), new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
 
                         if (mWaterTaskList.size() == 0) {
 
-                            ToastUtil.showToast("当前没有可接受的任务");
-
+                            ToastUtil.showToast(R.string.toast_no_task_to_accept);
                         } else {
                             mAdapter.clearAllItems();
-                            ToastUtil.showToast("接受了全部任务");
+                            ToastUtil.showToast(R.string.toast_accept_all_successful);
                         }
                         dialog.dismiss();
                     }
@@ -192,11 +219,18 @@ public class WaterTaskListActivity extends BaseToolBarPresenterActivity implemen
     }
 
 
+    /**
+     * 发布任务按钮点击时间
+     */
     @OnClick(R.id.btn_release_task)
     public void onViewClicked() {
         ReleaseWaterTaskActivity.startActivity(WaterTaskListActivity.this);
     }
 
+
+    /**
+     * 下拉刷新事件
+     */
     @Override
     public void onRefresh() {
 
@@ -206,19 +240,13 @@ public class WaterTaskListActivity extends BaseToolBarPresenterActivity implemen
                 runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
-
-                        for (int i = 0; i < 3; i++) {
-                            mWaterTaskList.add(new WaterTaskModel("111", "fhyPayaso",
-                                    "7795", "送水上门", "12-09 14:20"));
-                        }
-
+                        testAddItem(3);
                         mAdapter.notifyDataSetChanged();
                         mSwipeRefresh.setRefreshing(false);
                     }
                 });
             }
-        }, 2000);
-
+        }, Config.REFRESH_TIME);
     }
 
     @Override
@@ -226,24 +254,29 @@ public class WaterTaskListActivity extends BaseToolBarPresenterActivity implemen
         ToastUtil.showToast("点击了头像" + position);
     }
 
+    /**
+     * 接受任务点击事件
+     *
+     * @param position item位置
+     */
     @Override
     public void onClickAccept(final int position) {
 
         DialogUtil.NativeDialog dialogAccept = new DialogUtil().new NativeDialog();
         dialogAccept
                 .singleInit(WaterTaskListActivity.this)
-                .setTitle("是否接受该任务?")
-                .setMessage("确认后将从任务列表消失")
-                .setNegativeButton("取消", new DialogInterface.OnClickListener() {
+                .setTitle(getString(R.string.dialog_title_if_accept))
+                .setMessage(getString(R.string.dialog_message_remove_task))
+                .setNegativeButton(getString(R.string.txt_cancel), new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         dialog.dismiss();
                     }
                 })
-                .setPositiveButton("确认", new DialogInterface.OnClickListener() {
+                .setPositiveButton(getString(R.string.txt_confirm), new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-                        ToastUtil.showToast("铁头娃接受了任务" + position);
+                        ToastUtil.showToast(getString(R.string.toast_accept_successful) + position);
                         mAdapter.removeItem(position);
                         dialog.dismiss();
                     }
@@ -252,4 +285,17 @@ public class WaterTaskListActivity extends BaseToolBarPresenterActivity implemen
     }
 
 
+    /**
+     * 测试增加数据
+     *
+     * @param number
+     */
+    private void testAddItem(int number) {
+        if (mWaterTaskList != null) {
+            for (int i = 0; i < number; i++) {
+                mWaterTaskList.add(new WaterTaskModel("111", "fhyPayaso",
+                        "7795", "送水上门", "12-09 14:20"));
+            }
+        }
+    }
 }

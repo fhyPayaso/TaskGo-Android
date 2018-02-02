@@ -1,70 +1,51 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-              android:layout_width="match_parent"
-              android:layout_height="match_parent"
-              android:orientation="vertical">
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
 
     <cn.abtion.taskgo.widget.BannerPager
         android:id="@+id/flipper_header"
         android:layout_width="match_parent"
         android:layout_height="230dp">
-
     </cn.abtion.taskgo.widget.BannerPager>
 
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:gravity="center"
-        >
+        android:gravity="center">
 
         <TextView
             android:id="@+id/txt_diy_task"
-            android:layout_width="170dp"
-            android:layout_height="170dp"
+            style="@style/txt_home_task_type"
             android:layout_alignParentLeft="true"
             android:layout_alignParentTop="true"
             android:layout_marginBottom="6dp"
             android:layout_marginRight="6dp"
             android:background="@drawable/bg_txt_diy_task"
-            android:gravity="center"
-            android:text="自定义任务"
-            android:textColor="@color/white"
-            android:textSize="18sp"
-            />
+            android:text="@string/txt_home_diy_task" />
 
         <TextView
             android:id="@+id/txt_water_task"
-            android:layout_width="170dp"
-            android:layout_height="170dp"
+            style="@style/txt_home_task_type"
             android:layout_toRightOf="@id/txt_diy_task"
             android:background="@drawable/bg_txt_water_task"
-            android:gravity="center"
-            android:text="水任务"
-            android:textColor="@color/white"
-            android:textSize="18sp"/>
+            android:text="@string/txt_home_water_task" />
 
         <TextView
             android:id="@+id/txt_lost_task"
-            android:layout_width="170dp"
-            android:layout_height="170dp"
+            style="@style/txt_home_task_type"
             android:layout_below="@id/txt_diy_task"
             android:background="@drawable/bg_txt_lost_task"
-            android:gravity="center"
-            android:text="物品任务"
-            android:textColor="@color/white"
-            android:textSize="18sp"/>
+            android:text="@string/txt_home_lost_and_found_task" />
 
         <TextView
             android:id="@+id/txt_more_task"
-            android:layout_width="170dp"
-            android:layout_height="170dp"
+            style="@style/txt_home_task_type"
             android:layout_alignLeft="@id/txt_water_task"
             android:layout_alignTop="@id/txt_lost_task"
             android:background="@drawable/bg_txt_more_task"
-            android:gravity="center"
-            android:text="更多任务"
-            android:textColor="@color/white"
-            android:textSize="18sp"/>
+            android:text="@string/txt_home_more_task" />
 
     </RelativeLayout>
 </LinearLayout>

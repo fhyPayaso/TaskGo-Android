@@ -3,7 +3,6 @@ package cn.abtion.taskgo.mvp.view.home.adapter;
 import android.content.Context;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import java.util.List;
@@ -11,11 +10,9 @@ import java.util.List;
 import butterknife.BindView;
 import cn.abtion.taskgo.R;
 import cn.abtion.taskgo.base.adapter.BaseRecyclerViewAdapter;
-import cn.abtion.taskgo.mvp.contract.LoginContract;
 import cn.abtion.taskgo.mvp.model.request.home.WaterTaskModel;
 import de.hdodenhof.circleimageview.CircleImageView;
 
-import static android.view.View.GONE;
 
 /**
  * @author FanHongyu.
@@ -59,7 +56,7 @@ public class WaterTaskRecAdapter extends BaseRecyclerViewAdapter<WaterTaskModel>
         TextView txtAcceptTask;
 
 
-        public ItemHolder(View itemView) {
+        private ItemHolder(View itemView) {
             super(itemView);
             imgAvatar.setOnClickListener(this);
             txtAcceptTask.setOnClickListener(this);
@@ -79,7 +76,6 @@ public class WaterTaskRecAdapter extends BaseRecyclerViewAdapter<WaterTaskModel>
         public void onClick(View v) {
 
             int position = getAdapterPosition();
-
             switch (v.getId()) {
 
                 case R.id.img_avatar:
