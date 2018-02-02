@@ -9,6 +9,11 @@ android {
         versionCode 1
         versionName "1.0"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+
+
+
+        useLibrary 'org.apache.http.legacy'
+
     }
 
     packagingOptions {
@@ -67,5 +72,19 @@ dependencies {
     compile 'com.android.support:cardview-v7:26.1.0'
 
 
+
+
+
+//    //Bomb
+//    compile 'cn.bmob.android:http-legacy:1.0'
+//
+//    //bmob-sms ：Bmob单独为短信服务提供的包
+//    compile 'cn.bmob.android:bmob-sms:1.0.1'
+//
+//    //如果你想应用能够兼容Android6.0，请添加此依赖(org.apache.http.legacy.jar)
+//    compile 'cn.bmob.android:http-legacy:1.0'
+//
+//    compile 'cn.bmob.android:bmob-sdk:3.5.0'
+//
 
 }

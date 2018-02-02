@@ -1,5 +1,7 @@
 package cn.abtion.taskgo.mvp.view.account;
 
+
+
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
@@ -22,53 +24,54 @@ import cn.abtion.taskgo.utils.ToastUtil;
 
 public class RegisterActivity extends BaseNoBarPresenterActivity {
 
+    int tag =1;
 
-    VerificationCountDownTimer verificationCountDownTimer;
+    VerificationCountDownTimer mverificationCountDownTimer;
 
     @BindView(R.id.btn_back_register)
-    ImageView btnBackRegister;
+    ImageView mbtnBackRegister;
     @BindView(R.id.ly_header_register)
-    LinearLayout lyHeaderRegister;
+    LinearLayout mlyHeaderRegister;
     @BindView(R.id.edit_user_number)
-    EditText editUserNumber;
+    EditText meditUserNumber;
     @BindView(R.id.ly_user_number)
-    LinearLayout lyUserNumber;
+    LinearLayout mlyUserNumber;
     @BindView(R.id.line3)
-    View line3;
+    View mline3;
     @BindView(R.id.img_verification)
-    ImageView imgVerification;
+    ImageView mimgVerification;
     @BindView(R.id.edit_verification_code)
-    EditText editVerificationCode;
+    EditText meditVerificationCode;
     @BindView(R.id.btn_verification_register)
-    Button btnVerificationRegister;
+    Button mbtnVerificationRegister;
     @BindView(R.id.ly_verification_code)
-    RelativeLayout lyVerificationCode;
+    RelativeLayout mlyVerificationCode;
     @BindView(R.id.line4)
-    View line4;
+    View mline4;
     @BindView(R.id.edit_secret)
-    EditText editSecret;
+    EditText meditSecret;
     @BindView(R.id.ly_secret)
-    LinearLayout lySecret;
+    LinearLayout mlySecret;
     @BindView(R.id.line5)
-    View line5;
+    View mline5;
     @BindView(R.id.edit_secret_again)
-    EditText editSecretAgain;
+    EditText meditSecretAgain;
     @BindView(R.id.ly_secret_again)
-    LinearLayout lySecretAgain;
+    LinearLayout mlySecretAgain;
     @BindView(R.id.line6)
-    View line6;
+    View mline6;
     @BindView(R.id.txt_taskgo_servise)
-    TextView txtTaskgoServise;
+    TextView mtxtTaskgoServise;
     @BindView(R.id.line7)
-    View line7;
+    View mline7;
     @BindView(R.id.txt_servise)
-    LinearLayout txtServise;
+    LinearLayout mtxtServise;
     @BindView(R.id.ly_agreement)
-    LinearLayout lyAgreement;
+    LinearLayout mlyAgreement;
     @BindView(R.id.rl_context)
-    RelativeLayout rlContext;
+    RelativeLayout mrlContext;
     @BindView(R.id.btn_register)
-    Button btnRegister;
+    Button mbtnRegister;
 
     @BindView(R.id.img_agreement_selector)
     ImageView imgAgreementSelector;
@@ -80,6 +83,7 @@ public class RegisterActivity extends BaseNoBarPresenterActivity {
 
     public static void startActivity(Context context) {
         context.startActivity(new Intent(context, RegisterActivity.class));
+
     }
 
 
@@ -111,6 +115,7 @@ public class RegisterActivity extends BaseNoBarPresenterActivity {
         ButterKnife.bind(this);
 
 
+//        BmobSMS.initialize(this, "d56e0fe7bec328b922ea78d75e0c568c");
     }
 
 
@@ -119,24 +124,35 @@ public class RegisterActivity extends BaseNoBarPresenterActivity {
 
         ToastUtil.showToast("还没有网络请求，敬请期待");
         LoginActivity.startActivity(RegisterActivity.this);
-        verificationCountDownTimer.cancel();
+        mverificationCountDownTimer.cancel();
 
     }
 
 
     @OnClick(R.id.img_agreement_selector)
     public void onViewClicked() {
+        tag ++;
 
-        imgAgreementSelector.setSelected(true);
+        if(tag%2==0)//说明遇到点击为已阅读
+        {
+            imgAgreementSelector.setSelected(true);
+        }
+        if (tag %2!=0)
+        {
+            imgAgreementSelector.setSelected(false);
+        }
+
 
     }
 
 
-
-
+    /**
+     * 忘记密码的返回按钮，从忘记密码界面，回到登录界面
+     */
     @OnClick(R.id.ly_header_register)
     public void onLyHeaderRegisterClicked() {
-        LoginActivity.startActivity(RegisterActivity.this);
+//        LoginActivity.startActivity(RegisterActivity.this);
+        this.finish();
     }
 
     /**
@@ -145,7 +161,8 @@ public class RegisterActivity extends BaseNoBarPresenterActivity {
     @OnClick(R.id.btn_verification_register)
     public void onBtnVerificationRegisterClicked() {
         ToastUtil.showToast("你即将获得验证码，请注意查收");
-        verificationCountDownTimer.timerStart(true);
+        mverificationCountDownTimer.timerStart(true);
+
     }
 
     /**
@@ -154,10 +171,10 @@ public class RegisterActivity extends BaseNoBarPresenterActivity {
     public void initCountDownTimer() {
 
         if(!VerificationCountDownTimer.FLAG_FIRST_IN&&
-                VerificationCountDownTimer.curMillis+60000>System.currentTimeMillis()) {
+                VerificationCountDownTimer.mcurMillis+60000>System.currentTimeMillis()) {
 
-            setCountDownTimer(VerificationCountDownTimer.curMillis+60000-System.currentTimeMillis());
-            verificationCountDownTimer.timerStart(false);
+            setCountDownTimer(VerificationCountDownTimer.mcurMillis+60000-System.currentTimeMillis());
+            mverificationCountDownTimer.timerStart(false);
 
         } else {
 
@@ -165,21 +182,23 @@ public class RegisterActivity extends BaseNoBarPresenterActivity {
         }
     }
 
+
+
     public void setCountDownTimer(final long countDownTime) {
 
-        verificationCountDownTimer = new VerificationCountDownTimer( countDownTime , 1000) {
+        mverificationCountDownTimer = new VerificationCountDownTimer( countDownTime , 1000) {
 
             @Override
             public void onTick(long millisUntilFinished) {
-                btnVerificationRegister.setEnabled(false);
-                btnVerificationRegister.setText((millisUntilFinished / 1000) + " s");
+                mbtnVerificationRegister.setEnabled(false);
+                mbtnVerificationRegister.setText((millisUntilFinished / 1000) + " s");
             }
 
             @Override
             public void onFinish() {
 
-                btnVerificationRegister.setEnabled(true);
-                btnVerificationRegister.setText(getString(R.string.btn_verification_gain));
+                mbtnVerificationRegister.setEnabled(true);
+                mbtnVerificationRegister.setText(getString(R.string.btn_verification_gain));
 
                 if(countDownTime!=60000) {
                     setCountDownTimer(60000);

@@ -209,7 +209,7 @@
         <ImageView
             android:id="@+id/img_agreement_selector"
             android:layout_width="wrap_content"
-            android:layout_height="12dp"
+            android:layout_height="20dp"
             android:layout_gravity="center"
             android:src="@drawable/img_agreement_selector" />
         <TextView

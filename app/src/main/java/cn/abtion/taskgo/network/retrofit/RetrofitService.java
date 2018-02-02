@@ -1,7 +1,7 @@
 package cn.abtion.taskgo.network.retrofit;
 
 
-import cn.abtion.taskgo.mvp.model.request.LoginRequest;
+import cn.abtion.taskgo.mvp.model.request.account.LoginRequestModel;
 import cn.abtion.taskgo.network.response.ApiResponse;
 import io.reactivex.Observable;
 import retrofit2.Call;
@@ -23,7 +23,7 @@ public interface RetrofitService {
      * @return
      */
     @POST("login")
-    Observable<ApiResponse> rxLogin(@Body LoginRequest loginRequest);
+    Observable<ApiResponse> rxLogin(@Body LoginRequestModel loginRequest);
 
 
 
@@ -33,6 +33,6 @@ public interface RetrofitService {
      * @return
      */
     @POST("login")
-    Call<ApiResponse> login(@Body LoginRequest loginRequest);
+    Call<ApiResponse> login(@Body LoginRequestModel loginRequest);
 
 }

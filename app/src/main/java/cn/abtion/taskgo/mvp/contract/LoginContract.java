@@ -1,7 +1,9 @@
 package cn.abtion.taskgo.mvp.contract;
 
 import cn.abtion.taskgo.base.contract.BaseContract;
-import cn.abtion.taskgo.mvp.model.request.LoginRequest;
+
+
+import cn.abtion.taskgo.base.contract.BaseContract;
 
 /**
  * @author FanHongyu.
@@ -12,14 +14,6 @@ import cn.abtion.taskgo.mvp.model.request.LoginRequest;
 public interface LoginContract {
 
 
-    interface View extends BaseContract.View<Presenter> {
-
-        /**
-         * 通知V层登录成功
-         */
-        void onLoginSuccess();
-    }
-
     interface Presenter extends BaseContract.Presenter {
 
         /**
@@ -28,4 +22,11 @@ public interface LoginContract {
         void requestLogin(String phone,String password);
     }
 
+    interface View extends BaseContract.View<Presenter> {
+
+        /**
+         * 通知V层登录成功
+         */
+        void onLoginSuccess();
+    }
 }
