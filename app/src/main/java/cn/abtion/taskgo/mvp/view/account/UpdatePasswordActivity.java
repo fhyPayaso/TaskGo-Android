@@ -18,7 +18,9 @@ import cn.abtion.taskgo.base.activity.BaseNoBarActivity;
 import cn.abtion.taskgo.utils.ToastUtil;
 
 /**
- * Created by heaijia on 2018/1/26.
+ * @author heaijia
+ * @since 2018/2/2 上午11:33
+ * email 549044363@qq.com
  */
 
 public class UpdatePasswordActivity extends BaseNoBarActivity {
@@ -26,41 +28,41 @@ public class UpdatePasswordActivity extends BaseNoBarActivity {
     VerificationCountDownTimer vCountDownTimer;
 
     @BindView(R.id.btn_back_forget)
-    ImageView btnBackForget;
+    ImageView mbtnBackForget;
     @BindView(R.id.ly_header_forget)
-    LinearLayout lyHeaderForget;
+    LinearLayout mlyHeaderForget;
     @BindView(R.id.edit_user_number_forget)
-    EditText editUserNumberForget;
+    EditText meditUserNumberForget;
     @BindView(R.id.ly_user_number_forget)
-    LinearLayout lyUserNumberForget;
+    LinearLayout mlyUserNumberForget;
     @BindView(R.id.line3)
-    View line3;
+    View mline3;
     @BindView(R.id.img_verification_forget)
-    ImageView imgVerificationForget;
+    ImageView mimgVerificationForget;
     @BindView(R.id.edit_verification_code_forget)
-    EditText editVerificationCodeForget;
+    EditText meditVerificationCodeForget;
     @BindView(R.id.btn_verification)
-    Button btnVerification;
+    Button mbtnVerification;
     @BindView(R.id.ly_verification_code_forget)
-    RelativeLayout lyVerificationCodeForget;
+    RelativeLayout mlyVerificationCodeForget;
     @BindView(R.id.line4)
-    View line4;
+    View mline4;
     @BindView(R.id.edit_secret_forget)
-    EditText editSecretForget;
+    EditText meditSecretForget;
     @BindView(R.id.ly_secret_forget)
-    LinearLayout lySecretForget;
+    LinearLayout mlySecretForget;
     @BindView(R.id.line5)
-    View line5;
+    View mline5;
     @BindView(R.id.edit_secret_again_forget)
-    EditText editSecretAgainForget;
+    EditText meditSecretAgainForget;
     @BindView(R.id.ly_secret_again_forget)
-    LinearLayout lySecretAgainForget;
+    LinearLayout mlySecretAgainForget;
     @BindView(R.id.line6)
-    View line6;
+    View mline6;
     @BindView(R.id.rl_context_forget)
-    RelativeLayout rlContextForget;
+    RelativeLayout mrlContextForget;
     @BindView(R.id.btn_certain)
-    Button btnCertain;
+    Button mbtnCertain;
 
 
     public static void startActivity(Context context) {
@@ -127,9 +129,9 @@ public class UpdatePasswordActivity extends BaseNoBarActivity {
     public void initCountDownTimer() {
 
         if(!VerificationCountDownTimer.FLAG_FIRST_IN&&
-                VerificationCountDownTimer.curMillis+60000>System.currentTimeMillis()) {
+                VerificationCountDownTimer.mcurMillis+60000>System.currentTimeMillis()) {
 
-            setCountDownTimer(VerificationCountDownTimer.curMillis+60000-System.currentTimeMillis());
+            setCountDownTimer(VerificationCountDownTimer.mcurMillis+60000-System.currentTimeMillis());
             vCountDownTimer.timerStart(false);
 
         } else {
@@ -144,15 +146,15 @@ public class UpdatePasswordActivity extends BaseNoBarActivity {
 
             @Override
             public void onTick(long millisUntilFinished) {
-                btnVerification.setEnabled(false);
-                btnVerification.setText((millisUntilFinished / 1000) + " s");
+                mbtnVerification.setEnabled(false);
+                mbtnVerification.setText((millisUntilFinished / 1000) + " s");
             }
 
             @Override
             public void onFinish() {
 
-                btnVerification.setEnabled(true);
-                btnVerification.setText(getString(R.string.btn_verification_gain));
+                mbtnVerification.setEnabled(true);
+                mbtnVerification.setText(getString(R.string.btn_verification_gain));
 
                 if(countDownTime!=60000) {
                     setCountDownTimer(60000);

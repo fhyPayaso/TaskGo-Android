@@ -18,6 +18,12 @@ public class Config {
      */
     public static final int APP_SERVER_CONNECT_TIME_OUT = 15;
 
+
+    /**
+     * SwipeRefreshLayout下拉刷新时间
+     */
+    public final static int REFRESH_TIME = 2000;
+
     /**
      * InitiateActivity 的Page标记
      */

@@ -12,8 +12,7 @@ import cn.abtion.taskgo.common.Config;
  * Created by heaijia on 2018/1/28.
  */
 
-public class InitiateViewPageAdapter extends FragmentStatePagerAdapter
-{
+public class InitiateViewPageAdapter extends FragmentStatePagerAdapter {
 
     private InitiateFirstFragment initiateFirstFragment;
     private InitiateSecondFragment initiateSecondFragment;
@@ -25,23 +24,21 @@ public class InitiateViewPageAdapter extends FragmentStatePagerAdapter
 
     @Override
     public android.support.v4.app.Fragment getItem(int position) {
-        switch (position){
+        switch (position) {
             case Config.FLAG_INITIATE_FIRST:
-                if(initiateFirstFragment==null)
-                {
-                    initiateFirstFragment=new InitiateFirstFragment();
+                if (initiateFirstFragment == null) {
+                    initiateFirstFragment = new InitiateFirstFragment();
                 }
                 currentFragment = initiateFirstFragment;
                 break;
 
             case Config.FLAG_INITIATE_SECOND:
-                if (initiateSecondFragment==null)
-                {
-                    initiateSecondFragment=new InitiateSecondFragment();
+                if (initiateSecondFragment == null) {
+                    initiateSecondFragment = new InitiateSecondFragment();
                 }
-                currentFragment=initiateSecondFragment;
+                currentFragment = initiateSecondFragment;
                 break;
-             default:
+            default:
         }
         return currentFragment;
     }

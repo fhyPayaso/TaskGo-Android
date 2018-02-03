@@ -24,7 +24,7 @@ import cn.abtion.taskgo.widget.BannerPager;
  * @since 2018/1/21 on 下午1:28
  * fhyPayaso@qq.com
  */
-public class HomeFragment extends BasePresenterFragment implements BannerPager.OnBannerClick{
+public class HomeFragment extends BasePresenterFragment implements BannerPager.OnBannerClick {
 
     @BindView(R.id.txt_diy_task)
     TextView mTxtDiyTask;
@@ -34,9 +34,11 @@ public class HomeFragment extends BasePresenterFragment implements BannerPager.O
     TextView mTxtLostTask;
     @BindView(R.id.txt_more_task)
     TextView mTxtMoreTask;
-    Unbinder unbinder;
     @BindView(R.id.flipper_header)
     BannerPager mFlipper;
+    Unbinder unbinder;
+
+    public final static int IMG_ALPHA = 140;
 
     @Override
     protected BaseContract.Presenter initPresenter() {
@@ -56,10 +58,8 @@ public class HomeFragment extends BasePresenterFragment implements BannerPager.O
     @Override
     protected void initView() {
 
-        initFlipper();
+        initBanner();
         initAlpha();
-
-
     }
 
     @Override
@@ -67,9 +67,10 @@ public class HomeFragment extends BasePresenterFragment implements BannerPager.O
 
     }
 
-
-    private void initFlipper() {
-
+    /**
+     * 初始化轮播图
+     */
+    private void initBanner() {
 
         mFlipper.addView(getImageView(R.drawable.home_banner1));
         mFlipper.addView(getImageView(R.drawable.home_banner2));
@@ -79,39 +80,33 @@ public class HomeFragment extends BasePresenterFragment implements BannerPager.O
         mFlipper.startFlipping();
     }
 
+    /**
+     * 获取资源图片
+     *
+     * @param res
+     * @return
+     */
     private ImageView getImageView(int res) {
         ImageView imageView = new ImageView(getContext());
         imageView.setBackgroundResource(res);
         return imageView;
     }
 
+    /**
+     * 初始化透明度
+     */
     private void initAlpha() {
 
-        int alpha = 140;
-        mTxtDiyTask.getBackground().setAlpha(alpha);
-        mTxtLostTask.getBackground().setAlpha(alpha);
-        mTxtMoreTask.getBackground().setAlpha(alpha);
-        mTxtWaterTask.getBackground().setAlpha(alpha);
+        mTxtDiyTask.getBackground().setAlpha(IMG_ALPHA);
+        mTxtLostTask.getBackground().setAlpha(IMG_ALPHA);
+        mTxtMoreTask.getBackground().setAlpha(IMG_ALPHA);
+        mTxtWaterTask.getBackground().setAlpha(IMG_ALPHA);
     }
 
-    @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        // TODO: inflate a fragment view
-        View rootView = super.onCreateView(inflater, container, savedInstanceState);
-        unbinder = ButterKnife.bind(this, rootView);
-        return rootView;
-    }
-
-    @Override
-    public void onDestroyView() {
-        super.onDestroyView();
-        unbinder.unbind();
-
-    }
 
     @OnClick(R.id.txt_diy_task)
     public void onMTxtDiyTaskClicked() {
-        ToastUtil.showToast("敬请期待");
+        ToastUtil.showToast(R.string.toast_stay_tuned);
     }
 
     @OnClick(R.id.txt_water_task)
@@ -126,11 +121,26 @@ public class HomeFragment extends BasePresenterFragment implements BannerPager.O
 
     @OnClick(R.id.txt_more_task)
     public void onMTxtMoreTaskClicked() {
-        ToastUtil.showToast("敬请期待");
+        ToastUtil.showToast(R.string.toast_stay_tuned);
     }
 
     @Override
     public void onBannerClick(int position) {
         ToastUtil.showToast("点击了轮播图");
+    }
+
+
+    @Override
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+        // TODO: inflate a fragment view
+        View rootView = super.onCreateView(inflater, container, savedInstanceState);
+        unbinder = ButterKnife.bind(this, rootView);
+        return rootView;
+    }
+
+    @Override
+    public void onDestroyView() {
+        super.onDestroyView();
+        unbinder.unbind();
     }
 }

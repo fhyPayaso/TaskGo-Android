@@ -1,12 +1,11 @@
 package cn.abtion.taskgo.data;
 
 import cn.abtion.taskgo.base.data.DataCallBack;
-import cn.abtion.taskgo.mvp.model.request.LoginRequest;
+import cn.abtion.taskgo.mvp.model.request.account.LoginRequestModel;
 import cn.abtion.taskgo.network.BaseObserver;
 import cn.abtion.taskgo.network.ResponseCallBack;
 import cn.abtion.taskgo.network.response.ApiResponse;
 import cn.abtion.taskgo.network.retrofit.RetrofitFactory;
-import cn.abtion.taskgo.network.retrofit.RetrofitService;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.schedulers.Schedulers;
 import retrofit2.Call;
@@ -24,7 +23,7 @@ public class AccountHelper {
      * 登录请求
      */
     @SuppressWarnings("unchecked")
-    public static void login(final LoginRequest request, final DataCallBack.SuccessCallback callback) {
+    public static void login(final LoginRequestModel request, final DataCallBack.SuccessCallback callback) {
 
 
         RetrofitFactory.getRetrofitService().login(request).enqueue(new ResponseCallBack<ApiResponse>() {
@@ -45,17 +44,17 @@ public class AccountHelper {
         });
 
 
-        RetrofitFactory
-                .getRetrofitService()
-                .rxLogin(request)
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new BaseObserver() {
-                    @Override
-                    public void onDataSuccess(ApiResponse response) {
-                        callback.onDataLoaded(null);
-                    }
-                });
+//        RetrofitFactory
+//                .getRetrofitService()
+//                .rxLogin(request)
+//                .subscribeOn(Schedulers.io())
+//                .observeOn(AndroidSchedulers.mainThread())
+//                .subscribe(new BaseObserver() {
+//                    @Override
+//                    public void onDataSuccess(ApiResponse response) {
+//                        callback.onDataLoaded(null);
+//                    }
+//                });
 
     }
 }

@@ -3,6 +3,7 @@ package cn.abtion.taskgo.mvp.view.home.activity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.widget.EditText;
 import android.widget.TextView;
 
 import butterknife.BindView;
@@ -12,6 +13,7 @@ import cn.abtion.taskgo.R;
 import cn.abtion.taskgo.base.activity.BaseToolBarPresenterActivity;
 import cn.abtion.taskgo.base.contract.BaseContract;
 import cn.abtion.taskgo.base.presenter.BasePresenter;
+import cn.abtion.taskgo.utils.ToastUtil;
 
 /**
  * @author FanHongyu.
@@ -26,6 +28,12 @@ public class ReleaseWaterTaskActivity extends BaseToolBarPresenterActivity {
     TextView txtTypeSend;
     @BindView(R.id.txt_type_self)
     TextView txtTypeSelf;
+    @BindView(R.id.txt_total_money)
+    TextView txtTotalMoney;
+    @BindView(R.id.edit_address_number)
+    EditText editAddressNumber;
+    @BindView(R.id.edit_task_information)
+    EditText editTaskInformation;
 
     @Override
     public BaseContract.Presenter initPresenter() {
@@ -45,16 +53,14 @@ public class ReleaseWaterTaskActivity extends BaseToolBarPresenterActivity {
     @Override
     protected void initView() {
 
-        setActivityTitle("发布任务");
+        setActivityTitle(getString(R.string.title_release_task));
         onTxtTypeSendClicked();
-
     }
 
     @Override
     protected void loadData() {
 
     }
-
 
     public static void startActivity(Context context) {
         context.startActivity(new Intent(context, ReleaseWaterTaskActivity.class));
@@ -67,17 +73,31 @@ public class ReleaseWaterTaskActivity extends BaseToolBarPresenterActivity {
         ButterKnife.bind(this);
     }
 
+    /**
+     * 送水上门类型点击事件
+     */
     @OnClick(R.id.txt_type_send)
     public void onTxtTypeSendClicked() {
 
         txtTypeSend.setSelected(true);
         txtTypeSelf.setSelected(false);
+        txtTotalMoney.setText(R.string.txt_nine_rmb);
     }
 
+    /**
+     * 自取类型点击事件
+     */
     @OnClick(R.id.txt_type_self)
     public void onTxtTypeSelfClicked() {
 
         txtTypeSelf.setSelected(true);
         txtTypeSend.setSelected(false);
+        txtTotalMoney.setText(R.string.txt_eight_rmb);
+    }
+
+    @OnClick(R.id.btn_release_task)
+    public void onViewClicked() {
+        ToastUtil.showToast(R.string.toast_release_task_successful);
+        finish();
     }
 }

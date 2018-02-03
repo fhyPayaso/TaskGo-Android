@@ -3,13 +3,16 @@ package cn.abtion.taskgo.mvp.view.account;
 import android.os.CountDownTimer;
 
 /**
- * Created by heaijia on 2018/1/28.
+ * @author heaijia
+ * @since 2018/2/2 上午11:33
+ * email 549044363@qq.com
  */
+
 
 public class VerificationCountDownTimer extends CountDownTimer {
 
 
-    public static long curMillis =0;
+    public static long mcurMillis =0;
     public static boolean FLAG_FIRST_IN =true;
 
     /**
@@ -44,7 +47,7 @@ public class VerificationCountDownTimer extends CountDownTimer {
     public void timerStart(boolean onClick){
 
         if(onClick) {
-            VerificationCountDownTimer.curMillis= System.currentTimeMillis();
+            VerificationCountDownTimer.mcurMillis= System.currentTimeMillis();
         }
         VerificationCountDownTimer.FLAG_FIRST_IN=false;
         this.start();

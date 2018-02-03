@@ -2,7 +2,14 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
           package="cn.abtion.taskgo">
 
+    <!--网络权限-->
     <uses-permission android:name="android.permission.INTERNET"/>
+    <!--sd卡读写权限-->
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+
+
+
 
     <application
         android:name=".TaskGoApplication"
@@ -12,9 +19,9 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+
+
         <activity android:name=".mvp.view.MainActivity">
-
-
 
         </activity>
 
@@ -37,6 +44,8 @@
 
         <activity android:name=".mvp.view.initiate.InitiateActivity"/>
         <activity android:name=".mvp.view.home.activity.ReleaseLostFoundTaskActivity"/>
+        <activity android:name=".mvp.view.mine.activity.MyAcceptTaskActivity"/>
+        <activity android:name=".mvp.view.mine.activity.MyReleasedTaskActivity"/>
 
     </application>
 

@@ -4,6 +4,9 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import cn.abtion.taskgo.mvp.view.home.fragment.FoundTaskListFragment;
 import cn.abtion.taskgo.mvp.view.home.fragment.LostTaskListFragment;
 
@@ -19,7 +22,6 @@ public class LostFoundPagerAdapter extends FragmentPagerAdapter {
     private FoundTaskListFragment mFoundTaskListFragment;
     private LostTaskListFragment mLostTaskListFragment;
     private Fragment currentFragment;
-
 
     public LostFoundPagerAdapter(FragmentManager fm) {
         super(fm);

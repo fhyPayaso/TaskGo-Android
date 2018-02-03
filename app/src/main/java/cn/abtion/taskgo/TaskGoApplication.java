@@ -3,6 +3,7 @@ package cn.abtion.taskgo;
 import android.app.Activity;
 import android.app.Application;
 import android.os.Bundle;
+import android.os.StrictMode;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -26,6 +27,12 @@ public class TaskGoApplication extends Application {
         super.onCreate();
         instance = this;
         registerActivityLifecycleCallbacks(activityLifecycleCallbacks);
+
+
+        // android 7.0系统解决拍照的问题
+        StrictMode.VmPolicy.Builder builder = new StrictMode.VmPolicy.Builder();
+        StrictMode.setVmPolicy(builder.build());
+        builder.detectFileUriExposure();
     }
 
     /**

@@ -15,6 +15,7 @@ import butterknife.ButterKnife;
 import butterknife.OnClick;
 import cn.abtion.taskgo.R;
 import cn.abtion.taskgo.base.activity.BaseNoBarPresenterActivity;
+import cn.abtion.taskgo.base.presenter.BasePresenter;
 import cn.abtion.taskgo.mvp.contract.LoginContract;
 import cn.abtion.taskgo.mvp.presenter.LoginPresenter;
 import cn.abtion.taskgo.mvp.view.MainActivity;
@@ -25,31 +26,31 @@ public class LoginActivity extends BaseNoBarPresenterActivity<LoginContract.Pres
 
 
     @BindView(R.id.logo_login)
-    ImageView logoLogin;
+    ImageView mlogoLogin;
     @BindView(R.id.ly_header)
-    LinearLayout lyHeader;
+    LinearLayout mlyHeader;
     @BindView(R.id.edit_phone_number)
-    EditText editPhoneNumber;
+    EditText meditPhoneNumber;
     @BindView(R.id.ly_phone_number)
-    LinearLayout lyPhoneNumber;
+    LinearLayout mlyPhoneNumber;
     @BindView(R.id.line1)
-    View line1;
+    View mline1;
     @BindView(R.id.edit_password)
-    EditText editPassword;
+    EditText meditPassword;
     @BindView(R.id.ly_password)
-    LinearLayout lyPassword;
+    LinearLayout mlyPassword;
     @BindView(R.id.line2)
-    View line2;
+    View mline2;
     @BindView(R.id.btn_login)
-    Button btnLogin;
+    Button mbtnLogin;
     @BindView(R.id.txt_forget_password)
-    TextView txtForgetPassword;
+    TextView mtxtForgetPassword;
     @BindView(R.id.txt_register)
-    TextView txtRegister;
+    TextView mtxtRegister;
     @BindView(R.id.footer_line1)
-    View footerLine1;
+    View mfooterLine1;
     @BindView(R.id.footer_line2)
-    View footerLine2;
+    View mfooterLine2;
 
     /**
      * 登陆成功后,进入主页面,结束当前页面
@@ -117,5 +118,6 @@ public class LoginActivity extends BaseNoBarPresenterActivity<LoginContract.Pres
     @OnClick(R.id.txt_register)
     public void onTxtRegisterClicked() {
         RegisterActivity.startActivity(LoginActivity.this);
+    //    this.finish();
     }
 }

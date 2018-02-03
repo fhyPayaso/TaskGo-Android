@@ -4,7 +4,7 @@ import cn.abtion.taskgo.base.data.DataCallBack;
 import cn.abtion.taskgo.base.presenter.BasePresenter;
 import cn.abtion.taskgo.data.AccountHelper;
 import cn.abtion.taskgo.mvp.contract.LoginContract;
-import cn.abtion.taskgo.mvp.model.request.LoginRequest;
+import cn.abtion.taskgo.mvp.model.request.account.LoginRequestModel;
 
 /**
  * @author FanHongyu.
@@ -30,7 +30,7 @@ public class LoginPresenter extends BasePresenter<LoginContract.View> implements
     public void requestLogin(String phone,String password) {
 
         if (isDataTrue(phone, password)) {
-            AccountHelper.login(new LoginRequest(phone,password),this);
+            AccountHelper.login(new LoginRequestModel(phone,password),this);
         }
     }
 
