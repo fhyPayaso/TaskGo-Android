@@ -27,22 +27,22 @@ public class AccountHelper {
     public static void login(final LoginRequest request, final DataCallBack.SuccessCallback callback) {
 
 
-//        RetrofitFactory.getRetrofitService().login(request).enqueue(new ResponseCallBack<ApiResponse>() {
-//            @Override
-//            public void onDataResponse(Call<ApiResponse> call, Response<ApiResponse> response) {
-//                callback.onDataLoaded(null);
-//            }
-//
-//            @Override
-//            public void onDataFailure(Call<ApiResponse> call, Throwable t) {
-//
-//            }
-//
-//            @Override
-//            public void dismissDialog() {
-//
-//            }
-//        });
+        RetrofitFactory.getRetrofitService().login(request).enqueue(new ResponseCallBack<ApiResponse>() {
+            @Override
+            public void onDataResponse(Call<ApiResponse> call, Response<ApiResponse> response) {
+                callback.onDataLoaded(null);
+            }
+
+            @Override
+            public void onDataFailure(Call<ApiResponse> call, Throwable t) {
+
+            }
+
+            @Override
+            public void dismissDialog() {
+
+            }
+        });
 
 
         RetrofitFactory
