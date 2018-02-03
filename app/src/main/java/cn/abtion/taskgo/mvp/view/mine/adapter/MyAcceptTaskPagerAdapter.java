@@ -4,8 +4,6 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 
-import cn.abtion.taskgo.mvp.view.home.fragment.FoundTaskListFragment;
-import cn.abtion.taskgo.mvp.view.home.fragment.LostTaskListFragment;
 import cn.abtion.taskgo.mvp.view.mine.fragment.MyAcceptFinishedFragment;
 import cn.abtion.taskgo.mvp.view.mine.fragment.MyAcceptUnfinishedFragment;
 

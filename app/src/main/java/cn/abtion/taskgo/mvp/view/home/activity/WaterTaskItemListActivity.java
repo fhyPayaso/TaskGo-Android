@@ -28,7 +28,7 @@ import cn.abtion.taskgo.base.presenter.BasePresenter;
 import cn.abtion.taskgo.common.Config;
 import cn.abtion.taskgo.mvp.model.request.home.BaseTaskModel;
 import cn.abtion.taskgo.mvp.view.home.adapter.BtnTaskRecAdapter;
-import cn.abtion.taskgo.mvp.view.home.adapter.TaskListener;
+import cn.abtion.taskgo.mvp.view.home.adapter.TaskItemListener;
 import cn.abtion.taskgo.utils.DialogUtil;
 import cn.abtion.taskgo.utils.ToastUtil;
 
@@ -37,7 +37,7 @@ import cn.abtion.taskgo.utils.ToastUtil;
  * @since 2018/1/26 on 上午5:06
  * fhyPayaso@qq.com
  */
-public class WaterTaskListActivity extends BaseToolBarPresenterActivity implements TaskListener, SwipeRefreshLayout
+public class WaterTaskItemListActivity extends BaseToolBarPresenterActivity implements TaskItemListener, SwipeRefreshLayout
         .OnRefreshListener {
 
 
@@ -86,7 +86,7 @@ public class WaterTaskListActivity extends BaseToolBarPresenterActivity implemen
 
 
     public static void startActivity(Context context) {
-        context.startActivity(new Intent(context, WaterTaskListActivity.class));
+        context.startActivity(new Intent(context, WaterTaskItemListActivity.class));
     }
 
     @Override
@@ -107,7 +107,7 @@ public class WaterTaskListActivity extends BaseToolBarPresenterActivity implemen
         getToolBar().findViewById(R.id.img_toolbar_menu).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                SearchTaskActivity.startActivity(WaterTaskListActivity.this);
+                SearchTaskActivity.startActivity(WaterTaskItemListActivity.this);
             }
         });
         txtTotalNumber.setText("0");
@@ -141,10 +141,10 @@ public class WaterTaskListActivity extends BaseToolBarPresenterActivity implemen
      */
     private void initRecyclerView() {
 
-        mAdapter = new BtnTaskRecAdapter(WaterTaskListActivity.this, mWaterTaskList);
-        mAdapter.setTaskListener(this);
+        mAdapter = new BtnTaskRecAdapter(WaterTaskItemListActivity.this, mWaterTaskList);
+        mAdapter.setTaskItemListener(this);
         recWaterTask.setAdapter(mAdapter);
-        recWaterTask.setLayoutManager(new LinearLayoutManager(WaterTaskListActivity.this, LinearLayoutManager.VERTICAL, false));
+        recWaterTask.setLayoutManager(new LinearLayoutManager(WaterTaskItemListActivity.this, LinearLayoutManager.VERTICAL, false));
 
         mAdapter.setOnItemClickedListener(new BaseRecyclerViewAdapter.OnItemClicked<BaseTaskModel>() {
             @Override
@@ -169,7 +169,7 @@ public class WaterTaskListActivity extends BaseToolBarPresenterActivity implemen
     private void showDialogTaskInformation(BaseTaskModel model) {
 
         dialogTaskInformation = new DialogUtil().new CustomAlertDialog();
-        dialogTaskInformation.initDialog(WaterTaskListActivity.this, R.layout.dialog_water_task_information);
+        dialogTaskInformation.initDialog(WaterTaskItemListActivity.this, R.layout.dialog_water_task_information);
         dialogTaskInformation.setCanceledOntouchOutside(true);
         dialogTaskInformation.showDialog();
 
@@ -193,7 +193,7 @@ public class WaterTaskListActivity extends BaseToolBarPresenterActivity implemen
 
         DialogUtil.NativeDialog dialogAcceptAll = new DialogUtil().new NativeDialog();
         dialogAcceptAll
-                .singleInit(WaterTaskListActivity.this)
+                .singleInit(WaterTaskItemListActivity.this)
                 .setTitle(getString(R.string.dialog_title_if_accept_all))
                 .setMessage(getString(R.string.dialog_message_clear_list))
                 .setNegativeButton(getString(R.string.txt_cancel), new DialogInterface.OnClickListener() {
@@ -226,7 +226,7 @@ public class WaterTaskListActivity extends BaseToolBarPresenterActivity implemen
      */
     @OnClick(R.id.btn_release_task)
     public void onViewClicked() {
-        ReleaseWaterTaskActivity.startActivity(WaterTaskListActivity.this);
+        ReleaseWaterTaskActivity.startActivity(WaterTaskItemListActivity.this);
     }
 
 
@@ -267,7 +267,7 @@ public class WaterTaskListActivity extends BaseToolBarPresenterActivity implemen
 
         DialogUtil.NativeDialog dialogAccept = new DialogUtil().new NativeDialog();
         dialogAccept
-                .singleInit(WaterTaskListActivity.this)
+                .singleInit(WaterTaskItemListActivity.this)
                 .setTitle(getString(R.string.dialog_title_if_accept))
                 .setMessage(getString(R.string.dialog_message_remove_task))
                 .setNegativeButton(getString(R.string.txt_cancel), new DialogInterface.OnClickListener() {

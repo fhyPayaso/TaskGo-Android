@@ -3,7 +3,6 @@ package cn.abtion.taskgo.mvp.view.home.adapter;
 import android.content.Context;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import java.util.List;
@@ -23,7 +22,7 @@ public class BtnTaskRecAdapter extends BaseRecyclerViewAdapter<BaseTaskModel> {
 
 
 
-    private TaskListener mTaskListener;
+    private TaskItemListener mTaskItemListener;
     private String mButtonContent = "接受";
 
 
@@ -37,8 +36,8 @@ public class BtnTaskRecAdapter extends BaseRecyclerViewAdapter<BaseTaskModel> {
         return new ItemHolder(view);
     }
 
-    public void setTaskListener(TaskListener listener) {
-        mTaskListener = listener;
+    public void setTaskItemListener(TaskItemListener listener) {
+        mTaskItemListener = listener;
     }
 
     public void setButtonContent(String buttonContent) {
@@ -98,10 +97,10 @@ public class BtnTaskRecAdapter extends BaseRecyclerViewAdapter<BaseTaskModel> {
             int position = getAdapterPosition();
             switch (v.getId()) {
                 case R.id.img_avatar:
-                    mTaskListener.onClickAvatar(position);
+                    mTaskItemListener.onClickAvatar(position);
                     break;
                 case R.id.btn_task:
-                    mTaskListener.onClickAccept(position);
+                    mTaskItemListener.onClickAccept(position);
                     break;
                 default:
                     break;

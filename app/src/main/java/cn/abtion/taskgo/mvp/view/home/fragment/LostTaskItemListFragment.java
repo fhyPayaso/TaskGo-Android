@@ -28,7 +28,7 @@ import cn.abtion.taskgo.base.presenter.BasePresenter;
 import cn.abtion.taskgo.common.Config;
 import cn.abtion.taskgo.mvp.model.request.home.BaseTaskModel;
 import cn.abtion.taskgo.mvp.view.home.adapter.BtnTaskRecAdapter;
-import cn.abtion.taskgo.mvp.view.home.adapter.TaskListener;
+import cn.abtion.taskgo.mvp.view.home.adapter.TaskItemListener;
 import cn.abtion.taskgo.utils.DialogUtil;
 import cn.abtion.taskgo.utils.ToastUtil;
 
@@ -36,11 +36,10 @@ import static cn.abtion.taskgo.utils.Utility.runOnUiThread;
 
 /**
  * @author fhyPayaso
- * @since 2018/1/26 on 下午11:32
+ * @since 2018/1/26 on 下午11:31
  * fhyPayaso@qq.com
  */
-public class FoundTaskListFragment extends BasePresenterFragment implements TaskListener, SwipeRefreshLayout
-        .OnRefreshListener {
+public class LostTaskItemListFragment extends BasePresenterFragment implements TaskItemListener, SwipeRefreshLayout.OnRefreshListener {
 
     @BindView(R.id.rec_lost_find_task)
     RecyclerView recLostFindTask;
@@ -48,9 +47,10 @@ public class FoundTaskListFragment extends BasePresenterFragment implements Task
     SwipeRefreshLayout mSwipeRefresh;
     Unbinder unbinder;
 
-    private List<BaseTaskModel> mLostFindTaskLst;
     private BtnTaskRecAdapter mAdapter;
+    private List<BaseTaskModel> mLostFindTaskLst;
     private DialogUtil.CustomAlertDialog dialogTaskInformation;
+
 
     @Override
     protected BaseContract.Presenter initPresenter() {
@@ -59,7 +59,7 @@ public class FoundTaskListFragment extends BasePresenterFragment implements Task
 
     @Override
     protected int getLayoutId() {
-        return R.layout.fragment_find_task_list;
+        return R.layout.fragment_lost_task_list;
     }
 
     @Override
@@ -106,7 +106,7 @@ public class FoundTaskListFragment extends BasePresenterFragment implements Task
 
 
         mAdapter = new BtnTaskRecAdapter(getContext(), mLostFindTaskLst);
-        mAdapter.setTaskListener(this);
+        mAdapter.setTaskItemListener(this);
         recLostFindTask.setAdapter(mAdapter);
         recLostFindTask.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL, false));
 
@@ -131,10 +131,9 @@ public class FoundTaskListFragment extends BasePresenterFragment implements Task
     private void showDialogTaskInformation(BaseTaskModel model) {
 
         dialogTaskInformation = new DialogUtil().new CustomAlertDialog();
-        dialogTaskInformation
-                .initDialog(getContext(), R.layout.dialog_lost_found_information)
-                .setCanceledOntouchOutside(true)
-                .showDialog();
+        dialogTaskInformation.initDialog(getContext(), R.layout.dialog_lost_found_information);
+        dialogTaskInformation.setCanceledOntouchOutside(true);
+        dialogTaskInformation.showDialog();
 
         View view = dialogTaskInformation.getView();
         TextView txtItemName = view.findViewById(R.id.txt_item_name);
@@ -142,7 +141,7 @@ public class FoundTaskListFragment extends BasePresenterFragment implements Task
         TextView btnConfirm = view.findViewById(R.id.btn_information_confirm);
 
         txtItemName.setText(model.getMainValue());
-        txtLostFoundType.setText(getString(R.string.txt_lost_found_task_type_found));
+        txtLostFoundType.setText(getString(R.string.txt_lost_found_task_type_lost));
         btnConfirm.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -160,9 +159,14 @@ public class FoundTaskListFragment extends BasePresenterFragment implements Task
         return rootView;
     }
 
+    @Override
+    public void onDestroyView() {
+        super.onDestroyView();
+        unbinder.unbind();
+    }
 
     @Override
-    public void onClickAvatar(final int position) {
+    public void onClickAvatar(int position) {
         ToastUtil.showToast("点击了头像" + position);
     }
 
@@ -189,11 +193,11 @@ public class FoundTaskListFragment extends BasePresenterFragment implements Task
                     }
                 })
                 .showNativeDialog();
+
     }
 
     @Override
     public void onRefresh() {
-
         new Timer().schedule(new TimerTask() {
             @Override
             public void run() {
@@ -209,7 +213,6 @@ public class FoundTaskListFragment extends BasePresenterFragment implements Task
         }, Config.REFRESH_TIME);
     }
 
-
     /**
      * 测试增加数据
      *
@@ -219,16 +222,10 @@ public class FoundTaskListFragment extends BasePresenterFragment implements Task
 
         for (int i = 0; i < number; i++) {
             mLostFindTaskLst.add(new BaseTaskModel(1
-                    ,"url"
-                    ,"xkaxka"
-                    ,"02-10 04:25"
-                    ,"机械键盘"));
+                    , "url"
+                    , "xkaxka"
+                    , "02-10 04:25"
+                    , "机械键盘"));
         }
-    }
-
-    @Override
-    public void onDestroyView() {
-        super.onDestroyView();
-        unbinder.unbind();
     }
 }

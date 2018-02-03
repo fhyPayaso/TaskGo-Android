@@ -26,4 +26,8 @@
     <color name="bg_gray">#EFEFF4</color>
     <color name="solid_gray">#A4A4A4</color>
 
+
+    <!--message模块-->
+    <color name="bg_delete_red">#FF383A</color>
+
 </resources>

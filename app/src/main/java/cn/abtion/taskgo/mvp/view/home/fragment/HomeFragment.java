@@ -15,7 +15,7 @@ import cn.abtion.taskgo.R;
 import cn.abtion.taskgo.base.contract.BaseContract;
 import cn.abtion.taskgo.base.frgment.BasePresenterFragment;
 import cn.abtion.taskgo.mvp.view.home.activity.LostAndFoundTaskActivity;
-import cn.abtion.taskgo.mvp.view.home.activity.WaterTaskListActivity;
+import cn.abtion.taskgo.mvp.view.home.activity.WaterTaskItemListActivity;
 import cn.abtion.taskgo.utils.ToastUtil;
 import cn.abtion.taskgo.widget.BannerPager;
 
@@ -111,7 +111,7 @@ public class HomeFragment extends BasePresenterFragment implements BannerPager.O
 
     @OnClick(R.id.txt_water_task)
     public void onMTxtWaterTaskClicked() {
-        WaterTaskListActivity.startActivity(getContext());
+        WaterTaskItemListActivity.startActivity(getContext());
     }
 
     @OnClick(R.id.txt_lost_task)

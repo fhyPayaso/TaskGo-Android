@@ -19,6 +19,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.qiniu.android.common.AutoZone;
+import com.qiniu.android.common.FixedZone;
 import com.qiniu.android.common.Zone;
 import com.qiniu.android.http.ResponseInfo;
 import com.qiniu.android.storage.Configuration;
@@ -192,7 +193,7 @@ public class ReleaseLostFoundTaskActivity extends BaseToolBarPresenterActivity {
     private void uploadImg2QiNiu() {
 
         Configuration config = new Configuration.Builder()
-                .zone(Zone.zone1)
+                .zone(FixedZone.zone1)
                 .build();
 
         UploadManager uploadManager = new UploadManager(config);

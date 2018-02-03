@@ -3,12 +3,16 @@ package cn.abtion.taskgo.mvp.view.account;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+
+import com.hyphenate.EMCallBack;
+import com.hyphenate.chat.EMClient;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -98,13 +102,40 @@ public class LoginActivity extends BaseNoBarPresenterActivity<LoginContract.Pres
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         // TODO: add setContentView(...) invocation
-
-        ToastUtil.showToast("lalalallalalaallala");
     }
 
     @OnClick(R.id.btn_login)
     public void onViewClicked() {
+
+
+        emChatTest();
         MainActivity.startActivity(LoginActivity.this);
+    }
+
+    /**
+     * 聊天系统登录测试
+     */
+    private void emChatTest() {
+
+        EMClient.getInstance().login("111111", "111111", new EMCallBack() {
+            @Override
+            public void onSuccess() {
+
+                Log.i("login", "onSuccess: 登录成功");
+
+            }
+
+            @Override
+            public void onError(int code, String error) {
+
+                Log.i("login", "onError: 登录失败，" + error);
+            }
+
+            @Override
+            public void onProgress(int progress, String status) {
+
+            }
+        });
     }
 
 
@@ -118,6 +149,6 @@ public class LoginActivity extends BaseNoBarPresenterActivity<LoginContract.Pres
     @OnClick(R.id.txt_register)
     public void onTxtRegisterClicked() {
         RegisterActivity.startActivity(LoginActivity.this);
-    //    this.finish();
+        //    this.finish();
     }
 }

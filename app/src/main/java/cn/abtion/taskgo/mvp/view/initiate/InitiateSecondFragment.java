@@ -25,7 +25,6 @@ import cn.abtion.taskgo.mvp.view.account.RegisterActivity;
 public class InitiateSecondFragment extends BaseFragment {
 
 
-
     public static void startActivity(Context context) {
         context.startActivity(new Intent(context, LoginActivity.class));
     }
@@ -74,7 +73,7 @@ public class InitiateSecondFragment extends BaseFragment {
     @OnClick(R.id.btn_initiate)
     public void onViewClicked() {
 
-        Intent intent =new Intent();
+        Intent intent = new Intent();
         getActivity().startActivity(intent);
 
     }

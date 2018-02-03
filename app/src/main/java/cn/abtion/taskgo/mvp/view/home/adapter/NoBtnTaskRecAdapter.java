@@ -11,7 +11,6 @@ import butterknife.BindView;
 import cn.abtion.taskgo.R;
 import cn.abtion.taskgo.base.adapter.BaseRecyclerViewAdapter;
 import cn.abtion.taskgo.mvp.model.request.home.BaseTaskModel;
-import cn.abtion.taskgo.mvp.view.home.adapter.TaskListener;
 import de.hdodenhof.circleimageview.CircleImageView;
 
 /**
@@ -22,7 +21,7 @@ import de.hdodenhof.circleimageview.CircleImageView;
 public class NoBtnTaskRecAdapter extends BaseRecyclerViewAdapter<BaseTaskModel> {
 
 
-    private TaskListener mTaskListener;
+    private TaskItemListener mTaskItemListener;
 
     public NoBtnTaskRecAdapter(Context context, List<BaseTaskModel> baseTaskModels) {
         super(context, baseTaskModels);
@@ -35,8 +34,8 @@ public class NoBtnTaskRecAdapter extends BaseRecyclerViewAdapter<BaseTaskModel> 
         return new ItemHolder(view);
     }
 
-    public void setTaskListener(TaskListener listener) {
-        mTaskListener = listener;
+    public void setTaskItemListener(TaskItemListener listener) {
+        mTaskItemListener = listener;
     }
 
 
@@ -91,7 +90,7 @@ public class NoBtnTaskRecAdapter extends BaseRecyclerViewAdapter<BaseTaskModel> 
         public void onClick(View v) {
 
             if (v.getId() == R.id.img_avatar) {
-                mTaskListener.onClickAvatar(getAdapterPosition());
+                mTaskItemListener.onClickAvatar(getAdapterPosition());
             }
         }
     }

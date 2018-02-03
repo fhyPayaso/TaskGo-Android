@@ -22,7 +22,7 @@ import cn.abtion.taskgo.base.presenter.BasePresenter;
 import cn.abtion.taskgo.common.Config;
 import cn.abtion.taskgo.mvp.model.request.home.BaseTaskModel;
 import cn.abtion.taskgo.mvp.view.home.adapter.NoBtnTaskRecAdapter;
-import cn.abtion.taskgo.mvp.view.home.adapter.TaskListener;
+import cn.abtion.taskgo.mvp.view.home.adapter.TaskItemListener;
 import cn.abtion.taskgo.utils.DialogUtil;
 import cn.abtion.taskgo.utils.ToastUtil;
 
@@ -33,7 +33,7 @@ import static cn.abtion.taskgo.utils.Utility.runOnUiThread;
  * @since 2018/2/3 on 上午9:45
  * fhyPayaso@qq.com
  */
-public class MyReleasedFinishedFragment extends BasePresenterFragment implements TaskListener, SwipeRefreshLayout.OnRefreshListener{
+public class MyReleasedFinishedFragment extends BasePresenterFragment implements TaskItemListener, SwipeRefreshLayout.OnRefreshListener{
 
     @BindView(R.id.rec_task_list)
     RecyclerView mRecTaskList;
@@ -99,7 +99,7 @@ public class MyReleasedFinishedFragment extends BasePresenterFragment implements
 
 
         mAdapter = new NoBtnTaskRecAdapter(getContext(), mTaskLst);
-        mAdapter.setTaskListener(this);
+        mAdapter.setTaskItemListener(this);
         mRecTaskList.setAdapter(mAdapter);
         mRecTaskList.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL, false));
 

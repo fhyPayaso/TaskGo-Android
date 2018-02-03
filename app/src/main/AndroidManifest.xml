@@ -9,6 +9,20 @@
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
 
 
+    <!--EM Required -->
+    <uses-permission android:name="android.permission.VIBRATE"/>
+    <uses-permission android:name="android.permission.RECORD_AUDIO"/>
+    <uses-permission android:name="android.permission.CAMERA"/>
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
+    <uses-permission android:name="android.permission.MOUNT_UNMOUNT_FILESYSTEMS"/>
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"/>
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE"/>
+    <uses-permission android:name="android.permission.CHANGE_WIFI_STATE"/>
+    <uses-permission android:name="android.permission.WAKE_LOCK"/>
+    <uses-permission android:name="android.permission.MODIFY_AUDIO_SETTINGS"/>
+    <uses-permission android:name="android.permission.READ_PHONE_STATE"/>
+    <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED"/>
+
 
 
     <application
@@ -19,6 +33,32 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+
+        <!-- 设置环信应用的AppKey -->
+        <meta-data
+            android:name="EASEMOB_APPKEY"
+            android:value="1129180112178143#neuqercc"/>
+        <!-- 声明SDK所需的service SDK核心功能 -->
+        <service
+            android:name="com.hyphenate.chat.EMChatService"
+            android:exported="true"/>
+        <service
+            android:name="com.hyphenate.chat.EMJobService"
+            android:exported="true"
+            android:permission="android.permission.BIND_JOB_SERVICE"/>
+        <!-- 声明SDK所需的receiver -->
+        <receiver android:name="com.hyphenate.chat.EMMonitorReceiver">
+            <intent-filter>
+                <action android:name="android.intent.action.PACKAGE_REMOVED"/>
+
+                <data android:scheme="package"/>
+            </intent-filter>
+            <!-- 可选filter -->
+            <intent-filter>
+                <action android:name="android.intent.action.BOOT_COMPLETED"/>
+                <action android:name="android.intent.action.USER_PRESENT"/>
+            </intent-filter>
+        </receiver>
 
 
         <activity android:name=".mvp.view.MainActivity">
@@ -36,7 +76,7 @@
 
         <activity android:name=".mvp.view.account.RegisterActivity"/>
         <activity android:name=".mvp.view.account.UpdatePasswordActivity"/>
-        <activity android:name=".mvp.view.home.activity.WaterTaskListActivity"/>
+        <activity android:name=".mvp.view.home.activity.WaterTaskItemListActivity"/>
         <activity android:name=".mvp.view.home.activity.ReleaseWaterTaskActivity"/>
         <activity android:name=".mvp.view.home.activity.LostAndFoundTaskActivity"/>
         <activity android:name=".mvp.view.home.activity.SearchTaskActivity"/>
@@ -46,6 +86,7 @@
         <activity android:name=".mvp.view.home.activity.ReleaseLostFoundTaskActivity"/>
         <activity android:name=".mvp.view.mine.activity.MyAcceptTaskActivity"/>
         <activity android:name=".mvp.view.mine.activity.MyReleasedTaskActivity"/>
+        <activity android:name=".mvp.view.message.activity.ChatWindowActivity"/>
 
     </application>
 

@@ -1,14 +1,24 @@
 package cn.abtion.taskgo;
 
 import android.app.Activity;
+import android.app.ActivityManager;
 import android.app.Application;
+import android.content.Context;
 import android.os.Bundle;
 import android.os.StrictMode;
+import android.util.Log;
+
+import com.hyphenate.chat.EMClient;
+import com.hyphenate.chat.EMOptions;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
+import cn.abtion.taskgo.data.ChatHelper;
 import cn.abtion.taskgo.utils.CacheUtil;
+
+import static cn.abtion.taskgo.BuildConfig.DEBUG;
 
 /**
  * @author FanHongyu.
@@ -21,13 +31,16 @@ public class TaskGoApplication extends Application {
     private static TaskGoApplication instance;
     private static List<Activity> activityList = new ArrayList<>();
     private static CacheUtil cacheUtil;
+    public static Context appContext;
 
     @Override
     public void onCreate() {
         super.onCreate();
         instance = this;
+        appContext = this;
         registerActivityLifecycleCallbacks(activityLifecycleCallbacks);
 
+        ChatHelper.initEM();
 
         // android 7.0系统解决拍照的问题
         StrictMode.VmPolicy.Builder builder = new StrictMode.VmPolicy.Builder();

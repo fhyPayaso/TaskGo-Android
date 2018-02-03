@@ -187,7 +187,7 @@ public abstract class BaseRecyclerViewAdapter<Data> extends RecyclerView.Adapter
             ButterKnife.bind(this, itemView);
         }
 
-        void bind(Data data, int position) {
+        public void bind(Data data, int position) {
             mData = data;
             onBind(data, position);
         }

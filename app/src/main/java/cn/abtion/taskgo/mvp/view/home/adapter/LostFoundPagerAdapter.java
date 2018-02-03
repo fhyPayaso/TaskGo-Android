@@ -4,11 +4,8 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 
-import java.util.ArrayList;
-import java.util.List;
-
-import cn.abtion.taskgo.mvp.view.home.fragment.FoundTaskListFragment;
-import cn.abtion.taskgo.mvp.view.home.fragment.LostTaskListFragment;
+import cn.abtion.taskgo.mvp.view.home.fragment.FoundTaskItemListFragment;
+import cn.abtion.taskgo.mvp.view.home.fragment.LostTaskItemListFragment;
 
 /**
  * @author fhyPayaso
@@ -19,8 +16,8 @@ public class LostFoundPagerAdapter extends FragmentPagerAdapter {
 
 
     private String[] mTitles = {"失物招领", "寻物启事"};
-    private FoundTaskListFragment mFoundTaskListFragment;
-    private LostTaskListFragment mLostTaskListFragment;
+    private FoundTaskItemListFragment mFoundTaskListFragment;
+    private LostTaskItemListFragment mLostTaskListFragment;
     private Fragment currentFragment;
 
     public LostFoundPagerAdapter(FragmentManager fm) {
@@ -32,13 +29,13 @@ public class LostFoundPagerAdapter extends FragmentPagerAdapter {
         switch (position) {
             case 0:
                 if (mFoundTaskListFragment == null) {
-                    mFoundTaskListFragment = new FoundTaskListFragment();
+                    mFoundTaskListFragment = new FoundTaskItemListFragment();
                 }
                 currentFragment = mFoundTaskListFragment;
                 break;
             case 1:
                 if (mLostTaskListFragment == null) {
-                    mLostTaskListFragment = new LostTaskListFragment();
+                    mLostTaskListFragment = new LostTaskItemListFragment();
                 }
                 currentFragment = mLostTaskListFragment;
                 break;

@@ -8,7 +8,7 @@ package cn.abtion.taskgo.mvp.view.home.adapter;
  * email fanhongyu@hrsoft.net.
  */
 
-public interface TaskListener {
+public interface TaskItemListener {
 
     /**
      * 点击头像回调事件
