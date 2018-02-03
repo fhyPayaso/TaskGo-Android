@@ -26,8 +26,8 @@ import cn.abtion.taskgo.base.contract.BaseContract;
 import cn.abtion.taskgo.base.frgment.BasePresenterFragment;
 import cn.abtion.taskgo.base.presenter.BasePresenter;
 import cn.abtion.taskgo.common.Config;
-import cn.abtion.taskgo.mvp.model.request.home.LostFindTaskModel;
-import cn.abtion.taskgo.mvp.view.home.adapter.LostFoundTaskRecAdapter;
+import cn.abtion.taskgo.mvp.model.request.home.BaseTaskModel;
+import cn.abtion.taskgo.mvp.view.home.adapter.BtnTaskRecAdapter;
 import cn.abtion.taskgo.mvp.view.home.adapter.TaskListener;
 import cn.abtion.taskgo.utils.DialogUtil;
 import cn.abtion.taskgo.utils.ToastUtil;
@@ -39,7 +39,7 @@ import static cn.abtion.taskgo.utils.Utility.runOnUiThread;
  * @since 2018/1/26 on 下午11:31
  * fhyPayaso@qq.com
  */
-public class LostTaskListFragment extends BasePresenterFragment implements TaskListener ,SwipeRefreshLayout.OnRefreshListener{
+public class LostTaskListFragment extends BasePresenterFragment implements TaskListener, SwipeRefreshLayout.OnRefreshListener {
 
     @BindView(R.id.rec_lost_find_task)
     RecyclerView recLostFindTask;
@@ -47,8 +47,8 @@ public class LostTaskListFragment extends BasePresenterFragment implements TaskL
     SwipeRefreshLayout mSwipeRefresh;
     Unbinder unbinder;
 
-    private LostFoundTaskRecAdapter mAdapter;
-    private List<LostFindTaskModel> mLostFindTaskLst;
+    private BtnTaskRecAdapter mAdapter;
+    private List<BaseTaskModel> mLostFindTaskLst;
     private DialogUtil.CustomAlertDialog dialogTaskInformation;
 
 
@@ -105,15 +105,15 @@ public class LostTaskListFragment extends BasePresenterFragment implements TaskL
     private void initRecyclerView() {
 
 
-        mAdapter = new LostFoundTaskRecAdapter(getContext(), mLostFindTaskLst);
+        mAdapter = new BtnTaskRecAdapter(getContext(), mLostFindTaskLst);
         mAdapter.setTaskListener(this);
         recLostFindTask.setAdapter(mAdapter);
         recLostFindTask.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL, false));
 
-        mAdapter.setOnItemClickedListener(new BaseRecyclerViewAdapter.OnItemClicked<LostFindTaskModel>() {
+        mAdapter.setOnItemClickedListener(new BaseRecyclerViewAdapter.OnItemClicked<BaseTaskModel>() {
             @Override
-            public void onItemClicked(LostFindTaskModel lostFindTaskModel, BaseRecyclerViewAdapter.BaseViewHolder holder) {
-                showDialogTaskInformation(lostFindTaskModel);
+            public void onItemClicked(BaseTaskModel baseTaskModel, BaseRecyclerViewAdapter.BaseViewHolder holder) {
+                showDialogTaskInformation(baseTaskModel);
             }
         });
 
@@ -128,7 +128,7 @@ public class LostTaskListFragment extends BasePresenterFragment implements TaskL
     /**
      * 显示任务详细信息
      */
-    private void showDialogTaskInformation(LostFindTaskModel model) {
+    private void showDialogTaskInformation(BaseTaskModel model) {
 
         dialogTaskInformation = new DialogUtil().new CustomAlertDialog();
         dialogTaskInformation.initDialog(getContext(), R.layout.dialog_lost_found_information);
@@ -140,7 +140,7 @@ public class LostTaskListFragment extends BasePresenterFragment implements TaskL
         TextView txtLostFoundType = view.findViewById(R.id.txt_item_task_type);
         TextView btnConfirm = view.findViewById(R.id.btn_information_confirm);
 
-        txtItemName.setText(model.getThingsName());
+        txtItemName.setText(model.getMainValue());
         txtLostFoundType.setText(getString(R.string.txt_lost_found_task_type_lost));
         btnConfirm.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -221,8 +221,11 @@ public class LostTaskListFragment extends BasePresenterFragment implements TaskL
     private void testAddItem(int number) {
 
         for (int i = 0; i < number; i++) {
-            mLostFindTaskLst.add(new LostFindTaskModel("111", "fhyPayaso",
-                    "呱太", "12-09 14:20"));
+            mLostFindTaskLst.add(new BaseTaskModel(1
+                    , "url"
+                    , "xkaxka"
+                    , "02-10 04:25"
+                    , "机械键盘"));
         }
     }
 }

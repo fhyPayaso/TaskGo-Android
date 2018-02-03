@@ -1,14 +1,9 @@
-package cn.abtion.taskgo.mvp.view.home.fragment;
+package cn.abtion.taskgo.mvp.view.mine.fragment;
 
-import android.content.DialogInterface;
-import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.TextView;
 
 import java.util.ArrayList;
@@ -17,7 +12,6 @@ import java.util.Timer;
 import java.util.TimerTask;
 
 import butterknife.BindView;
-import butterknife.ButterKnife;
 import butterknife.Unbinder;
 import cn.abtion.taskgo.R;
 import cn.abtion.taskgo.base.adapter.BaseRecyclerViewAdapter;
@@ -27,7 +21,7 @@ import cn.abtion.taskgo.base.frgment.BasePresenterFragment;
 import cn.abtion.taskgo.base.presenter.BasePresenter;
 import cn.abtion.taskgo.common.Config;
 import cn.abtion.taskgo.mvp.model.request.home.BaseTaskModel;
-import cn.abtion.taskgo.mvp.view.home.adapter.BtnTaskRecAdapter;
+import cn.abtion.taskgo.mvp.view.home.adapter.NoBtnTaskRecAdapter;
 import cn.abtion.taskgo.mvp.view.home.adapter.TaskListener;
 import cn.abtion.taskgo.utils.DialogUtil;
 import cn.abtion.taskgo.utils.ToastUtil;
@@ -36,21 +30,21 @@ import static cn.abtion.taskgo.utils.Utility.runOnUiThread;
 
 /**
  * @author fhyPayaso
- * @since 2018/1/26 on 下午11:32
+ * @since 2018/2/3 on 上午9:45
  * fhyPayaso@qq.com
  */
-public class FoundTaskListFragment extends BasePresenterFragment implements TaskListener, SwipeRefreshLayout
-        .OnRefreshListener {
+public class MyReleasedFinishedFragment extends BasePresenterFragment implements TaskListener, SwipeRefreshLayout.OnRefreshListener{
 
-    @BindView(R.id.rec_lost_find_task)
-    RecyclerView recLostFindTask;
+    @BindView(R.id.rec_task_list)
+    RecyclerView mRecTaskList;
     @BindView(R.id.fresh_task_list)
     SwipeRefreshLayout mSwipeRefresh;
     Unbinder unbinder;
 
-    private List<BaseTaskModel> mLostFindTaskLst;
-    private BtnTaskRecAdapter mAdapter;
+    private List<BaseTaskModel> mTaskLst;
+    private NoBtnTaskRecAdapter mAdapter;
     private DialogUtil.CustomAlertDialog dialogTaskInformation;
+
 
     @Override
     protected BaseContract.Presenter initPresenter() {
@@ -59,13 +53,12 @@ public class FoundTaskListFragment extends BasePresenterFragment implements Task
 
     @Override
     protected int getLayoutId() {
-        return R.layout.fragment_find_task_list;
+        return R.layout.fragment_my_released_finished;
     }
 
     @Override
     protected void initVariable() {
-
-        mLostFindTaskLst = new ArrayList<>();
+        mTaskLst = new ArrayList<>();
     }
 
     @Override
@@ -105,19 +98,23 @@ public class FoundTaskListFragment extends BasePresenterFragment implements Task
     private void initRecyclerView() {
 
 
-        mAdapter = new BtnTaskRecAdapter(getContext(), mLostFindTaskLst);
+        mAdapter = new NoBtnTaskRecAdapter(getContext(), mTaskLst);
         mAdapter.setTaskListener(this);
-        recLostFindTask.setAdapter(mAdapter);
-        recLostFindTask.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL, false));
+        mRecTaskList.setAdapter(mAdapter);
+        mRecTaskList.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL, false));
 
         mAdapter.setOnItemClickedListener(new BaseRecyclerViewAdapter.OnItemClicked<BaseTaskModel>() {
             @Override
             public void onItemClicked(BaseTaskModel baseTaskModel, BaseRecyclerViewAdapter.BaseViewHolder holder) {
-                showDialogTaskInformation(baseTaskModel);
+                if (baseTaskModel.getTaskType() == 0) {
+                    showWaterTaskInformation(baseTaskModel);
+                } else if (baseTaskModel.getTaskType() == 1) {
+                    showLostFoundTaskInformation(baseTaskModel);
+                }
             }
         });
 
-        recLostFindTask.addOnScrollListener(new RecyclerScrollListener((FloatingActionButton) getActivity().findViewById(R.id.btn_release_task)) {
+        mRecTaskList.addOnScrollListener(new RecyclerScrollListener() {
             @Override
             public void scrolledToLast() {
                 ToastUtil.showToast("到底了");
@@ -126,9 +123,35 @@ public class FoundTaskListFragment extends BasePresenterFragment implements Task
     }
 
     /**
-     * 显示任务详细信息
+     * 显示送水任务详细信息
      */
-    private void showDialogTaskInformation(BaseTaskModel model) {
+    private void showWaterTaskInformation(BaseTaskModel model) {
+
+
+        dialogTaskInformation = new DialogUtil().new CustomAlertDialog();
+        dialogTaskInformation
+                .initDialog(getContext(), R.layout.dialog_water_task_information)
+                .setCanceledOntouchOutside(true)
+                .showDialog();
+
+        View view = dialogTaskInformation.getView();
+        TextView mTxtAddressNumber = view.findViewById(R.id.txt_address_number);
+        TextView mTxtWaterTaskType = view.findViewById(R.id.txt_water_task_type);
+        TextView btnConfirm = view.findViewById(R.id.btn_information_confirm);
+        mTxtAddressNumber.setText(model.getMainValue());
+        mTxtWaterTaskType.setText(model.getSubTitle());
+        btnConfirm.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                dialogTaskInformation.hideDialog();
+            }
+        });
+    }
+
+    /**
+     * 显示物品任务详细信息
+     */
+    private void showLostFoundTaskInformation(BaseTaskModel model) {
 
         dialogTaskInformation = new DialogUtil().new CustomAlertDialog();
         dialogTaskInformation
@@ -140,55 +163,14 @@ public class FoundTaskListFragment extends BasePresenterFragment implements Task
         TextView txtItemName = view.findViewById(R.id.txt_item_name);
         TextView txtLostFoundType = view.findViewById(R.id.txt_item_task_type);
         TextView btnConfirm = view.findViewById(R.id.btn_information_confirm);
-
         txtItemName.setText(model.getMainValue());
-        txtLostFoundType.setText(getString(R.string.txt_lost_found_task_type_found));
+        txtLostFoundType.setText(model.getSubTitle() == null ? "" : model.getSubTitle());
         btnConfirm.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 dialogTaskInformation.hideDialog();
             }
         });
-    }
-
-
-    @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        // TODO: inflate a fragment view
-        View rootView = super.onCreateView(inflater, container, savedInstanceState);
-        unbinder = ButterKnife.bind(this, rootView);
-        return rootView;
-    }
-
-
-    @Override
-    public void onClickAvatar(final int position) {
-        ToastUtil.showToast("点击了头像" + position);
-    }
-
-    @Override
-    public void onClickAccept(final int position) {
-
-        DialogUtil.NativeDialog dialogAccept = new DialogUtil().new NativeDialog();
-        dialogAccept
-                .singleInit(getContext())
-                .setTitle(getString(R.string.dialog_title_if_accept))
-                .setMessage(getString(R.string.dialog_message_remove_task))
-                .setNegativeButton(getString(R.string.txt_cancel), new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        dialog.dismiss();
-                    }
-                })
-                .setPositiveButton(getString(R.string.txt_confirm), new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        ToastUtil.showToast(getString(R.string.toast_accept_successful) + position);
-                        mAdapter.removeItem(position);
-                        dialog.dismiss();
-                    }
-                })
-                .showNativeDialog();
     }
 
     @Override
@@ -207,8 +189,19 @@ public class FoundTaskListFragment extends BasePresenterFragment implements Task
                 });
             }
         }, Config.REFRESH_TIME);
+
     }
 
+    @Override
+    public void onClickAvatar(int position) {
+
+        ToastUtil.showToast("点击了头像" + position);
+    }
+
+    @Override
+    public void onClickAccept(int position) {
+
+    }
 
     /**
      * 测试增加数据
@@ -218,17 +211,24 @@ public class FoundTaskListFragment extends BasePresenterFragment implements Task
     private void testAddItem(int number) {
 
         for (int i = 0; i < number; i++) {
-            mLostFindTaskLst.add(new BaseTaskModel(1
-                    ,"url"
-                    ,"xkaxka"
-                    ,"02-10 04:25"
-                    ,"机械键盘"));
-        }
-    }
 
-    @Override
-    public void onDestroyView() {
-        super.onDestroyView();
-        unbinder.unbind();
+            if (i %2 == 0) {
+
+                mTaskLst.add(new BaseTaskModel(0
+                        ,"url"
+                        ,"fhyPayaso"
+                        ,"12-09 14:20"
+                        ,"6077"
+                        ,"送水上门"));
+
+            } else {
+
+                mTaskLst.add(new BaseTaskModel(1
+                        ,"url"
+                        ,"xkaxka"
+                        ,"02-10 04:25"
+                        ,"机械键盘"));
+            }
+        }
     }
 }

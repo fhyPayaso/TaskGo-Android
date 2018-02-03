@@ -27,7 +27,6 @@ public class LostAndFoundTaskActivity extends BaseToolBarActivity {
     TabLayout mTabLayout;
     @BindView(R.id.vp_lost_and_found)
     ViewPager mViewPager;
-    LostFoundPagerAdapter mPagerAdapter;
     @BindView(R.id.btn_release_task)
     FloatingActionButton btnReleaseTask;
 
@@ -65,8 +64,9 @@ public class LostAndFoundTaskActivity extends BaseToolBarActivity {
     }
 
     private void initViewPager() {
-        mPagerAdapter = new LostFoundPagerAdapter(getSupportFragmentManager());
+        LostFoundPagerAdapter mPagerAdapter = new LostFoundPagerAdapter(getSupportFragmentManager());
         mViewPager.setAdapter(mPagerAdapter);
+        mViewPager.setOffscreenPageLimit(2);
         mTabLayout.setupWithViewPager(mViewPager);
     }
 

@@ -44,17 +44,17 @@ public class AccountHelper {
         });
 
 
-        RetrofitFactory
-                .getRetrofitService()
-                .rxLogin(request)
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new BaseObserver() {
-                    @Override
-                    public void onDataSuccess(ApiResponse response) {
-                        callback.onDataLoaded(null);
-                    }
-                });
+//        RetrofitFactory
+//                .getRetrofitService()
+//                .rxLogin(request)
+//                .subscribeOn(Schedulers.io())
+//                .observeOn(AndroidSchedulers.mainThread())
+//                .subscribe(new BaseObserver() {
+//                    @Override
+//                    public void onDataSuccess(ApiResponse response) {
+//                        callback.onDataLoaded(null);
+//                    }
+//                });
 
     }
 }

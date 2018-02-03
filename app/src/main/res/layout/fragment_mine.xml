@@ -5,10 +5,17 @@
     android:gravity="center"
     >
 
-    <TextView
+    <Button
+        android:id="@+id/btn_release"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="MineFragment"
-        />
+        android:text="我发布的任务" />
+
+
+    <Button
+        android:id="@+id/btn_accept"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="我接受的任务" />
 
 </LinearLayout>

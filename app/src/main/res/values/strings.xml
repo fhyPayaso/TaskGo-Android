@@ -60,4 +60,7 @@
     <string name="toast_accept_all_successful">一键接受成功</string>
     <string name="toast_no_task_to_accept">当前没有可接受的任务</string>
 
+    <string name="title_my_accepted_task">我接受的任务</string>
+    <string name="title_my_released_task">我发布的任务</string>
+
 </resources>

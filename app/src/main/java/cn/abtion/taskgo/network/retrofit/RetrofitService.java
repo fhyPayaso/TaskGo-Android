@@ -29,23 +29,23 @@ public interface RetrofitService {
     Call<ApiResponse> login(@Body LoginRequestModel loginRequest);
 
 
-    @POST("user/register")
-    Call<APIResponse> register(@Body RegisterRequestModel mregisterRequestModel);
-
-    /**
-     * 登录
-     * 手机号登录     获取 token 以及 user_id
-     *  微信/QQ登录   验证完后输入微信或QQ号登录 获取token以及user_id
-     */
-    @POST("user/login")
-    Call<APIResponse> rxlogin(@Body LoginRequestModel mloginRequestModel);
-
-    /**
-     * 忘记密码（修改密码）
-     *
-     */
-    @POST("user/resetPassword")
-    Call<APIResponse> updatepasswordrequestmodel(@Body UpdatePasswordRequestModel mupdatePasswordRequestModel);
+//    @POST("user/register")
+//    Call<APIResponse> register(@Body RegisterRequestModel mregisterRequestModel);
+//
+//    /**
+//     * 登录
+//     * 手机号登录     获取 token 以及 user_id
+//     *  微信/QQ登录   验证完后输入微信或QQ号登录 获取token以及user_id
+//     */
+//    @POST("user/login")
+//    Call<APIResponse> rxlogin(@Body LoginRequestModel mloginRequestModel);
+//
+//    /**
+//     * 忘记密码（修改密码）
+//     *
+//     */
+//    @POST("user/resetPassword")
+//    Call<APIResponse> updatepasswordrequestmodel(@Body UpdatePasswordRequestModel mupdatePasswordRequestModel);
 
 
 

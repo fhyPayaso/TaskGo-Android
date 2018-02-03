@@ -20,7 +20,7 @@
             android:layout_height="43dp"
             android:layout_marginBottom="6dp"
             android:layout_marginTop="11dp"
-            android:src="@drawable/home_banner2" />
+            android:src="@drawable/home_banner1" />
 
         <TextView
             android:id="@+id/txt_username"
@@ -35,23 +35,31 @@
 
 
     <TextView
-        android:id="@+id/txt_fix_things_name"
+        android:id="@+id/txt_main_title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
         android:layout_toRightOf="@id/ly_avatar"
-        android:text="物品名称："
         android:textColor="@color/black"
         android:textSize="14sp" />
 
 
     <TextView
-        android:id="@+id/txt_things_name"
+        android:id="@+id/txt_main_title_value"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
-        android:layout_toRightOf="@id/txt_fix_things_name"
-        android:text="机械键盘"
+        android:layout_toRightOf="@id/txt_main_title"
+        android:textColor="@color/black"
+        android:textSize="14sp" />
+
+    <TextView
+        android:id="@+id/txt_subtitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="14dp"
+        android:layout_marginTop="16dp"
+        android:layout_toRightOf="@id/txt_main_title_value"
         android:textColor="@color/black"
         android:textSize="14sp" />
 
@@ -60,10 +68,10 @@
         android:id="@+id/txt_fix_release_time"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignLeft="@id/txt_fix_things_name"
-        android:layout_below="@id/txt_fix_things_name"
+        android:layout_alignLeft="@id/txt_main_title"
+        android:layout_below="@id/txt_main_title"
         android:layout_marginTop="5dp"
-        android:text="发布时间："
+        android:text="@string/txt_release_time"
         android:textSize="12sp" />
 
     <TextView
@@ -72,12 +80,11 @@
         android:layout_height="wrap_content"
         android:layout_alignTop="@id/txt_fix_release_time"
         android:layout_toRightOf="@id/txt_fix_release_time"
-        android:text="12-05 17:20"
         android:textSize="12sp" />
 
 
     <TextView
-        android:id="@+id/txt_accept_task"
+        android:id="@+id/btn_task"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentRight="true"
@@ -88,9 +95,7 @@
         android:paddingLeft="20dp"
         android:paddingRight="20dp"
         android:paddingTop="4dp"
-        android:text="接受"
         android:textColor="@color/txt_blue"
         android:textSize="12sp" />
-
 
 </RelativeLayout>

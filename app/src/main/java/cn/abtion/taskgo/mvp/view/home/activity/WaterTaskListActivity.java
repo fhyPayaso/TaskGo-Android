@@ -26,9 +26,9 @@ import cn.abtion.taskgo.base.adapter.RecyclerScrollListener;
 import cn.abtion.taskgo.base.contract.BaseContract;
 import cn.abtion.taskgo.base.presenter.BasePresenter;
 import cn.abtion.taskgo.common.Config;
-import cn.abtion.taskgo.mvp.model.request.home.WaterTaskModel;
+import cn.abtion.taskgo.mvp.model.request.home.BaseTaskModel;
+import cn.abtion.taskgo.mvp.view.home.adapter.BtnTaskRecAdapter;
 import cn.abtion.taskgo.mvp.view.home.adapter.TaskListener;
-import cn.abtion.taskgo.mvp.view.home.adapter.WaterTaskRecAdapter;
 import cn.abtion.taskgo.utils.DialogUtil;
 import cn.abtion.taskgo.utils.ToastUtil;
 
@@ -51,9 +51,8 @@ public class WaterTaskListActivity extends BaseToolBarPresenterActivity implemen
     FloatingActionButton btnReleaseTask;
 
 
-
-    private WaterTaskRecAdapter mAdapter;
-    private List<WaterTaskModel> mWaterTaskList;
+    private BtnTaskRecAdapter mAdapter;
+    private List<BaseTaskModel> mWaterTaskList;
     private DialogUtil.CustomAlertDialog dialogTaskInformation;
 
     @Override
@@ -111,6 +110,7 @@ public class WaterTaskListActivity extends BaseToolBarPresenterActivity implemen
                 SearchTaskActivity.startActivity(WaterTaskListActivity.this);
             }
         });
+        txtTotalNumber.setText("0");
     }
 
     /**
@@ -129,6 +129,7 @@ public class WaterTaskListActivity extends BaseToolBarPresenterActivity implemen
                         testAddItem(10);
                         mAdapter.notifyDataSetChanged();
                         mSwipeRefresh.setRefreshing(false);
+                        txtTotalNumber.setText(""+mWaterTaskList.size());
                     }
                 });
             }
@@ -140,15 +141,16 @@ public class WaterTaskListActivity extends BaseToolBarPresenterActivity implemen
      */
     private void initRecyclerView() {
 
-        mAdapter = new WaterTaskRecAdapter(WaterTaskListActivity.this, mWaterTaskList);
+        mAdapter = new BtnTaskRecAdapter(WaterTaskListActivity.this, mWaterTaskList);
         mAdapter.setTaskListener(this);
         recWaterTask.setAdapter(mAdapter);
         recWaterTask.setLayoutManager(new LinearLayoutManager(WaterTaskListActivity.this, LinearLayoutManager.VERTICAL, false));
 
-        mAdapter.setOnItemClickedListener(new BaseRecyclerViewAdapter.OnItemClicked<WaterTaskModel>() {
+        mAdapter.setOnItemClickedListener(new BaseRecyclerViewAdapter.OnItemClicked<BaseTaskModel>() {
             @Override
-            public void onItemClicked(WaterTaskModel waterTaskModel, BaseRecyclerViewAdapter.BaseViewHolder holder) {
-                showDialogTaskInformation(waterTaskModel);
+            public void onItemClicked(BaseTaskModel baseTaskModel, BaseRecyclerViewAdapter.BaseViewHolder holder) {
+
+                showDialogTaskInformation(baseTaskModel);
             }
         });
 
@@ -164,7 +166,7 @@ public class WaterTaskListActivity extends BaseToolBarPresenterActivity implemen
     /**
      * 显示任务详细信息
      */
-    private void showDialogTaskInformation(WaterTaskModel model) {
+    private void showDialogTaskInformation(BaseTaskModel model) {
 
         dialogTaskInformation = new DialogUtil().new CustomAlertDialog();
         dialogTaskInformation.initDialog(WaterTaskListActivity.this, R.layout.dialog_water_task_information);
@@ -175,8 +177,8 @@ public class WaterTaskListActivity extends BaseToolBarPresenterActivity implemen
         TextView mTxtAddressNumber = view.findViewById(R.id.txt_address_number);
         TextView mTxtWaterTaskType = view.findViewById(R.id.txt_water_task_type);
         TextView mBtnInformationConfirm = view.findViewById(R.id.btn_information_confirm);
-        mTxtAddressNumber.setText(model.getAddress());
-        mTxtWaterTaskType.setText(model.getType());
+        mTxtAddressNumber.setText(model.getMainValue());
+        mTxtWaterTaskType.setText(model.getSubTitle());
         mBtnInformationConfirm.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -243,6 +245,7 @@ public class WaterTaskListActivity extends BaseToolBarPresenterActivity implemen
                         testAddItem(3);
                         mAdapter.notifyDataSetChanged();
                         mSwipeRefresh.setRefreshing(false);
+                        txtTotalNumber.setText(""+mWaterTaskList.size());
                     }
                 });
             }
@@ -278,6 +281,7 @@ public class WaterTaskListActivity extends BaseToolBarPresenterActivity implemen
                     public void onClick(DialogInterface dialog, int which) {
                         ToastUtil.showToast(getString(R.string.toast_accept_successful) + position);
                         mAdapter.removeItem(position);
+                        txtTotalNumber.setText(""+mWaterTaskList.size());
                         dialog.dismiss();
                     }
                 })
@@ -293,8 +297,13 @@ public class WaterTaskListActivity extends BaseToolBarPresenterActivity implemen
     private void testAddItem(int number) {
         if (mWaterTaskList != null) {
             for (int i = 0; i < number; i++) {
-                mWaterTaskList.add(new WaterTaskModel("111", "fhyPayaso",
-                        "7795", "送水上门", "12-09 14:20"));
+
+                mWaterTaskList.add(new BaseTaskModel(0
+                        ,"url"
+                        ,"fhyPayaso"
+                        ,"12-09 14:20"
+                        ,"6077"
+                        ,"送水上门"));
             }
         }
     }
