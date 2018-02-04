@@ -30,4 +30,11 @@
     <!--message模块-->
     <color name="bg_delete_red">#FF383A</color>
 
+
+
+    <!--mine模块-->
+    <color name="text_mine_button">#111111</color>
+    <color name="text_mine_gray">#969696</color>
+    <color name="btn_submmit_blue">#007AFF</color>
+
 </resources>

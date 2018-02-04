@@ -1,21 +1,372 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:gravity="center"
-    >
+    android:background="#EFEFF4"
+    android:orientation="horizontal">
 
-    <Button
-        android:id="@+id/btn_release"
-        android:layout_width="wrap_content"
+    <RelativeLayout
+        android:id="@+id/rlayout_mine_title"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="我发布的任务" />
+        android:background="@color/white">
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="180dp"
+            android:scaleType="centerCrop"
+            android:src="@drawable/bg_img_mine_background" />
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="123.5dp"
+            android:src="@drawable/bg_img_mine_below_portrait" />
+
+        <ImageView
+            android:id="@+id/img_portrait"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="127.5dp"
+            android:src="@drawable/ic_img_portrait" />
+
+    </RelativeLayout>
 
 
-    <Button
-        android:id="@+id/btn_accept"
-        android:layout_width="wrap_content"
+    <RelativeLayout
+        android:id="@+id/rlayout_mine_friend"
+        android:layout_width="match_parent"
+        android:layout_height="46.5dp"
+        android:layout_below="@id/rlayout_mine_title"
+        android:layout_centerHorizontal="true"
+        android:background="@color/white">
+
+        <RelativeLayout
+            android:id="@+id/rlayout_mine_follow"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="80dp">
+
+            <TextView
+                android:layout_width="22dp"
+                android:layout_height="25dp"
+                android:layout_centerHorizontal="true"
+                android:text="20"
+                android:textColor="#000000"
+                android:textSize="18sp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentBottom="true"
+                android:text="@string/txt_mine_follow"
+                android:textColor="#979797"
+                android:textSize="12sp" />
+
+
+        </RelativeLayout>
+
+        <View
+            android:layout_width="1dp"
+            android:layout_height="15.5dp"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="9.5dp"
+            android:background="#ABB4BF" />
+
+        <RelativeLayout
+            android:id="@+id/rlayout_mine_fans"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_alignParentRight="true"
+            android:layout_marginRight="80dp">
+
+            <TextView
+                android:layout_width="22dp"
+                android:layout_height="25dp"
+                android:layout_centerHorizontal="true"
+                android:text="11"
+                android:textColor="#000000"
+                android:textSize="18sp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentBottom="true"
+                android:text="@string/txt_mine_fans"
+                android:textColor="#979797"
+                android:textSize="12sp" />
+
+        </RelativeLayout>
+
+    </RelativeLayout>
+
+
+    <LinearLayout
+        android:id="@+id/rlayout_mine_task"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="我接受的任务" />
+        android:layout_below="@id/rlayout_mine_friend"
+        android:layout_marginTop="10dp"
+        android:background="@color/white"
+        android:orientation="vertical">
 
-</LinearLayout>
+        <RelativeLayout
+            android:id="@+id/btn_release"
+            android:layout_width="match_parent"
+            android:layout_height="30.5dp"
+            android:layout_marginTop="12dp">
+
+            <ImageView
+                android:layout_width="16dp"
+                android:layout_height="16dp"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="20dp"
+                android:src="@drawable/ic_mine_before_release" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="50dp"
+                android:text="@string/btn_mine_release_task"
+                android:textColor="@color/text_mine_button"
+                android:textSize="14sp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_marginRight="30dp"
+                android:text="26"
+                android:textColor="@color/text_mine_gray"
+                android:textSize="14sp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_marginRight="13dp"
+                android:text="@string/btn_mine_after_number"
+                android:textColor="@color/text_mine_gray"
+                android:textSize="14sp" />
+
+        </RelativeLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="0.5dp"
+            android:background="#D1D1D6" />
+
+        <RelativeLayout
+            android:id="@+id/btn_accept"
+            android:layout_width="match_parent"
+            android:layout_height="30.5dp"
+            android:layout_marginTop="12dp">
+
+
+            <ImageView
+                android:layout_width="16dp"
+                android:layout_height="16dp"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="20dp"
+                android:src="@drawable/ic_mine_before_receive" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="50dp"
+                android:text="@string/btn_mine_receive_task"
+                android:textColor="@color/text_mine_button"
+                android:textSize="14sp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_marginRight="30dp"
+                android:text="26"
+                android:textColor="@color/text_mine_gray"
+                android:textSize="14sp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_marginRight="13dp"
+                android:text="@string/btn_mine_after_number"
+                android:textColor="@color/text_mine_gray"
+                android:textSize="14sp" />
+
+        </RelativeLayout>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/rlayout_mine_task"
+        android:layout_marginTop="10dp"
+        android:background="@color/white"
+        android:orientation="vertical">
+
+        <RelativeLayout
+            android:id="@+id/rlayout_mine_real_name"
+            android:layout_width="match_parent"
+            android:layout_height="30.5dp"
+            android:layout_marginTop="6dp">
+
+
+            <ImageView
+                android:layout_width="16dp"
+                android:layout_height="16dp"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="20dp"
+                android:src="@drawable/ic_mine_of_real_name" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="50dp"
+                android:text="@string/txt_mine_real_name"
+                android:textColor="@color/text_mine_button"
+                android:textSize="14sp" />
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:layout_marginRight="11dp"
+                android:src="@drawable/ic_mine_arrow" />
+
+        </RelativeLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="0.5dp"
+            android:background="#D1D1D6" />
+
+
+        <RelativeLayout
+            android:id="@+id/rlayout_mine_feedback"
+            android:layout_width="match_parent"
+            android:layout_height="30.5dp"
+            android:layout_marginTop="6dp">
+
+
+            <ImageView
+                android:layout_width="16dp"
+                android:layout_height="16dp"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="20dp"
+                android:src="@drawable/ic_mine_of_feedback" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="50dp"
+                android:text="@string/txt_mine_feedback"
+                android:textColor="@color/text_mine_button"
+                android:textSize="14sp" />
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:layout_marginRight="11dp"
+                android:src="@drawable/ic_mine_arrow" />
+
+        </RelativeLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="0.5dp"
+            android:background="#D1D1D6" />
+
+
+        <RelativeLayout
+            android:id="@+id/rlayout_mine_setting"
+            android:layout_width="match_parent"
+            android:layout_height="30.5dp"
+            android:layout_marginTop="6dp">
+
+
+            <ImageView
+                android:layout_width="16dp"
+                android:layout_height="16dp"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="20dp"
+                android:src="@drawable/ic_mine_of_remind_setting" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="50dp"
+                android:text="@string/btn_mine_remind_setting"
+                android:textColor="@color/text_mine_button"
+                android:textSize="14sp" />
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:layout_marginRight="11dp"
+                android:src="@drawable/ic_mine_arrow" />
+
+        </RelativeLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="0.5dp"
+            android:background="#D1D1D6" />
+
+        <RelativeLayout
+            android:id="@+id/rlayout_mine_edit"
+            android:layout_width="match_parent"
+            android:layout_height="30.5dp"
+            android:layout_marginTop="6dp">
+
+
+            <ImageView
+                android:layout_width="16dp"
+                android:layout_height="16dp"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="20dp"
+                android:src="@drawable/ic_mine_of_edit" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="50dp"
+                android:text="@string/btn_mine_edit"
+                android:textColor="@color/text_mine_button"
+                android:textSize="14sp" />
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:layout_marginRight="11dp"
+                android:src="@drawable/ic_mine_arrow" />
+
+        </RelativeLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="0.5dp"
+            android:background="#D1D1D6" />
+
+    </LinearLayout>
+
+
+</RelativeLayout>
