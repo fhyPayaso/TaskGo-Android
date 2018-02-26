@@ -63,6 +63,8 @@
 
         <activity android:name=".mvp.view.MainActivity">
 
+
+
         </activity>
 
         <activity android:name=".mvp.view.account.LoginActivity">
@@ -82,11 +84,19 @@
         <activity android:name=".mvp.view.home.activity.SearchTaskActivity"/>
         <!--<activity android:name=".mvp.view.account.LoginActivity"/>-->
 
+        <activity android:name=".mvp.view.message.activity.ChatWindowActivity"/>
         <activity android:name=".mvp.view.initiate.InitiateActivity"/>
         <activity android:name=".mvp.view.home.activity.ReleaseLostFoundTaskActivity"/>
+        <activity android:name=".mvp.view.mine.activity.MyFollowActivity"/>
+        <activity android:name=".mvp.view.mine.activity.MyFansActivity"/>
+        <activity android:name=".mvp.view.mine.activity.FeedbackActivity"/>
+        <activity android:name=".mvp.view.mine.activity.RealNameActivity"/>
         <activity android:name=".mvp.view.mine.activity.MyAcceptTaskActivity"/>
         <activity android:name=".mvp.view.mine.activity.MyReleasedTaskActivity"/>
-        <activity android:name=".mvp.view.message.activity.ChatWindowActivity"/>
+        <activity android:name=".mvp.view.mine.activity.SettingActivity"/>
+        <activity android:name=".mvp.view.mine.activity.AboutAvtivity"/>
+        <activity android:name=".mvp.view.mine.activity.EditDataActivity"/>
+        <activity android:name=".mvp.view.mine.activity.ChangeNameActivity"/>
 
     </application>
 

@@ -4,9 +4,11 @@
     <string name="test">N/A</string>
 
     <string name="btn_verification_gain">重新获取</string>
-    
-    
-    
+
+
+
+
+
     <!--home模块-->
     <string name="txt_home_diy_task">自定义任务</string>
     <string name="txt_home_water_task">水任务</string>
@@ -62,5 +64,43 @@
 
     <string name="title_my_accepted_task">我接受的任务</string>
     <string name="title_my_released_task">我发布的任务</string>
+
+    <!--mine主页面-->
+    <string name="btn_mine_release_task">我发布的任务</string>
+    <string name="btn_mine_after_number">个</string>
+    <string name="btn_mine_receive_task">我接收的任务</string>
+    <string name="txt_mine_real_name">实名认证</string>
+    <string name="txt_mine_feedback">意见反馈</string>
+    <string name="btn_mine_remind_setting">提醒设置</string>
+    <string name="btn_mine_edit">编辑资料</string>
+    <string name="txt_mine_follow_title">我的关注</string>
+    <string name="txt_mine_follow">关注</string>
+    <string name="txt_mine_fans">粉丝</string>
+    <string name="txt_mine_fans_title">我的粉丝</string>
+    <string name="txt_mine_pleease_enter_feedback">请输入您的宝贵意见....</string>
+    <string name="btn_mine_submmit">提交</string>
+    <string name="txt_mine_real_name_top">请按照样例样式进行拍照，保证照片清晰</string>
+    <string name="txt_mine_setting">系统设置</string>
+    <string name="btn_mine_remind_push">推送提醒</string>
+    <string name="btn_mine_remind_voice">声音提醒</string>
+    <string name="btn_mine_remind_shock">震动提醒</string>
+    <string name="btn_mine_change_password">修改密码</string>
+    <string name="btn_mine_about">关于TaskGo</string>
+    <string name="btn_mine_exchange_account">切换账号</string>
+    <string name="btn_mine_exit_systom">退出系统</string>
+    <string name="txt_about">关于TaskGo</string>
+    <string name="txt_mine_edit_data" >个人信息</string>
+    <string name="txt_mine_photo">头像</string>
+    <string name="txt_mine_name">名字</string>
+    <string name="txt_mine_gender">性别</string>
+    <string name="txt_mine_phone">手机</string>
+    <string name="txt_mine_birth">生日</string>
+    <string name="txt_mine_wechat">微信号</string>
+    <string name="txt_mine_qq">QQ</string>
+    <string name="txt_mine_if_real_name">是否已经认证</string>
+    <string name="txt_mine_edit_data_name">昵称修改</string>
+    <string name="txt_gender_man">男</string>
+    <string name="txt_gender_woman">女</string>
+
 
 </resources>

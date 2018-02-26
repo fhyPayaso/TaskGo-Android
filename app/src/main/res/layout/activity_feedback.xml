@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/bg_gray">
+
+    <RelativeLayout
+        android:id="@+id/rlayout_mine_feedback"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:background="@color/white">
+
+        <EditText
+            android:id="@+id/edit_mine_feedback"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            android:hint="@string/txt_mine_pleease_enter_feedback"
+            android:textSize="12sp" />
+
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="0.5dp"
+            android:background="@color/bg_gray" />
+
+        <Button
+            android:id="@+id/btn_mine_feedback"
+            android:layout_width="324dp"
+            android:layout_height="31.5dp"
+            android:layout_below="@id/edit_mine_feedback"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="75dp"
+            android:background="@color/btn_submmit_blue"
+            android:text="@string/btn_mine_submmit" />
+    </RelativeLayout>
+
+
+</RelativeLayout>
