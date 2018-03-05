@@ -200,7 +200,6 @@ public class WaterTaskItemListActivity extends BaseToolBarPresenterActivity impl
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         dialog.dismiss();
-                        mAdapter.clearAllItems();
                     }
                 })
                 .setPositiveButton(getString(R.string.txt_confirm), new DialogInterface.OnClickListener() {

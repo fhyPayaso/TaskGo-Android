@@ -24,12 +24,4 @@ public class Config {
      */
     public final static int REFRESH_TIME = 2000;
 
-    /**
-     * InitiateActivity 的Page标记
-     */
-    public static final int FLAG_INITIATE_FIRST =0;
-    public static final int FLAG_INITIATE_SECOND =1;
-    public static final int PAGE_SUMS=2;
-
-
 }
