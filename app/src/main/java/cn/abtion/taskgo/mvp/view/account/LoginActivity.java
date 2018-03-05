@@ -132,9 +132,7 @@ public class LoginActivity extends BaseNoBarPresenterActivity<LoginContract.Pres
             }
 
             @Override
-            public void onProgress(int progress, String status) {
-
-            }
+            public void onProgress(int progress, String status)
         });
     }
 
