@@ -11,7 +11,7 @@ public class Config {
     /**
      * 网络请求BaseURL
      */
-    public static final String APP_SERVER_BASE_URL = "http://www.thmaoqiu.cn/saiyou/public/index.php/";
+    public static final String APP_SERVER_BASE_URL = "http://taskgo.andyhui.xin/";
 
     /**
      * 网络请求连接超时时间，单位：s

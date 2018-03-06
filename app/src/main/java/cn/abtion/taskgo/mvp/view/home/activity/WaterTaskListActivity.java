@@ -8,6 +8,7 @@ import android.support.design.widget.FloatingActionButton;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
 
@@ -26,7 +27,10 @@ import cn.abtion.taskgo.base.adapter.RecyclerScrollListener;
 import cn.abtion.taskgo.base.contract.BaseContract;
 import cn.abtion.taskgo.base.presenter.BasePresenter;
 import cn.abtion.taskgo.common.Config;
+import cn.abtion.taskgo.mvp.contract.WaterTaskListContract;
 import cn.abtion.taskgo.mvp.model.request.home.BaseTaskModel;
+import cn.abtion.taskgo.mvp.model.request.home.WaterTaskResponse;
+import cn.abtion.taskgo.mvp.presenter.WaterTaskListPresenter;
 import cn.abtion.taskgo.mvp.view.home.adapter.BtnTaskRecAdapter;
 import cn.abtion.taskgo.mvp.view.home.adapter.TaskItemListener;
 import cn.abtion.taskgo.utils.DialogUtil;
@@ -37,8 +41,8 @@ import cn.abtion.taskgo.utils.ToastUtil;
  * @since 2018/1/26 on 上午5:06
  * fhyPayaso@qq.com
  */
-public class WaterTaskItemListActivity extends BaseToolBarPresenterActivity implements TaskItemListener, SwipeRefreshLayout
-        .OnRefreshListener {
+public class WaterTaskListActivity extends BaseToolBarPresenterActivity<WaterTaskListContract.Presenter> implements
+        TaskItemListener, SwipeRefreshLayout.OnRefreshListener,WaterTaskListContract.View {
 
 
     @BindView(R.id.txt_total_number)
@@ -55,9 +59,11 @@ public class WaterTaskItemListActivity extends BaseToolBarPresenterActivity impl
     private List<BaseTaskModel> mWaterTaskList;
     private DialogUtil.CustomAlertDialog dialogTaskInformation;
 
+
+
     @Override
-    public BaseContract.Presenter initPresenter() {
-        return new BasePresenter<>(this);
+    public WaterTaskListContract.Presenter initPresenter() {
+        return new WaterTaskListPresenter(this);
     }
 
     @Override
@@ -86,7 +92,7 @@ public class WaterTaskItemListActivity extends BaseToolBarPresenterActivity impl
 
 
     public static void startActivity(Context context) {
-        context.startActivity(new Intent(context, WaterTaskItemListActivity.class));
+        context.startActivity(new Intent(context, WaterTaskListActivity.class));
     }
 
     @Override
@@ -95,6 +101,8 @@ public class WaterTaskItemListActivity extends BaseToolBarPresenterActivity impl
         // TODO: add setContentView(...) invocation
         ButterKnife.bind(this);
     }
+
+
 
 
     /**
@@ -107,7 +115,7 @@ public class WaterTaskItemListActivity extends BaseToolBarPresenterActivity impl
         getToolBar().findViewById(R.id.img_toolbar_menu).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                SearchTaskActivity.startActivity(WaterTaskItemListActivity.this);
+                SearchTaskActivity.startActivity(WaterTaskListActivity.this);
             }
         });
         txtTotalNumber.setText("0");
@@ -126,8 +134,7 @@ public class WaterTaskItemListActivity extends BaseToolBarPresenterActivity impl
                 runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
-                        testAddItem(10);
-                        mAdapter.notifyDataSetChanged();
+                        mPresenter.loadWaterTaskList();
                         mSwipeRefresh.setRefreshing(false);
                         txtTotalNumber.setText(""+mWaterTaskList.size());
                     }
@@ -141,10 +148,10 @@ public class WaterTaskItemListActivity extends BaseToolBarPresenterActivity impl
      */
     private void initRecyclerView() {
 
-        mAdapter = new BtnTaskRecAdapter(WaterTaskItemListActivity.this, mWaterTaskList);
+        mAdapter = new BtnTaskRecAdapter(WaterTaskListActivity.this, mWaterTaskList);
         mAdapter.setTaskItemListener(this);
         recWaterTask.setAdapter(mAdapter);
-        recWaterTask.setLayoutManager(new LinearLayoutManager(WaterTaskItemListActivity.this, LinearLayoutManager.VERTICAL, false));
+        recWaterTask.setLayoutManager(new LinearLayoutManager(WaterTaskListActivity.this, LinearLayoutManager.VERTICAL, false));
 
         mAdapter.setOnItemClickedListener(new BaseRecyclerViewAdapter.OnItemClicked<BaseTaskModel>() {
             @Override
@@ -169,7 +176,7 @@ public class WaterTaskItemListActivity extends BaseToolBarPresenterActivity impl
     private void showDialogTaskInformation(BaseTaskModel model) {
 
         dialogTaskInformation = new DialogUtil().new CustomAlertDialog();
-        dialogTaskInformation.initDialog(WaterTaskItemListActivity.this, R.layout.dialog_water_task_information);
+        dialogTaskInformation.initDialog(WaterTaskListActivity.this, R.layout.dialog_water_task_information);
         dialogTaskInformation.setCanceledOntouchOutside(true);
         dialogTaskInformation.showDialog();
 
@@ -193,7 +200,7 @@ public class WaterTaskItemListActivity extends BaseToolBarPresenterActivity impl
 
         DialogUtil.NativeDialog dialogAcceptAll = new DialogUtil().new NativeDialog();
         dialogAcceptAll
-                .singleInit(WaterTaskItemListActivity.this)
+                .singleInit(WaterTaskListActivity.this)
                 .setTitle(getString(R.string.dialog_title_if_accept_all))
                 .setMessage(getString(R.string.dialog_message_clear_list))
                 .setNegativeButton(getString(R.string.txt_cancel), new DialogInterface.OnClickListener() {
@@ -221,11 +228,11 @@ public class WaterTaskItemListActivity extends BaseToolBarPresenterActivity impl
 
 
     /**
-     * 发布任务按钮点击时间
+     * 发布任务按钮点击事件
      */
     @OnClick(R.id.btn_release_task)
     public void onViewClicked() {
-        ReleaseWaterTaskActivity.startActivity(WaterTaskItemListActivity.this);
+        ReleaseWaterTaskActivity.startActivity(WaterTaskListActivity.this);
     }
 
 
@@ -266,7 +273,7 @@ public class WaterTaskItemListActivity extends BaseToolBarPresenterActivity impl
 
         DialogUtil.NativeDialog dialogAccept = new DialogUtil().new NativeDialog();
         dialogAccept
-                .singleInit(WaterTaskItemListActivity.this)
+                .singleInit(WaterTaskListActivity.this)
                 .setTitle(getString(R.string.dialog_title_if_accept))
                 .setMessage(getString(R.string.dialog_message_remove_task))
                 .setNegativeButton(getString(R.string.txt_cancel), new DialogInterface.OnClickListener() {
@@ -278,9 +285,8 @@ public class WaterTaskItemListActivity extends BaseToolBarPresenterActivity impl
                 .setPositiveButton(getString(R.string.txt_confirm), new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-                        ToastUtil.showToast(getString(R.string.toast_accept_successful) + position);
-                        mAdapter.removeItem(position);
-                        txtTotalNumber.setText(""+mWaterTaskList.size());
+
+                        mPresenter.acceptWaterTask(mWaterTaskList.get(position).getTaskId(),position);
                         dialog.dismiss();
                     }
                 })
@@ -305,5 +311,44 @@ public class WaterTaskItemListActivity extends BaseToolBarPresenterActivity impl
                         ,"送水上门"));
             }
         }
+    }
+
+
+    @Override
+    public void onLoadDataSuccess(List<WaterTaskResponse> waterTaskList) {
+
+        for(int i=0 ;i<waterTaskList.size();i++ ) {
+
+            WaterTaskResponse item = waterTaskList.get(i);
+            String waterType = "自取";
+
+            if(item.getType() == 1) {
+                waterType = "送水上门";
+            }
+
+            BaseTaskModel taskModel = new BaseTaskModel(0
+                    ,"url"
+                    ,item.getUser_id()+""
+                    ,item.getCreated_at()
+                    ,item.getAddress()
+                    ,waterType);
+
+            taskModel.setTaskId(item.getId());
+            mWaterTaskList.add(taskModel);
+        }
+    }
+
+    @Override
+    public void onAcceptSuccess(int position) {
+
+        mAdapter.removeItem(position);
+        txtTotalNumber.setText(""+mWaterTaskList.size());
+        ToastUtil.showToast("接受任务成功");
+
+    }
+
+    @Override
+    public void onAcceptAllSuccess() {
+
     }
 }

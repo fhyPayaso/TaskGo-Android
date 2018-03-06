@@ -50,8 +50,6 @@ public class LoginPresenter extends BasePresenter<LoginContract.View> implements
 
 
 
-
-
         return flag;
     }
 

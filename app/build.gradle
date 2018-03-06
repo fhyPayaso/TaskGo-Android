@@ -66,6 +66,9 @@ dependencies {
     compile 'io.reactivex.rxjava2:rxandroid:2.0.1'
 
 
+    //阿里巴巴fastjson库
+    compile 'com.alibaba:fastjson:1.2.46'
+
     //glide图片加载库
     compile 'com.github.bumptech.glide:glide:4.3.1'
     annotationProcessor 'com.github.bumptech.glide:compiler:4.3.1'
