@@ -13,7 +13,6 @@ import cn.abtion.taskgo.base.contract.BaseContract;
 
 public interface LoginContract {
 
-
     interface Presenter extends BaseContract.Presenter {
 
         /**
