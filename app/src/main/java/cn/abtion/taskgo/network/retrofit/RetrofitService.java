@@ -32,7 +32,7 @@ public interface RetrofitService {
      * @param loginRequest
      * @return
      */
-    @POST("login")
+    @POST("user/login")
     Call<ApiResponse> login(@Body LoginRequestModel loginRequest);
 
 
@@ -67,5 +67,6 @@ public interface RetrofitService {
 
     @GET("water/accept")
     Observable<ApiResponse> acceptWaterTask(@Query("taskId")int taskId);
+
 
 }

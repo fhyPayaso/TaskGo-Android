@@ -2,7 +2,10 @@ package cn.abtion.taskgo.mvp.view.mine.activity;
 
 import android.content.Context;
 import android.content.Intent;
+import android.os.Bundle;
 
+import butterknife.ButterKnife;
+import butterknife.OnClick;
 import cn.abtion.taskgo.R;
 import cn.abtion.taskgo.base.activity.BaseToolBarPresenterActivity;
 import cn.abtion.taskgo.base.contract.BaseContract;
@@ -37,8 +40,17 @@ public class ChangeNameActivity extends BaseToolBarPresenterActivity {
     protected void loadData() {
 
     }
-    public static void startChangeNameActivity(Context context){
-        Intent intent=new Intent(context,ChangeNameActivity.class);
+
+    public static void startChangeNameActivity(Context context) {
+        Intent intent = new Intent(context, ChangeNameActivity.class);
         context.startActivity(intent);
+    }
+
+
+
+    @OnClick(R.id.edit_change_name)
+    public void onViewClicked() {
+
+        finish();
     }
 }
