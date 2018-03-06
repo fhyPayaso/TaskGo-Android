@@ -5,9 +5,8 @@
     <!--网络权限-->
     <uses-permission android:name="android.permission.INTERNET"/>
     <!--sd卡读写权限-->
-    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
-    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
-
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
 
     <!--EM Required -->
     <uses-permission android:name="android.permission.VIBRATE"/>
@@ -22,7 +21,6 @@
     <uses-permission android:name="android.permission.MODIFY_AUDIO_SETTINGS"/>
     <uses-permission android:name="android.permission.READ_PHONE_STATE"/>
     <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED"/>
-
 
 
     <application
@@ -64,15 +62,14 @@
         <activity android:name=".mvp.view.MainActivity">
 
 
-
         </activity>
 
         <activity android:name=".mvp.view.account.LoginActivity">
 
             <intent-filter>
-                <action android:name="android.intent.action.MAIN"/>
+            <action android:name="android.intent.action.MAIN"/>
 
-                <category android:name="android.intent.category.LAUNCHER"/>
+            <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
         </activity>
 
@@ -82,10 +79,8 @@
         <activity android:name=".mvp.view.home.activity.ReleaseWaterTaskActivity"/>
         <activity android:name=".mvp.view.home.activity.LostAndFoundTaskActivity"/>
         <activity android:name=".mvp.view.home.activity.SearchTaskActivity"/>
-        <!--<activity android:name=".mvp.view.account.LoginActivity"/>-->
 
         <activity android:name=".mvp.view.message.activity.ChatWindowActivity"/>
-        <activity android:name=".mvp.view.initiate.InitiateActivity"/>
         <activity android:name=".mvp.view.home.activity.ReleaseLostFoundTaskActivity"/>
         <activity android:name=".mvp.view.mine.activity.MyFollowActivity"/>
         <activity android:name=".mvp.view.mine.activity.MyFansActivity"/>
@@ -97,6 +92,9 @@
         <activity android:name=".mvp.view.mine.activity.AboutAvtivity"/>
         <activity android:name=".mvp.view.mine.activity.EditDataActivity"/>
         <activity android:name=".mvp.view.mine.activity.ChangeNameActivity"/>
+
+        <activity android:name=".mvp.view.initiate.GuideActivity"/>
+        <activity android:name=".mvp.view.initiate.SplashActivity"/>
 
     </application>
 

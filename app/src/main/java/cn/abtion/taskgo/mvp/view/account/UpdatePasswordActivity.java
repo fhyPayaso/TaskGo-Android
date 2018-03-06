@@ -16,6 +16,7 @@ import butterknife.OnClick;
 import cn.abtion.taskgo.R;
 import cn.abtion.taskgo.base.activity.BaseNoBarActivity;
 import cn.abtion.taskgo.utils.ToastUtil;
+import cn.abtion.taskgo.widget.VerificationCountDownTimer;
 
 /**
  * @author heaijia

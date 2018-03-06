@@ -21,6 +21,7 @@ import cn.abtion.taskgo.base.activity.BaseNoBarPresenterActivity;
 import cn.abtion.taskgo.base.contract.BaseContract;
 import cn.abtion.taskgo.base.presenter.BasePresenter;
 import cn.abtion.taskgo.utils.ToastUtil;
+import cn.abtion.taskgo.widget.VerificationCountDownTimer;
 
 public class RegisterActivity extends BaseNoBarPresenterActivity {
 

@@ -15,16 +15,12 @@ import com.hyphenate.EMCallBack;
 import com.hyphenate.chat.EMClient;
 
 import butterknife.BindView;
-import butterknife.ButterKnife;
 import butterknife.OnClick;
 import cn.abtion.taskgo.R;
 import cn.abtion.taskgo.base.activity.BaseNoBarPresenterActivity;
-import cn.abtion.taskgo.base.presenter.BasePresenter;
 import cn.abtion.taskgo.mvp.contract.LoginContract;
 import cn.abtion.taskgo.mvp.presenter.LoginPresenter;
 import cn.abtion.taskgo.mvp.view.MainActivity;
-import cn.abtion.taskgo.mvp.view.initiate.InitiateSecondFragment;
-import cn.abtion.taskgo.utils.ToastUtil;
 
 public class LoginActivity extends BaseNoBarPresenterActivity<LoginContract.Presenter> implements LoginContract.View {
 
