@@ -103,6 +103,7 @@ public class LoginActivity extends BaseNoBarPresenterActivity<LoginContract.Pres
     @OnClick(R.id.btn_login)
     public void onViewClicked() {
 
+        mPresenter.requestLogin(meditPhoneNumber.getText().toString().trim(),meditPassword.getText().toString().trim());
 
         emChatTest();
         MainActivity.startActivity(LoginActivity.this);

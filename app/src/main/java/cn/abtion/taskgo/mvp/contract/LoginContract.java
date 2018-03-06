@@ -27,5 +27,7 @@ public interface LoginContract {
          * 通知V层登录成功
          */
         void onLoginSuccess();
+
+        void onLoginFailed();
     }
 }

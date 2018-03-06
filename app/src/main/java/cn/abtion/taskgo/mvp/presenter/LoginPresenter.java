@@ -1,5 +1,6 @@
 package cn.abtion.taskgo.mvp.presenter;
 
+import butterknife.BindView;
 import cn.abtion.taskgo.base.data.DataCallBack;
 import cn.abtion.taskgo.base.presenter.BasePresenter;
 import cn.abtion.taskgo.data.AccountHelper;
@@ -13,6 +14,8 @@ import cn.abtion.taskgo.mvp.model.request.account.LoginRequestModel;
  */
 
 public class LoginPresenter extends BasePresenter<LoginContract.View> implements LoginContract.Presenter,DataCallBack.SuccessCallback {
+
+
 
 
     /**
