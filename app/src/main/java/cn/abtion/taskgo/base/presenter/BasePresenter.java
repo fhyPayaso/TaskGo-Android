@@ -8,7 +8,7 @@ import cn.abtion.taskgo.base.contract.BaseContract;
  * email fanhongyu@hrsoft.net.
  */
 
-public class BasePresenter <T extends BaseContract.View> implements BaseContract.Presenter{
+public class BasePresenter<T extends BaseContract.View> implements BaseContract.Presenter {
 
 
     protected T mView;
@@ -16,17 +16,16 @@ public class BasePresenter <T extends BaseContract.View> implements BaseContract
     /**
      * P层构造方法;
      * 创建P层时就将P和V进行双向绑定
+     *
      * @param mView V层的引用
      */
     @SuppressWarnings("unchecked")
     public BasePresenter(T mView) {
 
         //将V层的引用捆绑到P层
-
         this.mView = mView;
 
         //将P层自身捆绑到V层
-
         this.mView.setPresenter(this);
     }
 
@@ -41,7 +40,7 @@ public class BasePresenter <T extends BaseContract.View> implements BaseContract
         T view = mView;
 
         //销毁V层对P层的引用
-        if(view != null) {
+        if (view != null) {
             view.setPresenter(null);
         }
 

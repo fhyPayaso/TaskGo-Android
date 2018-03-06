@@ -6,14 +6,26 @@
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="50dp"
+        android:layout_height="match_parent"
         android:background="@color/bg_gray">
 
         <EditText
-            android:layout_width="wrap_content"
+            android:id="@+id/edit_change_name"
+            android:layout_width="324dp"
             android:layout_height="wrap_content"
             android:textSize="18sp"
-            android:layout_centerVertical="true"/>
+            android:layout_centerHorizontal="true"
+            />
+
+        <Button
+            android:id="@+id/btn_submmit_new_name"
+            android:layout_width="324dp"
+            android:layout_height="31.5dp"
+            android:layout_below="@id/edit_change_name"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="75dp"
+            android:background="@color/btn_blue"
+            android:text="@string/btn_mine_submmit" />
 
     </RelativeLayout>
 

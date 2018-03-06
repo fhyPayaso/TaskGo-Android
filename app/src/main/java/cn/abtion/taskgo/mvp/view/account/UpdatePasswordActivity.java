@@ -9,13 +9,18 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
+import android.widget.TextView;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import cn.abtion.taskgo.R;
 import cn.abtion.taskgo.base.activity.BaseNoBarActivity;
+import cn.abtion.taskgo.base.activity.BaseNoBarPresenterActivity;
+import cn.abtion.taskgo.mvp.contract.LoginContract;
+import cn.abtion.taskgo.mvp.contract.UpdatePasswordContract;
 import cn.abtion.taskgo.utils.ToastUtil;
+import cn.abtion.taskgo.widget.VerificationCountDownTimer;
 
 /**
  * @author heaijia
@@ -23,7 +28,7 @@ import cn.abtion.taskgo.utils.ToastUtil;
  * email 549044363@qq.com
  */
 
-public class UpdatePasswordActivity extends BaseNoBarActivity {
+public class UpdatePasswordActivity extends BaseNoBarPresenterActivity<UpdatePasswordContract.Presenter> implements UpdatePasswordContract.View {
 
     VerificationCountDownTimer vCountDownTimer;
 
@@ -65,8 +70,11 @@ public class UpdatePasswordActivity extends BaseNoBarActivity {
     Button mbtnCertain;
 
 
+
     public static void startActivity(Context context) {
-        context.startActivity(new Intent(context, UpdatePasswordActivity.class));
+        Intent intent=new Intent(context,UpdatePasswordActivity.class);
+
+        context.startActivity(intent);
     }
 
 
@@ -91,13 +99,6 @@ public class UpdatePasswordActivity extends BaseNoBarActivity {
 
     }
 
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        // TODO: add setContentView(...) invocation
-        ButterKnife.bind(this);
-    }
-
 
     @OnClick(R.id.ly_header_forget)
     public void onLyHeaderForgetClicked() {
@@ -106,14 +107,13 @@ public class UpdatePasswordActivity extends BaseNoBarActivity {
     }
 
 
-
     @OnClick(R.id.btn_certain)
     public void onViewClicked() {
 
         ToastUtil.showToast("敬请期待");
-        LoginActivity.startActivity(UpdatePasswordActivity.this);
-    }
 
+        finish();
+    }
 
 
     @OnClick(R.id.btn_verification)
@@ -128,10 +128,10 @@ public class UpdatePasswordActivity extends BaseNoBarActivity {
      */
     public void initCountDownTimer() {
 
-        if(!VerificationCountDownTimer.FLAG_FIRST_IN&&
-                VerificationCountDownTimer.mcurMillis+60000>System.currentTimeMillis()) {
+        if (!VerificationCountDownTimer.FLAG_FIRST_IN &&
+                VerificationCountDownTimer.mcurMillis + 60000 > System.currentTimeMillis()) {
 
-            setCountDownTimer(VerificationCountDownTimer.mcurMillis+60000-System.currentTimeMillis());
+            setCountDownTimer(VerificationCountDownTimer.mcurMillis + 60000 - System.currentTimeMillis());
             vCountDownTimer.timerStart(false);
 
         } else {
@@ -142,7 +142,7 @@ public class UpdatePasswordActivity extends BaseNoBarActivity {
 
     public void setCountDownTimer(final long countDownTime) {
 
-        vCountDownTimer = new VerificationCountDownTimer( countDownTime , 1000) {
+        vCountDownTimer = new VerificationCountDownTimer(countDownTime, 1000) {
 
             @Override
             public void onTick(long millisUntilFinished) {
@@ -156,7 +156,7 @@ public class UpdatePasswordActivity extends BaseNoBarActivity {
                 mbtnVerification.setEnabled(true);
                 mbtnVerification.setText(getString(R.string.btn_verification_gain));
 
-                if(countDownTime!=60000) {
+                if (countDownTime != 60000) {
                     setCountDownTimer(60000);
                 }
             }
@@ -166,4 +166,13 @@ public class UpdatePasswordActivity extends BaseNoBarActivity {
     }
 
 
+    @Override
+    public void onUpdatePasswordSuccess() {
+
+    }
+
+    @Override
+    protected UpdatePasswordContract.Presenter initPresenter() {
+        return null;
+    }
 }

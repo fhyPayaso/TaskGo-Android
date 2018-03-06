@@ -32,7 +32,7 @@ public class FileUtil {
 
 
     private static final String[] PERMISSIONS_STORAGE = new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE
-            , Manifest.permission.READ_EXTERNAL_STORAGE};
+            , Manifest.permission.READ_EXTERNAL_STORAGE,Manifest.permission.CAMERA};
 
 
     /**
@@ -42,7 +42,7 @@ public class FileUtil {
     public final static int ALBUM_REQUEST = 1;
 
     /**
-     * 动态申请SD卡读写权限
+     * 动态申请SD卡读写、相机等权限
      *
      * @param activity
      */
@@ -97,7 +97,9 @@ public class FileUtil {
         intent.putExtra(MediaStore.EXTRA_VIDEO_QUALITY, 1);
 
         File out = new File(savePath, System.currentTimeMillis() + ".jpg");
+        Log.i(TAG, "openCamera: "+ out.getPath());
         Uri uri = Uri.fromFile(out);
+        Log.i(TAG, "openCamera: debug ");
         intent.putExtra(MediaStore.EXTRA_OUTPUT, uri);
         activity.startActivityForResult(intent, CAMERA_REQUEST);
 

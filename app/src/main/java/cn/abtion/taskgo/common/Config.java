@@ -11,7 +11,7 @@ public class Config {
     /**
      * 网络请求BaseURL
      */
-    public static final String APP_SERVER_BASE_URL = "http://www.thmaoqiu.cn/saiyou/public/index.php/";
+    public static final String APP_SERVER_BASE_URL = "http://taskgo.andyhui.xin/";
 
     /**
      * 网络请求连接超时时间，单位：s
@@ -23,13 +23,5 @@ public class Config {
      * SwipeRefreshLayout下拉刷新时间
      */
     public final static int REFRESH_TIME = 2000;
-
-    /**
-     * InitiateActivity 的Page标记
-     */
-    public static final int FLAG_INITIATE_FIRST =0;
-    public static final int FLAG_INITIATE_SECOND =1;
-    public static final int PAGE_SUMS=2;
-
 
 }

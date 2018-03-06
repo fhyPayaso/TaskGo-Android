@@ -14,6 +14,7 @@ public class BaseTaskModel {
      * 0代表水任务,1代表物品任务
      */
     private int taskType;
+    private int taskId;
     private String avatarUrl;
     private String username;
     private String releaseTime;
@@ -87,4 +88,12 @@ public class BaseTaskModel {
         this.subTitle = subTitle;
     }
 
+
+    public int getTaskId() {
+        return taskId;
+    }
+
+    public void setTaskId(int taskId) {
+        this.taskId = taskId;
+    }
 }
