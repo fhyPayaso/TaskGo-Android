@@ -94,12 +94,6 @@ public class LoginActivity extends BaseNoBarPresenterActivity<LoginContract.Pres
     }
 
 
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        // TODO: add setContentView(...) invocation
-    }
-
     @OnClick(R.id.btn_login)
     public void onViewClicked() {
 

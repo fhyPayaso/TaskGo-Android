@@ -5,6 +5,7 @@ import cn.abtion.taskgo.mvp.model.request.account.LoginRequestModel;
 import cn.abtion.taskgo.mvp.model.request.account.RegisterRequestModel;
 import cn.abtion.taskgo.mvp.model.request.account.UpdatePasswordRequestModel;
 import cn.abtion.taskgo.network.response.ApiResponse;
+import io.reactivex.Observable;
 import retrofit2.Call;
 import retrofit2.http.Body;
 import retrofit2.http.POST;
@@ -25,7 +26,7 @@ public interface RetrofitService {
      * @param loginRequest
      * @return
      */
-    @POST("login")
+    @POST("user/login")
     Call<ApiResponse> login(@Body LoginRequestModel loginRequest);
 
 
@@ -46,6 +47,7 @@ public interface RetrofitService {
 //     */
 //    @POST("user/resetPassword")
 //    Call<APIResponse> updatepasswordrequestmodel(@Body UpdatePasswordRequestModel mupdatePasswordRequestModel);
+
 
 
 

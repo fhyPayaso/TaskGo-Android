@@ -16,7 +16,7 @@ import retrofit2.Response;
 public abstract class BaseObserver<T> implements Observer<ApiResponse<T>> {
 
 
-    public abstract void onDataSuccess(ApiResponse response);
+    public abstract void onDataSuccess(ApiResponse<T> response);
 
 
     @Override
