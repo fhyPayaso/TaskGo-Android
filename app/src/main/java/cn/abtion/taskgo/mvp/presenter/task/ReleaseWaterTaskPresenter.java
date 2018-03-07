@@ -1,8 +1,8 @@
 package cn.abtion.taskgo.mvp.presenter;
 
 import cn.abtion.taskgo.base.presenter.BasePresenter;
-import cn.abtion.taskgo.mvp.contract.ReleaseWaterTaskContract;
-import cn.abtion.taskgo.mvp.model.request.home.ReleaseWaterTaskRequest;
+import cn.abtion.taskgo.mvp.contract.task.ReleaseWaterTaskContract;
+import cn.abtion.taskgo.mvp.model.task.ReleaseWaterTaskRequest;
 import cn.abtion.taskgo.network.BaseObserver;
 import cn.abtion.taskgo.network.response.ApiResponse;
 import cn.abtion.taskgo.network.retrofit.RetrofitFactory;

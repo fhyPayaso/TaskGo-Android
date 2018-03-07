@@ -2,7 +2,6 @@ package cn.abtion.taskgo.mvp.view.account;
 
 import android.app.Activity;
 import android.content.Intent;
-import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -18,9 +17,9 @@ import butterknife.BindView;
 import butterknife.OnClick;
 import cn.abtion.taskgo.R;
 import cn.abtion.taskgo.base.activity.BaseNoBarPresenterActivity;
-import cn.abtion.taskgo.mvp.contract.LoginContract;
-import cn.abtion.taskgo.mvp.model.request.account.LoginRequestModel;
-import cn.abtion.taskgo.mvp.presenter.LoginPresenter;
+import cn.abtion.taskgo.mvp.contract.account.LoginContract;
+import cn.abtion.taskgo.mvp.model.account.LoginRequestModel;
+import cn.abtion.taskgo.mvp.presenter.account.LoginPresenter;
 import cn.abtion.taskgo.mvp.view.MainActivity;
 import cn.abtion.taskgo.utils.ToastUtil;
 
@@ -111,7 +110,7 @@ public class LoginActivity extends BaseNoBarPresenterActivity<LoginContract.Pres
 
 
         emChatTest();
-        MainActivity.startActivity(LoginActivity.this);
+        mPresenter.requestLogin(new LoginRequestModel(meditPhoneNumber.getText().toString().trim(),meditPassword.getText().toString().trim()));
     }
 
     /**

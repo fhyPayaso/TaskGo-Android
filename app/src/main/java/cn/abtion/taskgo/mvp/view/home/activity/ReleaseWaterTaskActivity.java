@@ -13,7 +13,7 @@ import cn.abtion.taskgo.R;
 import cn.abtion.taskgo.base.activity.BaseToolBarPresenterActivity;
 import cn.abtion.taskgo.mvp.contract.task.ReleaseWaterTaskContract;
 import cn.abtion.taskgo.mvp.model.task.ReleaseWaterTaskRequest;
-import cn.abtion.taskgo.mvp.presenter.task.ReleaseWaterTaskPresenter;
+import cn.abtion.taskgo.mvp.presenter.ReleaseWaterTaskPresenter;
 import cn.abtion.taskgo.utils.ToastUtil;
 
 /**

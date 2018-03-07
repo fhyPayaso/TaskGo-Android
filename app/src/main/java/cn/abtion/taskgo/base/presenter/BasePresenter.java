@@ -1,7 +1,6 @@
 package cn.abtion.taskgo.base.presenter;
 
 import cn.abtion.taskgo.base.contract.BaseContract;
-import cn.abtion.taskgo.mvp.model.request.account.LoginRequestModel;
 
 /**
  * @author FanHongyu.
