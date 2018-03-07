@@ -1,7 +1,4 @@
-package cn.abtion.taskgo.mvp.model.request.home;
-
-import com.alibaba.fastjson.JSONObject;
-import com.alibaba.fastjson.annotation.JSONField;
+package cn.abtion.taskgo.mvp.model.task;
 
 /**
  * @author FanHongyu.

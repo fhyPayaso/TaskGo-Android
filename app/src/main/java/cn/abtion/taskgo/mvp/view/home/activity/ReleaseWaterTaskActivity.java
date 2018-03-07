@@ -11,11 +11,9 @@ import butterknife.ButterKnife;
 import butterknife.OnClick;
 import cn.abtion.taskgo.R;
 import cn.abtion.taskgo.base.activity.BaseToolBarPresenterActivity;
-import cn.abtion.taskgo.base.contract.BaseContract;
-import cn.abtion.taskgo.base.presenter.BasePresenter;
-import cn.abtion.taskgo.mvp.contract.ReleaseWaterTaskContract;
-import cn.abtion.taskgo.mvp.model.request.home.ReleaseWaterTaskRequest;
-import cn.abtion.taskgo.mvp.presenter.ReleaseWaterTaskPresenter;
+import cn.abtion.taskgo.mvp.contract.task.ReleaseWaterTaskContract;
+import cn.abtion.taskgo.mvp.model.task.ReleaseWaterTaskRequest;
+import cn.abtion.taskgo.mvp.presenter.task.ReleaseWaterTaskPresenter;
 import cn.abtion.taskgo.utils.ToastUtil;
 
 /**

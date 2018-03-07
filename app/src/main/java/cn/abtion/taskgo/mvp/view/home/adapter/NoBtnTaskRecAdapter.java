@@ -10,7 +10,7 @@ import java.util.List;
 import butterknife.BindView;
 import cn.abtion.taskgo.R;
 import cn.abtion.taskgo.base.adapter.BaseRecyclerViewAdapter;
-import cn.abtion.taskgo.mvp.model.request.home.BaseTaskModel;
+import cn.abtion.taskgo.mvp.model.task.BaseTaskModel;
 import de.hdodenhof.circleimageview.CircleImageView;
 
 /**

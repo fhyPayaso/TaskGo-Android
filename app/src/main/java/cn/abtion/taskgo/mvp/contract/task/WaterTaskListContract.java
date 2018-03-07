@@ -1,9 +1,9 @@
-package cn.abtion.taskgo.mvp.contract;
+package cn.abtion.taskgo.mvp.contract.task;
 
 import java.util.List;
 
 import cn.abtion.taskgo.base.contract.BaseContract;
-import cn.abtion.taskgo.mvp.model.request.home.WaterTaskResponse;
+import cn.abtion.taskgo.mvp.model.task.WaterTaskResponse;
 
 /**
  * @author FanHongyu.

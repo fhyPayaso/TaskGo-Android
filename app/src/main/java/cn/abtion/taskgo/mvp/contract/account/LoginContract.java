@@ -1,4 +1,4 @@
-package cn.abtion.taskgo.mvp.contract;
+package cn.abtion.taskgo.mvp.contract.account;
 
 import cn.abtion.taskgo.base.contract.BaseContract;
 
@@ -28,5 +28,11 @@ public interface LoginContract {
          * 通知V层登录成功
          */
         void onLoginSuccess();
+
+        /**
+         *
+         * @param errorMessage
+         */
+        void onLoginFaild(String errorMessage);
     }
 }

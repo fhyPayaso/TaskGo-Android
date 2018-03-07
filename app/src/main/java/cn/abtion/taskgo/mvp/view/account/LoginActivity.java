@@ -2,7 +2,6 @@ package cn.abtion.taskgo.mvp.view.account;
 
 import android.app.Activity;
 import android.content.Intent;
-import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -18,9 +17,10 @@ import butterknife.BindView;
 import butterknife.OnClick;
 import cn.abtion.taskgo.R;
 import cn.abtion.taskgo.base.activity.BaseNoBarPresenterActivity;
-import cn.abtion.taskgo.mvp.contract.LoginContract;
-import cn.abtion.taskgo.mvp.presenter.LoginPresenter;
+import cn.abtion.taskgo.mvp.contract.account.LoginContract;
+import cn.abtion.taskgo.mvp.presenter.account.LoginPresenter;
 import cn.abtion.taskgo.mvp.view.MainActivity;
+import cn.abtion.taskgo.utils.ToastUtil;
 
 public class LoginActivity extends BaseNoBarPresenterActivity<LoginContract.Presenter> implements LoginContract.View {
 
@@ -61,6 +61,11 @@ public class LoginActivity extends BaseNoBarPresenterActivity<LoginContract.Pres
 //        ToastUtil.showToast("登录成功");
 //        MainActivity.startActivity(this);
 //        this.finish();
+    }
+
+    @Override
+    public void onLoginFaild(String errorMessage) {
+        ToastUtil.showToast(errorMessage);
     }
 
     public static void startActivity(Activity context) {

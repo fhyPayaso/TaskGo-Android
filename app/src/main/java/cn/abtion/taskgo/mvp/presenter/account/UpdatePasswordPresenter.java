@@ -1,8 +1,8 @@
-package cn.abtion.taskgo.mvp.presenter;
+package cn.abtion.taskgo.mvp.presenter.account;
 
 import cn.abtion.taskgo.base.data.DataCallBack;
 import cn.abtion.taskgo.base.presenter.BasePresenter;
-import cn.abtion.taskgo.mvp.contract.UpdatePasswordContract;
+import cn.abtion.taskgo.mvp.contract.account.UpdatePasswordContract;
 
 /**
  * @author：lszr on 2018/3/6 20:14
