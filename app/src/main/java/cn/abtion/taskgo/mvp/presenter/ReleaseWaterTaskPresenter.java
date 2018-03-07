@@ -2,6 +2,7 @@ package cn.abtion.taskgo.mvp.presenter;
 
 import cn.abtion.taskgo.base.presenter.BasePresenter;
 import cn.abtion.taskgo.mvp.contract.ReleaseWaterTaskContract;
+import cn.abtion.taskgo.mvp.model.request.account.LoginRequestModel;
 import cn.abtion.taskgo.mvp.model.request.home.ReleaseWaterTaskRequest;
 import cn.abtion.taskgo.network.BaseObserver;
 import cn.abtion.taskgo.network.response.ApiResponse;
@@ -17,8 +18,7 @@ import io.reactivex.schedulers.Schedulers;
  * email fanhongyu@hrsoft.net.
  */
 
-public class ReleaseWaterTaskPresenter extends BasePresenter<ReleaseWaterTaskContract.View> implements
-        ReleaseWaterTaskContract.Presenter {
+public class ReleaseWaterTaskPresenter extends BasePresenter<ReleaseWaterTaskContract.View> implements ReleaseWaterTaskContract.Presenter {
 
     /**
      * P层构造方法;
@@ -29,6 +29,8 @@ public class ReleaseWaterTaskPresenter extends BasePresenter<ReleaseWaterTaskCon
     public ReleaseWaterTaskPresenter(ReleaseWaterTaskContract.View mView) {
         super(mView);
     }
+
+
 
 
     @Override

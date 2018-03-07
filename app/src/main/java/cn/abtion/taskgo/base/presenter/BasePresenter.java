@@ -1,6 +1,7 @@
 package cn.abtion.taskgo.base.presenter;
 
 import cn.abtion.taskgo.base.contract.BaseContract;
+import cn.abtion.taskgo.mvp.model.request.account.LoginRequestModel;
 
 /**
  * @author FanHongyu.
@@ -48,4 +49,6 @@ public class BasePresenter<T extends BaseContract.View> implements BaseContract.
         mView = null;
 
     }
+
+
 }

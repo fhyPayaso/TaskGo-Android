@@ -4,6 +4,7 @@ import cn.abtion.taskgo.base.contract.BaseContract;
 
 
 import cn.abtion.taskgo.base.contract.BaseContract;
+import cn.abtion.taskgo.mvp.model.request.account.LoginRequestModel;
 
 /**
  * @author FanHongyu.
@@ -18,16 +19,19 @@ public interface LoginContract {
         /**
          * P层进行登录
          */
-        void requestLogin(String phone,String password);
+        void requestLogin(LoginRequestModel loginRequestModel);
     }
 
     interface View extends BaseContract.View<Presenter> {
+
 
         /**
          * 通知V层登录成功
          */
         void onLoginSuccess();
 
-        void onLoginFailed();
+        void onLoginFailed(String showError);
     }
+
+
 }

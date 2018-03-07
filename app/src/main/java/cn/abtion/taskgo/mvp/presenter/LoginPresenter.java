@@ -1,11 +1,29 @@
 package cn.abtion.taskgo.mvp.presenter;
 
+import android.content.Intent;
+import android.util.Log;
+
 import butterknife.BindView;
 import cn.abtion.taskgo.base.data.DataCallBack;
 import cn.abtion.taskgo.base.presenter.BasePresenter;
+import cn.abtion.taskgo.common.Config;
 import cn.abtion.taskgo.data.AccountHelper;
 import cn.abtion.taskgo.mvp.contract.LoginContract;
 import cn.abtion.taskgo.mvp.model.request.account.LoginRequestModel;
+import cn.abtion.taskgo.mvp.view.MainActivity;
+import cn.abtion.taskgo.mvp.view.account.LoginActivity;
+import cn.abtion.taskgo.network.BaseObserver;
+import cn.abtion.taskgo.network.ResponseCallBack;
+import cn.abtion.taskgo.network.response.ApiResponse;
+import cn.abtion.taskgo.network.retrofit.RetrofitFactory;
+import cn.abtion.taskgo.utils.CacheUtil;
+import cn.abtion.taskgo.utils.RegexpUtils;
+import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.schedulers.Schedulers;
+import retrofit2.Call;
+import retrofit2.Response;
+
+import static android.content.ContentValues.TAG;
 
 /**
  * @author FanHongyu.
@@ -13,9 +31,7 @@ import cn.abtion.taskgo.mvp.model.request.account.LoginRequestModel;
  * email fanhongyu@hrsoft.net.
  */
 
-public class LoginPresenter extends BasePresenter<LoginContract.View> implements LoginContract.Presenter,DataCallBack.SuccessCallback {
-
-
+public class LoginPresenter extends BasePresenter<LoginContract.View> implements LoginContract.Presenter {
 
 
     /**
@@ -30,11 +46,26 @@ public class LoginPresenter extends BasePresenter<LoginContract.View> implements
 
 
     @Override
-    public void requestLogin(String phone,String password) {
+    public void requestLogin(LoginRequestModel loginRequestModel) {
 
-        if (isDataTrue(phone, password)) {
-            AccountHelper.login(new LoginRequestModel(phone,password),this);
+        if (isDataTrue(loginRequestModel)) {
+
+
+        RetrofitFactory
+                .getRetrofitService()
+                .login(loginRequestModel)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new BaseObserver() {
+                    @Override
+                    public void onDataSuccess(ApiResponse response) {
+                       Log.i(TAG, "onDataSuccess: sssssssssss" );
+                        mView.onLoginSuccess();
+
+                    }
+                });
         }
+
     }
 
 
@@ -43,35 +74,30 @@ public class LoginPresenter extends BasePresenter<LoginContract.View> implements
      *
      * @return
      */
-    private boolean isDataTrue(String phone,String password) {
+    private boolean isDataTrue(LoginRequestModel loginRequestModel) {
 
         boolean flag = true;
 
 
 
-
-
+       if(loginRequestModel.getPhone().equals(Config.EMPTY_FIELD)) {
+            mView.onLoginFailed("账号不可为空");
+            flag = false;
+        }else if(!RegexpUtils.checkMobile(loginRequestModel.getPhone())){
+            mView.onLoginFailed("账号有误，请重新输入");
+            flag = false;
+        }else if(loginRequestModel.getPassword().length() < Config.PASSWORD_MIN){
+            mView.onLoginFailed("请输入6位以上的密码");
+            flag = false;
+        }else if(loginRequestModel.getPassword().length()>Config.PASSWORD_MAX){
+            mView.onLoginFailed("密码位数最多不能超过20位");
+            flag = false;
+        }
 
 
         return flag;
     }
 
 
-    /**
-     * 数据加载成功的方法
-     * @param o
-     */
-    @Override
-    public void onDataLoaded(Object o) {
-
-        LoginContract.View view = mView;
-        //如果view不存在,不做任何操作
-        if (view == null) {
-            return;
-        }
-
-        //通知V层登录成功
-        mView.onLoginSuccess();
-    }
 
 }

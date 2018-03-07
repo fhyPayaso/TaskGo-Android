@@ -19,8 +19,10 @@ import butterknife.OnClick;
 import cn.abtion.taskgo.R;
 import cn.abtion.taskgo.base.activity.BaseNoBarPresenterActivity;
 import cn.abtion.taskgo.mvp.contract.LoginContract;
+import cn.abtion.taskgo.mvp.model.request.account.LoginRequestModel;
 import cn.abtion.taskgo.mvp.presenter.LoginPresenter;
 import cn.abtion.taskgo.mvp.view.MainActivity;
+import cn.abtion.taskgo.utils.ToastUtil;
 
 public class LoginActivity extends BaseNoBarPresenterActivity<LoginContract.Presenter> implements LoginContract.View {
 
@@ -52,16 +54,27 @@ public class LoginActivity extends BaseNoBarPresenterActivity<LoginContract.Pres
     @BindView(R.id.footer_line2)
     View mfooterLine2;
 
+
     /**
      * 登陆成功后,进入主页面,结束当前页面
      */
     @Override
     public void onLoginSuccess() {
+        ToastUtil.showToast("登录成功");
+        MainActivity.startActivity(LoginActivity.this);
 
-//        ToastUtil.showToast("登录成功");
-//        MainActivity.startActivity(this);
-//        this.finish();
+        finish();
     }
+
+    /**
+     * 输入的账号格式有误
+     * 重写V层的方法
+     */
+    @Override
+    public void onLoginFailed(String showError) {
+        ToastUtil.showToast(showError);
+    }
+
 
     public static void startActivity(Activity context) {
         context.startActivity(new Intent(context, LoginActivity.class));
@@ -97,10 +110,12 @@ public class LoginActivity extends BaseNoBarPresenterActivity<LoginContract.Pres
     @OnClick(R.id.btn_login)
     public void onViewClicked() {
 
-        mPresenter.requestLogin(meditPhoneNumber.getText().toString().trim(),meditPassword.getText().toString().trim());
+        mPresenter.requestLogin(new LoginRequestModel(meditPhoneNumber.getText().toString().trim(),meditPassword.getText().toString().trim()));
 
-        emChatTest();
-        MainActivity.startActivity(LoginActivity.this);
+        //emChatTest();
+//        MainActivity.startActivity(LoginActivity.this);
+//        finish();
+
     }
 
     /**
