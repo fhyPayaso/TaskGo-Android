@@ -23,11 +23,12 @@ public interface LoginContract {
 
     interface View extends BaseContract.View<Presenter> {
 
+
         /**
          * 通知V层登录成功
          */
-        void onLoginSuccess();
+        void onLoginSuccess(String showSuccess);
 
-        void onLoginFailed();
+        void onLoginFailed(String showError);
     }
 }

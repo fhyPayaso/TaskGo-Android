@@ -25,7 +25,7 @@ public interface RetrofitService {
      * @param loginRequest
      * @return
      */
-    @POST("login")
+    @POST("user/login")
     Call<ApiResponse> login(@Body LoginRequestModel loginRequest);
 
 
