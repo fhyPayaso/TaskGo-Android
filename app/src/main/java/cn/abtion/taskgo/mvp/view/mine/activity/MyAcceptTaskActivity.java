@@ -62,10 +62,5 @@ public class MyAcceptTaskActivity extends BaseToolBarActivity {
         context.startActivity(new Intent(context, MyAcceptTaskActivity.class));
     }
 
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        // TODO: add setContentView(...) invocation
-        ButterKnife.bind(this);
-    }
+
 }

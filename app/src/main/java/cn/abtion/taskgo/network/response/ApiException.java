@@ -13,11 +13,11 @@ import java.io.IOException;
 public class ApiException extends IOException {
 
     private int code;
-    private String msg;
+    private String message;
 
     public ApiException(int code, String msg) {
         this.code = code;
-        this.msg = msg;
+        this.message = msg;
     }
 
     public int getCode() {
@@ -29,10 +29,10 @@ public class ApiException extends IOException {
     }
 
     public String getMsg() {
-        return msg;
+        return message;
     }
 
     public void setMsg(String msg) {
-        this.msg = msg;
+        this.message = msg;
     }
 }

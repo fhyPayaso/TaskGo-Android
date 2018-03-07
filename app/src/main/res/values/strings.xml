@@ -101,6 +101,8 @@
     <string name="txt_mine_edit_data_name">昵称修改</string>
     <string name="txt_gender_man">男</string>
     <string name="txt_gender_woman">女</string>
+    <string name="txt_update_password_title">修改密码</string>
+    <string name="txt_forget_password_title">忘记密码</string>
 
 
 </resources>

@@ -13,6 +13,9 @@ import cn.abtion.taskgo.R;
 import cn.abtion.taskgo.base.activity.BaseToolBarPresenterActivity;
 import cn.abtion.taskgo.base.contract.BaseContract;
 import cn.abtion.taskgo.base.presenter.BasePresenter;
+import cn.abtion.taskgo.mvp.contract.ReleaseWaterTaskContract;
+import cn.abtion.taskgo.mvp.model.request.home.ReleaseWaterTaskRequest;
+import cn.abtion.taskgo.mvp.presenter.ReleaseWaterTaskPresenter;
 import cn.abtion.taskgo.utils.ToastUtil;
 
 /**
@@ -21,7 +24,8 @@ import cn.abtion.taskgo.utils.ToastUtil;
  * email fanhongyu@hrsoft.net.
  */
 
-public class ReleaseWaterTaskActivity extends BaseToolBarPresenterActivity {
+public class ReleaseWaterTaskActivity extends BaseToolBarPresenterActivity<ReleaseWaterTaskContract.Presenter>
+        implements ReleaseWaterTaskContract.View {
 
 
     @BindView(R.id.txt_type_send)
@@ -35,9 +39,10 @@ public class ReleaseWaterTaskActivity extends BaseToolBarPresenterActivity {
     @BindView(R.id.edit_task_information)
     EditText editTaskInformation;
 
+
     @Override
-    public BaseContract.Presenter initPresenter() {
-        return new BasePresenter<>(this);
+    public ReleaseWaterTaskContract.Presenter initPresenter() {
+        return new ReleaseWaterTaskPresenter(this);
     }
 
     @Override
@@ -73,6 +78,7 @@ public class ReleaseWaterTaskActivity extends BaseToolBarPresenterActivity {
         ButterKnife.bind(this);
     }
 
+
     /**
      * 送水上门类型点击事件
      */
@@ -97,7 +103,32 @@ public class ReleaseWaterTaskActivity extends BaseToolBarPresenterActivity {
 
     @OnClick(R.id.btn_release_task)
     public void onViewClicked() {
-        ToastUtil.showToast(R.string.toast_release_task_successful);
+
+        String type = "0";
+
+        if (!txtTypeSend.isSelected() && txtTypeSelf.isSelected()) {
+            type = "1";
+        }
+        mPresenter.releaseWaterTask(new ReleaseWaterTaskRequest(editAddressNumber.getText().toString().trim(), type));
+    }
+
+
+    /**
+     * 发布成功回调
+     */
+    @Override
+    public void onReleaseSuccess() {
+        ToastUtil.showToast("发布成功");
         finish();
+    }
+
+    /**
+     * 发布失败打印错误信息
+     *
+     * @param errorMessage
+     */
+    @Override
+    public void onReleaseFailed(String errorMessage) {
+        ToastUtil.showToast(errorMessage);
     }
 }

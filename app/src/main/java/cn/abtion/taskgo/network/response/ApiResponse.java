@@ -15,8 +15,11 @@ public class ApiResponse<T> {
 
     /** 返回码 */
     private int code = -2;
+
+
+
     /** 返回信息 */
-    private String msg = "";
+    private String message = "";
     /** 返回数据 */
     private T data;
 
@@ -28,12 +31,12 @@ public class ApiResponse<T> {
         this.code = code;
     }
 
-    public String getMsg() {
-        return msg;
+    public String getMessage() {
+        return message;
     }
 
-    public void setMsg(String msg) {
-        this.msg = msg;
+    public void setMessage(String message) {
+        this.message = message;
     }
 
     public T getData() {
