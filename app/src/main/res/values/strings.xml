@@ -103,6 +103,10 @@
     <string name="txt_gender_woman">女</string>
     <string name="txt_update_password_title">修改密码</string>
     <string name="txt_forget_password_title">忘记密码</string>
+    <string name="txt_mine_old_password">旧密码</string>
+    <string name="txt_mine_new_password">新密码</string>
+    <string name="txt_mine_repeat_password">重复新密码</string>
+    <string name="txt_mine_change_password_success">修改成功</string>
 
 
 </resources>

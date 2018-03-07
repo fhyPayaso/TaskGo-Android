@@ -1,4 +1,4 @@
-package cn.abtion.taskgo.mvp.model.request.account;
+package cn.abtion.taskgo.mvp.model.account;
 
 /**
  * @author heaijia

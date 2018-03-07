@@ -92,6 +92,7 @@
         <activity android:name=".mvp.view.mine.activity.AboutAvtivity"/>
         <activity android:name=".mvp.view.mine.activity.EditDataActivity"/>
         <activity android:name=".mvp.view.mine.activity.ChangeNameActivity"/>
+        <activity android:name=".mvp.view.mine.activity.ChangePasswordActivity"/>
 
         <activity android:name=".mvp.view.initiate.GuideActivity"/>
         <activity android:name=".mvp.view.initiate.SplashActivity"/>

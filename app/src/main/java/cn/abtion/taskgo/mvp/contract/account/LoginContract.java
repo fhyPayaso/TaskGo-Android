@@ -4,7 +4,6 @@ import cn.abtion.taskgo.base.contract.BaseContract;
 
 
 import cn.abtion.taskgo.base.contract.BaseContract;
-import cn.abtion.taskgo.mvp.model.request.account.LoginRequestModel;
 
 /**
  * @author FanHongyu.
@@ -13,6 +12,7 @@ import cn.abtion.taskgo.mvp.model.request.account.LoginRequestModel;
  */
 
 public interface LoginContract {
+
 
     interface Presenter extends BaseContract.Presenter {
 
@@ -23,7 +23,6 @@ public interface LoginContract {
     }
 
     interface View extends BaseContract.View<Presenter> {
-
 
         /**
          * 通知V层登录成功

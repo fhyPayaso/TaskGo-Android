@@ -3,11 +3,10 @@ package cn.abtion.taskgo.network.retrofit;
 
 import java.util.List;
 
-import cn.abtion.taskgo.mvp.model.request.account.LoginRequestModel;
-import cn.abtion.taskgo.mvp.model.request.account.RegisterRequestModel;
-import cn.abtion.taskgo.mvp.model.request.account.UpdatePasswordRequestModel;
-import cn.abtion.taskgo.mvp.model.request.home.ReleaseWaterTaskRequest;
-import cn.abtion.taskgo.mvp.model.request.home.WaterTaskResponse;
+import cn.abtion.taskgo.mvp.model.account.LoginRequestModel;
+import cn.abtion.taskgo.mvp.model.mine.ChangePasswordRequestModel;
+import cn.abtion.taskgo.mvp.model.task.ReleaseWaterTaskRequest;
+import cn.abtion.taskgo.mvp.model.task.WaterTaskResponse;
 import cn.abtion.taskgo.network.response.ApiResponse;
 import io.reactivex.Observable;
 import retrofit2.Call;
@@ -34,6 +33,10 @@ public interface RetrofitService {
      */
     @POST("user/login")
     Observable<ApiResponse> login(@Body LoginRequestModel loginRequest);
+
+
+    @POST("user/resetPassword")
+    Call<ApiResponse> changePassword(@Body ChangePasswordRequestModel changePasswordRequestModel);
 
 
 //    @POST("user/register")

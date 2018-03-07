@@ -37,7 +37,7 @@ public class RealNameActivity extends BaseToolBarPresenterActivity {
     protected void loadData() {
 
     }
-    public static void stratRealNameActivity(Context context){
+    public static void startRealNameActivity(Context context){
         Intent intent=new Intent(context,RealNameActivity.class);
         context.startActivity(intent);
     }

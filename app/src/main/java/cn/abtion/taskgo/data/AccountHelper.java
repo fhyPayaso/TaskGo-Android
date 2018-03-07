@@ -1,13 +1,10 @@
 package cn.abtion.taskgo.data;
 
 import cn.abtion.taskgo.base.data.DataCallBack;
-import cn.abtion.taskgo.mvp.model.request.account.LoginRequestModel;
-import cn.abtion.taskgo.network.BaseObserver;
+import cn.abtion.taskgo.mvp.model.account.LoginRequestModel;
 import cn.abtion.taskgo.network.ResponseCallBack;
 import cn.abtion.taskgo.network.response.ApiResponse;
 import cn.abtion.taskgo.network.retrofit.RetrofitFactory;
-import io.reactivex.android.schedulers.AndroidSchedulers;
-import io.reactivex.schedulers.Schedulers;
 import retrofit2.Call;
 import retrofit2.Response;
 

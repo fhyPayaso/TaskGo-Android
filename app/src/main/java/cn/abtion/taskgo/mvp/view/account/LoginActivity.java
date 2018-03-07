@@ -54,7 +54,6 @@ public class LoginActivity extends BaseNoBarPresenterActivity<LoginContract.Pres
     @BindView(R.id.footer_line2)
     View mfooterLine2;
 
-
     /**
      * 登陆成功后,进入主页面,结束当前页面
      */
@@ -110,12 +109,9 @@ public class LoginActivity extends BaseNoBarPresenterActivity<LoginContract.Pres
     @OnClick(R.id.btn_login)
     public void onViewClicked() {
 
-        mPresenter.requestLogin(new LoginRequestModel(meditPhoneNumber.getText().toString().trim(),meditPassword.getText().toString().trim()));
 
-        //emChatTest();
-//        MainActivity.startActivity(LoginActivity.this);
-//        finish();
-
+        emChatTest();
+        MainActivity.startActivity(LoginActivity.this);
     }
 
     /**

@@ -82,7 +82,7 @@ public class MineFragment extends BasePresenterFragment {
                 MyAcceptTaskActivity.startActivity(getContext());
                 break;
             case R.id.rlayout_mine_real_name:
-                RealNameActivity.stratRealNameActivity(getContext());
+                RealNameActivity.startRealNameActivity(getContext());
                 break;
             case R.id.rlayout_mine_feedback:
                 FeedbackActivity.startFeedbackActivity(getContext());
