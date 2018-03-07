@@ -8,7 +8,6 @@ import android.support.design.widget.FloatingActionButton;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
 
@@ -24,13 +23,11 @@ import cn.abtion.taskgo.R;
 import cn.abtion.taskgo.base.activity.BaseToolBarPresenterActivity;
 import cn.abtion.taskgo.base.adapter.BaseRecyclerViewAdapter;
 import cn.abtion.taskgo.base.adapter.RecyclerScrollListener;
-import cn.abtion.taskgo.base.contract.BaseContract;
-import cn.abtion.taskgo.base.presenter.BasePresenter;
 import cn.abtion.taskgo.common.Config;
-import cn.abtion.taskgo.mvp.contract.WaterTaskListContract;
+import cn.abtion.taskgo.mvp.contract.task.WaterTaskListContract;
 import cn.abtion.taskgo.mvp.model.request.home.BaseTaskModel;
 import cn.abtion.taskgo.mvp.model.request.home.WaterTaskResponse;
-import cn.abtion.taskgo.mvp.presenter.WaterTaskListPresenter;
+import cn.abtion.taskgo.mvp.presenter.task.WaterTaskListPresenter;
 import cn.abtion.taskgo.mvp.view.home.adapter.BtnTaskRecAdapter;
 import cn.abtion.taskgo.mvp.view.home.adapter.TaskItemListener;
 import cn.abtion.taskgo.utils.DialogUtil;
@@ -136,7 +133,7 @@ public class WaterTaskListActivity extends BaseToolBarPresenterActivity<WaterTas
                     public void run() {
                         mPresenter.loadWaterTaskList();
                         mSwipeRefresh.setRefreshing(false);
-                        txtTotalNumber.setText(""+mWaterTaskList.size());
+
                     }
                 });
             }
@@ -248,14 +245,21 @@ public class WaterTaskListActivity extends BaseToolBarPresenterActivity<WaterTas
                 runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
-                        testAddItem(3);
-                        mAdapter.notifyDataSetChanged();
+
+                        mPresenter.loadWaterTaskList();
                         mSwipeRefresh.setRefreshing(false);
                         txtTotalNumber.setText(""+mWaterTaskList.size());
                     }
                 });
             }
         }, Config.REFRESH_TIME);
+    }
+
+
+    @Override
+    protected void onPostResume() {
+        super.onPostResume();
+        initRefreshLayout();
     }
 
     @Override
@@ -294,29 +298,11 @@ public class WaterTaskListActivity extends BaseToolBarPresenterActivity<WaterTas
     }
 
 
-    /**
-     * 测试增加数据
-     *
-     * @param number
-     */
-    private void testAddItem(int number) {
-        if (mWaterTaskList != null) {
-            for (int i = 0; i < number; i++) {
-
-                mWaterTaskList.add(new BaseTaskModel(0
-                        ,"url"
-                        ,"fhyPayaso"
-                        ,"12-09 14:20"
-                        ,"6077"
-                        ,"送水上门"));
-            }
-        }
-    }
-
 
     @Override
     public void onLoadDataSuccess(List<WaterTaskResponse> waterTaskList) {
 
+        mWaterTaskList.clear();
         for(int i=0 ;i<waterTaskList.size();i++ ) {
 
             WaterTaskResponse item = waterTaskList.get(i);
@@ -336,6 +322,9 @@ public class WaterTaskListActivity extends BaseToolBarPresenterActivity<WaterTas
             taskModel.setTaskId(item.getId());
             mWaterTaskList.add(taskModel);
         }
+
+        mAdapter.notifyDataSetChanged();
+        txtTotalNumber.setText(""+mWaterTaskList.size());
     }
 
     @Override

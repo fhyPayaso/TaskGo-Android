@@ -118,7 +118,7 @@ public final class RetrofitFactory {
                 String token = TaskGoApplication.getInstance().getCacheUtil().getString(CacheKey.TOKEN);
 
                 if (token == null) {
-                    token = "f08e5d1665f0c246ae04b5d93f36e7ad";
+                    token = "f72367ad33ebe9addf07c77ada7e6825";
                 }
                 // TODO: 18/1/18 token安全性问题
                 //请求时加入token

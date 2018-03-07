@@ -1,4 +1,4 @@
-package cn.abtion.taskgo.mvp.contract;
+package cn.abtion.taskgo.mvp.contract.task;
 
 import java.util.List;
 

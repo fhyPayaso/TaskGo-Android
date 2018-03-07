@@ -6,14 +6,21 @@ import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.TabLayout;
 import android.support.v4.view.ViewPager;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.view.View;
+
+import java.util.Timer;
+import java.util.TimerTask;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import cn.abtion.taskgo.R;
 import cn.abtion.taskgo.base.activity.BaseToolBarActivity;
+import cn.abtion.taskgo.common.Config;
 import cn.abtion.taskgo.mvp.view.home.adapter.LostFoundPagerAdapter;
+
+import static cn.abtion.taskgo.utils.Utility.runOnUiThread;
 
 /**
  * @author fhyPayaso
@@ -70,6 +77,10 @@ public class LostAndFoundTaskActivity extends BaseToolBarActivity {
         mTabLayout.setupWithViewPager(mViewPager);
     }
 
+
+
+
+
     public static void startActivity(Context context) {
         context.startActivity(new Intent(context, LostAndFoundTaskActivity.class));
     }
@@ -90,4 +101,6 @@ public class LostAndFoundTaskActivity extends BaseToolBarActivity {
     public FloatingActionButton getFloatingButton() {
         return this.btnReleaseTask;
     }
+
+
 }

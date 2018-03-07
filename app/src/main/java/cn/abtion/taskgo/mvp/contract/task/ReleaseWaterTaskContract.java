@@ -1,4 +1,4 @@
-package cn.abtion.taskgo.mvp.contract;
+package cn.abtion.taskgo.mvp.contract.task;
 
 import cn.abtion.taskgo.base.contract.BaseContract;
 import cn.abtion.taskgo.mvp.model.request.home.ReleaseWaterTaskRequest;

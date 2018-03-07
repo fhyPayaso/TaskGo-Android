@@ -1,14 +1,12 @@
-package cn.abtion.taskgo.mvp.presenter;
+package cn.abtion.taskgo.mvp.presenter.task;
 
 import cn.abtion.taskgo.base.presenter.BasePresenter;
-import cn.abtion.taskgo.mvp.contract.ReleaseWaterTaskContract;
+import cn.abtion.taskgo.mvp.contract.task.ReleaseWaterTaskContract;
 import cn.abtion.taskgo.mvp.model.request.home.ReleaseWaterTaskRequest;
 import cn.abtion.taskgo.network.BaseObserver;
 import cn.abtion.taskgo.network.response.ApiResponse;
 import cn.abtion.taskgo.network.retrofit.RetrofitFactory;
-import io.reactivex.Observer;
 import io.reactivex.android.schedulers.AndroidSchedulers;
-import io.reactivex.disposables.Disposable;
 import io.reactivex.schedulers.Schedulers;
 
 /**
