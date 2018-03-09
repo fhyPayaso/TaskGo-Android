@@ -1,4 +1,4 @@
-package cn.abtion.taskgo.mvp.model.request.home;
+package cn.abtion.taskgo.mvp.model.task.request;
 
 /**
  * 发布物品任务请求体

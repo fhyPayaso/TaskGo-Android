@@ -5,12 +5,14 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
+
 import java.util.List;
 
 import butterknife.BindView;
 import cn.abtion.taskgo.R;
 import cn.abtion.taskgo.base.adapter.BaseRecyclerViewAdapter;
-import cn.abtion.taskgo.mvp.model.request.home.BaseTaskModel;
+import cn.abtion.taskgo.mvp.model.task.model.BaseTaskModel;
 import de.hdodenhof.circleimageview.CircleImageView;
 
 /**
@@ -24,10 +26,12 @@ public class BtnTaskRecAdapter extends BaseRecyclerViewAdapter<BaseTaskModel> {
 
     private TaskItemListener mTaskItemListener;
     private String mButtonContent = "接受";
+    private Context mContext;
 
 
     public BtnTaskRecAdapter(Context context, List<BaseTaskModel> baseTaskModels) {
         super(context, baseTaskModels);
+        mContext = context;
     }
 
     @Override
@@ -73,6 +77,7 @@ public class BtnTaskRecAdapter extends BaseRecyclerViewAdapter<BaseTaskModel> {
         protected void onBind(BaseTaskModel baseTaskModel, int position) {
 
             //必有部分
+            Glide.with(mContext).load(baseTaskModel.getAvatarUrl()).into(mImgAvatar);
             mTxtUsername.setText(baseTaskModel.getUsername() == null ? "N/A" : baseTaskModel.getUsername());
             mTxtReleaseTime.setText(baseTaskModel.getReleaseTime() == null ? "N/A" : baseTaskModel.getReleaseTime());
             mTxtMainTitleValue.setText(baseTaskModel.getMainValue() == null ? "N/A" : baseTaskModel.getMainValue());

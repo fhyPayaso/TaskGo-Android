@@ -3,13 +3,8 @@ package cn.abtion.taskgo.mvp.view.home.activity;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.Intent;
-import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
-import android.icu.text.SimpleDateFormat;
-import android.net.Uri;
 import android.os.Bundle;
-import android.provider.MediaStore;
-import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
 import android.view.Window;
@@ -18,25 +13,16 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.qiniu.android.common.AutoZone;
-import com.qiniu.android.common.FixedZone;
-import com.qiniu.android.common.Zone;
-import com.qiniu.android.http.ResponseInfo;
-import com.qiniu.android.storage.Configuration;
-import com.qiniu.android.storage.UpCompletionHandler;
-import com.qiniu.android.storage.UploadManager;
-
-import org.json.JSONObject;
-
-import java.util.Date;
-
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import cn.abtion.taskgo.R;
 import cn.abtion.taskgo.base.activity.BaseToolBarPresenterActivity;
-import cn.abtion.taskgo.base.contract.BaseContract;
-import cn.abtion.taskgo.base.presenter.BasePresenter;
+import cn.abtion.taskgo.base.data.DataCallBack;
+import cn.abtion.taskgo.data.UpLoadHelper;
+import cn.abtion.taskgo.mvp.contract.task.ReleaseTaskContract;
+import cn.abtion.taskgo.mvp.model.task.request.ReleaseLostFoundTaskRequest;
+import cn.abtion.taskgo.mvp.presenter.task.ReleaseTaskPresenter;
 import cn.abtion.taskgo.utils.FileUtil;
 import cn.abtion.taskgo.utils.ToastUtil;
 
@@ -46,7 +32,8 @@ import cn.abtion.taskgo.utils.ToastUtil;
  * email fanhongyu@hrsoft.net.
  */
 
-public class ReleaseLostFoundTaskActivity extends BaseToolBarPresenterActivity {
+public class ReleaseLostFoundTaskActivity extends BaseToolBarPresenterActivity<ReleaseTaskContract.Presenter>
+        implements ReleaseTaskContract.View, DataCallBack.Callback<String> {
 
     @BindView(R.id.edit_item_name)
     EditText mEditItemName;
@@ -58,17 +45,24 @@ public class ReleaseLostFoundTaskActivity extends BaseToolBarPresenterActivity {
     TextView mTxtTypeLost;
     @BindView(R.id.txt_type_found)
     TextView mTxtTypeFound;
+    @BindView(R.id.edit_item_place)
+    EditText mEditItemPlace;
 
 
+    //0代表丢了东西，1代表捡到东西
+    private String lostFoundTaskType = "0";
+    //0代表不需要上传图片，1代表需要上传图片
+    private Boolean hasImg = false;
     private AlertDialog bottomDialog;
     private TextView btnTakePhoto;
     private TextView btnFromAlbum;
     private TextView btnCancel;
     private String photoPath;
 
+
     @Override
-    public BaseContract.Presenter initPresenter() {
-        return new BasePresenter<>(this);
+    public ReleaseTaskContract.Presenter initPresenter() {
+        return new ReleaseTaskPresenter(this);
     }
 
     @Override
@@ -88,7 +82,7 @@ public class ReleaseLostFoundTaskActivity extends BaseToolBarPresenterActivity {
 
         setActivityTitle(getString(R.string.title_release_task));
         onTxtTypeLostClicked();
-
+        getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_RESIZE);
     }
 
     @Override
@@ -108,11 +102,13 @@ public class ReleaseLostFoundTaskActivity extends BaseToolBarPresenterActivity {
         ButterKnife.bind(this);
     }
 
+
     @OnClick(R.id.txt_type_lost)
     public void onTxtTypeLostClicked() {
 
         mTxtTypeLost.setSelected(true);
         mTxtTypeFound.setSelected(false);
+        lostFoundTaskType = "0";
     }
 
     @OnClick(R.id.txt_type_found)
@@ -120,6 +116,7 @@ public class ReleaseLostFoundTaskActivity extends BaseToolBarPresenterActivity {
 
         mTxtTypeLost.setSelected(false);
         mTxtTypeFound.setSelected(true);
+        lostFoundTaskType = "1";
     }
 
     /**
@@ -185,41 +182,16 @@ public class ReleaseLostFoundTaskActivity extends BaseToolBarPresenterActivity {
     @OnClick(R.id.btn_release_task)
     public void onBtnReleaseTaskClicked() {
 
-        uploadImg2QiNiu();
-        ToastUtil.showToast(R.string.toast_release_task_successful);
-        finish();
+        if (!hasImg) {
+
+            mPresenter.releaseLostFoundTask(new ReleaseLostFoundTaskRequest(mEditItemName.getText().toString().trim()
+                    , lostFoundTaskType, "no_picture"
+                    , mEditItemPlace.getText().toString().trim()
+                    , mEditTaskInformation.getText().toString().trim()));
+        } else {
+            UpLoadHelper.upLoadImgToQiNiu(photoPath, this);
+        }
     }
-
-    private void uploadImg2QiNiu() {
-
-        Configuration config = new Configuration.Builder()
-                .zone(FixedZone.zone1)
-                .build();
-
-        UploadManager uploadManager = new UploadManager(config);
-        // 设置图片路径、上传后文件名、token
-        String token ="V4bRlWyjq34V1c2WVvd39rm4WR7qAcaTtQ0Zs7rL:yqnN9yrv6um26wANvEOy-086nEs=:eyJzY29wZSI6InBpY3R1cmUiLCJkZWFkbGluZSI6MTUxNzU1NzY1M30=";
-        uploadManager.put(photoPath, "test.png", token, new UpCompletionHandler() {
-            @Override
-            public void complete(String key, ResponseInfo info, JSONObject res) {
-                // info.error中包含了错误信息，可打印调试
-                // 上传成功后将key值上传到自己的服务器
-                if (info.isOK()) {
-
-
-                    String imgUrl = "http://p0y1qzu73.bkt.clouddn.com/"+key;
-
-                    Log.d("qiniu", "complete: "+info.toString());
-                    Log.d("qiniu", "complete: "+res.toString());
-
-                } else {
-                    Log.d("qiniu", "complete: "+info.error);
-                }
-            }
-        }, null);
-    }
-
-
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
@@ -231,16 +203,53 @@ public class ReleaseLostFoundTaskActivity extends BaseToolBarPresenterActivity {
 
                 case FileUtil.CAMERA_REQUEST:
                     mImgAddPhoto.setImageBitmap(BitmapFactory.decodeFile(photoPath));
+                    hasImg = true;
                     break;
                 case FileUtil.ALBUM_REQUEST:
-
                     String picturePath = FileUtil.getSelectedPicturePath(data, ReleaseLostFoundTaskActivity.this);
                     mImgAddPhoto.setImageBitmap(BitmapFactory.decodeFile(picturePath));
                     photoPath = picturePath;
+                    hasImg = true;
                     break;
                 default:
                     break;
             }
         }
+    }
+
+    @Override
+    public void onReleaseSuccess() {
+        ToastUtil.showToast("发布成功");
+        finish();
+    }
+
+    @Override
+    public void onReleaseFailed(String errorMessage) {
+        ToastUtil.showToast(errorMessage);
+    }
+
+
+    /**
+     * 图片上传成功
+     *
+     * @param s 图片外链
+     */
+    @Override
+    public void onDataLoaded(String s) {
+
+        mPresenter.releaseLostFoundTask(new ReleaseLostFoundTaskRequest(mEditItemName.getText().toString().trim()
+                , lostFoundTaskType, s
+                , mEditItemPlace.getText().toString().trim()
+                , mEditTaskInformation.getText().toString().trim()));
+    }
+
+    /**
+     * 图片上传失败
+     *
+     * @param error
+     */
+    @Override
+    public void onFailedLoaded(int error) {
+        ToastUtil.showToast(error);
     }
 }

@@ -40,7 +40,7 @@
 
     <string name="txt_task_information">备注信息:</string>
     <string name="hint_please_add_task_information">请添加备注信息</string>
-    <string name="txt_release_time">发布时间</string>
+    <string name="txt_release_time">发布时间 </string>
     <string name="btn_release_task">发布任务</string>
     <string name="btn_accept">接受</string>
     <string name="btn_accept_all">一键接受</string>
@@ -103,6 +103,12 @@
     <string name="txt_gender_woman">女</string>
     <string name="txt_update_password_title">修改密码</string>
     <string name="txt_forget_password_title">忘记密码</string>
+    <string name="txt_mine_old_password">旧密码</string>
+    <string name="txt_mine_new_password">新密码</string>
+    <string name="txt_mine_repeat_password">重复新密码</string>
+    <string name="txt_mine_change_password_success">修改成功</string>
+
+    <string name="error_upload_image_filed">图片上传失败</string>
 
 
 </resources>

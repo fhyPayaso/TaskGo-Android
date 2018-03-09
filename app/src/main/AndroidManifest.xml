@@ -81,7 +81,9 @@
         <activity android:name=".mvp.view.home.activity.SearchTaskActivity"/>
 
         <activity android:name=".mvp.view.message.activity.ChatWindowActivity"/>
-        <activity android:name=".mvp.view.home.activity.ReleaseLostFoundTaskActivity"/>
+        <activity android:name=".mvp.view.home.activity.ReleaseLostFoundTaskActivity"
+                  android:windowSoftInputMode="adjustPan|stateHidden"/>
+
         <activity android:name=".mvp.view.mine.activity.MyFollowActivity"/>
         <activity android:name=".mvp.view.mine.activity.MyFansActivity"/>
         <activity android:name=".mvp.view.mine.activity.FeedbackActivity"/>
@@ -92,6 +94,7 @@
         <activity android:name=".mvp.view.mine.activity.AboutAvtivity"/>
         <activity android:name=".mvp.view.mine.activity.EditDataActivity"/>
         <activity android:name=".mvp.view.mine.activity.ChangeNameActivity"/>
+        <activity android:name=".mvp.view.mine.activity.ChangePasswordActivity"/>
 
         <activity android:name=".mvp.view.initiate.GuideActivity"/>
         <activity android:name=".mvp.view.initiate.SplashActivity"/>

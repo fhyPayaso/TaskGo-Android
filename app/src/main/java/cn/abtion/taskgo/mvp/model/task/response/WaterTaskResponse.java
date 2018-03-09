@@ -1,7 +1,4 @@
-package cn.abtion.taskgo.mvp.model.request.home;
-
-import com.alibaba.fastjson.JSONObject;
-import com.alibaba.fastjson.annotation.JSONField;
+package cn.abtion.taskgo.mvp.model.task.response;
 
 /**
  * @author FanHongyu.
@@ -13,6 +10,8 @@ public class WaterTaskResponse {
 
     private int id;
     private int user_id;
+    private String user_name;
+    private String avatar;
     private String address;
     private int status;
     private int type;
@@ -33,6 +32,22 @@ public class WaterTaskResponse {
 
     public void setUser_id(int user_id) {
         this.user_id = user_id;
+    }
+
+    public String getUser_name() {
+        return user_name;
+    }
+
+    public void setUser_name(String user_name) {
+        this.user_name = user_name;
+    }
+
+    public String getAvatar() {
+        return avatar;
+    }
+
+    public void setAvatar(String avatar) {
+        this.avatar = avatar;
     }
 
     public String getAddress() {

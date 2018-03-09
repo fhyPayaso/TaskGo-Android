@@ -11,9 +11,9 @@ import butterknife.ButterKnife;
 import butterknife.OnClick;
 import cn.abtion.taskgo.R;
 import cn.abtion.taskgo.base.activity.BaseToolBarPresenterActivity;
-import cn.abtion.taskgo.mvp.contract.task.ReleaseWaterTaskContract;
-import cn.abtion.taskgo.mvp.model.request.home.ReleaseWaterTaskRequest;
-import cn.abtion.taskgo.mvp.presenter.task.ReleaseWaterTaskPresenter;
+import cn.abtion.taskgo.mvp.contract.task.ReleaseTaskContract;
+import cn.abtion.taskgo.mvp.presenter.task.ReleaseTaskPresenter;
+import cn.abtion.taskgo.mvp.model.task.request.ReleaseWaterTaskRequest;
 import cn.abtion.taskgo.utils.ToastUtil;
 
 /**
@@ -22,8 +22,8 @@ import cn.abtion.taskgo.utils.ToastUtil;
  * email fanhongyu@hrsoft.net.
  */
 
-public class ReleaseWaterTaskActivity extends BaseToolBarPresenterActivity<ReleaseWaterTaskContract.Presenter>
-        implements ReleaseWaterTaskContract.View {
+public class ReleaseWaterTaskActivity extends BaseToolBarPresenterActivity<ReleaseTaskContract.Presenter>
+        implements ReleaseTaskContract.View {
 
 
     @BindView(R.id.txt_type_send)
@@ -34,13 +34,16 @@ public class ReleaseWaterTaskActivity extends BaseToolBarPresenterActivity<Relea
     TextView txtTotalMoney;
     @BindView(R.id.edit_address_number)
     EditText editAddressNumber;
-    @BindView(R.id.edit_task_information)
-    EditText editTaskInformation;
 
+
+    /**
+     * 默认为0代表送水上门，1代表自取
+     */
+    private String waterTaskType= "0";
 
     @Override
-    public ReleaseWaterTaskContract.Presenter initPresenter() {
-        return new ReleaseWaterTaskPresenter(this);
+    public ReleaseTaskContract.Presenter initPresenter() {
+        return new ReleaseTaskPresenter(this);
     }
 
     @Override
@@ -86,6 +89,7 @@ public class ReleaseWaterTaskActivity extends BaseToolBarPresenterActivity<Relea
         txtTypeSend.setSelected(true);
         txtTypeSelf.setSelected(false);
         txtTotalMoney.setText(R.string.txt_nine_rmb);
+        waterTaskType = "0";
     }
 
     /**
@@ -97,19 +101,13 @@ public class ReleaseWaterTaskActivity extends BaseToolBarPresenterActivity<Relea
         txtTypeSelf.setSelected(true);
         txtTypeSend.setSelected(false);
         txtTotalMoney.setText(R.string.txt_eight_rmb);
+        waterTaskType = "1";
     }
 
     @OnClick(R.id.btn_release_task)
     public void onViewClicked() {
-
-        String type = "0";
-
-        if (!txtTypeSend.isSelected() && txtTypeSelf.isSelected()) {
-            type = "1";
-        }
-        mPresenter.releaseWaterTask(new ReleaseWaterTaskRequest(editAddressNumber.getText().toString().trim(), type));
+        mPresenter.releaseWaterTask(new ReleaseWaterTaskRequest(editAddressNumber.getText().toString().trim(), waterTaskType));
     }
-
 
     /**
      * 发布成功回调

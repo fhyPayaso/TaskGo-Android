@@ -23,7 +23,7 @@ import cn.abtion.taskgo.base.contract.BaseContract;
 import cn.abtion.taskgo.base.frgment.BasePresenterFragment;
 import cn.abtion.taskgo.base.presenter.BasePresenter;
 import cn.abtion.taskgo.common.Config;
-import cn.abtion.taskgo.mvp.model.request.MessageModel;
+import cn.abtion.taskgo.mvp.model.MessageModel;
 import cn.abtion.taskgo.mvp.view.home.activity.SearchTaskActivity;
 import cn.abtion.taskgo.mvp.view.message.activity.ChatWindowActivity;
 import cn.abtion.taskgo.mvp.view.message.adapter.MessageItemListener;

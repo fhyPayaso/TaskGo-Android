@@ -3,9 +3,9 @@ package cn.abtion.taskgo.mvp.contract.task;
 import java.util.List;
 
 import cn.abtion.taskgo.base.contract.BaseContract;
-import cn.abtion.taskgo.mvp.model.request.home.AcceptLostFoundTaskRequest;
-import cn.abtion.taskgo.mvp.model.request.home.BaseTaskModel;
-import cn.abtion.taskgo.mvp.model.request.home.LostFindTaskModel;
+import cn.abtion.taskgo.mvp.model.task.model.BaseTaskModel;
+import cn.abtion.taskgo.mvp.model.task.request.AcceptLostFoundTaskRequest;
+
 
 /**
  * @author FanHongyu.
@@ -20,14 +20,14 @@ public interface LostFoundTaskListContract {
 
         void loadTaskList();
 
-        void acceptTask(AcceptLostFoundTaskRequest request);
+        void acceptTask(AcceptLostFoundTaskRequest request,int position);
     }
 
     interface View extends BaseContract.View<Presenter> {
 
-        void onLoadDataSuccess(List<LostFindTaskModel> taskModelList);
+        void onLoadDataSuccess(List<BaseTaskModel> lostTaskList, List<BaseTaskModel> foundTaskList);
 
-        void onAcceptSuccess();
+        void onAcceptSuccess(int position);
 
     }
 }

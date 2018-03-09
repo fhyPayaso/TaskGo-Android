@@ -1,10 +1,12 @@
 package cn.abtion.taskgo.mvp.presenter.task;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import cn.abtion.taskgo.base.presenter.BasePresenter;
 import cn.abtion.taskgo.mvp.contract.task.WaterTaskListContract;
-import cn.abtion.taskgo.mvp.model.request.home.WaterTaskResponse;
+import cn.abtion.taskgo.mvp.model.task.model.BaseTaskModel;
+import cn.abtion.taskgo.mvp.model.task.response.WaterTaskResponse;
 import cn.abtion.taskgo.network.BaseObserver;
 import cn.abtion.taskgo.network.response.ApiResponse;
 import cn.abtion.taskgo.network.retrofit.RetrofitFactory;
@@ -41,9 +43,7 @@ public class WaterTaskListPresenter extends BasePresenter<WaterTaskListContract.
                 .subscribe(new BaseObserver<List<WaterTaskResponse>>() {
                     @Override
                     public void onDataSuccess(ApiResponse<List<WaterTaskResponse>> response) {
-                        if (mView != null) {
-                            mView.onLoadDataSuccess(response.getData());
-                        }
+                        onLoadWaterTaskSuccess(response.getData());
                     }
                 });
     }
@@ -68,5 +68,28 @@ public class WaterTaskListPresenter extends BasePresenter<WaterTaskListContract.
     @Override
     public void acceptAllWaterTask() {
 
+    }
+
+
+    /**
+     * 水任务列表加载成功回调
+     * @param responseList
+     */
+    private void onLoadWaterTaskSuccess(List<WaterTaskResponse> responseList) {
+
+        List<BaseTaskModel> modelList = new ArrayList<>();
+        for (int i = 0; i < responseList.size(); i++) {
+            WaterTaskResponse response = responseList.get(i);
+            String waterTaskType = response.getType() == 0 ? "自取" : "送水上门";
+            BaseTaskModel taskModel = new BaseTaskModel(0
+                    , response.getAvatar()
+                    , response.getUser_name()
+                    , response.getCreated_at()
+                    , response.getAddress()
+                    , waterTaskType);
+            taskModel.setTaskId(response.getId());
+            modelList.add(taskModel);
+        }
+        mView.onLoadDataSuccess(modelList);
     }
 }

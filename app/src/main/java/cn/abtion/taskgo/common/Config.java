@@ -22,6 +22,6 @@ public class Config {
     /**
      * SwipeRefreshLayout下拉刷新时间
      */
-    public final static int REFRESH_TIME = 2000;
+    public final static int REFRESH_TIME = 1000;
 
 }

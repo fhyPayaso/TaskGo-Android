@@ -78,9 +78,6 @@ public class LostAndFoundTaskActivity extends BaseToolBarActivity {
     }
 
 
-
-
-
     public static void startActivity(Context context) {
         context.startActivity(new Intent(context, LostAndFoundTaskActivity.class));
     }

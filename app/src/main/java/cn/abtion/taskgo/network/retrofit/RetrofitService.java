@@ -3,14 +3,18 @@ package cn.abtion.taskgo.network.retrofit;
 
 import java.util.List;
 
-import cn.abtion.taskgo.mvp.model.request.account.LoginRequestModel;
-import cn.abtion.taskgo.mvp.model.request.account.RegisterRequestModel;
-import cn.abtion.taskgo.mvp.model.request.account.UpdatePasswordRequestModel;
-import cn.abtion.taskgo.mvp.model.request.home.AcceptLostFoundTaskRequest;
-import cn.abtion.taskgo.mvp.model.request.home.LostFindTaskModel;
-import cn.abtion.taskgo.mvp.model.request.home.ReleaseLostFoundTaskRequest;
-import cn.abtion.taskgo.mvp.model.request.home.ReleaseWaterTaskRequest;
-import cn.abtion.taskgo.mvp.model.request.home.WaterTaskResponse;
+
+import cn.abtion.taskgo.mvp.model.task.request.AcceptLostFoundTaskRequest;
+
+import cn.abtion.taskgo.mvp.model.task.request.FinishLostFoundTaskRequest;
+import cn.abtion.taskgo.mvp.model.task.request.ReleaseLostFoundTaskRequest;
+
+import cn.abtion.taskgo.mvp.model.account.LoginRequestModel;
+import cn.abtion.taskgo.mvp.model.mine.ChangePasswordRequestModel;
+import cn.abtion.taskgo.mvp.model.task.request.ReleaseWaterTaskRequest;
+import cn.abtion.taskgo.mvp.model.task.response.BaseTaskResponse;
+import cn.abtion.taskgo.mvp.model.task.response.LostFoundTaskResponse;
+import cn.abtion.taskgo.mvp.model.task.response.WaterTaskResponse;
 import cn.abtion.taskgo.network.response.ApiResponse;
 import io.reactivex.Observable;
 import retrofit2.Call;
@@ -38,6 +42,10 @@ public interface RetrofitService {
      */
     @POST("user/login")
     Call<ApiResponse> login(@Body LoginRequestModel loginRequest);
+
+
+    @POST("user/resetPassword")
+    Call<ApiResponse> changePassword(@Body ChangePasswordRequestModel changePasswordRequestModel);
 
 
 //    @POST("user/register")
@@ -83,19 +91,37 @@ public interface RetrofitService {
     Observable<ApiResponse> acceptWaterTask(@Path("taskId") int taskId);
 
     /**
+     * 完成水任务
+     * @param taskId
+     * @return
+     */
+    @GET("water/finish/{taskId}")
+    Observable<ApiResponse> finishWaterTask(@Path("taskId") int taskId);
+
+    /**
      * 加载物品任务列表
      * @return
      */
     @GET("thing/list")
-    Observable<ApiResponse<List<LostFindTaskModel>>> loadLostFoundTaskList();
+    Observable<ApiResponse<List<LostFoundTaskResponse>>> loadLostFoundTaskList();
 
     /**
      * 接受物品任务
      * @param request
      * @return
      */
-    @GET("thing/accept")
+    @POST("thing/accept")
     Observable<ApiResponse> acceptLostFoundTask(@Body AcceptLostFoundTaskRequest request);
+
+
+    /**
+     * 完成物品任务
+     * @param request
+     * @return
+     */
+    @GET("thing/finish")
+    Observable<ApiResponse> finishLostFoundTask(@Body FinishLostFoundTaskRequest request);
+
 
     /**
      * 添加物品任务
@@ -105,7 +131,21 @@ public interface RetrofitService {
     @POST("thing/add")
     Observable<ApiResponse> releaseLostFoundTask(@Body ReleaseLostFoundTaskRequest request);
 
+    /**
+     * 加载我接受的任务列表
+     * @param status
+     * @return
+     */
+    @POST("me/accepttask")
+    Observable<ApiResponse<List<BaseTaskResponse>>> loadMyAcceptTask(@Query("task_status")int status);
 
 
+    /**
+     * 加载我发布的任务列表
+     * @param status
+     * @return
+     */
+    @POST("me/finishtask")
+    Observable<ApiResponse<List<BaseTaskResponse>>> loadMyReleaseTask(@Query("task_status")int status);
 
 }

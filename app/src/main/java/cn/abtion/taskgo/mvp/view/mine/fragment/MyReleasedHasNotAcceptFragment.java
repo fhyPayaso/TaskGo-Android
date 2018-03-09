@@ -1,5 +1,6 @@
 package cn.abtion.taskgo.mvp.view.mine.fragment;
 
+import android.content.DialogInterface;
 import android.os.Bundle;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
@@ -24,9 +25,13 @@ import cn.abtion.taskgo.base.contract.BaseContract;
 import cn.abtion.taskgo.base.frgment.BasePresenterFragment;
 import cn.abtion.taskgo.base.presenter.BasePresenter;
 import cn.abtion.taskgo.common.Config;
-import cn.abtion.taskgo.mvp.model.request.home.BaseTaskModel;
+import cn.abtion.taskgo.mvp.contract.task.MyTaskListContract;
+import cn.abtion.taskgo.mvp.model.task.model.BaseTaskModel;
+import cn.abtion.taskgo.mvp.model.task.request.FinishLostFoundTaskRequest;
+import cn.abtion.taskgo.mvp.presenter.task.MyTaskListPresenter;
 import cn.abtion.taskgo.mvp.view.home.adapter.TaskItemListener;
 import cn.abtion.taskgo.mvp.view.home.adapter.NoBtnTaskRecAdapter;
+import cn.abtion.taskgo.mvp.view.mine.adapter.MyAcceptUnfinishedAdapter;
 import cn.abtion.taskgo.utils.DialogUtil;
 import cn.abtion.taskgo.utils.ToastUtil;
 
@@ -37,7 +42,8 @@ import static cn.abtion.taskgo.utils.Utility.runOnUiThread;
  * @since 2018/2/3 on 上午9:44
  * fhyPayaso@qq.com
  */
-public class MyReleasedHasNotAcceptFragment extends BasePresenterFragment implements TaskItemListener, SwipeRefreshLayout.OnRefreshListener {
+public class MyReleasedHasNotAcceptFragment extends BasePresenterFragment<MyTaskListContract.Presenter> implements
+        TaskItemListener, SwipeRefreshLayout.OnRefreshListener ,MyTaskListContract.View{
 
 
     @BindView(R.id.rec_task_list)
@@ -47,13 +53,13 @@ public class MyReleasedHasNotAcceptFragment extends BasePresenterFragment implem
     Unbinder unbinder;
 
     private List<BaseTaskModel> mTaskLst;
-    private NoBtnTaskRecAdapter mAdapter;
+    private MyAcceptUnfinishedAdapter mAdapter;
     private DialogUtil.CustomAlertDialog dialogTaskInformation;
 
 
     @Override
-    protected BaseContract.Presenter initPresenter() {
-        return new BasePresenter<>(this);
+    protected MyTaskListContract.Presenter initPresenter() {
+        return new MyTaskListPresenter(this);
     }
 
     @Override
@@ -92,8 +98,7 @@ public class MyReleasedHasNotAcceptFragment extends BasePresenterFragment implem
                 runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
-                        testAddItem(10);
-                        mAdapter.notifyDataSetChanged();
+                        mPresenter.loadMyReleaseTaskList(0);
                         mSwipeRefresh.setRefreshing(false);
                     }
                 });
@@ -104,7 +109,7 @@ public class MyReleasedHasNotAcceptFragment extends BasePresenterFragment implem
     private void initRecyclerView() {
 
 
-        mAdapter = new NoBtnTaskRecAdapter(getContext(), mTaskLst);
+        mAdapter = new MyAcceptUnfinishedAdapter(getContext(), mTaskLst);
         mAdapter.setTaskItemListener(this);
         mRecTaskList.setAdapter(mAdapter);
         mRecTaskList.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL, false));
@@ -189,14 +194,14 @@ public class MyReleasedHasNotAcceptFragment extends BasePresenterFragment implem
                 runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
-                        testAddItem(3);
-                        mAdapter.notifyDataSetChanged();
+                        mPresenter.loadMyReleaseTaskList(0);
                         mSwipeRefresh.setRefreshing(false);
                     }
                 });
             }
         }, Config.REFRESH_TIME);
     }
+
 
     @Override
     public void onClickAvatar(int position) {
@@ -205,8 +210,31 @@ public class MyReleasedHasNotAcceptFragment extends BasePresenterFragment implem
     }
 
     @Override
-    public void onClickAccept(int position) {
+    public void onClickAccept(final int position) {
 
+        DialogUtil.NativeDialog dialogAccept = new DialogUtil().new NativeDialog();
+        dialogAccept
+                .singleInit(getContext())
+                .setTitle("确认完成该任务？")
+                .setMessage(getString(R.string.dialog_message_remove_task))
+                .setNegativeButton(getString(R.string.txt_cancel), new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.dismiss();
+                    }
+                })
+                .setPositiveButton(getString(R.string.txt_confirm), new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+
+                        BaseTaskModel model = mTaskLst.get(position);
+
+                        mPresenter.finishLostFoundTask(new FinishLostFoundTaskRequest("1",String.valueOf(model
+                                .getTaskId()), String.valueOf(model.getTaskType())),position);
+                        dialog.dismiss();
+                    }
+                })
+                .showNativeDialog();
     }
 
     @Override
@@ -218,39 +246,23 @@ public class MyReleasedHasNotAcceptFragment extends BasePresenterFragment implem
     }
 
 
-    /**
-     * 测试增加数据
-     *
-     * @param number
-     */
-    private void testAddItem(int number) {
-
-        for (int i = 0; i < number; i++) {
-
-            if (i % 2 == 0) {
-
-                mTaskLst.add(new BaseTaskModel(0
-                        , "url"
-                        , "fhyPayaso"
-                        , "12-09 14:20"
-                        , "6077"
-                        , "送水上门"));
-
-            } else {
-
-                mTaskLst.add(new BaseTaskModel(1
-                        , "url"
-                        , "xkaxka"
-                        , "02-10 04:25"
-                        , "机械键盘"));
-            }
-        }
-    }
-
-
     @Override
     public void onDestroyView() {
         super.onDestroyView();
         unbinder.unbind();
+    }
+
+    @Override
+    public void onLoadSuccess(List<BaseTaskModel> taskModelList) {
+
+        mTaskLst.clear();
+        mTaskLst.addAll(taskModelList);
+        mAdapter.notifyDataSetChanged();
+    }
+
+    @Override
+    public void onFinishSuccess(int position) {
+
+        mAdapter.removeItem(position);
     }
 }

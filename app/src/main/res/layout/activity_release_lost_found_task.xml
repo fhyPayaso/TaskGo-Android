@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="@color/bg_gray">
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@color/bg_gray">
 
 
     <ScrollView
@@ -21,9 +21,11 @@
                 android:id="@+id/img_item_name"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="20dp"
+                android:layout_alignLeft="@+id/ly_edit_box"
+                android:layout_alignParentTop="true"
+                android:layout_alignStart="@+id/ly_edit_box"
                 android:layout_marginTop="40dp"
-                android:src="@drawable/ic_item_task_name" />
+                android:src="@drawable/ic_item_task_name"/>
 
 
             <TextView
@@ -32,7 +34,7 @@
                 android:layout_alignBottom="@id/img_item_name"
                 android:layout_marginLeft="10dp"
                 android:layout_toRightOf="@id/img_item_name"
-                android:text="物品名称:" />
+                android:text="物品名称:"/>
 
             <View
                 android:id="@+id/line"
@@ -41,7 +43,7 @@
                 android:layout_alignBottom="@id/txt_fix_item_name"
                 android:layout_marginLeft="90dp"
                 android:layout_toRightOf="@id/img_item_name"
-                android:background="@color/txt_gray" />
+                android:background="@color/txt_gray"/>
 
             <EditText
                 android:id="@+id/edit_item_name"
@@ -51,25 +53,62 @@
                 android:layout_alignLeft="@id/line"
                 android:layout_marginBottom="2dp"
                 android:background="@null"
-                android:textSize="14sp" />
+                android:textSize="14sp"/>
 
 
             <ImageView
-                android:id="@+id/img_item_task_type"
+                android:id="@+id/img_item_place"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignLeft="@id/img_item_name"
                 android:layout_below="@id/img_item_name"
                 android:layout_marginTop="25dp"
-                android:src="@drawable/ic_item_task_type" />
+                android:src="@drawable/ic_item_task_name"/>
+
+
+            <TextView
+                android:id="@+id/txt_fix_item_place"
+                style="@style/txt_fix_task_information"
+                android:layout_alignBottom="@id/img_item_place"
+                android:layout_marginLeft="10dp"
+                android:layout_toRightOf="@id/img_item_place"
+                android:text="地点:"/>
+
+            <View
+                android:id="@+id/line_place"
+                android:layout_width="150dp"
+                android:layout_height="1dp"
+                android:layout_alignBottom="@id/txt_fix_item_place"
+                android:layout_marginLeft="90dp"
+                android:layout_toRightOf="@id/img_item_name"
+                android:background="@color/txt_gray"/>
+
+            <EditText
+                android:id="@+id/edit_item_place"
+                android:layout_width="150dp"
+                android:layout_height="wrap_content"
+                android:layout_above="@id/line_place"
+                android:layout_alignLeft="@id/line_place"
+                android:layout_marginBottom="2dp"
+                android:background="@null"
+                android:textSize="14sp"/>
+
+            <ImageView
+                android:id="@+id/img_item_task_type"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignLeft="@id/img_item_place"
+                android:layout_below="@id/img_item_place"
+                android:layout_marginTop="25dp"
+                android:src="@drawable/ic_item_task_type"/>
 
 
             <TextView
                 android:id="@+id/txt_item_task_type"
                 style="@style/txt_fix_task_information"
                 android:layout_alignBottom="@id/img_item_task_type"
-                android:layout_alignLeft="@id/txt_fix_item_name"
-                android:text="@string/txt_lost_found_task_type" />
+                android:layout_alignLeft="@id/txt_fix_item_place"
+                android:text="@string/txt_lost_found_task_type"/>
 
 
             <TextView
@@ -78,7 +117,7 @@
                 android:layout_alignBottom="@id/img_item_task_type"
                 android:layout_alignLeft="@id/line"
                 android:background="@drawable/txt_task_type_selector"
-                android:text="@string/txt_lost_found_task_type_lost" />
+                android:text="@string/txt_lost_found_task_type_lost"/>
 
 
             <TextView
@@ -87,7 +126,7 @@
                 android:layout_alignBottom="@id/txt_type_lost"
                 android:layout_alignRight="@id/line"
                 android:background="@drawable/txt_task_type_selector"
-                android:text="@string/txt_lost_found_task_type_found" />
+                android:text="@string/txt_lost_found_task_type_found"/>
 
 
             <ImageView
@@ -97,14 +136,14 @@
                 android:layout_alignLeft="@id/img_item_task_type"
                 android:layout_below="@id/img_item_task_type"
                 android:layout_marginTop="25dp"
-                android:src="@drawable/ic_item_task_photo" />
+                android:src="@drawable/ic_item_task_photo"/>
 
 
             <TextView
                 style="@style/txt_fix_task_information"
                 android:layout_alignBottom="@id/img_item_photo"
                 android:layout_alignLeft="@id/txt_fix_item_name"
-                android:text="@string/txt_item_photo" />
+                android:text="@string/txt_item_photo"/>
 
 
             <ImageView
@@ -113,7 +152,7 @@
                 android:layout_height="150dp"
                 android:layout_alignLeft="@id/line"
                 android:layout_alignTop="@id/img_item_photo"
-                android:src="@drawable/bg_item_task_photo" />
+                android:src="@drawable/bg_item_task_photo"/>
 
 
             <ImageView
@@ -124,14 +163,14 @@
                 android:layout_below="@id/img_add_photo"
                 android:layout_marginLeft="3dp"
                 android:layout_marginTop="25dp"
-                android:src="@drawable/ic_task_information" />
+                android:src="@drawable/ic_task_information"/>
 
             <TextView
                 android:id="@+id/txt_remark_information"
                 style="@style/txt_fix_task_information"
                 android:layout_alignBottom="@id/img_task_information"
                 android:layout_alignLeft="@id/txt_fix_item_name"
-                android:text="@string/txt_task_information" />
+                android:text="@string/txt_task_information"/>
 
             <LinearLayout
                 android:id="@+id/ly_edit_box"
@@ -148,17 +187,15 @@
                 android:paddingRight="15dp"
                 android:paddingTop="10dp">
 
-
                 <EditText
                     android:id="@+id/edit_task_information"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:background="@null"
                     android:hint="@string/hint_please_add_task_information"
-                    android:textSize="14sp" />
+                    android:textSize="14sp"/>
+
             </LinearLayout>
-
-
         </RelativeLayout>
     </ScrollView>
 
@@ -182,13 +219,13 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="合计 ¥"
-                android:textColor="@color/txt_blue" />
+                android:textColor="@color/txt_blue"/>
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="0"
-                android:textColor="@color/txt_blue" />
+                android:textColor="@color/txt_blue"/>
         </LinearLayout>
 
         <TextView
@@ -200,7 +237,7 @@
             android:gravity="center"
             android:text="@string/btn_release_task"
             android:textColor="@color/white"
-            android:textSize="14sp" />
+            android:textSize="14sp"/>
     </LinearLayout>
 
 

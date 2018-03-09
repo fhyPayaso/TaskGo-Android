@@ -20,7 +20,9 @@ import cn.abtion.taskgo.base.contract.BaseContract;
 import cn.abtion.taskgo.base.frgment.BasePresenterFragment;
 import cn.abtion.taskgo.base.presenter.BasePresenter;
 import cn.abtion.taskgo.common.Config;
-import cn.abtion.taskgo.mvp.model.request.home.BaseTaskModel;
+import cn.abtion.taskgo.mvp.contract.task.MyTaskListContract;
+import cn.abtion.taskgo.mvp.model.task.model.BaseTaskModel;
+import cn.abtion.taskgo.mvp.presenter.task.MyTaskListPresenter;
 import cn.abtion.taskgo.mvp.view.home.adapter.NoBtnTaskRecAdapter;
 import cn.abtion.taskgo.mvp.view.home.adapter.TaskItemListener;
 import cn.abtion.taskgo.utils.DialogUtil;
@@ -33,7 +35,8 @@ import static cn.abtion.taskgo.utils.Utility.runOnUiThread;
  * @since 2018/2/3 on 上午9:45
  * fhyPayaso@qq.com
  */
-public class MyReleasedFinishedFragment extends BasePresenterFragment implements TaskItemListener, SwipeRefreshLayout.OnRefreshListener{
+public class MyReleasedFinishedFragment extends BasePresenterFragment<MyTaskListContract.Presenter> implements TaskItemListener,
+        SwipeRefreshLayout.OnRefreshListener,MyTaskListContract.View{
 
     @BindView(R.id.rec_task_list)
     RecyclerView mRecTaskList;
@@ -47,8 +50,8 @@ public class MyReleasedFinishedFragment extends BasePresenterFragment implements
 
 
     @Override
-    protected BaseContract.Presenter initPresenter() {
-        return new BasePresenter<>(this);
+    protected MyTaskListContract.Presenter initPresenter() {
+        return new MyTaskListPresenter(this);
     }
 
     @Override
@@ -86,8 +89,7 @@ public class MyReleasedFinishedFragment extends BasePresenterFragment implements
                 runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
-                        testAddItem(10);
-                        mAdapter.notifyDataSetChanged();
+                        mPresenter.loadMyReleaseTaskList(2);
                         mSwipeRefresh.setRefreshing(false);
                     }
                 });
@@ -182,8 +184,7 @@ public class MyReleasedFinishedFragment extends BasePresenterFragment implements
                 runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
-                        testAddItem(3);
-                        mAdapter.notifyDataSetChanged();
+                        mPresenter.loadMyReleaseTaskList(2);
                         mSwipeRefresh.setRefreshing(false);
                     }
                 });
@@ -231,4 +232,18 @@ public class MyReleasedFinishedFragment extends BasePresenterFragment implements
             }
         }
     }
+
+    @Override
+    public void onLoadSuccess(List<BaseTaskModel> taskModelList) {
+        mTaskLst.clear();
+        mTaskLst.addAll(taskModelList);
+        mAdapter.notifyDataSetChanged();
+    }
+
+    @Override
+    public void onFinishSuccess(int position) {
+
+    }
+
+
 }

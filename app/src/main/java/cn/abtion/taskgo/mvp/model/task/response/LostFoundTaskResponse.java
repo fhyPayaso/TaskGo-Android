@@ -1,4 +1,4 @@
-package cn.abtion.taskgo.mvp.model.request.home;
+package cn.abtion.taskgo.mvp.model.task.response;
 
 import io.reactivex.schedulers.Schedulers;
 
@@ -13,6 +13,8 @@ public class LostFoundTaskResponse {
 
     private int id;
     private int user_id;
+    private String user_name;
+    private String avatar;
     private String name;
     private String picture_url;
     private String place;
@@ -110,5 +112,21 @@ public class LostFoundTaskResponse {
 
     public void setUpdated_at(String updated_at) {
         this.updated_at = updated_at;
+    }
+
+    public String getUser_name() {
+        return user_name;
+    }
+
+    public void setUser_name(String user_name) {
+        this.user_name = user_name;
+    }
+
+    public String getAvatar() {
+        return avatar;
+    }
+
+    public void setAvatar(String avatar) {
+        this.avatar = avatar;
     }
 }

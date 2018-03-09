@@ -1,4 +1,4 @@
-package cn.abtion.taskgo.mvp.model.request;
+package cn.abtion.taskgo.mvp.model;
 
 /**
  * @author FanHongyu.

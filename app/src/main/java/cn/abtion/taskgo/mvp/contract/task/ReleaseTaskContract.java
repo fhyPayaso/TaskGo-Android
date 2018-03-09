@@ -1,7 +1,8 @@
 package cn.abtion.taskgo.mvp.contract.task;
 
 import cn.abtion.taskgo.base.contract.BaseContract;
-import cn.abtion.taskgo.mvp.model.request.home.ReleaseWaterTaskRequest;
+import cn.abtion.taskgo.mvp.model.task.request.ReleaseLostFoundTaskRequest;
+import cn.abtion.taskgo.mvp.model.task.request.ReleaseWaterTaskRequest;
 
 /**
  * @author FanHongyu.
@@ -9,11 +10,13 @@ import cn.abtion.taskgo.mvp.model.request.home.ReleaseWaterTaskRequest;
  * email fanhongyu@hrsoft.net.
  */
 
-public interface ReleaseWaterTaskContract {
+public interface ReleaseTaskContract {
 
     interface Presenter extends BaseContract.Presenter {
 
         void releaseWaterTask(ReleaseWaterTaskRequest request);
+
+        void releaseLostFoundTask(ReleaseLostFoundTaskRequest request);
     }
 
     interface View extends BaseContract.View<Presenter> {

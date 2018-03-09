@@ -1,4 +1,4 @@
-package cn.abtion.taskgo.mvp.model.request.home;
+package cn.abtion.taskgo.mvp.model.task.request;
 
 /**
  * @author FanHongyu.
@@ -10,10 +10,21 @@ public class AcceptLostFoundTaskRequest {
 
     private int task_id;
     private int task_type;
+    private String task_name;
 
-    public AcceptLostFoundTaskRequest(int task_id, int task_type) {
+
+    public AcceptLostFoundTaskRequest(int task_id, int task_type, String task_name) {
         this.task_id = task_id;
         this.task_type = task_type;
+        this.task_name = task_name;
+    }
+
+    public String getTask_name() {
+        return task_name;
+    }
+
+    public void setTask_name(String task_name) {
+        this.task_name = task_name;
     }
 
     public int getTask_id() {

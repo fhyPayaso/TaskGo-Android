@@ -4,8 +4,8 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 
-import cn.abtion.taskgo.mvp.view.home.fragment.FoundTaskItemListFragment;
-import cn.abtion.taskgo.mvp.view.home.fragment.LostTaskItemListFragment;
+import cn.abtion.taskgo.mvp.view.home.fragment.FoundTaskListFragment;
+import cn.abtion.taskgo.mvp.view.home.fragment.LostTaskListFragment;
 
 /**
  * @author fhyPayaso
@@ -15,9 +15,9 @@ import cn.abtion.taskgo.mvp.view.home.fragment.LostTaskItemListFragment;
 public class LostFoundPagerAdapter extends FragmentPagerAdapter {
 
 
-    private String[] mTitles = {"失物招领", "寻物启事"};
-    private FoundTaskItemListFragment mFoundTaskListFragment;
-    private LostTaskItemListFragment mLostTaskListFragment;
+    private String[] mTitles = {"寻物启事", "失物招领"};
+    private FoundTaskListFragment mFoundTaskListFragment;
+    private LostTaskListFragment mLostTaskListFragment;
     private Fragment currentFragment;
 
     public LostFoundPagerAdapter(FragmentManager fm) {
@@ -28,16 +28,19 @@ public class LostFoundPagerAdapter extends FragmentPagerAdapter {
     public Fragment getItem(int position) {
         switch (position) {
             case 0:
-                if (mFoundTaskListFragment == null) {
-                    mFoundTaskListFragment = new FoundTaskItemListFragment();
-                }
-                currentFragment = mFoundTaskListFragment;
-                break;
-            case 1:
+
                 if (mLostTaskListFragment == null) {
-                    mLostTaskListFragment = new LostTaskItemListFragment();
+                    mLostTaskListFragment = new LostTaskListFragment();
                 }
                 currentFragment = mLostTaskListFragment;
+                break;
+
+            case 1:
+
+                if (mFoundTaskListFragment == null) {
+                    mFoundTaskListFragment = new FoundTaskListFragment();
+                }
+                currentFragment = mFoundTaskListFragment;
                 break;
             default:
                 break;

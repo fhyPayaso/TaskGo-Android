@@ -15,7 +15,7 @@ import cn.abtion.taskgo.mvp.view.mine.fragment.MyReleasedHasNotAcceptFragment;
  */
 public class MyReleasedTaskPagerAdapter extends FragmentPagerAdapter {
 
-    private String[] mTitles = {"未接受", "已接受", "已完成"};
+    private String[] mTitles = {"未接受", "被接受", "已完成"};
     private MyReleasedHasNotAcceptFragment mNotAcceptFragment;
     private MyReleasedHasAcceptFragment mAcceptFragment;
     private MyReleasedFinishedFragment mFinishedFragment;

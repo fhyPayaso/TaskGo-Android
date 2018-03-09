@@ -20,7 +20,9 @@ import cn.abtion.taskgo.base.contract.BaseContract;
 import cn.abtion.taskgo.base.frgment.BasePresenterFragment;
 import cn.abtion.taskgo.base.presenter.BasePresenter;
 import cn.abtion.taskgo.common.Config;
-import cn.abtion.taskgo.mvp.model.request.home.BaseTaskModel;
+import cn.abtion.taskgo.mvp.contract.task.MyTaskListContract;
+import cn.abtion.taskgo.mvp.model.task.model.BaseTaskModel;
+import cn.abtion.taskgo.mvp.presenter.task.MyTaskListPresenter;
 import cn.abtion.taskgo.mvp.view.home.adapter.NoBtnTaskRecAdapter;
 import cn.abtion.taskgo.mvp.view.home.adapter.TaskItemListener;
 import cn.abtion.taskgo.utils.DialogUtil;
@@ -33,7 +35,8 @@ import static cn.abtion.taskgo.utils.Utility.runOnUiThread;
  * @since 2018/2/3 on 上午9:38
  * fhyPayaso@qq.com
  */
-public class MyAcceptFinishedFragment extends BasePresenterFragment implements TaskItemListener, SwipeRefreshLayout.OnRefreshListener {
+public class MyAcceptFinishedFragment extends BasePresenterFragment<MyTaskListContract.Presenter> implements TaskItemListener,
+        SwipeRefreshLayout.OnRefreshListener ,MyTaskListContract.View{
 
     @BindView(R.id.rec_task_list)
     RecyclerView mRecTaskList;
@@ -47,8 +50,8 @@ public class MyAcceptFinishedFragment extends BasePresenterFragment implements T
 
 
     @Override
-    protected BaseContract.Presenter initPresenter() {
-        return new BasePresenter<>(this);
+    protected MyTaskListContract.Presenter initPresenter() {
+        return new MyTaskListPresenter(this);
     }
 
     @Override
@@ -88,8 +91,7 @@ public class MyAcceptFinishedFragment extends BasePresenterFragment implements T
                 runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
-                        testAddItem(10);
-                        mAdapter.notifyDataSetChanged();
+                        mPresenter.loadMyAcceptTaskList(1);
                         mSwipeRefresh.setRefreshing(false);
                     }
                 });
@@ -188,8 +190,7 @@ public class MyAcceptFinishedFragment extends BasePresenterFragment implements T
                 runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
-                        testAddItem(3);
-                        mAdapter.notifyDataSetChanged();
+                        mPresenter.loadMyAcceptTaskList(2);
                         mSwipeRefresh.setRefreshing(false);
                     }
                 });
@@ -208,32 +209,15 @@ public class MyAcceptFinishedFragment extends BasePresenterFragment implements T
 
     }
 
-    /**
-     * 测试增加数据
-     *
-     * @param number
-     */
-    private void testAddItem(int number) {
+    @Override
+    public void onLoadSuccess(List<BaseTaskModel> taskModelList) {
+        mTaskLst.clear();
+        mTaskLst.addAll(taskModelList);
+        mAdapter.notifyDataSetChanged();
+    }
 
-        for (int i = 0; i < number; i++) {
+    @Override
+    public void onFinishSuccess(int position) {
 
-            if (i % 2 == 0) {
-
-                mTaskLst.add(new BaseTaskModel(0
-                        , "url"
-                        , "fhyPayaso"
-                        , "12-09 14:20"
-                        , "6077"
-                        , "送水上门"));
-
-            } else {
-
-                mTaskLst.add(new BaseTaskModel(1
-                        , "url"
-                        , "xkaxka"
-                        , "02-10 04:25"
-                        , "机械键盘"));
-            }
-        }
     }
 }

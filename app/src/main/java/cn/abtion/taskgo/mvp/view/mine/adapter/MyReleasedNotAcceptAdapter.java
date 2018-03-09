@@ -1,4 +1,4 @@
-package cn.abtion.taskgo.mvp.view.home.adapter;
+package cn.abtion.taskgo.mvp.view.mine.adapter;
 
 import android.content.Context;
 import android.view.View;
@@ -13,25 +13,26 @@ import butterknife.BindView;
 import cn.abtion.taskgo.R;
 import cn.abtion.taskgo.base.adapter.BaseRecyclerViewAdapter;
 import cn.abtion.taskgo.mvp.model.task.model.BaseTaskModel;
+import cn.abtion.taskgo.mvp.view.home.adapter.TaskItemListener;
 import de.hdodenhof.circleimageview.CircleImageView;
 
 /**
- * @author fhyPayaso
- * @since 2018/2/3 on 上午11:26
- * fhyPayaso@qq.com
+ * @author FanHongyu.
+ * @since 18/3/9 21:22.
+ * email fanhongyu@hrsoft.net.
  */
-public class NoBtnTaskRecAdapter extends BaseRecyclerViewAdapter<BaseTaskModel> {
 
+public class MyReleasedNotAcceptAdapter extends BaseRecyclerViewAdapter<BaseTaskModel> {
 
     private TaskItemListener mTaskItemListener;
+    private String mButtonContent = "完成";
 
-    public NoBtnTaskRecAdapter(Context context, List<BaseTaskModel> baseTaskModels) {
-        super(context, baseTaskModels);
+    public MyReleasedNotAcceptAdapter(Context context, List<BaseTaskModel> taskModelList) {
+        super(context, taskModelList);
     }
 
     @Override
     public BaseViewHolder<BaseTaskModel> onCreateViewHolder(ViewGroup parent, int viewType) {
-
         View view = mInflater.inflate(R.layout.item_base_task, parent, false);
         return new ItemHolder(view);
     }
@@ -40,8 +41,12 @@ public class NoBtnTaskRecAdapter extends BaseRecyclerViewAdapter<BaseTaskModel> 
         mTaskItemListener = listener;
     }
 
+    public void setButtonContent(String buttonContent) {
+        mButtonContent = buttonContent;
+    }
 
     class ItemHolder extends BaseViewHolder<BaseTaskModel> implements View.OnClickListener {
+
 
         @BindView(R.id.img_avatar)
         CircleImageView mImgAvatar;
@@ -58,12 +63,11 @@ public class NoBtnTaskRecAdapter extends BaseRecyclerViewAdapter<BaseTaskModel> 
         @BindView(R.id.btn_task)
         TextView mBtnTask;
 
-
         public ItemHolder(View itemView) {
             super(itemView);
-
             itemView.setOnClickListener(this);
             mImgAvatar.setOnClickListener(this);
+            mBtnTask.setOnClickListener(this);
         }
 
         @Override
@@ -80,20 +84,30 @@ public class NoBtnTaskRecAdapter extends BaseRecyclerViewAdapter<BaseTaskModel> 
 
                 mTxtMainTitle.setText("宿舍号：");
                 mTxtSubtitle.setText(baseTaskModel.getSubTitle() == null ? "N/A" : baseTaskModel.getSubTitle());
+
+                //设置按钮是否可见，可见则设置按钮内容
+                mBtnTask.setVisibility(View.INVISIBLE);
+
             } else {
                 mTxtMainTitle.setText("物品名称：");
-                mTxtSubtitle.setText("");
+                mBtnTask.setVisibility(View.VISIBLE);
+                mBtnTask.setText(mButtonContent);
             }
-
-            //设置按钮是否可见，可见则设置按钮内容
-            mBtnTask.setVisibility(View.INVISIBLE);
         }
 
         @Override
         public void onClick(View v) {
 
-            if (v.getId() == R.id.img_avatar) {
-                mTaskItemListener.onClickAvatar(getAdapterPosition());
+            int position = getAdapterPosition();
+            switch (v.getId()) {
+                case R.id.img_avatar:
+                    mTaskItemListener.onClickAvatar(position);
+                    break;
+                case R.id.btn_task:
+                    mTaskItemListener.onClickAccept(position);
+                    break;
+                default:
+                    break;
             }
         }
     }
