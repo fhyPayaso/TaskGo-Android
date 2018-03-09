@@ -25,14 +25,12 @@ import cn.abtion.taskgo.base.adapter.BaseRecyclerViewAdapter;
 import cn.abtion.taskgo.base.adapter.RecyclerScrollListener;
 import cn.abtion.taskgo.common.Config;
 import cn.abtion.taskgo.mvp.contract.task.WaterTaskListContract;
-import cn.abtion.taskgo.mvp.presenter.task.WaterTaskListPresenter;
 import cn.abtion.taskgo.mvp.model.task.model.BaseTaskModel;
+import cn.abtion.taskgo.mvp.presenter.task.WaterTaskListPresenter;
 import cn.abtion.taskgo.mvp.view.home.adapter.BtnTaskRecAdapter;
 import cn.abtion.taskgo.mvp.view.home.adapter.TaskItemListener;
 import cn.abtion.taskgo.utils.DialogUtil;
 import cn.abtion.taskgo.utils.ToastUtil;
-
-import static cn.abtion.taskgo.utils.Utility.runOnUiThread;
 
 /**
  * @author fhyPayaso
@@ -49,21 +47,14 @@ public class WaterTaskListActivity extends BaseToolBarPresenterActivity<WaterTas
     RecyclerView recWaterTask;
     @BindView(R.id.fresh_task_list)
     SwipeRefreshLayout mSwipeRefresh;
-    @BindView(R.id.btn_release_task)
-    FloatingActionButton btnReleaseTask;
+    @BindView(R.id.btn_releasze_task)
+    FloatingActionButton btnReleaszeTask;
 
 
     private BtnTaskRecAdapter mAdapter;
     private List<BaseTaskModel> mWaterTaskList;
     private DialogUtil.CustomAlertDialog dialogTaskInformation;
 
-
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        // TODO: add setContentView(...) invocation
-        ButterKnife.bind(this);
-    }
 
     @Override
     public WaterTaskListContract.Presenter initPresenter() {
@@ -151,7 +142,7 @@ public class WaterTaskListActivity extends BaseToolBarPresenterActivity<WaterTas
             }
         });
 
-        recWaterTask.addOnScrollListener(new RecyclerScrollListener(btnReleaseTask) {
+        recWaterTask.addOnScrollListener(new RecyclerScrollListener(btnReleaszeTask) {
             @Override
             public void scrolledToLast() {
                 ToastUtil.showToast("到底啦");
@@ -217,13 +208,7 @@ public class WaterTaskListActivity extends BaseToolBarPresenterActivity<WaterTas
     }
 
 
-    /**
-     * 发布任务按钮点击事件
-     */
-    @OnClick(R.id.btn_release_task)
-    public void onViewClicked() {
-        ReleaseWaterTaskActivity.startActivity(WaterTaskListActivity.this);
-    }
+
 
 
     /**
@@ -322,5 +307,18 @@ public class WaterTaskListActivity extends BaseToolBarPresenterActivity<WaterTas
 
     public static void startActivity(Context context) {
         context.startActivity(new Intent(context, WaterTaskListActivity.class));
+    }
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        // TODO: add setContentView(...) invocation
+        ButterKnife.bind(this);
+    }
+
+    @OnClick(R.id.btn_releasze_task)
+    public void onViewClicked() {
+
+        ReleaseWaterTaskActivity.startActivity(WaterTaskListActivity.this);
     }
 }

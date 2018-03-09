@@ -123,7 +123,7 @@ public final class RetrofitFactory {
                 // TODO: 18/1/18 token安全性问题
                 //请求时加入token
                 Request request = chain.request().newBuilder()
-                        .header("token", token)
+                        .header("token", "2ac296af5699fd4f47ce5420aecf88bb")
                         .build();
                 return chain.proceed(request);
             }

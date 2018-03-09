@@ -12,8 +12,8 @@ import butterknife.OnClick;
 import cn.abtion.taskgo.R;
 import cn.abtion.taskgo.base.activity.BaseToolBarPresenterActivity;
 import cn.abtion.taskgo.mvp.contract.task.ReleaseTaskContract;
-import cn.abtion.taskgo.mvp.presenter.task.ReleaseTaskPresenter;
 import cn.abtion.taskgo.mvp.model.task.request.ReleaseWaterTaskRequest;
+import cn.abtion.taskgo.mvp.presenter.task.ReleaseTaskPresenter;
 import cn.abtion.taskgo.utils.ToastUtil;
 
 /**
@@ -34,12 +34,14 @@ public class ReleaseWaterTaskActivity extends BaseToolBarPresenterActivity<Relea
     TextView txtTotalMoney;
     @BindView(R.id.edit_address_number)
     EditText editAddressNumber;
+    @BindView(R.id.btn_release_task)
+    TextView btnReleaseTask;
 
 
     /**
      * 默认为0代表送水上门，1代表自取
      */
-    private String waterTaskType= "0";
+    private String waterTaskType = "0";
 
     @Override
     public ReleaseTaskContract.Presenter initPresenter() {
@@ -72,14 +74,6 @@ public class ReleaseWaterTaskActivity extends BaseToolBarPresenterActivity<Relea
         context.startActivity(new Intent(context, ReleaseWaterTaskActivity.class));
     }
 
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        // TODO: add setContentView(...) invocation
-        ButterKnife.bind(this);
-    }
-
-
     /**
      * 送水上门类型点击事件
      */
@@ -104,11 +98,6 @@ public class ReleaseWaterTaskActivity extends BaseToolBarPresenterActivity<Relea
         waterTaskType = "1";
     }
 
-    @OnClick(R.id.btn_release_task)
-    public void onViewClicked() {
-        mPresenter.releaseWaterTask(new ReleaseWaterTaskRequest(editAddressNumber.getText().toString().trim(), waterTaskType));
-    }
-
     /**
      * 发布成功回调
      */
@@ -126,5 +115,12 @@ public class ReleaseWaterTaskActivity extends BaseToolBarPresenterActivity<Relea
     @Override
     public void onReleaseFailed(String errorMessage) {
         ToastUtil.showToast(errorMessage);
+    }
+
+
+    @OnClick(R.id.btn_release_task)
+    public void onViewClicked() {
+        mPresenter.releaseWaterTask(new ReleaseWaterTaskRequest(editAddressNumber.getText().toString().trim(),
+                waterTaskType));
     }
 }
