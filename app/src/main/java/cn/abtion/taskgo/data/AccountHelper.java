@@ -22,23 +22,37 @@ public class AccountHelper {
     @SuppressWarnings("unchecked")
     public static void login(final LoginRequestModel request, final DataCallBack.SuccessCallback callback) {
 
-
-        RetrofitFactory.getRetrofitService().login(request).enqueue(new ResponseCallBack<ApiResponse>() {
-            @Override
-            public void onDataResponse(Call<ApiResponse> call, Response<ApiResponse> response) {
-                callback.onDataLoaded(null);
-            }
-
-            @Override
-            public void onDataFailure(Call<ApiResponse> call, Throwable t) {
-
-            }
-
-            @Override
-            public void dismissDialog() {
-
-            }
-        });
+//
+//        RetrofitFactory.getRetrofitService().login(request).enqueue(new ResponseCallBack<ApiResponse>() {
+//
+//            /**
+//             * 请求成功时回掉
+//             * @param call
+//             * @param response
+//             */
+//            @Override
+//            public void onDataResponse(Call<ApiResponse> call, Response<ApiResponse> response) {
+//                callback.onDataLoaded(null);
+//            }
+//
+//            /**
+//             * 请求失败时回掉
+//             * @param call
+//             * @param t
+//             */
+//            @Override
+//            public void onDataFailure(Call<ApiResponse> call, Throwable t) {
+//
+//            }
+//
+//            /**
+//             *无论成功或者失败时都回调，用于dismissDialog或隐藏其他控件
+//             */
+//            @Override
+//            public void dismissDialog() {
+//
+//            }
+//        });
 
 
 //        RetrofitFactory

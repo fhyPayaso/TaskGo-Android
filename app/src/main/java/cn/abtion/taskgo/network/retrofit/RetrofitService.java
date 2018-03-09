@@ -41,7 +41,7 @@ public interface RetrofitService {
      * @return
      */
     @POST("user/login")
-    Call<ApiResponse> login(@Body LoginRequestModel loginRequest);
+    Observable<ApiResponse> login(@Body LoginRequestModel loginRequest);
 
 
     @POST("user/resetPassword")

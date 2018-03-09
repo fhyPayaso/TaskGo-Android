@@ -166,6 +166,13 @@ public class RegisterActivity extends BaseNoBarPresenterActivity {
 
     }
 
+    @OnClick(R.id.txt_servise)
+    public void onBtnTxtClicked()
+    {
+
+    }
+
+
     /**
      * 倒计时具体方法
      */

@@ -35,7 +35,7 @@ public class GsonResponseBodyConverter<T> implements Converter<ResponseBody,T>{
         //将外层的数据解析到ApiResponse中
         ApiResponse apiResponse = mGson.fromJson(response, ApiResponse.class);
         //服务端设定1000为正确的请求，故在此为判断标准
-        if (apiResponse.getCode() == 1000) {
+        if (apiResponse.getCode() == 1000 || apiResponse.getCode() == 6000) {
             //直接解析，正确请求不会导致json解析异常
             return mGson.fromJson(response, mType);
         } else {

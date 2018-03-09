@@ -48,4 +48,6 @@ public class BasePresenter<T extends BaseContract.View> implements BaseContract.
         mView = null;
 
     }
+
+
 }

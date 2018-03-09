@@ -10,22 +10,23 @@ package cn.abtion.taskgo.mvp.model.account;
 public class LoginRequestModel{
 
 
-    private String phone;
+    private String value;
     private String password;
     private String type;
 
 
     public LoginRequestModel(String phone, String password) {
-        this.phone = phone;
+        this.value = phone;
         this.password = password;
-        this.type = type;
+    type="mobile";
+//        this.type=type;
     }
 
     public String getPhone() {
-        return phone;
+        return value;
     }
     public void setPhone(String phone) {
-        this.phone = phone;
+        this.value = phone;
     }
 
     public String getPassword() {

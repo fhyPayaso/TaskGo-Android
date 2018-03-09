@@ -31,7 +31,7 @@ public abstract class BaseObserver<T> implements Observer<ApiResponse<T>> {
     @Override
     public void onNext(ApiResponse tApiResponse) {
 
-        if (tApiResponse.getCode() != 1000) {
+        if (tApiResponse.getCode() != 1000 && tApiResponse.getCode() != 6000) {
 
             GlobalAPIErrorHandler.handler(tApiResponse.getCode());
         } else {
