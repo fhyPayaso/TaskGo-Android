@@ -37,13 +37,6 @@ public interface MyTaskListContract {
          */
         void finishWaterTask(int taskId,int position);
 
-        /**
-         * 完成物品任务
-         * @param request
-         * @param position
-         */
-        void finishLostFoundTask(FinishLostFoundTaskRequest request, int position);
-
 
         /**
          * 查看物品任务详细信息
@@ -61,7 +54,7 @@ public interface MyTaskListContract {
         void onLoadSuccess(List<BaseTaskModel> taskModelList);
 
         /**
-         * 任务接受成功
+         * 任务完成成功
          * @param position
          */
         void onFinishSuccess(int position);

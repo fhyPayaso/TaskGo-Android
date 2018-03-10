@@ -7,6 +7,7 @@ import java.util.List;
 import cn.abtion.taskgo.mvp.model.task.request.AcceptLostFoundTaskRequest;
 
 import cn.abtion.taskgo.mvp.model.task.request.FinishLostFoundTaskRequest;
+import cn.abtion.taskgo.mvp.model.task.request.FinishUserListRequest;
 import cn.abtion.taskgo.mvp.model.task.request.ReleaseLostFoundTaskRequest;
 
 import cn.abtion.taskgo.mvp.model.account.LoginRequestModel;
@@ -14,6 +15,7 @@ import cn.abtion.taskgo.mvp.model.mine.ChangePasswordRequestModel;
 import cn.abtion.taskgo.mvp.model.task.request.ReleaseWaterTaskRequest;
 import cn.abtion.taskgo.mvp.model.task.response.BaseTaskResponse;
 import cn.abtion.taskgo.mvp.model.task.response.LostFoundTaskResponse;
+import cn.abtion.taskgo.mvp.model.task.response.UserInfoReponse;
 import cn.abtion.taskgo.mvp.model.task.response.WaterTaskResponse;
 import cn.abtion.taskgo.network.response.ApiResponse;
 import io.reactivex.Observable;
@@ -124,15 +126,6 @@ public interface RetrofitService {
 
 
     /**
-     * 完成物品任务
-     * @param request
-     * @return
-     */
-    @GET("thing/finish")
-    Observable<ApiResponse> finishLostFoundTask(@Body FinishLostFoundTaskRequest request);
-
-
-    /**
      * 物品任务详细信息
      * @param taskId
      * @return
@@ -156,5 +149,34 @@ public interface RetrofitService {
      */
     @POST("me/finishtask")
     Observable<ApiResponse<List<BaseTaskResponse>>> loadMyReleaseTask(@Query("task_status")int status);
+
+
+    /**
+     * 完成物品任务
+     * @param request
+     * @return
+     */
+    @GET("thing/finish")
+    Observable<ApiResponse> finishLostFoundTask(@Body FinishLostFoundTaskRequest request);
+
+
+    /**
+     * 加载完成用户列表
+     * @param request
+     * @return
+     */
+    @POST("thing/user")
+    Observable<ApiResponse<List<Integer>>> loadFinishUserList(@Body FinishUserListRequest request);
+
+
+    /**
+     * 查看其他用户简易信息
+     * @param userId
+     * @return
+     */
+    @GET("user/info/show/{user_id}")
+    Observable<ApiResponse<UserInfoReponse>> loadSimpleUserInfo(@Path("user_id")int userId);
+
+
 
 }

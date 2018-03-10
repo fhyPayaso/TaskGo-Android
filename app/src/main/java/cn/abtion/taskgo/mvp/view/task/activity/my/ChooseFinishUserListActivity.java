@@ -20,8 +20,12 @@ import cn.abtion.taskgo.base.adapter.RecyclerScrollListener;
 import cn.abtion.taskgo.base.contract.BaseContract;
 import cn.abtion.taskgo.base.presenter.BasePresenter;
 import cn.abtion.taskgo.common.Config;
+import cn.abtion.taskgo.mvp.contract.task.FinishUserListContract;
 import cn.abtion.taskgo.mvp.model.task.model.BaseTaskModel;
 import cn.abtion.taskgo.mvp.model.task.model.SimpleUserInfoModel;
+import cn.abtion.taskgo.mvp.model.task.request.FinishLostFoundTaskRequest;
+import cn.abtion.taskgo.mvp.model.task.request.FinishUserListRequest;
+import cn.abtion.taskgo.mvp.presenter.task.FinishUserListPresenter;
 import cn.abtion.taskgo.mvp.view.task.adapter.TaskItemListener;
 import cn.abtion.taskgo.mvp.view.task.adapter.rec.FinishUserListAdapter;
 import cn.abtion.taskgo.utils.ToastUtil;
@@ -31,8 +35,8 @@ import cn.abtion.taskgo.utils.ToastUtil;
  * @since 2018/3/10 on 下午4:23
  * fhyPayaso@qq.com
  */
-public class ChooseFinishUserListActivity extends BaseToolBarPresenterActivity implements SwipeRefreshLayout
-        .OnRefreshListener,TaskItemListener {
+public class ChooseFinishUserListActivity extends BaseToolBarPresenterActivity<FinishUserListContract.Prsenter> implements SwipeRefreshLayout
+        .OnRefreshListener, TaskItemListener, FinishUserListContract.View {
 
 
     @BindView(R.id.rec_finish_user_list)
@@ -44,9 +48,10 @@ public class ChooseFinishUserListActivity extends BaseToolBarPresenterActivity i
     private FinishUserListAdapter mAdapter;
     private List<SimpleUserInfoModel> mUserInfoList;
 
+
     @Override
-    public BaseContract.Presenter initPresenter() {
-        return new BasePresenter<>(this);
+    public FinishUserListContract.Prsenter initPresenter() {
+        return new FinishUserListPresenter(this);
     }
 
     @Override
@@ -58,7 +63,6 @@ public class ChooseFinishUserListActivity extends BaseToolBarPresenterActivity i
     protected void initVariable() {
 
         mUserInfoList = new ArrayList<>();
-        mUserInfoList.add(new SimpleUserInfoModel("http://p0y1qzu73.bkt.clouddn.com/17-12-18/59916075.jpg","fhy"));
     }
 
     @Override
@@ -102,7 +106,8 @@ public class ChooseFinishUserListActivity extends BaseToolBarPresenterActivity i
                 runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
-                        mSwipeRefresh.setRefreshing(false);
+                        mPresenter.loadFinishUserList(new FinishUserListRequest(
+                                String.valueOf(mLostFoundTaskModel.getTaskId()), String.valueOf(mLostFoundTaskModel.getTaskType())));
                     }
                 });
             }
@@ -112,11 +117,11 @@ public class ChooseFinishUserListActivity extends BaseToolBarPresenterActivity i
 
     private void initRecyclerView() {
 
-        mAdapter = new FinishUserListAdapter(ChooseFinishUserListActivity.this,mUserInfoList);
+        mAdapter = new FinishUserListAdapter(ChooseFinishUserListActivity.this, mUserInfoList);
         mAdapter.setTaskItemListener(this);
         recFinishUserList.setAdapter(mAdapter);
         recFinishUserList.setLayoutManager(new LinearLayoutManager(ChooseFinishUserListActivity.this,
-                LinearLayoutManager.VERTICAL,false));
+                LinearLayoutManager.VERTICAL, false));
         recFinishUserList.addOnScrollListener(new RecyclerScrollListener() {
             @Override
             public void scrolledToLast() {
@@ -134,20 +139,57 @@ public class ChooseFinishUserListActivity extends BaseToolBarPresenterActivity i
                 runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
-                        mSwipeRefresh.setRefreshing(false);
+                        mPresenter.loadFinishUserList(new FinishUserListRequest(
+                                String.valueOf(mLostFoundTaskModel.getTaskId()), String.valueOf(mLostFoundTaskModel.getTaskType())));
                     }
                 });
             }
         }, Config.REFRESH_TIME);
     }
 
+
+    /**
+     * 点击头衔点击事件
+     * @param position item位置
+     */
     @Override
     public void onClickAvatar(int position) {
-
+        ToastUtil.showToast("点击了头像" + position);
     }
 
+    /**
+     * 点击完成按钮点击事件
+     * @param position item位置
+     */
     @Override
     public void onClickAccept(int position) {
 
+        mPresenter.finishLostFoundTask(new FinishLostFoundTaskRequest(mUserInfoList.get(position).getUserId()
+                , String.valueOf(mLostFoundTaskModel.getTaskId())
+                , String.valueOf(mLostFoundTaskModel.getTaskType())), position);
+    }
+
+
+    /**
+     * 用户列表加载成功回调
+     * @param modelList
+     */
+    @Override
+    public void onLoadUserListSuccess(List<SimpleUserInfoModel> modelList) {
+        mUserInfoList.clear();
+        mUserInfoList.addAll(modelList);
+        mAdapter.notifyDataSetChanged();
+        mSwipeRefresh.setRefreshing(false);
+    }
+
+
+    /**
+     * 完成任务成功回调
+     * @param position
+     */
+    @Override
+    public void onFinishSuccess(int position) {
+        mAdapter.removeItem(position);
+        mAdapter.notifyDataSetChanged();
     }
 }

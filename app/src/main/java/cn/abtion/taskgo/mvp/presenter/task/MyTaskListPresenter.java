@@ -114,29 +114,6 @@ public class MyTaskListPresenter extends BasePresenter<MyTaskListContract.View> 
 
 
     /**
-     * 完成物品任务
-     * @param request
-     * @param position
-     */
-    @Override
-    @SuppressWarnings("unchecked")
-    public void finishLostFoundTask(FinishLostFoundTaskRequest request, final int position) {
-
-        RetrofitFactory
-                .getRetrofitService()
-                .finishLostFoundTask(request)
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new BaseObserver() {
-                    @Override
-                    public void onDataSuccess(ApiResponse response) {
-                        mView.onFinishSuccess(position);
-                    }
-                });
-    }
-
-
-    /**
      * 对返回成功的数据进行处理
      * @param responseList
      */

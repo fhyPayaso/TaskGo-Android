@@ -10,13 +10,13 @@ public class SimpleUserInfoModel {
 
     private String avatarUrl;
     private String username;
-    private String taskId;
+    private String userId;
 
-    public SimpleUserInfoModel(String avatarUrl, String username) {
+    public SimpleUserInfoModel(String avatarUrl, String username, String userId) {
         this.avatarUrl = avatarUrl;
         this.username = username;
+        this.userId = userId;
     }
-
 
     public String getAvatarUrl() {
         return avatarUrl;
@@ -34,11 +34,12 @@ public class SimpleUserInfoModel {
         this.username = username;
     }
 
-    public String getTaskId() {
-        return taskId;
+    public String getUserId() {
+        return userId;
     }
 
-    public void setTaskId(String taskId) {
-        this.taskId = taskId;
+    public void setUserId(String userId) {
+        this.userId = userId;
     }
+
 }
