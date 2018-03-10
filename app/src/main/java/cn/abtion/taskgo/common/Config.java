@@ -22,6 +22,18 @@ public class Config {
     /**
      * SwipeRefreshLayout下拉刷新时间
      */
-    public final static int REFRESH_TIME = 2000;
+    public final static int REFRESH_TIME = 1000;
+
+    /**
+     * 空字段
+     */
+    public static final String EMPTY_FIELD="";
+
+    /**
+     * 对密码的位数进行设置
+     */
+    public static final int PASSWORD_MIN = 6;
+    public static final int PASSWORD_MAX =20;
+
 
 }

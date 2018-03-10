@@ -2,23 +2,18 @@ package cn.abtion.taskgo.mvp.view.account;
 
 import android.content.Context;
 import android.content.Intent;
-import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
-import android.widget.TextView;
 
 import butterknife.BindView;
-import butterknife.ButterKnife;
 import butterknife.OnClick;
 import cn.abtion.taskgo.R;
-import cn.abtion.taskgo.base.activity.BaseNoBarActivity;
 import cn.abtion.taskgo.base.activity.BaseNoBarPresenterActivity;
-import cn.abtion.taskgo.mvp.contract.LoginContract;
-import cn.abtion.taskgo.mvp.contract.UpdatePasswordContract;
+import cn.abtion.taskgo.mvp.contract.account.UpdatePasswordContract;
 import cn.abtion.taskgo.utils.ToastUtil;
 import cn.abtion.taskgo.widget.VerificationCountDownTimer;
 

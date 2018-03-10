@@ -10,7 +10,10 @@ import java.util.regex.Pattern;
 public class RegexpUtils {
 
 
-
+    /**
+     * 验证全部为数字
+     */
+    public static final String NUMBER_REGEX = "^[0-9]*$";
 
     /**
      * 手机号正则
@@ -59,6 +62,14 @@ public class RegexpUtils {
     public static final String POSTAL_CODE_REGEX = "\\d{6}";
 
 
+    /**
+     * 验证全部为数字正则
+     * @param number
+     * @return
+     */
+    public static boolean checkAllNumber(String number) {
+        return Pattern.matches(NUMBER_REGEX,number);
+    }
 
     /**
      * 验证手机号正则

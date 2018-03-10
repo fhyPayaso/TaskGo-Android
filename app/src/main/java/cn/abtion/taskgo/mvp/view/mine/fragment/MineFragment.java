@@ -1,13 +1,9 @@
 package cn.abtion.taskgo.mvp.view.mine.fragment;
 
-import android.os.Bundle;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.RelativeLayout;
 
 import butterknife.BindView;
-import butterknife.ButterKnife;
 import butterknife.OnClick;
 import butterknife.Unbinder;
 import cn.abtion.taskgo.R;
@@ -15,10 +11,10 @@ import cn.abtion.taskgo.base.contract.BaseContract;
 import cn.abtion.taskgo.base.frgment.BasePresenterFragment;
 import cn.abtion.taskgo.mvp.view.mine.activity.EditDataActivity;
 import cn.abtion.taskgo.mvp.view.mine.activity.FeedbackActivity;
-import cn.abtion.taskgo.mvp.view.mine.activity.MyAcceptTaskActivity;
+import cn.abtion.taskgo.mvp.view.task.activity.my.MyAcceptTaskActivity;
 import cn.abtion.taskgo.mvp.view.mine.activity.MyFansActivity;
 import cn.abtion.taskgo.mvp.view.mine.activity.MyFollowActivity;
-import cn.abtion.taskgo.mvp.view.mine.activity.MyReleasedTaskActivity;
+import cn.abtion.taskgo.mvp.view.task.activity.my.MyReleasedTaskActivity;
 import cn.abtion.taskgo.mvp.view.mine.activity.RealNameActivity;
 import cn.abtion.taskgo.mvp.view.mine.activity.SettingActivity;
 
@@ -82,7 +78,7 @@ public class MineFragment extends BasePresenterFragment {
                 MyAcceptTaskActivity.startActivity(getContext());
                 break;
             case R.id.rlayout_mine_real_name:
-                RealNameActivity.stratRealNameActivity(getContext());
+                RealNameActivity.startRealNameActivity(getContext());
                 break;
             case R.id.rlayout_mine_feedback:
                 FeedbackActivity.startFeedbackActivity(getContext());

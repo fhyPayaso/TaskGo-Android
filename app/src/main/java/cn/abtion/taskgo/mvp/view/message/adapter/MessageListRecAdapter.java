@@ -11,7 +11,7 @@ import java.util.List;
 import butterknife.BindView;
 import cn.abtion.taskgo.R;
 import cn.abtion.taskgo.base.adapter.BaseRecyclerViewAdapter;
-import cn.abtion.taskgo.mvp.model.request.MessageModel;
+import cn.abtion.taskgo.mvp.model.MessageModel;
 import de.hdodenhof.circleimageview.CircleImageView;
 
 /**

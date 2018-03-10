@@ -111,43 +111,44 @@
             android:text="@string/txt_water_task_type_self" />
 
 
-        <ImageView
-            android:id="@+id/img_task_information"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignLeft="@id/img_address_build"
-            android:layout_below="@id/img_water_task_type"
-            android:layout_marginLeft="5dp"
-            android:layout_marginTop="25dp"
-            android:src="@drawable/ic_task_information" />
+        <!--水任务的备注信息暂时取消-->
+        <!--<ImageView-->
+            <!--android:id="@+id/img_task_information"-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:layout_alignLeft="@id/img_address_build"-->
+            <!--android:layout_below="@id/img_water_task_type"-->
+            <!--android:layout_marginLeft="5dp"-->
+            <!--android:layout_marginTop="25dp"-->
+            <!--android:src="@drawable/ic_task_information" />-->
 
-        <TextView
-            android:id="@+id/txt_remark_information"
-            style="@style/txt_fix_task_information"
-            android:layout_alignBottom="@id/img_task_information"
-            android:layout_alignLeft="@id/txt_fix_address_build"
-            android:text="@string/txt_task_information" />
+        <!--<TextView-->
+            <!--android:id="@+id/txt_remark_information"-->
+            <!--style="@style/txt_fix_task_information"-->
+            <!--android:layout_alignBottom="@id/img_task_information"-->
+            <!--android:layout_alignLeft="@id/txt_fix_address_build"-->
+            <!--android:text="@string/txt_task_information" />-->
 
-        <LinearLayout
-            android:id="@+id/ly_edit_box"
-            android:layout_width="match_parent"
-            android:layout_height="150dp"
-            android:layout_below="@id/img_task_information"
-            android:layout_marginLeft="20dp"
-            android:layout_marginRight="20dp"
-            android:layout_marginTop="25dp"
-            android:background="@drawable/bg_edit_information"
-            android:padding="10dp">
+        <!--<LinearLayout-->
+            <!--android:id="@+id/ly_edit_box"-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="150dp"-->
+            <!--android:layout_below="@id/img_task_information"-->
+            <!--android:layout_marginLeft="20dp"-->
+            <!--android:layout_marginRight="20dp"-->
+            <!--android:layout_marginTop="25dp"-->
+            <!--android:background="@drawable/bg_edit_information"-->
+            <!--android:padding="10dp">-->
 
 
-            <EditText
-                android:id="@+id/edit_task_information"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:background="@null"
-                android:hint="@string/hint_please_add_task_information"
-                android:textSize="14sp" />
-        </LinearLayout>
+            <!--<EditText-->
+                <!--android:id="@+id/edit_task_information"-->
+                <!--android:layout_width="match_parent"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:background="@null"-->
+                <!--android:hint="@string/hint_please_add_task_information"-->
+                <!--android:textSize="14sp" />-->
+        <!--</LinearLayout>-->
 
 
         <LinearLayout
@@ -187,8 +188,6 @@
                 android:text="@string/btn_release_task"
                 android:textColor="@color/white"
                 android:textSize="14sp" />
-
-
         </LinearLayout>
     </RelativeLayout>
 </RelativeLayout>
