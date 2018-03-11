@@ -37,14 +37,14 @@ public class FinishUserListAdapter extends BaseRecyclerViewAdapter<SimpleUserInf
     @Override
     public BaseViewHolder<SimpleUserInfoModel> onCreateViewHolder(ViewGroup parent, int viewType) {
         View view = mInflater.inflate(R.layout.item_finish_user_info, parent, false);
-        return new ItemHoder(view);
+        return new ItemHolder(view);
     }
 
     public void setTaskItemListener(TaskItemListener listener) {
         mTaskItemListener = listener;
     }
 
-    class ItemHoder extends BaseViewHolder<SimpleUserInfoModel> implements View.OnClickListener {
+    class ItemHolder extends BaseViewHolder<SimpleUserInfoModel> implements View.OnClickListener {
 
         @BindView(R.id.img_avatar)
         CircleImageView imgAvatar;
@@ -53,7 +53,7 @@ public class FinishUserListAdapter extends BaseRecyclerViewAdapter<SimpleUserInf
         @BindView(R.id.btn_task)
         TextView btnTask;
 
-        public ItemHoder(View itemView) {
+        public ItemHolder(View itemView) {
             super(itemView);
             imgAvatar.setOnClickListener(this);
             btnTask.setOnClickListener(this);

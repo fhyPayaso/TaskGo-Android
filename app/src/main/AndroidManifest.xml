@@ -59,20 +59,8 @@
         </receiver>
 
 
-        <activity android:name=".mvp.view.MainActivity">
-
-
-        </activity>
-
-        <activity android:name=".mvp.view.account.LoginActivity">
-
-            <intent-filter>
-            <action android:name="android.intent.action.MAIN"/>
-
-            <category android:name="android.intent.category.LAUNCHER"/>
-            </intent-filter>
-        </activity>
-
+        <activity android:name=".mvp.view.MainActivity"/>
+        <activity android:name=".mvp.view.account.LoginActivity"/>
         <activity android:name=".mvp.view.account.RegisterActivity"/>
         <activity android:name=".mvp.view.account.UpdatePasswordActivity"/>
         <activity android:name=".mvp.view.task.activity.home.WaterTaskListActivity"/>
@@ -98,8 +86,12 @@
         <activity android:name=".mvp.view.task.activity.my.ChooseFinishUserListActivity"/>
 
         <activity android:name=".mvp.view.initiate.GuideActivity"/>
-        <activity android:name=".mvp.view.initiate.SplashActivity"/>
-
+        <activity android:name=".mvp.view.initiate.SplashActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN"/>
+                <category android:name="android.intent.category.LAUNCHER"/>
+            </intent-filter>
+        </activity>
     </application>
 
 </manifest>

@@ -66,8 +66,19 @@ public class WaterTaskListPresenter extends BasePresenter<WaterTaskListContract.
     }
 
     @Override
+    @SuppressWarnings("unchecked")
     public void acceptAllWaterTask() {
-
+        RetrofitFactory
+                .getRetrofitService()
+                .acceptAllWaterTask()
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new BaseObserver() {
+                    @Override
+                    public void onDataSuccess(ApiResponse response) {
+                        mView.onAcceptAllSuccess();
+                    }
+                });
     }
 
 

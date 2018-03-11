@@ -6,7 +6,6 @@ import cn.abtion.taskgo.base.contract.BaseContract;
 import cn.abtion.taskgo.mvp.model.task.model.SimpleUserInfoModel;
 import cn.abtion.taskgo.mvp.model.task.request.FinishLostFoundTaskRequest;
 import cn.abtion.taskgo.mvp.model.task.request.FinishUserListRequest;
-import cn.abtion.taskgo.mvp.model.task.response.UserInfoReponse;
 
 /**
  * @author FanHongyu.
@@ -17,7 +16,7 @@ import cn.abtion.taskgo.mvp.model.task.response.UserInfoReponse;
 public interface FinishUserListContract {
 
 
-    interface Prsenter extends BaseContract.Presenter {
+    interface Presenter extends BaseContract.Presenter {
 
         /**
          * 加载待选完成者列表
@@ -34,7 +33,7 @@ public interface FinishUserListContract {
     }
 
 
-    interface View extends BaseContract.View<Prsenter> {
+    interface View extends BaseContract.View<Presenter> {
 
 
         void onLoadUserListSuccess(List<SimpleUserInfoModel> modelList);

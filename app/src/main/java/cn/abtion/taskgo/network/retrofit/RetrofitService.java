@@ -15,7 +15,7 @@ import cn.abtion.taskgo.mvp.model.mine.ChangePasswordRequestModel;
 import cn.abtion.taskgo.mvp.model.task.request.ReleaseWaterTaskRequest;
 import cn.abtion.taskgo.mvp.model.task.response.BaseTaskResponse;
 import cn.abtion.taskgo.mvp.model.task.response.LostFoundTaskResponse;
-import cn.abtion.taskgo.mvp.model.task.response.UserInfoReponse;
+import cn.abtion.taskgo.mvp.model.task.response.SimpleUserInfoResponse;
 import cn.abtion.taskgo.mvp.model.task.response.WaterTaskResponse;
 import cn.abtion.taskgo.network.response.ApiResponse;
 import io.reactivex.Observable;
@@ -35,10 +35,9 @@ import retrofit2.http.Query;
 public interface RetrofitService {
 
 
-
-
     /**
      * 登录接口
+     *
      * @param loginRequest
      * @return
      */
@@ -71,13 +70,26 @@ public interface RetrofitService {
 
     /**
      * 加载水任务列表
+     *
      * @return
      */
     @GET("water/show")
     Observable<ApiResponse<List<WaterTaskResponse>>> loadWaterTaskList();
 
+
+    /**
+     * 检查token是否过期
+     *
+     * @param token
+     * @return
+     */
+    @GET("user/checkToken/{token}")
+    Observable<ApiResponse> checkToke(@Path("token") String token);
+
+
     /**
      * 发布水任务
+     *
      * @param request
      * @return
      */
@@ -86,14 +98,25 @@ public interface RetrofitService {
 
     /**
      * 接受水任务
+     *
      * @param taskId
      * @return
      */
     @GET("water/accept/{taskId}")
     Observable<ApiResponse> acceptWaterTask(@Path("taskId") int taskId);
 
+
+    /**
+     * 接受全部水任务
+     *
+     * @return
+     */
+    @GET("water/all/accept")
+    Observable<ApiResponse> acceptAllWaterTask();
+
     /**
      * 完成水任务
+     *
      * @param taskId
      * @return
      */
@@ -103,6 +126,7 @@ public interface RetrofitService {
 
     /**
      * 加载物品任务列表
+     *
      * @return
      */
     @GET("thing/list")
@@ -110,6 +134,7 @@ public interface RetrofitService {
 
     /**
      * 添加物品任务
+     *
      * @param request
      * @return
      */
@@ -118,6 +143,7 @@ public interface RetrofitService {
 
     /**
      * 接受物品任务
+     *
      * @param request
      * @return
      */
@@ -127,6 +153,7 @@ public interface RetrofitService {
 
     /**
      * 物品任务详细信息
+     *
      * @param taskId
      * @return
      */
@@ -135,48 +162,41 @@ public interface RetrofitService {
 
     /**
      * 加载我接受的任务列表
+     *
      * @param status
      * @return
      */
     @POST("me/accepttask")
-    Observable<ApiResponse<List<BaseTaskResponse>>> loadMyAcceptTask(@Query("task_status")int status);
+    Observable<ApiResponse<List<BaseTaskResponse>>> loadMyAcceptTask(@Query("task_status") int status);
 
 
     /**
      * 加载我发布的任务列表
+     *
      * @param status
      * @return
      */
     @POST("me/finishtask")
-    Observable<ApiResponse<List<BaseTaskResponse>>> loadMyReleaseTask(@Query("task_status")int status);
+    Observable<ApiResponse<List<BaseTaskResponse>>> loadMyReleaseTask(@Query("task_status") int status);
 
 
     /**
      * 完成物品任务
+     *
      * @param request
      * @return
      */
-    @GET("thing/finish")
+    @POST("thing/finish")
     Observable<ApiResponse> finishLostFoundTask(@Body FinishLostFoundTaskRequest request);
 
 
     /**
      * 加载完成用户列表
+     *
      * @param request
      * @return
      */
     @POST("thing/user")
-    Observable<ApiResponse<List<Integer>>> loadFinishUserList(@Body FinishUserListRequest request);
-
-
-    /**
-     * 查看其他用户简易信息
-     * @param userId
-     * @return
-     */
-    @GET("user/info/show/{user_id}")
-    Observable<ApiResponse<UserInfoReponse>> loadSimpleUserInfo(@Path("user_id")int userId);
-
-
+    Observable<ApiResponse<List<SimpleUserInfoResponse>>> loadFinishUserList(@Body FinishUserListRequest request);
 
 }

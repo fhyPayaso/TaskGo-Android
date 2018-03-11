@@ -6,7 +6,13 @@ import android.os.Handler;
 import android.support.annotation.Nullable;
 
 import cn.abtion.taskgo.R;
+import cn.abtion.taskgo.TaskGoApplication;
 import cn.abtion.taskgo.base.activity.BaseNoBarActivity;
+import cn.abtion.taskgo.base.activity.BaseNoBarPresenterActivity;
+import cn.abtion.taskgo.common.constants.CacheKey;
+import cn.abtion.taskgo.mvp.contract.account.SplashContract;
+import cn.abtion.taskgo.mvp.presenter.account.SplashPresenter;
+import cn.abtion.taskgo.mvp.view.MainActivity;
 import cn.abtion.taskgo.mvp.view.account.LoginActivity;
 
 /**
@@ -17,28 +23,77 @@ import cn.abtion.taskgo.mvp.view.account.LoginActivity;
  * email fanhongyu@hrsoft.net.
  */
 
-public class SplashActivity extends Activity {
+public class SplashActivity extends BaseNoBarPresenterActivity<SplashContract.Presenter> implements SplashContract.View {
+
 
     @Override
-    protected void onCreate(@Nullable Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
+    protected int getLayoutId() {
+        return R.layout.activity_splash;
+    }
 
-        boolean isFirstOpen = false;
+    @Override
+    protected void initVariable() {
 
-        // TODO: 18/3/5 判断是否第一次登录
+    }
 
-        if (isFirstOpen) {
-            GuideActivity.startActivity(this);
-            finish();
-        }
+    @Override
+    protected void initView() {
 
-        setContentView(R.layout.activity_splash);
         new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {
-                LoginActivity.startActivity(SplashActivity.this);
-                finish();
+                checkToken();
             }
         }, 1000);
+    }
+
+    @Override
+    protected void loadData() {
+
+    }
+
+    @Override
+    protected SplashContract.Presenter initPresenter() {
+        return new SplashPresenter(this);
+    }
+
+
+    /**
+     * 检查token
+     */
+    private void checkToken() {
+
+        String token = TaskGoApplication.getInstance().getCacheUtil().getString(CacheKey.TOKEN);
+
+        //判断是否第一次登录
+        boolean isFirstOpen = token==null;
+
+        if (isFirstOpen) {
+            //第一次登录直接进入引导页
+            GuideActivity.startActivity(this);
+            finish();
+        } else {
+            //不是第一次登录检查token是否过期
+            mPresenter.checkToken(token);
+        }
+    }
+
+
+    /**
+     * token有效直接进入主活动
+     */
+    @Override
+    public void effectiveToken() {
+        MainActivity.startActivity(SplashActivity.this);
+        finish();
+    }
+
+    /**
+     * token过期进入登录界面
+     */
+    @Override
+    public void invalidToken() {
+        LoginActivity.startActivity(SplashActivity.this);
+        finish();
     }
 }

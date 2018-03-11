@@ -166,8 +166,7 @@ public class WaterTaskListActivity extends BaseToolBarPresenterActivity<WaterTas
 
                             ToastUtil.showToast(R.string.toast_no_task_to_accept);
                         } else {
-                            mAdapter.clearAllItems();
-                            ToastUtil.showToast(R.string.toast_accept_all_successful);
+                            mPresenter.acceptAllWaterTask();
                         }
                         dialog.dismiss();
                     }
@@ -261,6 +260,7 @@ public class WaterTaskListActivity extends BaseToolBarPresenterActivity<WaterTas
     public void onAcceptSuccess(int position) {
 
         mAdapter.removeItem(position);
+        mWaterTaskList.clear();
         txtTotalNumber.setText(String.valueOf(mWaterTaskList.size()));
         ToastUtil.showToast("接受任务成功");
     }
@@ -268,6 +268,8 @@ public class WaterTaskListActivity extends BaseToolBarPresenterActivity<WaterTas
     @Override
     public void onAcceptAllSuccess() {
 
+        mAdapter.clearAllItems();
+        ToastUtil.showToast(R.string.toast_accept_all_successful);
     }
 
     public static void startActivity(Context context) {
@@ -283,7 +285,6 @@ public class WaterTaskListActivity extends BaseToolBarPresenterActivity<WaterTas
 
     @OnClick(R.id.btn_releasze_task)
     public void onViewClicked() {
-
         ReleaseWaterTaskActivity.startActivity(WaterTaskListActivity.this);
     }
 }

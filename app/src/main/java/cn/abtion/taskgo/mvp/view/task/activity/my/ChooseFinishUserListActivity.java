@@ -17,8 +17,6 @@ import butterknife.ButterKnife;
 import cn.abtion.taskgo.R;
 import cn.abtion.taskgo.base.activity.BaseToolBarPresenterActivity;
 import cn.abtion.taskgo.base.adapter.RecyclerScrollListener;
-import cn.abtion.taskgo.base.contract.BaseContract;
-import cn.abtion.taskgo.base.presenter.BasePresenter;
 import cn.abtion.taskgo.common.Config;
 import cn.abtion.taskgo.mvp.contract.task.FinishUserListContract;
 import cn.abtion.taskgo.mvp.model.task.model.BaseTaskModel;
@@ -35,7 +33,7 @@ import cn.abtion.taskgo.utils.ToastUtil;
  * @since 2018/3/10 on 下午4:23
  * fhyPayaso@qq.com
  */
-public class ChooseFinishUserListActivity extends BaseToolBarPresenterActivity<FinishUserListContract.Prsenter> implements SwipeRefreshLayout
+public class ChooseFinishUserListActivity extends BaseToolBarPresenterActivity<FinishUserListContract.Presenter> implements SwipeRefreshLayout
         .OnRefreshListener, TaskItemListener, FinishUserListContract.View {
 
 
@@ -50,7 +48,7 @@ public class ChooseFinishUserListActivity extends BaseToolBarPresenterActivity<F
 
 
     @Override
-    public FinishUserListContract.Prsenter initPresenter() {
+    public FinishUserListContract.Presenter initPresenter() {
         return new FinishUserListPresenter(this);
     }
 
@@ -164,6 +162,7 @@ public class ChooseFinishUserListActivity extends BaseToolBarPresenterActivity<F
     @Override
     public void onClickAccept(int position) {
 
+
         mPresenter.finishLostFoundTask(new FinishLostFoundTaskRequest(mUserInfoList.get(position).getUserId()
                 , String.valueOf(mLostFoundTaskModel.getTaskId())
                 , String.valueOf(mLostFoundTaskModel.getTaskType())), position);
@@ -191,5 +190,6 @@ public class ChooseFinishUserListActivity extends BaseToolBarPresenterActivity<F
     public void onFinishSuccess(int position) {
         mAdapter.removeItem(position);
         mAdapter.notifyDataSetChanged();
+        ToastUtil.showToast("任务完成成功");
     }
 }

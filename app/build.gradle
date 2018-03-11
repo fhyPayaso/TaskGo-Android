@@ -78,6 +78,7 @@ dependencies {
     compile 'com.qiniu:qiniu-android-sdk:7.3.10'
     compile 'com.qiniu:happy-dns:0.2.13'
     compile 'com.loopj.android:android-async-http:1.4.9'
+    compile 'com.qiniu:qiniu-java-sdk:7.2.0'
 
     //环信聊天sdk
     compile 'com.google.android.gms:play-services-gcm:11.8.0'

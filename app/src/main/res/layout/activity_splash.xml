@@ -6,10 +6,9 @@
               android:gravity="center">
 
     <ImageView
-        android:layout_width="100dp"
+        android:layout_width="150dp"
         android:layout_height="100dp"
         android:layout_gravity="bottom"
-        android:layout_marginBottom="20dp"
-        android:src="@drawable/splash_page"/>
+        android:src="@drawable/ic_splash"/>
 
 </LinearLayout>
