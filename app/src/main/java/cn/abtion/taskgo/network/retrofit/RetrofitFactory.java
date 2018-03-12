@@ -116,6 +116,7 @@ public final class RetrofitFactory {
 
                 //获取本地缓存的token
                 String token = TaskGoApplication.getInstance().getCacheUtil().getString(CacheKey.TOKEN);
+                Log.i(TAG, "intercept: "+token);
 
                 /**
                  * 防止空指针

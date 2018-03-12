@@ -11,7 +11,7 @@ import butterknife.ButterKnife;
 import butterknife.OnClick;
 import cn.abtion.taskgo.R;
 import cn.abtion.taskgo.base.activity.BaseNoBarActivity;
-import cn.abtion.taskgo.mvp.view.home.fragment.HomeFragment;
+import cn.abtion.taskgo.mvp.view.task.fragment.HomeFragment;
 import cn.abtion.taskgo.mvp.view.message.fragment.MessageFragment;
 import cn.abtion.taskgo.mvp.view.mine.fragment.MineFragment;
 import cn.abtion.taskgo.utils.FragmentUtil;

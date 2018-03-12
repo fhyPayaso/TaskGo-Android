@@ -65,6 +65,9 @@ public class LoginActivity extends BaseNoBarPresenterActivity<LoginContract.Pres
         MainActivity.startActivity(LoginActivity.this);
 
         CacheUtil.putString(CacheKey.TOKEN, token);
+
+        Log.i("token", "onLoginSuccess: "+token);
+
         ToastUtil.showToast(token);
 
 
@@ -117,7 +120,8 @@ public class LoginActivity extends BaseNoBarPresenterActivity<LoginContract.Pres
 
 
         emChatTest();
-        mPresenter.requestLogin(new LoginRequestModel(meditPhoneNumber.getText().toString().trim(),meditPassword.getText().toString().trim()));
+        MainActivity.startActivity(LoginActivity.this);
+        //mPresenter.requestLogin(new LoginRequestModel(meditPhoneNumber.getText().toString().trim(),meditPassword.getText().toString().trim()));
     }
 
     /**

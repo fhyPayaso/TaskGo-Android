@@ -6,6 +6,7 @@ import cn.abtion.taskgo.base.presenter.BasePresenter;
 import cn.abtion.taskgo.common.Config;
 import cn.abtion.taskgo.mvp.contract.account.LoginContract;
 import cn.abtion.taskgo.mvp.model.account.LoginRequestModel;
+import cn.abtion.taskgo.mvp.model.account.TokenResponse;
 import cn.abtion.taskgo.network.BaseObserver;
 import cn.abtion.taskgo.network.response.ApiResponse;
 import cn.abtion.taskgo.network.retrofit.RetrofitFactory;
@@ -37,6 +38,8 @@ public class LoginPresenter extends BasePresenter<LoginContract.View> implements
 
 
     @Override
+    @SuppressWarnings("unchecked")
+
     public void requestLogin(LoginRequestModel loginRequestModel) {
 
         if (isDataTrue(loginRequestModel)) {
@@ -47,10 +50,10 @@ public class LoginPresenter extends BasePresenter<LoginContract.View> implements
                     .login(loginRequestModel)
                     .subscribeOn(Schedulers.io())
                     .observeOn(AndroidSchedulers.mainThread())
-                    .subscribe(new BaseObserver() {
+                    .subscribe(new BaseObserver<TokenResponse>() {
                         @Override
-                        public void onDataSuccess(ApiResponse response) {
-                            mView.onLoginSuccess(response.getData().toString());
+                        public void onDataSuccess(ApiResponse<TokenResponse> response) {
+                            mView.onLoginSuccess(response.getData().getToken().toString());
                         }
                     });
         }

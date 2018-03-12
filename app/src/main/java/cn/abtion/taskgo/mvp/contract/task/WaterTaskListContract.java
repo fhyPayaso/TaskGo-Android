@@ -3,7 +3,8 @@ package cn.abtion.taskgo.mvp.contract.task;
 import java.util.List;
 
 import cn.abtion.taskgo.base.contract.BaseContract;
-import cn.abtion.taskgo.mvp.model.task.WaterTaskResponse;
+import cn.abtion.taskgo.mvp.model.task.model.BaseTaskModel;
+import cn.abtion.taskgo.mvp.model.task.response.WaterTaskResponse;
 
 /**
  * @author FanHongyu.
@@ -41,7 +42,7 @@ public interface WaterTaskListContract {
         /**
          * 列表加载成功
          */
-        void onLoadDataSuccess(List<WaterTaskResponse> waterTaskList);
+        void onLoadDataSuccess(List<BaseTaskModel> modelList);
 
         /**
          * 接受单个任务成功
