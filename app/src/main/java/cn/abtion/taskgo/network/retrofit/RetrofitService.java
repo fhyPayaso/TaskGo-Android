@@ -3,19 +3,20 @@ package cn.abtion.taskgo.network.retrofit;
 
 import java.util.List;
 
-import butterknife.BindView;
 import cn.abtion.taskgo.mvp.model.account.ForgotPasswordModel;
-
+import cn.abtion.taskgo.mvp.model.account.LoginRequestModel;
+import cn.abtion.taskgo.mvp.model.account.RegisterRequestModel;
 import cn.abtion.taskgo.mvp.model.account.TokenResponse;
+import cn.abtion.taskgo.mvp.model.mine.ChangePasswordRequestModel;
+import cn.abtion.taskgo.mvp.model.mine.MineInformationModel;
+import cn.abtion.taskgo.mvp.model.mine.MyFansListModel;
+import cn.abtion.taskgo.mvp.model.mine.MyFollowModel;
+import cn.abtion.taskgo.mvp.model.mine.PersonalPageModel;
+import cn.abtion.taskgo.mvp.model.mine.UpdateInformationModel;
 import cn.abtion.taskgo.mvp.model.task.request.AcceptLostFoundTaskRequest;
-
 import cn.abtion.taskgo.mvp.model.task.request.FinishLostFoundTaskRequest;
 import cn.abtion.taskgo.mvp.model.task.request.FinishUserListRequest;
 import cn.abtion.taskgo.mvp.model.task.request.ReleaseLostFoundTaskRequest;
-
-import cn.abtion.taskgo.mvp.model.account.LoginRequestModel;
-import cn.abtion.taskgo.mvp.model.account.RegisterRequestModel;
-import cn.abtion.taskgo.mvp.model.mine.ChangePasswordRequestModel;
 import cn.abtion.taskgo.mvp.model.task.request.ReleaseWaterTaskRequest;
 import cn.abtion.taskgo.mvp.model.task.response.BaseTaskResponse;
 import cn.abtion.taskgo.mvp.model.task.response.LostFoundTaskResponse;
@@ -27,8 +28,6 @@ import retrofit2.Call;
 import retrofit2.http.Body;
 import retrofit2.http.GET;
 import retrofit2.http.POST;
-import retrofit2.http.Part;
-import retrofit2.http.Path;
 import retrofit2.http.Path;
 import retrofit2.http.Query;
 
@@ -77,6 +76,7 @@ public interface RetrofitService {
     @POST("user/register")
     Observable<ApiResponse> register(@Body RegisterRequestModel registerRequestModel);
 
+
     /**
      * 忘记密码接口
      *
@@ -86,6 +86,59 @@ public interface RetrofitService {
     @POST("user/forgotPassword")
     Observable<ApiResponse> forgetPassWord(@Body ForgotPasswordModel forgotPasswordModel);
 
+
+    /**
+     * 个人主页面信息
+     * @return
+     */
+    @GET("user/info/show")
+    Call<ApiResponse<MineInformationModel>> mineInformation();
+
+    /**
+     * 关注某人
+     * @param followerId
+     * @return
+     */
+    @GET("user/follow/{follower_id}")
+    Call<ApiResponse<MineInformationModel>> followSB(@Path("follower_id") String followerId);
+
+    /**
+     * 取消关注
+     * @param unFollowId
+     * @return
+     */
+    @GET("user/unFollow/{follower_id}")
+    Call<ApiResponse<MineInformationModel>> cancelFollow(@Path("follower_id") String unFollowId);
+
+    /**
+     * 获取关注列表
+     * @return
+     */
+    @GET("user/getFollowers")
+    Call<ApiResponse<List<MyFollowModel>>> followList();
+
+    /**
+     * 获取粉丝列表
+     * @return
+     */
+    @GET("user/getFollowings")
+    Call<ApiResponse<List<MyFansListModel>>> fansList();
+
+    /**
+     * 更新个人信息
+     * @param UpdateInformationModel
+     * @return
+     */
+    @POST("user/info/update")
+    Call<ApiResponse> updateInformation(@Body UpdateInformationModel UpdateInformationModel);
+
+    /**
+     * 获得个人主页信息
+     * @param userId
+     * @return
+     */
+    @GET("user/info/show/{user_id}")
+    Call<ApiResponse<PersonalPageModel>> getPersonalPageInformation(@Path("user_id")String userId);
 
 
     /**

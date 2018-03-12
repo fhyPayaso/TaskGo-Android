@@ -1,13 +1,14 @@
 package cn.abtion.taskgo.network;
 
+import android.util.Log;
+
 import cn.abtion.taskgo.network.response.ApiException;
-import cn.abtion.taskgo.network.response.ApiResponse;
 import cn.abtion.taskgo.utils.ToastUtil;
-import io.reactivex.Observer;
-import io.reactivex.disposables.Disposable;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
+
+import static android.content.ContentValues.TAG;
 
 /**
  * @author FanHongyu.
@@ -30,9 +31,11 @@ public abstract class ResponseCallBack<T> implements Callback<T> {
     public void onResponse(Call<T> call, Response<T> response) {
         dismissDialog();
 
-        if (response.code() != 1000){
+        if (response.code() >= 400 ){
 
             GlobalAPIErrorHandler.handler(response.code());
+            Log.i(TAG, "onResponse: "+response.code());
+
         }else {
             onDataResponse(call, response);
         }

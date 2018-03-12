@@ -85,6 +85,7 @@
         <activity android:name=".mvp.view.mine.activity.ChangePasswordActivity"/>
         <activity android:name=".mvp.view.task.activity.my.ChooseFinishUserListActivity"/>
         <activity android:name=".mvp.view.account.ForgetPasswordActivity"/>
+        <activity android:name=".mvp.view.mine.activity.PersonalPage"/>
 
         <activity android:name=".mvp.view.initiate.GuideActivity"/>
         <activity android:name=".mvp.view.initiate.SplashActivity">

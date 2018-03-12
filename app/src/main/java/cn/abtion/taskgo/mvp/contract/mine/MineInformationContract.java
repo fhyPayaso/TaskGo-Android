@@ -1,29 +1,32 @@
 package cn.abtion.taskgo.mvp.contract.mine;
 
 import cn.abtion.taskgo.base.contract.BaseContract;
+import cn.abtion.taskgo.mvp.model.mine.MineInformationModel;
 
 /**
  * @author：lszr on 2018/3/7 10:17
  * @email：1085963811@qq.com
  */
-public interface SettingContract {
+public interface MineInformationContract {
 
     interface Presenter extends BaseContract.Presenter {
 
         /**
          *
          */
-        void requestRevealSetting();
+        void requestMineInformation();
+
+
     }
 
-    interface View extends BaseContract.View<SettingContract.Presenter> {
+    interface View extends BaseContract.View<MineInformationContract.Presenter> {
 
         /**
          *
          */
-        void onRevealSettingSuccess();
+        void onMineInformationRequestSuccess(MineInformationModel mineInformationModel);
 
-        void onFormatError(String errorMessage);
+
     }
 
 

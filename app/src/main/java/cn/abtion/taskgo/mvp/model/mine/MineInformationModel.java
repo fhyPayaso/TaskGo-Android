@@ -4,7 +4,7 @@ package cn.abtion.taskgo.mvp.model.mine;
  * @author：lszr on 2018/3/7 10:42
  * @email：1085963811@qq.com
  */
-public class SettingModel {
+public class MineInformationModel {
     private String name;
     private String mobile;
     private String avatar;
@@ -18,8 +18,26 @@ public class SettingModel {
     private String stucard_pic;
     private int level;
     private int exp;
+    private int followers_count;
+    private int followings_count;
 
-    public SettingModel(String name, String mobile, String avatar, String sex, String wechat_id, String qq_id, String birth, int status, String stuwithcard_pic, String id_pic, String stucard_pic, int level, int exp) {
+    public int getFollowers_count() {
+        return followers_count;
+    }
+
+    public void setFollowers_count(int followers_count) {
+        this.followers_count = followers_count;
+    }
+
+    public int getFollowings_count() {
+        return followings_count;
+    }
+
+    public void setFollowings_count(int followings_count) {
+        this.followings_count = followings_count;
+    }
+
+    public MineInformationModel(String name, String mobile, String avatar, String sex, String wechat_id, String qq_id, String birth, int status, String stuwithcard_pic, String id_pic, String stucard_pic, int level, int exp, int followers_count, int followings_count) {
         this.name = name;
         this.mobile = mobile;
         this.avatar = avatar;
@@ -33,6 +51,8 @@ public class SettingModel {
         this.stucard_pic = stucard_pic;
         this.level = level;
         this.exp = exp;
+        this.followers_count = followers_count;
+        this.followings_count = followings_count;
     }
 
     public String getName() {
