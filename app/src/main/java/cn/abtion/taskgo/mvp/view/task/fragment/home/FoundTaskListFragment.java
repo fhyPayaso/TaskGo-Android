@@ -29,7 +29,9 @@ import cn.abtion.taskgo.mvp.model.task.model.BaseTaskModel;
 import cn.abtion.taskgo.mvp.model.task.request.AcceptLostFoundTaskRequest;
 import cn.abtion.taskgo.mvp.model.task.response.LostFoundTaskResponse;
 import cn.abtion.taskgo.mvp.presenter.task.LostFoundTaskListPresenter;
+import cn.abtion.taskgo.mvp.view.mine.activity.PersonalPageActivity;
 import cn.abtion.taskgo.mvp.view.task.activity.home.LostAndFoundTaskActivity;
+import cn.abtion.taskgo.mvp.view.task.activity.home.WaterTaskListActivity;
 import cn.abtion.taskgo.mvp.view.task.adapter.rec.BtnTaskRecAdapter;
 import cn.abtion.taskgo.mvp.view.task.adapter.TaskItemListener;
 import cn.abtion.taskgo.utils.DialogUtil;
@@ -145,7 +147,8 @@ public class FoundTaskListFragment extends BasePresenterFragment<LostFoundTaskLi
 
     @Override
     public void onClickAvatar(final int position) {
-        ToastUtil.showToast("点击了头像" + position);
+        PersonalPageActivity.startPersonalPageActivity(getContext(),mLostFindTaskLst.get(position).getUserId());
+
     }
 
     @Override

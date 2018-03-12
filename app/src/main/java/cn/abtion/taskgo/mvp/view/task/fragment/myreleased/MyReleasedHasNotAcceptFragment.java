@@ -28,6 +28,7 @@ import cn.abtion.taskgo.mvp.model.task.model.BaseTaskModel;
 import cn.abtion.taskgo.mvp.model.task.request.FinishLostFoundTaskRequest;
 import cn.abtion.taskgo.mvp.model.task.response.LostFoundTaskResponse;
 import cn.abtion.taskgo.mvp.presenter.task.MyTaskListPresenter;
+import cn.abtion.taskgo.mvp.view.mine.activity.PersonalPageActivity;
 import cn.abtion.taskgo.mvp.view.task.activity.home.LostAndFoundTaskActivity;
 import cn.abtion.taskgo.mvp.view.task.activity.my.ChooseFinishUserListActivity;
 import cn.abtion.taskgo.mvp.view.task.adapter.TaskItemListener;
@@ -152,43 +153,12 @@ public class MyReleasedHasNotAcceptFragment extends BasePresenterFragment<MyTask
 
     @Override
     public void onClickAvatar(int position) {
-
-        ToastUtil.showToast("点击了头像" + position);
+        PersonalPageActivity.startPersonalPageActivity(getContext(),mTaskLst.get(position).getUserId());
     }
 
     @Override
     public void onClickAccept(final int position) {
-
-
-
         ChooseFinishUserListActivity.startActivity(getContext(),mTaskLst.get(position));
-
-
-//        DialogUtil.NativeDialog dialogAccept = new DialogUtil().new NativeDialog();
-//        dialogAccept
-//                .singleInit(getContext())
-//                .setTitle("确认完成该任务？")
-//                .setMessage("选择想要完成的用户")
-//                .setNegativeButton(getString(R.string.txt_cancel), new DialogInterface.OnClickListener() {
-//                    @Override
-//                    public void onClick(DialogInterface dialog, int which) {
-//                        dialog.dismiss();
-//                    }
-//                })
-//                .setPositiveButton(getString(R.string.txt_confirm), new DialogInterface.OnClickListener() {
-//                    @Override
-//                    public void onClick(DialogInterface dialog, int which) {
-//
-//
-//
-//
-//                        mPresenter.finishLostFoundTask(new FinishLostFoundTaskRequest("1", String.valueOf(model
-//                                .getTaskId()), String.valueOf(model.getTaskType())), position);
-//                        dialog.dismiss();
-//                    }
-//                })
-//                .showNativeDialog();
-
     }
 
     @Override

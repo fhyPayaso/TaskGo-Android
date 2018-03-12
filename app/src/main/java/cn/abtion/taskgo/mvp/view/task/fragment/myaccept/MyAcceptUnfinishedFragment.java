@@ -23,6 +23,7 @@ import cn.abtion.taskgo.mvp.contract.task.MyTaskListContract;
 import cn.abtion.taskgo.mvp.model.task.model.BaseTaskModel;
 import cn.abtion.taskgo.mvp.model.task.response.LostFoundTaskResponse;
 import cn.abtion.taskgo.mvp.presenter.task.MyTaskListPresenter;
+import cn.abtion.taskgo.mvp.view.mine.activity.PersonalPageActivity;
 import cn.abtion.taskgo.mvp.view.task.activity.home.LostAndFoundTaskActivity;
 import cn.abtion.taskgo.mvp.view.task.adapter.TaskItemListener;
 import cn.abtion.taskgo.mvp.view.task.adapter.rec.MyAcceptUnfinishedAdapter;
@@ -143,8 +144,7 @@ public class MyAcceptUnfinishedFragment extends BasePresenterFragment<MyTaskList
 
     @Override
     public void onClickAvatar(int position) {
-
-        ToastUtil.showToast("点击了头像" + position);
+        PersonalPageActivity.startPersonalPageActivity(getContext(),mTaskLst.get(position).getUserId());
     }
 
     /**

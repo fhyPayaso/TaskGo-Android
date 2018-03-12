@@ -34,8 +34,6 @@ public class MineFragment extends BasePresenterFragment<MineInformationContract.
 
     public MineInformationModel mineInformation = null;
 
-    @BindView(R.id.rlayout_mine_follow)
-    RelativeLayout rlayoutMineFollow;
 
     @BindView(R.id.btn_release)
     RelativeLayout mBtnRelease;

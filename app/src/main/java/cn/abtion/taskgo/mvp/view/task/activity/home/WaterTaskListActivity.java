@@ -27,6 +27,7 @@ import cn.abtion.taskgo.common.Config;
 import cn.abtion.taskgo.mvp.contract.task.WaterTaskListContract;
 import cn.abtion.taskgo.mvp.model.task.model.BaseTaskModel;
 import cn.abtion.taskgo.mvp.presenter.task.WaterTaskListPresenter;
+import cn.abtion.taskgo.mvp.view.mine.activity.PersonalPageActivity;
 import cn.abtion.taskgo.mvp.view.task.activity.SearchTaskActivity;
 import cn.abtion.taskgo.mvp.view.task.activity.release.ReleaseWaterTaskActivity;
 import cn.abtion.taskgo.mvp.view.task.adapter.rec.BtnTaskRecAdapter;
@@ -202,7 +203,7 @@ public class WaterTaskListActivity extends BaseToolBarPresenterActivity<WaterTas
 
     @Override
     public void onClickAvatar(int position) {
-        ToastUtil.showToast("点击了头像" + position);
+        PersonalPageActivity.startPersonalPageActivity(WaterTaskListActivity.this,mWaterTaskList.get(position).getUserId());
     }
 
     /**

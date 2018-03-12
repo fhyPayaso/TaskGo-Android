@@ -61,7 +61,7 @@ public class MyFollowActivity extends BaseToolBarPresenterActivity<MyFollowContr
         myFollowListAdapter.setOnItemClickedListener(new BaseRecyclerViewAdapter.OnItemClicked<MyFollowModel>() {
             @Override
             public void onItemClicked(MyFollowModel myFollowModel, BaseRecyclerViewAdapter.BaseViewHolder holder) {
-                PersonalPage.startPersonalPageActivity(MyFollowActivity.this,myFollowModel.getUser_id());
+                PersonalPageActivity.startPersonalPageActivity(MyFollowActivity.this,myFollowModel.getUser_id());
             }
         });
     }

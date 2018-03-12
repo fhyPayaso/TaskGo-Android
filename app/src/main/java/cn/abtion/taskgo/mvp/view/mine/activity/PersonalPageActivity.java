@@ -24,7 +24,7 @@ import de.hdodenhof.circleimageview.CircleImageView;
  * @author：lszr on 2018/3/11 20:37
  * @email：1085963811@qq.com
  */
-public class PersonalPage extends BaseNoBarPresenterActivity<PersonalPageContract.Presenter> implements PersonalPageContract.View {
+public class PersonalPageActivity extends BaseNoBarPresenterActivity<PersonalPageContract.Presenter> implements PersonalPageContract.View {
 
 
     @BindView(R.id.img_portrait)
@@ -67,7 +67,7 @@ public class PersonalPage extends BaseNoBarPresenterActivity<PersonalPageContrac
     }
 
     public static void startPersonalPageActivity(Context context, String userId) {
-        Intent intent = new Intent(context, PersonalPage.class);
+        Intent intent = new Intent(context, PersonalPageActivity.class);
         intent.putExtra("userId", userId);
         context.startActivity(intent);
     }
@@ -79,7 +79,7 @@ public class PersonalPage extends BaseNoBarPresenterActivity<PersonalPageContrac
 
     @Override
     public void getPersonalInformationsuccess(PersonalPageModel personalPageModel) {
-        Glide.with(PersonalPage.this).load(personalPageModel.getAvatar()).into(imgPortrait);
+        Glide.with(PersonalPageActivity.this).load(personalPageModel.getAvatar()).into(imgPortrait);
         txtMineFans.setText(String.valueOf(personalPageModel.getFollowings_count()));
         txtMineFollower.setText(String.valueOf(personalPageModel.getFollowers_count()));
         if (personalPageModel.getSex() == null) {
@@ -121,7 +121,7 @@ public class PersonalPage extends BaseNoBarPresenterActivity<PersonalPageContrac
                 break;
             case R.id.btn_concentrate:
                 if(btnConcentrate.getText().equals("已关注")){
-                    DialogUtil.NativeDialog nativeDialog=new DialogUtil().new NativeDialog().singleInit(PersonalPage.this);
+                    DialogUtil.NativeDialog nativeDialog=new DialogUtil().new NativeDialog().singleInit(PersonalPageActivity.this);
                     nativeDialog
                             .setMessage("确定取消关注？")
                             .setPositiveButton("确定", new DialogInterface.OnClickListener() {

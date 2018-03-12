@@ -73,7 +73,7 @@ public class MyFansActivity extends BaseToolBarPresenterActivity<MyFansContract.
         myFansListAdapter.setOnItemClickedListener(new BaseRecyclerViewAdapter.OnItemClicked<MyFansListModel>() {
             @Override
             public void onItemClicked(MyFansListModel myFansListModel, BaseRecyclerViewAdapter.BaseViewHolder holder) {
-                PersonalPage.startPersonalPageActivity(MyFansActivity.this,myFansListModel.getFollower_id());
+                PersonalPageActivity.startPersonalPageActivity(MyFansActivity.this,myFansListModel.getFollower_id());
 
             }
         });

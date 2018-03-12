@@ -112,7 +112,8 @@ public class EditDataActivity extends BaseToolBarPresenterActivity<UpdateInforma
                 SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
                 String format = simpleDateFormat.format(date);
                 mTxtMineEditBirth.setText(format);
-                mPresenter.requestUpdateInformation(mineInformationModel.getName(),mineInformationModel.getAvatar(),mineInformationModel.getSex(),format);
+                mPresenter.requestUpdateInformation(mineInformationModel.getName()
+                        ,mineInformationModel.getAvatar(),mineInformationModel.getSex(),format);
                 mineInformationModel.setBirth(format);
             }
         })
@@ -149,7 +150,8 @@ public class EditDataActivity extends BaseToolBarPresenterActivity<UpdateInforma
                         switch (mGender) {
                             case 0:
                                 mTxtMineEditDataGender.setText(getString(R.string.txt_gender_man));
-                                mPresenter.requestUpdateInformation(mineInformationModel.getName(),mineInformationModel.getAvatar(),"男",mineInformationModel.getBirth());
+                                mPresenter.requestUpdateInformation(mineInformationModel.getName()
+                                        ,mineInformationModel.getAvatar(),"男",mineInformationModel.getBirth());
                                 mineInformationModel.setSex("男");
                                 break;
                             case 1:
