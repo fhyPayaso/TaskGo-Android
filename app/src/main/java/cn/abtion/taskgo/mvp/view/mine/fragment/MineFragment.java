@@ -69,16 +69,22 @@ public class MineFragment extends BasePresenterFragment<MineInformationContract.
 
     }
 
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        mPresenter.requestMineInformation();
+
+    }
+
     @OnClick({R.id.rlayout_mine_follow, R.id.rlayout_mine_fans, R.id.btn_release, R.id.btn_accept, R.id.rlayout_mine_real_name, R.id.rlayout_mine_feedback, R.id.rlayout_mine_setting, R.id.rlayout_mine_edit})
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.rlayout_mine_follow:
                 MyFollowActivity.startMyFollowActivity(getContext());
-                initView();
                 break;
             case R.id.rlayout_mine_fans:
                 MyFansActivity.startMyFansActivity(getContext());
-                initView();
                 break;
             case R.id.btn_release:
                 MyReleasedTaskActivity.startActivity(getContext());
