@@ -7,8 +7,6 @@ import cn.abtion.taskgo.network.response.ApiResponse;
 import cn.abtion.taskgo.utils.ToastUtil;
 import io.reactivex.Observer;
 import io.reactivex.disposables.Disposable;
-import retrofit2.Call;
-import retrofit2.Response;
 
 import static android.content.ContentValues.TAG;
 
@@ -31,7 +29,7 @@ public abstract class BaseObserver<T> implements Observer<ApiResponse<T>> {
     @Override
     public void onNext(ApiResponse tApiResponse) {
 
-        if (tApiResponse.getCode() != 1000 && tApiResponse.getCode() != 6000) {
+        if (tApiResponse.getCode() != 1000&&tApiResponse.getCode() != 6000) {
 
             GlobalAPIErrorHandler.handler(tApiResponse.getCode());
         } else {

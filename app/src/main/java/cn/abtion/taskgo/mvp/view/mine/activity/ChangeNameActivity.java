@@ -1,25 +1,23 @@
 package cn.abtion.taskgo.mvp.view.mine.activity;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
-import android.os.Bundle;
+import android.widget.EditText;
 
-import butterknife.ButterKnife;
+import butterknife.BindView;
 import butterknife.OnClick;
 import cn.abtion.taskgo.R;
-import cn.abtion.taskgo.base.activity.BaseToolBarPresenterActivity;
-import cn.abtion.taskgo.base.contract.BaseContract;
-import cn.abtion.taskgo.base.presenter.BasePresenter;
+import cn.abtion.taskgo.base.activity.BaseToolBarActivity;
 
 /**
  * @author：lszr on 2018/1/28 22:16
  * @email：1085963811@qq.com
  */
-public class ChangeNameActivity extends BaseToolBarPresenterActivity {
-    @Override
-    public BaseContract.Presenter initPresenter() {
-        return new BasePresenter<>(this);
-    }
+public class ChangeNameActivity extends BaseToolBarActivity {
+    @BindView(R.id.edit_change_name)
+    EditText editChangeName;
+
 
     @Override
     protected int getLayoutId() {
@@ -33,6 +31,7 @@ public class ChangeNameActivity extends BaseToolBarPresenterActivity {
 
     @Override
     protected void initView() {
+
         setActivityTitle(getString(R.string.txt_mine_edit_data_name));
     }
 
@@ -41,16 +40,23 @@ public class ChangeNameActivity extends BaseToolBarPresenterActivity {
 
     }
 
-    public static void startChangeNameActivity(Context context) {
+    public static void startChangeNameActivity(Activity activity, Context context) {
         Intent intent = new Intent(context, ChangeNameActivity.class);
-        context.startActivity(intent);
+        activity.startActivityForResult(intent, 1);
+
     }
 
 
 
-    @OnClick(R.id.edit_change_name)
+
+
+    @OnClick(R.id.btn_submmit_new_name)
     public void onViewClicked() {
 
+
+        Intent intent = new Intent();
+        intent.putExtra("newName", editChangeName.getText().toString().trim());
+        setResult(RESULT_OK, intent);
         finish();
     }
 }

@@ -15,10 +15,11 @@ public interface ChangePasswordContract {
         void requestChangePassword(String oldPassword,String newPassword,String repeatPassword);
     }
 
+
     interface View extends BaseContract.View<ChangePasswordContract.Presenter> {
 
         /**
-         * 通知V层登录成功
+         * 通知V层修改密码成功
          */
         void onChangePasswordSuccess();
 

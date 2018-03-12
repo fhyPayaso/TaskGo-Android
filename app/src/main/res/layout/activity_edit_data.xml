@@ -14,7 +14,7 @@
         <RelativeLayout
             android:id="@+id/rlayout_mine_edit_photo"
             android:layout_width="match_parent"
-            android:layout_height="80dp"
+            android:layout_height="113dp"
             android:layout_marginTop="20dp"
             android:background="@color/white">
             <TextView
@@ -33,6 +33,16 @@
                 android:layout_centerVertical="true"
                 android:layout_marginRight="11dp"
                 android:src="@drawable/ic_mine_arrow" />
+
+            <de.hdodenhof.circleimageview.CircleImageView
+                android:id="@+id/img_portrait"
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="220dp"
+                 />
+
+
         </RelativeLayout>
 
         <RelativeLayout
@@ -51,11 +61,11 @@
                 android:textSize="18sp" />
 
             <TextView
+                android:id="@+id/txt_mine_name"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignRight="@id/img_mine_edit_name"
                 android:layout_centerVertical="true"
-                android:text="葭"
                 android:layout_marginRight="20dp"/>
 
             <ImageView
@@ -91,7 +101,6 @@
                 android:layout_height="wrap_content"
                 android:layout_alignRight="@id/img_mine_edit_gender"
                 android:layout_centerVertical="true"
-                android:text="女"
                 android:layout_marginRight="20dp"/>
 
             <ImageView
@@ -120,11 +129,11 @@
                 android:textColor="@color/text_mine_button"
                 android:textSize="18sp" />
             <TextView
+                android:id="@+id/txt_mine_phone_number"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_centerVertical="true"
                 android:layout_alignParentRight="true"
-                android:text="13912345678"
                 android:layout_marginRight="20dp"/>
 
         </RelativeLayout>
@@ -178,6 +187,15 @@
                 android:text="@string/txt_mine_wechat"
                 android:textColor="@color/text_mine_button"
                 android:textSize="18sp" />
+            <TextView
+                android:id="@+id/txt_we_chat_number"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_alignParentRight="true"
+                android:layout_marginRight="150dp"
+                />
+
 
             <ImageView
                 android:layout_width="wrap_content"
@@ -203,6 +221,15 @@
                 android:text="@string/txt_mine_qq"
                 android:textColor="@color/text_mine_button"
                 android:textSize="18sp" />
+
+            <TextView
+                android:id="@+id/txt_qq_number"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_alignParentRight="true"
+                android:layout_marginRight="150dp"
+                />
 
             <ImageView
                 android:layout_width="wrap_content"
@@ -230,12 +257,12 @@
                 android:textSize="18sp" />
 
             <TextView
+                android:id="@+id/txt_mine_status"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentRight="true"
                 android:layout_centerVertical="true"
                 android:layout_marginRight="11dp"
-                android:text="是"
                 />
 
 

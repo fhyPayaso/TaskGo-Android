@@ -107,6 +107,7 @@
     <string name="txt_mine_new_password">新密码</string>
     <string name="txt_mine_repeat_password">重复新密码</string>
     <string name="txt_mine_change_password_success">修改成功</string>
+    <string name="txt_gender_unknown">未知</string>
 
     <string name="error_upload_image_filed">图片上传失败</string>
 
