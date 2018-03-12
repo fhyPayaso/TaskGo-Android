@@ -16,8 +16,6 @@ public class ApiResponse<T> {
     /** 返回码 */
     private int code = -2;
 
-
-
     /** 返回信息 */
     private String message = "";
     /** 返回数据 */

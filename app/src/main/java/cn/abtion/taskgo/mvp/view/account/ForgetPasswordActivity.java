@@ -2,6 +2,7 @@ package cn.abtion.taskgo.mvp.view.account;
 
 import android.content.Context;
 import android.content.Intent;
+import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -10,33 +11,32 @@ import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 
 import butterknife.BindView;
+import butterknife.ButterKnife;
 import butterknife.OnClick;
 import cn.abtion.taskgo.R;
 import cn.abtion.taskgo.base.activity.BaseNoBarPresenterActivity;
-import cn.abtion.taskgo.mvp.contract.account.UpdatePasswordContract;
+import cn.abtion.taskgo.mvp.contract.account.ForgetPasswordContract;
+import cn.abtion.taskgo.mvp.model.account.ForgotPasswordModel;
+import cn.abtion.taskgo.mvp.presenter.account.ForgetPasswordPresent;
 import cn.abtion.taskgo.utils.ToastUtil;
 import cn.abtion.taskgo.widget.VerificationCountDownTimer;
 
 /**
  * @author heaijia
- * @since 2018/2/2 上午11:33
+ * @since 2018/3/9 上午9:39
  * email 549044363@qq.com
  */
 
-public class UpdatePasswordActivity extends BaseNoBarPresenterActivity<UpdatePasswordContract.Presenter> implements UpdatePasswordContract.View {
+public class ForgetPasswordActivity extends BaseNoBarPresenterActivity<ForgetPasswordContract.Presenter> implements ForgetPasswordContract.View {
+
 
     VerificationCountDownTimer vCountDownTimer;
-
     @BindView(R.id.btn_back_forget)
     ImageView mbtnBackForget;
     @BindView(R.id.ly_header_forget)
     LinearLayout mlyHeaderForget;
-    @BindView(R.id.edit_user_number_forget)
-    EditText meditUserNumberForget;
     @BindView(R.id.ly_user_number_forget)
     LinearLayout mlyUserNumberForget;
-    @BindView(R.id.line3)
-    View mline3;
     @BindView(R.id.img_verification_forget)
     ImageView mimgVerificationForget;
     @BindView(R.id.edit_verification_code_forget)
@@ -45,38 +45,49 @@ public class UpdatePasswordActivity extends BaseNoBarPresenterActivity<UpdatePas
     Button mbtnVerification;
     @BindView(R.id.ly_verification_code_forget)
     RelativeLayout mlyVerificationCodeForget;
-    @BindView(R.id.line4)
-    View mline4;
     @BindView(R.id.edit_secret_forget)
     EditText meditSecretForget;
     @BindView(R.id.ly_secret_forget)
     LinearLayout mlySecretForget;
-    @BindView(R.id.line5)
-    View mline5;
     @BindView(R.id.edit_secret_again_forget)
     EditText meditSecretAgainForget;
     @BindView(R.id.ly_secret_again_forget)
     LinearLayout mlySecretAgainForget;
-    @BindView(R.id.line6)
-    View mline6;
     @BindView(R.id.rl_context_forget)
     RelativeLayout mrlContextForget;
     @BindView(R.id.btn_certain)
     Button mbtnCertain;
-
+    @BindView(R.id.edit_user_number_forget)
+    EditText editUserNumberForget;
 
 
     public static void startActivity(Context context) {
-        Intent intent=new Intent(context,UpdatePasswordActivity.class);
 
-        context.startActivity(intent);
+//        Intent intent=new Intent(context,ForgetPasswordActivity.class);
+//        context.startActivity(intent);
+
+        context.startActivity(new Intent(context, ForgetPasswordActivity.class));
     }
 
+
+    @Override
+    public void onSendInformationSuccess() {
+        ToastUtil.showToast("密码已找回，请重新登录");
+        LoginActivity.startActivity(ForgetPasswordActivity.this);
+
+        finish();
+    }
+
+    @Override
+    protected ForgetPasswordContract.Presenter initPresenter() {
+        return new ForgetPasswordPresent(this);
+    }
 
     @Override
     protected int getLayoutId() {
         return R.layout.activity_update_password;
     }
+
 
     @Override
     protected void initVariable() {
@@ -94,29 +105,11 @@ public class UpdatePasswordActivity extends BaseNoBarPresenterActivity<UpdatePas
 
     }
 
-
     @OnClick(R.id.ly_header_forget)
     public void onLyHeaderForgetClicked() {
-        LoginActivity.startActivity(UpdatePasswordActivity.this);
-
+        LoginActivity.startActivity(ForgetPasswordActivity.this);
     }
 
-
-    @OnClick(R.id.btn_certain)
-    public void onViewClicked() {
-
-        ToastUtil.showToast("敬请期待");
-
-        finish();
-    }
-
-
-    @OnClick(R.id.btn_verification)
-    public void onBtnVerificationClicked() {
-
-        ToastUtil.showToast("你即将获取验证码，请注意查收");
-        vCountDownTimer.timerStart(true);
-    }
 
     /**
      * 倒计时生物具体方法
@@ -160,14 +153,30 @@ public class UpdatePasswordActivity extends BaseNoBarPresenterActivity<UpdatePas
 
     }
 
-
     @Override
-    public void onUpdatePasswordSuccess() {
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        // TODO: add setContentView(...) invocation
+        ButterKnife.bind(this);
+    }
+
+
+    @OnClick(R.id.btn_verification)
+    public void onViewClicked() {
+        /**
+         * 点击 发送验证码 按钮，P层进行数据的传输
+         */
+        mPresenter.sendCaptcha(editUserNumberForget.getText().toString().trim());
+
+        ToastUtil.showToast("你即将获取验证码，请注意查收");
+        vCountDownTimer.timerStart(true);
 
     }
 
-    @Override
-    protected UpdatePasswordContract.Presenter initPresenter() {
-        return null;
+
+    @OnClick(R.id.btn_certain)
+    public void onClicked() {
+
+        mPresenter.sendRequestNewInformation(new ForgotPasswordModel(editUserNumberForget.getText().toString().trim(),meditVerificationCodeForget.getText().toString().trim(),meditSecretForget.getText().toString().trim(),meditSecretAgainForget.getText().toString().trim()));
     }
 }

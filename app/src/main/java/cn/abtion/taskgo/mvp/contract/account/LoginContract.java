@@ -28,7 +28,7 @@ public interface LoginContract {
         /**
          * 通知V层登录成功
          */
-        void onLoginSuccess();
+        void onLoginSuccess(String Token);
 
         void onLoginFailed(String showError);
     }

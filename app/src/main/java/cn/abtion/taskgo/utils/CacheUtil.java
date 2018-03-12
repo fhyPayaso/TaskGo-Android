@@ -34,7 +34,7 @@ public final class CacheUtil {
     private static final int MAX_SIZE = 1024 * 1024 * 50;
     private static final int MAX_COUNT = Integer.MAX_VALUE;
     private static Map<String, CacheUtil> instanceMap = new HashMap<>();
-    private CaCheManager mCaCheManager;
+    private static CaCheManager mCaCheManager;
 
     /**
      * 构造函数
@@ -80,7 +80,7 @@ public final class CacheUtil {
      * @param key
      * @param value
      */
-    public void putString(String key, String value) {
+    public static void putString(String key, String value) {
         File file = mCaCheManager.newFile(key);
         BufferedWriter bufferedWriter = null;
         try {

@@ -16,7 +16,6 @@ import cn.abtion.taskgo.base.contract.BaseContract;
 import cn.abtion.taskgo.base.presenter.BasePresenter;
 import cn.abtion.taskgo.mvp.contract.mine.ChangePasswordContract;
 import cn.abtion.taskgo.mvp.contract.mine.SettingContract;
-import cn.abtion.taskgo.mvp.view.account.UpdatePasswordActivity;
 
 /**
  * @author：lszr on 2018/1/30 21:13

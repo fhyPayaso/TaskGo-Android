@@ -20,10 +20,15 @@ import cn.abtion.taskgo.R;
 import cn.abtion.taskgo.base.activity.BaseNoBarPresenterActivity;
 import cn.abtion.taskgo.base.contract.BaseContract;
 import cn.abtion.taskgo.base.presenter.BasePresenter;
+import cn.abtion.taskgo.mvp.contract.account.RegisterContract;
+import cn.abtion.taskgo.mvp.model.account.LoginRequestModel;
+import cn.abtion.taskgo.mvp.model.account.RegisterRequestModel;
+import cn.abtion.taskgo.mvp.presenter.account.RegisterPresenter;
+import cn.abtion.taskgo.mvp.view.MainActivity;
 import cn.abtion.taskgo.utils.ToastUtil;
 import cn.abtion.taskgo.widget.VerificationCountDownTimer;
 
-public class RegisterActivity extends BaseNoBarPresenterActivity {
+public class RegisterActivity extends BaseNoBarPresenterActivity<RegisterContract.Presenter> implements RegisterContract.View{
 
     int tag =1;
 
@@ -37,8 +42,6 @@ public class RegisterActivity extends BaseNoBarPresenterActivity {
     EditText meditUserNumber;
     @BindView(R.id.ly_user_number)
     LinearLayout mlyUserNumber;
-    @BindView(R.id.line3)
-    View mline3;
     @BindView(R.id.img_verification)
     ImageView mimgVerification;
     @BindView(R.id.edit_verification_code)
@@ -47,24 +50,16 @@ public class RegisterActivity extends BaseNoBarPresenterActivity {
     Button mbtnVerificationRegister;
     @BindView(R.id.ly_verification_code)
     RelativeLayout mlyVerificationCode;
-    @BindView(R.id.line4)
-    View mline4;
     @BindView(R.id.edit_secret)
     EditText meditSecret;
     @BindView(R.id.ly_secret)
     LinearLayout mlySecret;
-    @BindView(R.id.line5)
-    View mline5;
     @BindView(R.id.edit_secret_again)
     EditText meditSecretAgain;
     @BindView(R.id.ly_secret_again)
     LinearLayout mlySecretAgain;
-    @BindView(R.id.line6)
-    View mline6;
     @BindView(R.id.txt_taskgo_servise)
     TextView mtxtTaskgoServise;
-    @BindView(R.id.line7)
-    View mline7;
     @BindView(R.id.txt_servise)
     LinearLayout mtxtServise;
     @BindView(R.id.ly_agreement)
@@ -73,14 +68,10 @@ public class RegisterActivity extends BaseNoBarPresenterActivity {
     RelativeLayout mrlContext;
     @BindView(R.id.btn_register)
     Button mbtnRegister;
-
     @BindView(R.id.img_agreement_selector)
     ImageView imgAgreementSelector;
 
-    @Override
-    protected BaseContract.Presenter initPresenter() {
-        return new BasePresenter<>(this);
-    }
+
 
     public static void startActivity(Context context) {
         context.startActivity(new Intent(context, RegisterActivity.class));
@@ -114,19 +105,11 @@ public class RegisterActivity extends BaseNoBarPresenterActivity {
         super.onCreate(savedInstanceState);
         // TODO: add setContentView(...) invocation
         ButterKnife.bind(this);
-
-
-//        BmobSMS.initialize(this, "d56e0fe7bec328b922ea78d75e0c568c");
     }
 
-
-    @OnClick(R.id.btn_register)
-    public void onBtnRegisterClicked() {
-
-        ToastUtil.showToast("还没有网络请求，敬请期待");
-        LoginActivity.startActivity(RegisterActivity.this);
-        mverificationCountDownTimer.cancel();
-
+    @Override
+    protected RegisterContract.Presenter initPresenter() {
+        return new RegisterPresenter(this);
     }
 
 
@@ -156,16 +139,11 @@ public class RegisterActivity extends BaseNoBarPresenterActivity {
         this.finish();
     }
 
+
+
     /**
-     * 绑定 获得验证码 按钮，启动timerStart
+     * 用户协议 暂未开启
      */
-    @OnClick(R.id.btn_verification_register)
-    public void onBtnVerificationRegisterClicked() {
-        ToastUtil.showToast("你即将获得验证码，请注意查收");
-        mverificationCountDownTimer.timerStart(true);
-
-    }
-
     @OnClick(R.id.txt_servise)
     public void onBtnTxtClicked()
     {
@@ -213,5 +191,66 @@ public class RegisterActivity extends BaseNoBarPresenterActivity {
                 }
             }
         };
+    }
+
+
+
+    @Override
+    public void onCaptchaSuccess() {
+        ToastUtil.showToast("已经发送验证码，请注意查收");
+    }
+
+    @Override
+    public void onLoginAgainSuccess(String Token) {
+        ToastUtil.showToast("来自新注册用户的Token缓存成功啦");
+        MainActivity.startActivity(RegisterActivity.this);
+        mverificationCountDownTimer.cancel();
+    }
+
+
+
+
+    /**
+     * 绑定 获得验证码 按钮，启动timerStart
+     */
+    @OnClick(R.id.btn_verification_register)
+    public void onBtnVerificationRegisterClicked() {
+
+
+        /**
+         * 点击 发送验证码 按钮，P层进行数据的传输
+         */
+        mPresenter.sendCaptcha(meditUserNumber.getText().toString().trim());
+
+        ToastUtil.showToast("你即将获得验证码，请注意查收");
+        mverificationCountDownTimer.timerStart(true);
+
+    }
+
+
+
+    /**
+     * 点击 注册 按钮,P层进行数据的传输
+     */
+    @OnClick(R.id.btn_register)
+    public void onBtnRegisterClicked() {
+
+        mPresenter.register(new RegisterRequestModel(meditUserNumber.getText().toString().trim(),meditSecret.getText().toString().trim(),"mobile",meditVerificationCode.getText().toString().trim()),meditSecretAgain.getText().toString().trim());
+
+
+    }
+
+
+    @Override
+    public void onRegisterSuccess() {
+
+        mPresenter.loginAgain(new LoginRequestModel(meditUserNumber.getText().toString().trim(),meditSecret.getText().toString().trim()));
+
+
+//        MainActivity.startActivity(RegisterActivity.this);
+//        mverificationCountDownTimer.cancel();
+
+
+
     }
 }

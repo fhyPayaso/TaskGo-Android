@@ -9,6 +9,7 @@ import cn.abtion.taskgo.mvp.model.account.LoginRequestModel;
 import cn.abtion.taskgo.network.BaseObserver;
 import cn.abtion.taskgo.network.response.ApiResponse;
 import cn.abtion.taskgo.network.retrofit.RetrofitFactory;
+import cn.abtion.taskgo.utils.CacheUtil;
 import cn.abtion.taskgo.utils.RegexpUtils;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.schedulers.Schedulers;
@@ -49,9 +50,7 @@ public class LoginPresenter extends BasePresenter<LoginContract.View> implements
                     .subscribe(new BaseObserver() {
                         @Override
                         public void onDataSuccess(ApiResponse response) {
-                            Log.i(TAG, "onDataSuccess: sssssssssss" );
-                            mView.onLoginSuccess();
-
+                            mView.onLoginSuccess(response.getData().toString());
                         }
                     });
         }

@@ -2,6 +2,7 @@ package cn.abtion.taskgo.mvp.view.account;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.media.session.MediaSession;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -17,10 +18,12 @@ import butterknife.BindView;
 import butterknife.OnClick;
 import cn.abtion.taskgo.R;
 import cn.abtion.taskgo.base.activity.BaseNoBarPresenterActivity;
+import cn.abtion.taskgo.common.constants.CacheKey;
 import cn.abtion.taskgo.mvp.contract.account.LoginContract;
 import cn.abtion.taskgo.mvp.model.account.LoginRequestModel;
 import cn.abtion.taskgo.mvp.presenter.account.LoginPresenter;
 import cn.abtion.taskgo.mvp.view.MainActivity;
+import cn.abtion.taskgo.utils.CacheUtil;
 import cn.abtion.taskgo.utils.ToastUtil;
 
 public class LoginActivity extends BaseNoBarPresenterActivity<LoginContract.Presenter> implements LoginContract.View {
@@ -57,9 +60,13 @@ public class LoginActivity extends BaseNoBarPresenterActivity<LoginContract.Pres
      * 登陆成功后,进入主页面,结束当前页面
      */
     @Override
-    public void onLoginSuccess() {
+    public void onLoginSuccess(String token) {
         ToastUtil.showToast("登录成功");
         MainActivity.startActivity(LoginActivity.this);
+
+        CacheUtil.putString(CacheKey.TOKEN, token);
+        ToastUtil.showToast(token);
+
 
         finish();
     }
@@ -143,7 +150,7 @@ public class LoginActivity extends BaseNoBarPresenterActivity<LoginContract.Pres
     @OnClick(R.id.txt_forget_password)
     public void onTxtForgetPasswordClicked() {
 
-        UpdatePasswordActivity.startActivity(LoginActivity.this);
+        ForgetPasswordActivity.startActivity(LoginActivity.this);
 
     }
 
@@ -152,4 +159,6 @@ public class LoginActivity extends BaseNoBarPresenterActivity<LoginContract.Pres
         RegisterActivity.startActivity(LoginActivity.this);
         //    this.finish();
     }
+
+
 }
