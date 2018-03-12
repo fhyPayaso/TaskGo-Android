@@ -54,7 +54,6 @@ public class LostTaskListFragment extends BasePresenterFragment<LostFoundTaskLis
     private static final int TYPE_LOST_TASK = 0;
     private BtnTaskRecAdapter mAdapter;
     private List<BaseTaskModel> mLostFindTaskLst;
-    private DialogUtil.CustomAlertDialog dialogTaskInformation;
 
 
     @Override
@@ -224,30 +223,7 @@ public class LostTaskListFragment extends BasePresenterFragment<LostFoundTaskLis
     @Override
     public void onLoadTaskInfoSuccess(LostFoundTaskResponse response) {
 
-        dialogTaskInformation = new DialogUtil().new CustomAlertDialog();
+        DialogUtil.CustomAlertDialog dialogTaskInformation = new DialogUtil().new CustomAlertDialog();
         LostAndFoundTaskActivity.showLostFoundTaskInfo(getContext(),dialogTaskInformation,response);
-//        dialogTaskInformation.initDialog(getContext(), R.layout.dialog_lost_found_information);
-//        dialogTaskInformation.setCanceledOntouchOutside(true);
-//        dialogTaskInformation.showDialog();
-//
-//        View view = dialogTaskInformation.getView();
-//        TextView txtItemName = view.findViewById(R.id.txt_item_name);
-//        TextView txtPlace = view.findViewById(R.id.txt_item_place);
-//        TextView txtLostFoundType = view.findViewById(R.id.txt_item_task_type);
-//        TextView txtRmark = view.findViewById(R.id.txt_remark_information);
-//        TextView btnConfirm = view.findViewById(R.id.btn_information_confirm);
-//
-//        txtItemName.setText(response.getName() == null ? "" : response.getName());
-//        txtLostFoundType.setText(getString(R.string.txt_lost_found_task_type_lost));
-//        txtPlace.setText(response.getPlace() == null ? "" : response.getPlace());
-//        txtRmark.setText(response.getRemarks() == null ? "" : response.getRemarks());
-//
-//
-//        btnConfirm.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                dialogTaskInformation.hideDialog();
-//            }
-//        });
     }
 }

@@ -23,6 +23,7 @@ import cn.abtion.taskgo.data.UpLoadHelper;
 import cn.abtion.taskgo.mvp.contract.task.ReleaseTaskContract;
 import cn.abtion.taskgo.mvp.model.task.request.ReleaseLostFoundTaskRequest;
 import cn.abtion.taskgo.mvp.presenter.task.ReleaseTaskPresenter;
+import cn.abtion.taskgo.utils.DialogUtil;
 import cn.abtion.taskgo.utils.FileUtil;
 import cn.abtion.taskgo.utils.ToastUtil;
 
@@ -49,11 +50,16 @@ public class ReleaseLostFoundTaskActivity extends BaseToolBarPresenterActivity<R
     EditText mEditItemPlace;
 
 
-    //0代表丢了东西，1代表捡到东西
+    /**
+     * 0代表丢了东西，1代表捡到东西
+     */
     private String lostFoundTaskType = "0";
-    //0代表不需要上传图片，1代表需要上传图片
+    /**
+     * 0代表不需要上传图片，1代表需要上传图片
+     */
     private Boolean hasImg = false;
     private AlertDialog bottomDialog;
+    private DialogUtil.NativeProgressDialog mProgressDialog;
     private TextView btnTakePhoto;
     private TextView btnFromAlbum;
     private TextView btnCancel;
@@ -182,6 +188,13 @@ public class ReleaseLostFoundTaskActivity extends BaseToolBarPresenterActivity<R
     @OnClick(R.id.btn_release_task)
     public void onBtnReleaseTaskClicked() {
 
+        mProgressDialog = new DialogUtil().new NativeProgressDialog();
+        mProgressDialog
+                .initDialog(ReleaseLostFoundTaskActivity.this)
+                .setMessage("请稍后")
+                .showDialog();
+
+
         if (!hasImg) {
 
             mPresenter.releaseLostFoundTask(new ReleaseLostFoundTaskRequest(mEditItemName.getText().toString().trim()
@@ -219,6 +232,7 @@ public class ReleaseLostFoundTaskActivity extends BaseToolBarPresenterActivity<R
 
     @Override
     public void onReleaseSuccess() {
+        mProgressDialog.hideDialog();
         ToastUtil.showToast("发布成功");
         finish();
     }

@@ -55,7 +55,6 @@ public class WaterTaskListActivity extends BaseToolBarPresenterActivity<WaterTas
 
     private BtnTaskRecAdapter mAdapter;
     private List<BaseTaskModel> mWaterTaskList;
-    private DialogUtil.CustomAlertDialog dialogTaskInformation;
 
 
     @Override
@@ -250,6 +249,7 @@ public class WaterTaskListActivity extends BaseToolBarPresenterActivity<WaterTas
         mAdapter.notifyDataSetChanged();
         txtTotalNumber.setText(String.valueOf(mWaterTaskList.size()));
     }
+
 
     /**
      * 接受成功回调

@@ -23,7 +23,8 @@ import cn.abtion.taskgo.mvp.view.account.LoginActivity;
  * email fanhongyu@hrsoft.net.
  */
 
-public class SplashActivity extends BaseNoBarPresenterActivity<SplashContract.Presenter> implements SplashContract.View {
+public class SplashActivity extends BaseNoBarPresenterActivity<SplashContract.Presenter> implements SplashContract
+        .View {
 
 
     @Override
@@ -57,24 +58,28 @@ public class SplashActivity extends BaseNoBarPresenterActivity<SplashContract.Pr
         return new SplashPresenter(this);
     }
 
-
     /**
      * 检查token
      */
     private void checkToken() {
 
-        String token = TaskGoApplication.getInstance().getCacheUtil().getString(CacheKey.TOKEN);
-
-        //判断是否第一次登录
-        boolean isFirstOpen = token==null;
+        //判断是否第一次登录,
+        boolean isFirstOpen = true;
+        isFirstOpen = TaskGoApplication.getInstance().getCacheUtil().getBoolean(CacheKey.IS_FIRST_OPEN, isFirstOpen);
 
         if (isFirstOpen) {
             //第一次登录直接进入引导页
+            TaskGoApplication.getInstance().getCacheUtil().putBoolean(CacheKey.IS_FIRST_OPEN, false);
             GuideActivity.startActivity(this);
             finish();
         } else {
-            //不是第一次登录检查token是否过期
-            mPresenter.checkToken(token);
+            String token = TaskGoApplication.getInstance().getCacheUtil().getString(CacheKey.TOKEN);
+            if (token == null) {
+                invalidToken();
+            } else {
+                //不是第一次登录检查token是否过期
+                mPresenter.checkToken(token);
+            }
         }
     }
 

@@ -303,6 +303,7 @@ public final class DialogUtil {
 
         private ProgressDialog nativeProgressDialog;
 
+
         public NativeProgressDialog initDialog(Context context) {
             nativeProgressDialog = new ProgressDialog(context);
             return this;
@@ -317,12 +318,10 @@ public final class DialogUtil {
         /**
          * 显示Dialog
          *
-         * @param context
          * @return
          */
-        public NativeProgressDialog showDialog(Context context) {
+        public NativeProgressDialog showDialog() {
             nativeProgressDialog.show();
-
             return this;
         }
 
@@ -382,9 +381,14 @@ public final class DialogUtil {
          */
         public NativeProgressDialog setDialogMessage(String message) {
             nativeProgressDialog.setMessage(message);
-
             return this;
         }
+
+        public NativeProgressDialog hideDialog() {
+            nativeProgressDialog.dismiss();
+            return this;
+        }
+
 
     }
 
