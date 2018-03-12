@@ -3,7 +3,10 @@ package cn.abtion.taskgo.network.retrofit;
 
 import java.util.List;
 
+import butterknife.BindView;
+import cn.abtion.taskgo.mvp.model.account.ForgotPasswordModel;
 
+import cn.abtion.taskgo.mvp.model.account.TokenResponse;
 import cn.abtion.taskgo.mvp.model.task.request.AcceptLostFoundTaskRequest;
 
 import cn.abtion.taskgo.mvp.model.task.request.FinishLostFoundTaskRequest;
@@ -11,6 +14,7 @@ import cn.abtion.taskgo.mvp.model.task.request.FinishUserListRequest;
 import cn.abtion.taskgo.mvp.model.task.request.ReleaseLostFoundTaskRequest;
 
 import cn.abtion.taskgo.mvp.model.account.LoginRequestModel;
+import cn.abtion.taskgo.mvp.model.account.RegisterRequestModel;
 import cn.abtion.taskgo.mvp.model.mine.ChangePasswordRequestModel;
 import cn.abtion.taskgo.mvp.model.task.request.ReleaseWaterTaskRequest;
 import cn.abtion.taskgo.mvp.model.task.response.BaseTaskResponse;
@@ -23,6 +27,8 @@ import retrofit2.Call;
 import retrofit2.http.Body;
 import retrofit2.http.GET;
 import retrofit2.http.POST;
+import retrofit2.http.Part;
+import retrofit2.http.Path;
 import retrofit2.http.Path;
 import retrofit2.http.Query;
 
@@ -42,39 +48,44 @@ public interface RetrofitService {
      * @return
      */
     @POST("user/login")
-    Observable<ApiResponse> login(@Body LoginRequestModel loginRequest);
+    Observable<ApiResponse<TokenResponse>> login(@Body LoginRequestModel loginRequest);
 
-
+    /**
+     * 修改密码接口
+     *
+     * @param changePasswordRequestModel
+     * @return
+     */
     @POST("user/resetPassword")
     Call<ApiResponse> changePassword(@Body ChangePasswordRequestModel changePasswordRequestModel);
 
-
-//    @POST("user/register")
-//    Call<APIResponse> register(@Body RegisterRequestModel mregisterRequestModel);
-//
-//    /**
-//     * 登录
-//     * 手机号登录     获取 token 以及 user_id
-//     *  微信/QQ登录   验证完后输入微信或QQ号登录 获取token以及user_id
-//     */
-//    @POST("user/login")
-//    Call<APIResponse> rxlogin(@Body LoginRequestModel mloginRequestModel);
-//
-//    /**
-//     * 忘记密码（修改密码）
-//     *
-//     */
-//    @POST("user/resetPassword")
-//    Call<APIResponse> updatepasswordrequestmodel(@Body UpdatePasswordRequestModel mupdatePasswordRequestModel);
-
-
     /**
-     * 加载水任务列表
+     * 获取验证码接口
      *
+     * @param mobile
      * @return
      */
-    @GET("water/show")
-    Observable<ApiResponse<List<WaterTaskResponse>>> loadWaterTaskList();
+    @GET("user/getCaptcha/{mobile}")
+    Observable<ApiResponse> sendCaptchato(@Path("mobile") String mobile);
+
+    /**
+     * 注册接口
+     *
+     * @param registerRequestModel
+     * @return
+     */
+    @POST("user/register")
+    Observable<ApiResponse> register(@Body RegisterRequestModel registerRequestModel);
+
+    /**
+     * 忘记密码接口
+     *
+     * @param forgotPasswordModel
+     * @return
+     */
+    @POST("user/forgotPassword")
+    Observable<ApiResponse> forgetPassWord(@Body ForgotPasswordModel forgotPasswordModel);
+
 
 
     /**
@@ -86,6 +97,13 @@ public interface RetrofitService {
     @GET("user/checkToken/{token}")
     Observable<ApiResponse> checkToke(@Path("token") String token);
 
+    /**
+     * 加载水任务列表
+     *
+     * @return
+     */
+    @GET("water/show")
+    Observable<ApiResponse<List<WaterTaskResponse>>> loadWaterTaskList();
 
     /**
      * 发布水任务
@@ -105,7 +123,6 @@ public interface RetrofitService {
     @GET("water/accept/{taskId}")
     Observable<ApiResponse> acceptWaterTask(@Path("taskId") int taskId);
 
-
     /**
      * 接受全部水任务
      *
@@ -122,7 +139,6 @@ public interface RetrofitService {
      */
     @GET("water/finish/{taskId}")
     Observable<ApiResponse> finishWaterTask(@Path("taskId") int taskId);
-
 
     /**
      * 加载物品任务列表

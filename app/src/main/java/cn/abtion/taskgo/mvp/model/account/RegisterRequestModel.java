@@ -15,18 +15,27 @@ public class RegisterRequestModel{
      * 手机号注册  "type": "mobile"      本接口为mobile
      */
 
-    private String phone;
+    private String value;
     private String password;
     private String type;
+    private String captcha;
+//    private String repeatPassword;
 
-    public RegisterRequestModel() {
+
+    public RegisterRequestModel(String value,String password,String type,String captcha) {
+        this.value=value;
+        this.password=password;
+        this.type=type;
+        this.captcha=captcha;
+
+
     }
 
     public String getPhone(){
-        return phone;
+        return value;
     }
     public void setPhone(){
-        this.phone=phone;
+        this.value=value;
     }
 
     public String getPassword() {
@@ -37,5 +46,11 @@ public class RegisterRequestModel{
     }
 
     public String getType(){return type;}
-    public void setType(String type){this.type=type;}
+    public void setType(String type){this.type="mobile";}
+
+    public String getCaptcha(){return captcha;}
+    public void setCaptcha(String captcha){this.captcha=captcha;}
+
+//    public String getRepeatPassword(){return repeatPassword;}
+//    public void setRepeatPassword(String captcha){this.repeatPassword=repeatPassword;}
 }

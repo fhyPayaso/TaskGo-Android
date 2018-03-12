@@ -18,8 +18,7 @@ public class LoginRequestModel{
     public LoginRequestModel(String phone, String password) {
         this.value = phone;
         this.password = password;
-    type="mobile";
-//        this.type=type;
+        this.type="mobile";
     }
 
     public String getPhone() {

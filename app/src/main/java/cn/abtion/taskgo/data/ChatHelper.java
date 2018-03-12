@@ -4,6 +4,7 @@ import android.app.ActivityManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 
+import com.hyphenate.EMCallBack;
 import com.hyphenate.chat.EMClient;
 import com.hyphenate.chat.EMOptions;
 
@@ -91,4 +92,34 @@ public class ChatHelper {
             }
         }, 200);
     }
+
+
+    /**
+     * 登录环信账号
+     */
+    public static void loginEM() {
+
+        EMClient.getInstance().login("111111", "111111", new EMCallBack() {
+            @Override
+            public void onSuccess() {
+
+                Log.i("login", "onSuccess: 登录成功");
+
+            }
+
+            @Override
+            public void onError(int code, String error) {
+
+                Log.i("login", "onError: 登录失败，" + error);
+            }
+
+            @Override
+            public void onProgress(int progress, String status) {
+
+            }
+        });
+    }
+
+
+
 }

@@ -116,9 +116,13 @@ public final class RetrofitFactory {
 
                 //获取本地缓存的token
                 String token = TaskGoApplication.getInstance().getCacheUtil().getString(CacheKey.TOKEN);
+                Log.i(TAG, "intercept: "+token);
 
+                /**
+                 * 防止空指针
+                 */
                 if (token == null) {
-                    token = "17fec53db3756b1a3e262073d57920ab";
+                    token = "token";
                 }
                 // TODO: 18/1/18 token安全性问题
                 //请求时加入token

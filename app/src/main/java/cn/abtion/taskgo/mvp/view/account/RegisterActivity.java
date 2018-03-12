@@ -1,86 +1,50 @@
 package cn.abtion.taskgo.mvp.view.account;
 
 
-
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import android.view.View;
+import android.util.Log;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
-import android.widget.RelativeLayout;
-import android.widget.TextView;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import cn.abtion.taskgo.R;
 import cn.abtion.taskgo.base.activity.BaseNoBarPresenterActivity;
-import cn.abtion.taskgo.base.contract.BaseContract;
-import cn.abtion.taskgo.base.presenter.BasePresenter;
+import cn.abtion.taskgo.common.constants.CacheKey;
+import cn.abtion.taskgo.mvp.contract.account.RegisterContract;
+import cn.abtion.taskgo.mvp.model.account.LoginRequestModel;
+import cn.abtion.taskgo.mvp.model.account.RegisterRequestModel;
+import cn.abtion.taskgo.mvp.presenter.account.RegisterPresenter;
+import cn.abtion.taskgo.mvp.view.MainActivity;
+import cn.abtion.taskgo.utils.CacheUtil;
 import cn.abtion.taskgo.utils.ToastUtil;
 import cn.abtion.taskgo.widget.VerificationCountDownTimer;
 
-public class RegisterActivity extends BaseNoBarPresenterActivity {
+public class RegisterActivity extends BaseNoBarPresenterActivity<RegisterContract.Presenter> implements
+        RegisterContract.View {
 
-    int tag =1;
+    private boolean flagAgreement = false;
 
     VerificationCountDownTimer mverificationCountDownTimer;
 
-    @BindView(R.id.btn_back_register)
-    ImageView mbtnBackRegister;
-    @BindView(R.id.ly_header_register)
-    LinearLayout mlyHeaderRegister;
+
     @BindView(R.id.edit_user_number)
     EditText meditUserNumber;
-    @BindView(R.id.ly_user_number)
-    LinearLayout mlyUserNumber;
-    @BindView(R.id.line3)
-    View mline3;
-    @BindView(R.id.img_verification)
-    ImageView mimgVerification;
     @BindView(R.id.edit_verification_code)
     EditText meditVerificationCode;
     @BindView(R.id.btn_verification_register)
     Button mbtnVerificationRegister;
-    @BindView(R.id.ly_verification_code)
-    RelativeLayout mlyVerificationCode;
-    @BindView(R.id.line4)
-    View mline4;
     @BindView(R.id.edit_secret)
     EditText meditSecret;
-    @BindView(R.id.ly_secret)
-    LinearLayout mlySecret;
-    @BindView(R.id.line5)
-    View mline5;
     @BindView(R.id.edit_secret_again)
     EditText meditSecretAgain;
-    @BindView(R.id.ly_secret_again)
-    LinearLayout mlySecretAgain;
-    @BindView(R.id.line6)
-    View mline6;
-    @BindView(R.id.txt_taskgo_servise)
-    TextView mtxtTaskgoServise;
-    @BindView(R.id.line7)
-    View mline7;
-    @BindView(R.id.txt_servise)
-    LinearLayout mtxtServise;
-    @BindView(R.id.ly_agreement)
-    LinearLayout mlyAgreement;
-    @BindView(R.id.rl_context)
-    RelativeLayout mrlContext;
-    @BindView(R.id.btn_register)
-    Button mbtnRegister;
-
     @BindView(R.id.img_agreement_selector)
     ImageView imgAgreementSelector;
 
-    @Override
-    protected BaseContract.Presenter initPresenter() {
-        return new BasePresenter<>(this);
-    }
 
     public static void startActivity(Context context) {
         context.startActivity(new Intent(context, RegisterActivity.class));
@@ -114,36 +78,24 @@ public class RegisterActivity extends BaseNoBarPresenterActivity {
         super.onCreate(savedInstanceState);
         // TODO: add setContentView(...) invocation
         ButterKnife.bind(this);
-
-
-//        BmobSMS.initialize(this, "d56e0fe7bec328b922ea78d75e0c568c");
     }
 
-
-    @OnClick(R.id.btn_register)
-    public void onBtnRegisterClicked() {
-
-        ToastUtil.showToast("还没有网络请求，敬请期待");
-        LoginActivity.startActivity(RegisterActivity.this);
-        mverificationCountDownTimer.cancel();
-
+    @Override
+    protected RegisterContract.Presenter initPresenter() {
+        return new RegisterPresenter(this);
     }
 
 
     @OnClick(R.id.img_agreement_selector)
     public void onViewClicked() {
-        tag ++;
 
-        if(tag%2==0)//说明遇到点击为已阅读
-        {
+        if (flagAgreement) {
+            flagAgreement = false;
             imgAgreementSelector.setSelected(true);
-        }
-        if (tag %2!=0)
-        {
+        } else {
             imgAgreementSelector.setSelected(false);
+            flagAgreement = true;
         }
-
-
     }
 
 
@@ -152,24 +104,16 @@ public class RegisterActivity extends BaseNoBarPresenterActivity {
      */
     @OnClick(R.id.ly_header_register)
     public void onLyHeaderRegisterClicked() {
-//        LoginActivity.startActivity(RegisterActivity.this);
         this.finish();
     }
 
+
     /**
-     * 绑定 获得验证码 按钮，启动timerStart
+     * 用户协议 暂未开启
      */
-    @OnClick(R.id.btn_verification_register)
-    public void onBtnVerificationRegisterClicked() {
-        ToastUtil.showToast("你即将获得验证码，请注意查收");
-        mverificationCountDownTimer.timerStart(true);
-
-    }
-
     @OnClick(R.id.txt_servise)
-    public void onBtnTxtClicked()
-    {
-
+    public void onBtnTxtClicked() {
+        ToastUtil.showToast("暂未开启");
     }
 
 
@@ -178,10 +122,10 @@ public class RegisterActivity extends BaseNoBarPresenterActivity {
      */
     public void initCountDownTimer() {
 
-        if(!VerificationCountDownTimer.FLAG_FIRST_IN&&
-                VerificationCountDownTimer.mcurMillis+60000>System.currentTimeMillis()) {
+        if (!VerificationCountDownTimer.FLAG_FIRST_IN &&
+                VerificationCountDownTimer.mcurMillis + 60000 > System.currentTimeMillis()) {
 
-            setCountDownTimer(VerificationCountDownTimer.mcurMillis+60000-System.currentTimeMillis());
+            setCountDownTimer(VerificationCountDownTimer.mcurMillis + 60000 - System.currentTimeMillis());
             mverificationCountDownTimer.timerStart(false);
 
         } else {
@@ -191,10 +135,9 @@ public class RegisterActivity extends BaseNoBarPresenterActivity {
     }
 
 
-
     public void setCountDownTimer(final long countDownTime) {
 
-        mverificationCountDownTimer = new VerificationCountDownTimer( countDownTime , 1000) {
+        mverificationCountDownTimer = new VerificationCountDownTimer(countDownTime, 1000) {
 
             @Override
             public void onTick(long millisUntilFinished) {
@@ -208,10 +151,73 @@ public class RegisterActivity extends BaseNoBarPresenterActivity {
                 mbtnVerificationRegister.setEnabled(true);
                 mbtnVerificationRegister.setText(getString(R.string.btn_verification_gain));
 
-                if(countDownTime!=60000) {
+                if (countDownTime != 60000) {
                     setCountDownTimer(60000);
                 }
             }
         };
+    }
+
+
+
+
+
+    /**
+     * 绑定 获得验证码 按钮，启动timerStart
+     */
+    @OnClick(R.id.btn_verification_register)
+    public void onBtnVerificationRegisterClicked() {
+
+        //点击 发送验证码 按钮，P层进行数据的传输
+        mPresenter.sendCaptcha(meditUserNumber.getText().toString().trim());
+        ToastUtil.showToast("你即将获得验证码，请注意查收");
+        mverificationCountDownTimer.timerStart(true);
+    }
+
+
+    /**
+     * 点击 注册 按钮,P层进行数据的传输
+     */
+    @OnClick(R.id.btn_register)
+    public void onBtnRegisterClicked() {
+
+        mPresenter.register(new RegisterRequestModel(meditUserNumber.getText().toString().trim(), meditSecret.getText
+                ().toString().trim(), "mobile", meditVerificationCode.getText().toString().trim()), meditSecretAgain
+                .getText().toString().trim());
+
+
+    }
+
+
+    /**
+     * 注册成功回调，直接调用登录接口
+     */
+    @Override
+    public void onRegisterSuccess() {
+
+        mPresenter.loginAgain(new LoginRequestModel(meditUserNumber.getText().toString().trim(), meditSecret.getText
+                ().toString().trim()));
+    }
+
+
+    /**
+     * 登录成功回调，缓存token
+     * @param token
+     */
+    @Override
+    public void onLoginAgainSuccess(String token) {
+
+        Log.i("register", "onLoginAgainSuccess: " + token);
+
+        CacheUtil.putString(CacheKey.TOKEN, token);
+        MainActivity.startActivity(RegisterActivity.this);
+        finish();
+        mverificationCountDownTimer.cancel();
+    }
+
+
+    @Override
+    public void onCaptchaSuccess() {
+        ToastUtil.showToast("已经发送验证码，请注意查收");
     }
 }
