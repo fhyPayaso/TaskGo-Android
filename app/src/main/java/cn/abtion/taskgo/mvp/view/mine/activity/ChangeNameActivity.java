@@ -42,7 +42,7 @@ public class ChangeNameActivity extends BaseToolBarActivity {
 
     public static void startChangeNameActivity(Activity activity, Context context) {
         Intent intent = new Intent(context, ChangeNameActivity.class);
-        activity.startActivityForResult(intent, 1);
+        activity.startActivityForResult(intent, 10);
 
     }
 

@@ -1,10 +1,15 @@
 package cn.abtion.taskgo.mvp.view.mine.activity;
 
+import android.app.AlertDialog;
 import android.app.DatePickerDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.BitmapFactory;
+import android.view.Gravity;
 import android.view.View;
+import android.view.Window;
+import android.view.WindowManager;
 import android.widget.TextView;
 
 import com.bigkoo.pickerview.TimePickerView;
@@ -18,10 +23,13 @@ import butterknife.BindView;
 import butterknife.OnClick;
 import cn.abtion.taskgo.R;
 import cn.abtion.taskgo.base.activity.BaseToolBarPresenterActivity;
+import cn.abtion.taskgo.base.data.DataCallBack;
+import cn.abtion.taskgo.data.UpLoadHelper;
 import cn.abtion.taskgo.mvp.contract.mine.UpdateInformationContract;
 import cn.abtion.taskgo.mvp.model.mine.MineInformationModel;
 import cn.abtion.taskgo.mvp.presenter.mine.UpdateInformationPresenter;
 import cn.abtion.taskgo.utils.DialogUtil;
+import cn.abtion.taskgo.utils.FileUtil;
 import cn.abtion.taskgo.utils.ToastUtil;
 import de.hdodenhof.circleimageview.CircleImageView;
 
@@ -29,7 +37,7 @@ import de.hdodenhof.circleimageview.CircleImageView;
  * @author：lszr on 2018/1/31 21:54
  * @email：1085963811@qq.com
  */
-public class EditDataActivity extends BaseToolBarPresenterActivity<UpdateInformationContract.Presenter> implements UpdateInformationContract.View {
+public class EditDataActivity extends BaseToolBarPresenterActivity<UpdateInformationContract.Presenter> implements UpdateInformationContract.View, DataCallBack.Callback<String> {
     public int mGender = -1;
     @BindView(R.id.txt_mine_status)
     TextView mTxtMineStatus;
@@ -41,6 +49,16 @@ public class EditDataActivity extends BaseToolBarPresenterActivity<UpdateInforma
 
     private DatePickerDialog.OnDateSetListener mDateSetListener;
     public MineInformationModel mineInformationModel = null;
+    /**
+     * 0代表不需要上传图片，1代表需要上传图片
+     */
+    private Boolean hasImg = false;
+    private AlertDialog bottomDialog;
+    private DialogUtil.NativeProgressDialog mProgressDialog;
+    private TextView btnTakePhoto;
+    private TextView btnFromAlbum;
+    private TextView btnCancel;
+    private String photoPath;
 
     @BindView(R.id.txt_mine_phone_number)
     TextView mTxtMinePhoneNumber;
@@ -90,6 +108,7 @@ public class EditDataActivity extends BaseToolBarPresenterActivity<UpdateInforma
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.rlayout_mine_edit_photo:
+                updatePhoto();
                 break;
             case R.id.rlayout_mine_edit_name:
                 ChangeNameActivity.startChangeNameActivity(EditDataActivity.this, EditDataActivity.this);
@@ -103,6 +122,26 @@ public class EditDataActivity extends BaseToolBarPresenterActivity<UpdateInforma
             default:
                 break;
         }
+    }
+
+    private void updatePhoto() {
+        bottomDialog = new AlertDialog.Builder(this, R.style.dialog_bottom).create();
+        bottomDialog.show();
+        Window window = bottomDialog.getWindow();
+        window.setContentView(R.layout.dialog_upload_image);
+        window.setGravity(Gravity.BOTTOM);
+        window.getDecorView().setPadding(0, 0, 0, 0);
+        WindowManager.LayoutParams lp = window.getAttributes();
+        lp.width = WindowManager.LayoutParams.MATCH_PARENT;
+        lp.height = WindowManager.LayoutParams.WRAP_CONTENT;
+        window.setAttributes(lp);
+
+
+        btnTakePhoto = bottomDialog.findViewById(R.id.btn_take_photo);
+        btnFromAlbum = bottomDialog.findViewById(R.id.btn_from_album);
+        btnCancel = bottomDialog.findViewById(R.id.btn_cancel);
+        setDialogOnClick();
+
     }
 
     public void selectBirthDate() {
@@ -242,23 +281,101 @@ public class EditDataActivity extends BaseToolBarPresenterActivity<UpdateInforma
     }
 
 
-    @Override
-    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        switch (requestCode) {
-            case 1:
-                if (resultCode == RESULT_OK) {
-                    String newName=data.getStringExtra("newName");
-                    mTxtMineName.setText(newName);
-                    mPresenter.requestUpdateInformation(newName,mineInformationModel.getAvatar(),mineInformationModel.getSex(),mineInformationModel.getBirth());
-                    mineInformationModel.setName(newName);
-                }
-                break;
-            default:
-                break;
-        }
 
 
+
+
+
+
+    /**
+     * 设置底部dialog点击事件
+     */
+    private void setDialogOnClick() {
+
+        //拍照选项点击事件
+        btnTakePhoto.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                String filePath = FileUtil.createNewFile(EditDataActivity.this, "TaskGo");
+                photoPath = FileUtil.openCamera(EditDataActivity.this, filePath);
+                bottomDialog.dismiss();
+            }
+        });
+
+        //相册选项点击事件
+        btnFromAlbum.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                FileUtil.openAlbum(EditDataActivity.this);
+                bottomDialog.dismiss();
+            }
+        });
+
+        btnCancel.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                bottomDialog.dismiss();
+            }
+        });
     }
 
 
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+        if (resultCode == RESULT_OK) {
+
+            switch (requestCode) {
+
+                case FileUtil.CAMERA_REQUEST:
+                    imgPortrait.setImageBitmap(BitmapFactory.decodeFile(photoPath));
+                    UpLoadHelper.upLoadImgToQiNiu(photoPath, this);
+                    mProgressDialog = new DialogUtil().new NativeProgressDialog();
+                    mProgressDialog
+                            .initDialog(EditDataActivity.this)
+                            .setMessage("请稍后")
+                            .showDialog();
+                    hasImg = true;
+                    break;
+                case FileUtil.ALBUM_REQUEST:
+                    String picturePath = FileUtil.getSelectedPicturePath(data, EditDataActivity.this);
+                    imgPortrait.setImageBitmap(BitmapFactory.decodeFile(picturePath));
+                    photoPath = picturePath;
+                    UpLoadHelper.upLoadImgToQiNiu(photoPath, this);
+                    mProgressDialog = new DialogUtil().new NativeProgressDialog();
+                    mProgressDialog
+                            .initDialog(EditDataActivity.this)
+                            .setMessage("请稍后")
+                            .showDialog();
+                    hasImg = true;
+                    break;
+                case 10:
+                    if (resultCode == RESULT_OK) {
+                        String newName=data.getStringExtra("newName");
+                        mTxtMineName.setText(newName);
+                        mPresenter.requestUpdateInformation(newName,mineInformationModel.getAvatar(),mineInformationModel.getSex(),mineInformationModel.getBirth());
+                        mineInformationModel.setName(newName);
+                    }
+                    break;
+                default:
+                    break;
+            }
+        }
+    }
+
+    @Override
+    public void onDataLoaded(String s) {
+        mPresenter.requestUpdateInformation(mineInformationModel.getName(),s,mineInformationModel.getSex(),mineInformationModel.getBirth());
+        ToastUtil.showToast("更新头像成功！");
+        mProgressDialog.hideDialog();
+    }
+
+    @Override
+    public void onFailedLoaded(int error) {
+        ToastUtil.showToast(error);
+        mProgressDialog.hideDialog();
+    }
 }
