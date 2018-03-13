@@ -72,7 +72,6 @@ public class MineFragment extends BasePresenterFragment<MineInformationContract.
     public void onResume() {
         super.onResume();
         mPresenter.requestMineInformation();
-
     }
 
     @OnClick({R.id.rlayout_mine_follow, R.id.rlayout_mine_fans, R.id.btn_release, R.id.btn_accept, R.id.rlayout_mine_real_name, R.id.rlayout_mine_feedback, R.id.rlayout_mine_setting, R.id.rlayout_mine_edit})
