@@ -99,11 +99,6 @@ public class EditDataActivity extends BaseToolBarPresenterActivity<UpdateInforma
         context.startActivity(intent);
     }
 
-    public static void startEditDataActivity(Context context) {
-        Intent intent = new Intent(context, EditDataActivity.class);
-        context.startActivity(intent);
-    }
-
     @OnClick({R.id.rlayout_mine_edit_photo, R.id.rlayout_mine_edit_name, R.id.rlayout_mine_edit_gender, R.id.rlayout_mine_edit_brith})
     public void onViewClicked(View view) {
         switch (view.getId()) {
@@ -125,6 +120,7 @@ public class EditDataActivity extends BaseToolBarPresenterActivity<UpdateInforma
     }
 
     private void updatePhoto() {
+
         bottomDialog = new AlertDialog.Builder(this, R.style.dialog_bottom).create();
         bottomDialog.show();
         Window window = bottomDialog.getWindow();

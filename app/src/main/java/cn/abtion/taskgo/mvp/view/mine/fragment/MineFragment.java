@@ -119,7 +119,10 @@ public class MineFragment extends BasePresenterFragment<MineInformationContract.
         mineInformation = mineInformationModel;
         txtMineFollower.setText(String.valueOf(mineInformationModel.getFollowers_count()));
         txtMineFans.setText(String.valueOf(mineInformationModel.getFollowings_count()));
-        Glide.with(MineFragment.this).load(mineInformationModel.getAvatar()).into(imgPortrait);
+        Glide
+                .with(MineFragment.this)
+                .load(mineInformationModel.getAvatar())
+                .into(imgPortrait);
     }
 
 

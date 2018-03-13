@@ -159,23 +159,7 @@
 
 
         </RelativeLayout>
-        <RelativeLayout
-            android:id="@+id/rlayout_mine_exit_systom"
-            android:layout_width="match_parent"
-            android:layout_height="45dp"
-            android:layout_marginTop="1dp"
-            android:background="@color/white">
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_centerVertical="true"
-                android:layout_centerHorizontal="true"
-                android:text="@string/btn_mine_exit_systom"
-                android:textColor="@color/text_mine_button"
-                android:textSize="18sp" />
 
-
-        </RelativeLayout>
 
 
 
