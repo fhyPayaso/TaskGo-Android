@@ -101,7 +101,12 @@ public class LostFoundTaskListPresenter extends BasePresenter<LostFoundTaskListC
                     ,response.getPicture_url()
                     ,response.getUser_name()
                     ,response.getCreated_at()
-                    ,response.getName());
+                    ,response.getName()
+                    ,String.valueOf(response.getUser_id()));
+
+
+
+
             model.setTaskId(response.getId());
             //0代表寻物启事，1代表失物招领
             if(response.getType() == 0) {

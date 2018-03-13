@@ -20,26 +20,28 @@ public class BaseTaskModel {
     private String releaseTime;
     private String mainValue;
     private String subTitle;
-
     private String userId;
 
 
-    public BaseTaskModel(int taskType, String avatarUrl, String username, String releaseTime, String mainValue, String subTitle) {
+    public BaseTaskModel(int taskType, String avatarUrl, String username, String releaseTime, String mainValue,
+                         String subTitle,String userId) {
         this.taskType = taskType;
         this.avatarUrl = avatarUrl;
         this.username = username;
         this.releaseTime = releaseTime;
         this.mainValue = mainValue;
         this.subTitle = subTitle;
+        this.userId = userId;
     }
 
-    public BaseTaskModel(int taskType,String avatarUrl, String username, String releaseTime, String mainValue) {
+    public BaseTaskModel(int taskType,String avatarUrl, String username, String releaseTime, String mainValue,String userId) {
 
         this.taskType = taskType;
         this.avatarUrl = avatarUrl;
         this.username = username;
         this.releaseTime = releaseTime;
         this.mainValue = mainValue;
+        this.userId = userId;
     }
 
     public String getUserId() {

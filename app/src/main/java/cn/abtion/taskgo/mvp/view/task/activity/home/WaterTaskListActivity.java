@@ -203,7 +203,8 @@ public class WaterTaskListActivity extends BaseToolBarPresenterActivity<WaterTas
 
     @Override
     public void onClickAvatar(int position) {
-        PersonalPageActivity.startPersonalPageActivity(WaterTaskListActivity.this,mWaterTaskList.get(position).getUserId());
+        PersonalPageActivity.startPersonalPageActivity(WaterTaskListActivity.this, mWaterTaskList.get(position)
+                .getUserId());
     }
 
     /**
@@ -244,11 +245,11 @@ public class WaterTaskListActivity extends BaseToolBarPresenterActivity<WaterTas
     @Override
     public void onLoadDataSuccess(List<BaseTaskModel> modelList) {
 
+        txtTotalNumber.setText(String.valueOf(mWaterTaskList.size()));
         mWaterTaskList.clear();
         mWaterTaskList.addAll(modelList);
-        mSwipeRefresh.setRefreshing(false);
         mAdapter.notifyDataSetChanged();
-        txtTotalNumber.setText(String.valueOf(mWaterTaskList.size()));
+        mSwipeRefresh.setRefreshing(false);
     }
 
 

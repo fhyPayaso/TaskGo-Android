@@ -20,7 +20,7 @@ public class SearchTaskActivity extends BaseNoBarPresenterActivity {
 
     @Override
     protected BaseContract.Presenter initPresenter() {
-        return new BasePresenter<>(null);
+        return new BasePresenter<>(this);
     }
 
     @Override

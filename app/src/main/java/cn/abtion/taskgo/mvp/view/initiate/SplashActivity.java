@@ -73,8 +73,9 @@ public class SplashActivity extends BaseNoBarPresenterActivity<SplashContract.Pr
             GuideActivity.startActivity(this);
             finish();
         } else {
+
             String token = TaskGoApplication.getInstance().getCacheUtil().getString(CacheKey.TOKEN);
-            if (token == null) {
+            if (token == null || token.length()<6) {
                 invalidToken();
             } else {
                 //不是第一次登录检查token是否过期
@@ -82,7 +83,6 @@ public class SplashActivity extends BaseNoBarPresenterActivity<SplashContract.Pr
             }
         }
     }
-
 
     /**
      * token有效直接进入主活动

@@ -133,7 +133,8 @@ public class MyTaskListPresenter extends BasePresenter<MyTaskListContract.View> 
                         ,response.getAvatar()
                         ,response.getUser_name()
                         ,response.getCreated_at()
-                        ,response.getName());
+                        ,response.getName()
+                        ,String.valueOf(response.getUser_id()));
             } else {
 
                 String type = response.getType() == 0 ? "自取":"送水上门";
@@ -143,7 +144,8 @@ public class MyTaskListPresenter extends BasePresenter<MyTaskListContract.View> 
                         ,response.getUser_name()
                         ,response.getCreated_at()
                         ,response.getAddress()
-                        ,type);
+                        ,type
+                        ,String.valueOf(response.getUser_id()));
             }
             model.setTaskId(response.getId());
             modelList.add(model);

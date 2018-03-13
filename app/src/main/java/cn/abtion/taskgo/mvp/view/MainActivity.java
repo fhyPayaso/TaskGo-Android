@@ -15,6 +15,7 @@ import cn.abtion.taskgo.mvp.view.task.fragment.HomeFragment;
 import cn.abtion.taskgo.mvp.view.message.fragment.MessageFragment;
 import cn.abtion.taskgo.mvp.view.mine.fragment.MineFragment;
 import cn.abtion.taskgo.utils.FragmentUtil;
+import cn.abtion.taskgo.utils.ToastUtil;
 
 
 public class MainActivity extends BaseNoBarActivity {
@@ -37,6 +38,7 @@ public class MainActivity extends BaseNoBarActivity {
     private HomeFragment mHomeFragment;
     private MessageFragment mMessageFragment;
     private MineFragment mMineFragment;
+    private long startTime=0;
 
 
     @Override
@@ -171,5 +173,18 @@ public class MainActivity extends BaseNoBarActivity {
         super.onCreate(savedInstanceState);
         // TODO: add setContentView(...) invocation
         ButterKnife.bind(this);
+    }
+
+
+    @Override
+    public void onBackPressed() {
+
+        long currentTime=System.currentTimeMillis();
+        if((currentTime-startTime)>2000) {
+            ToastUtil.showToast("再按一次退出TaskGo");
+            startTime=currentTime;
+        } else {
+            finish();
+        }
     }
 }
