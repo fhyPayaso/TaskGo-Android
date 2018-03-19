@@ -40,6 +40,7 @@ public class SplashActivity extends BaseNoBarPresenterActivity<SplashContract.Pr
     @Override
     protected void initView() {
 
+
         new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {
@@ -75,7 +76,7 @@ public class SplashActivity extends BaseNoBarPresenterActivity<SplashContract.Pr
         } else {
 
             String token = TaskGoApplication.getInstance().getCacheUtil().getString(CacheKey.TOKEN);
-            if (token == null || token.length()<6) {
+            if (token == null || token.length() < 6) {
                 invalidToken();
             } else {
                 //不是第一次登录检查token是否过期
