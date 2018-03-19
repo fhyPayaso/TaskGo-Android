@@ -156,8 +156,6 @@
                 android:text="@string/btn_mine_exchange_account"
                 android:textColor="@color/text_mine_button"
                 android:textSize="18sp" />
-
-
         </RelativeLayout>
 
 

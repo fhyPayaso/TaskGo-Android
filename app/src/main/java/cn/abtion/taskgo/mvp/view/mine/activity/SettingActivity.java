@@ -79,7 +79,8 @@ public class SettingActivity extends BaseToolBarActivity {
     }
 
 
-    @OnClick({R.id.rlayout_mine_setting_change_password, R.id.rlayout_mine_setting_about, R.id.rlayout_mine_exchange_account, R.id.rlayout_mine_exit_systom})
+    @OnClick({R.id.rlayout_mine_setting_change_password, R.id.rlayout_mine_setting_about, R.id.rlayout_mine_exchange_account
+    })
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.rlayout_mine_setting_change_password:
