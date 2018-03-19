@@ -219,9 +219,8 @@ public class ReleaseLostFoundTaskActivity extends BaseToolBarPresenterActivity<R
                     hasImg = true;
                     break;
                 case FileUtil.ALBUM_REQUEST:
-                    String picturePath = FileUtil.getSelectedPicturePath(data, ReleaseLostFoundTaskActivity.this);
-                    mImgAddPhoto.setImageBitmap(BitmapFactory.decodeFile(picturePath));
-                    photoPath = picturePath;
+                    String photoPath = FileUtil.getSelectedPicturePath(data, ReleaseLostFoundTaskActivity.this);
+                    mImgAddPhoto.setImageBitmap(BitmapFactory.decodeFile(photoPath));
                     hasImg = true;
                     break;
                 default:

@@ -43,11 +43,7 @@ public class TaskGoApplication extends Application {
 
         ChatHelper.initEM();
 
-        // android 7.0系统解决拍照的问题
-//        StrictMode.VmPolicy.Builder builder = new StrictMode.VmPolicy.Builder();
-//        StrictMode.setVmPolicy(builder.build());
-//        builder.detectFileUriExposure();
-
+        //解决安卓7.0相机调用崩溃问题
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
             StrictMode.VmPolicy.Builder builder = new StrictMode.VmPolicy.Builder();
             StrictMode.setVmPolicy(builder.build());
@@ -147,6 +143,4 @@ public class TaskGoApplication extends Application {
     public void exitAccount() {
 
     }
-
-
 }

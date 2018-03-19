@@ -46,7 +46,12 @@ public class BannerPager extends ViewFlipper implements View.OnTouchListener {
         this.setInAnimation(inFromRightAnimation());
         this.setOutAnimation(outToLeftAnimation());
         this.setFlipInterval(3000);
+    }
 
+
+    @Override
+    public boolean performClick() {
+        return super.performClick();
     }
 
     @Override
