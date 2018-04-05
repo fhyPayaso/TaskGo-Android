@@ -24,9 +24,7 @@ public class ChangePasswordActivity extends BaseToolBarPresenterActivity<ChangeP
     @BindView(R.id.edit_repeat_password)
     EditText editRepeatPassword;
 
-    @Override
-    public void setPresenter(ChangePasswordContract.Presenter presenter) {
-    }
+
 
     @Override
     public void onChangePasswordSuccess() {

@@ -138,7 +138,6 @@ public class MyTaskListPresenter extends BasePresenter<MyTaskListContract.View> 
             } else {
 
                 String type = response.getType() == 0 ? "自取":"送水上门";
-
                 model = new BaseTaskModel(0
                         ,response.getAvatar()
                         ,response.getUser_name()

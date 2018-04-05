@@ -9,7 +9,11 @@ import android.widget.Switch;
 import butterknife.BindView;
 import butterknife.OnClick;
 import cn.abtion.taskgo.R;
+import cn.abtion.taskgo.TaskGoApplication;
 import cn.abtion.taskgo.base.activity.BaseToolBarActivity;
+import cn.abtion.taskgo.common.constants.CacheKey;
+import cn.abtion.taskgo.mvp.view.account.LoginActivity;
+import cn.abtion.taskgo.utils.CacheUtil;
 
 /**
  * @author：lszr on 2018/1/30 21:13
@@ -75,7 +79,8 @@ public class SettingActivity extends BaseToolBarActivity {
     }
 
 
-    @OnClick({R.id.rlayout_mine_setting_change_password, R.id.rlayout_mine_setting_about, R.id.rlayout_mine_exchange_account, R.id.rlayout_mine_exit_systom})
+    @OnClick({R.id.rlayout_mine_setting_change_password, R.id.rlayout_mine_setting_about, R.id.rlayout_mine_exchange_account
+    })
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.rlayout_mine_setting_change_password:
@@ -85,8 +90,10 @@ public class SettingActivity extends BaseToolBarActivity {
                 AboutAvtivity.startAboutActivity(SettingActivity.this);
                 break;
             case R.id.rlayout_mine_exchange_account:
-                break;
-            case R.id.rlayout_mine_exit_systom:
+                TaskGoApplication.getInstance().removeAllActivity();
+                LoginActivity.startActivity(SettingActivity.this);
+                CacheUtil.putString(CacheKey.TOKEN, null);
+                finish();
                 break;
             default:
                 break;
