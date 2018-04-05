@@ -3,6 +3,7 @@ package cn.abtion.taskgo.mvp.view;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -38,7 +39,7 @@ public class MainActivity extends BaseNoBarActivity {
     private HomeFragment mHomeFragment;
     private MessageFragment mMessageFragment;
     private MineFragment mMineFragment;
-    private long startTime=0;
+    private long startTime = 0;
 
 
     @Override
@@ -54,6 +55,8 @@ public class MainActivity extends BaseNoBarActivity {
     @Override
     protected void initView() {
 
+        //首页禁止侧滑返回
+        setSwipeBackEnable(false);
         onLyMenuHomeClicked();
     }
 
@@ -179,10 +182,10 @@ public class MainActivity extends BaseNoBarActivity {
     @Override
     public void onBackPressed() {
 
-        long currentTime=System.currentTimeMillis();
-        if((currentTime-startTime)>2000) {
+        long currentTime = System.currentTimeMillis();
+        if ((currentTime - startTime) > 2000) {
             ToastUtil.showToast("再按一次退出TaskGo");
-            startTime=currentTime;
+            startTime = currentTime;
         } else {
             finish();
         }

@@ -8,6 +8,7 @@ import android.widget.TextView;
 import butterknife.BindView;
 import butterknife.OnClick;
 import cn.abtion.taskgo.R;
+import cn.abtion.taskgo.base.activity.BaseToolBarActivity;
 import cn.abtion.taskgo.base.activity.BaseToolBarPresenterActivity;
 import cn.abtion.taskgo.mvp.contract.task.ReleaseTaskContract;
 import cn.abtion.taskgo.mvp.model.task.request.ReleaseWaterTaskRequest;
@@ -21,8 +22,7 @@ import cn.abtion.taskgo.utils.ToastUtil;
  * email fanhongyu@hrsoft.net.
  */
 
-public class ReleaseWaterTaskActivity extends BaseToolBarPresenterActivity<ReleaseTaskContract.Presenter>
-        implements ReleaseTaskContract.View {
+public class ReleaseWaterTaskActivity extends BaseToolBarActivity {
 
 
     @BindView(R.id.txt_type_send)
@@ -42,10 +42,6 @@ public class ReleaseWaterTaskActivity extends BaseToolBarPresenterActivity<Relea
      */
     private String waterTaskType = "0";
 
-    @Override
-    public ReleaseTaskContract.Presenter initPresenter() {
-        return new ReleaseTaskPresenter(this);
-    }
 
     @Override
     protected int getLayoutId() {
@@ -97,29 +93,31 @@ public class ReleaseWaterTaskActivity extends BaseToolBarPresenterActivity<Relea
         waterTaskType = "1";
     }
 
-    /**
-     * 发布成功回调
-     */
-    @Override
-    public void onReleaseSuccess() {
-        ToastUtil.showToast("发布成功");
-        finish();
-    }
-
-    /**
-     * 发布失败打印错误信息
-     *
-     * @param errorMessage
-     */
-    @Override
-    public void onReleaseFailed(String errorMessage) {
-        ToastUtil.showToast(errorMessage);
-    }
+//    /**
+//     * 发布成功回调
+//     */
+//    @Override
+//    public void onReleaseSuccess() {
+//        ToastUtil.showToast("发布成功");
+//        finish();
+//    }
+//
+//    /**
+//     * 发布失败打印错误信息
+//     *
+//     * @param errorMessage
+//     */
+//    @Override
+//    public void onReleaseFailed(String errorMessage) {
+//        ToastUtil.showToast(errorMessage);
+//    }
 
 
     @OnClick(R.id.btn_release_task)
     public void onViewClicked() {
-        mPresenter.releaseWaterTask(new ReleaseWaterTaskRequest(editAddressNumber.getText().toString().trim(),
-                waterTaskType));
+//        mPresenter.releaseWaterTask(new ReleaseWaterTaskRequest(editAddressNumber.getText().toString().trim(),
+//                waterTaskType));
+
+        ChooseCardActivity.startActivity(this);
     }
 }

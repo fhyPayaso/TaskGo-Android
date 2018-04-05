@@ -85,17 +85,6 @@ dependencies {
     compile 'com.hyphenate:hyphenate-sdk:3.3.0'
 
 
-//    //Bomb
-//    compile 'cn.bmob.android:http-legacy:1.0'
-//
-//    //bmob-sms ：Bmob单独为短信服务提供的包
-//    compile 'cn.bmob.android:bmob-sms:1.0.1'
-//
-//    //如果你想应用能够兼容Android6.0，请添加此依赖(org.apache.http.legacy.jar)
-//    compile 'cn.bmob.android:http-legacy:1.0'
-//
-//    compile 'cn.bmob.android:bmob-sdk:3.5.0'
-//
     compile 'de.hdodenhof:circleimageview:2.1.0'
     compile 'com.android.support:cardview-v7:26.1.0'
 
@@ -104,6 +93,8 @@ dependencies {
     annotationProcessor 'com.jakewharton:butterknife-compiler:8.8.1'
     //日期选择器
     compile 'com.contrarywind:Android-PickerView:3.2.5'
+    //侧滑返回
+    compile 'me.imid.swipebacklayout.lib:library:1.1.0'
 
 
 

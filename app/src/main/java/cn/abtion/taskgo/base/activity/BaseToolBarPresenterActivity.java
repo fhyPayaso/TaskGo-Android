@@ -37,7 +37,10 @@ public abstract class BaseToolBarPresenterActivity<Presenter extends BaseContrac
 
     @Override
     protected void onDestroy() {
-        mPresenter.destroy();
+
+        if (mPresenter != null) {
+            mPresenter.destroy();
+        }
         super.onDestroy();
     }
 }

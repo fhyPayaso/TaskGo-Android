@@ -12,9 +12,13 @@ import android.support.v7.app.AppCompatActivity;
 import android.util.AttributeSet;
 import android.view.View;
 
+import java.util.LinkedList;
+
 import butterknife.ButterKnife;
 import butterknife.Unbinder;
 import cn.abtion.taskgo.utils.Utility;
+import me.imid.swipebacklayout.lib.SwipeBackLayout;
+import me.imid.swipebacklayout.lib.app.SwipeBackActivity;
 
 /**
  * @author FanHongyu.
@@ -22,11 +26,14 @@ import cn.abtion.taskgo.utils.Utility;
  * email fanhongyu@hrsoft.net.
  */
 
-public abstract class BaseActivity extends AppCompatActivity {
+public abstract class BaseActivity extends SwipeBackActivity {
 
+
+    private SwipeBackLayout mSwipeBackLayout;
 
     /**
      * 进度窗
+     *
      * @param savedInstanceState
      */
     protected ProgressDialog progressDialog;
@@ -34,8 +41,8 @@ public abstract class BaseActivity extends AppCompatActivity {
     /**
      * 取消ProgressDialog
      */
-    protected void disMissProgressDialog(){
-        if(!isDestroyed()&&progressDialog.isShowing()){
+    protected void disMissProgressDialog() {
+        if (!isDestroyed() && progressDialog.isShowing()) {
             Utility.runOnUiThread(new Runnable() {
                 @Override
                 public void run() {
@@ -50,6 +57,13 @@ public abstract class BaseActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         //禁止APP横屏
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
+
+        //状态栏深色文字
+        getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN | View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR);
+
+        mSwipeBackLayout = getSwipeBackLayout();
+        //设置滑动方向，可设置EDGE_LEFT, EDGE_RIGHT, EDGE_ALL, EDGE_BOTTOM
+        mSwipeBackLayout.setEdgeTrackingEnabled(SwipeBackLayout.EDGE_LEFT);
     }
 
 
@@ -66,6 +80,10 @@ public abstract class BaseActivity extends AppCompatActivity {
         initVariable();
         initView();
         loadData();
+
+
+
+
     }
 
     /**

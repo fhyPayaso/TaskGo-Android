@@ -32,6 +32,11 @@ public class ReleaseTaskPresenter extends BasePresenter<ReleaseTaskContract.View
     }
 
 
+    @Override
+    public void loadCardInformation() {
+
+    }
+
     /**
      * 发布水任务网络请求
      * @param request

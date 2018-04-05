@@ -14,6 +14,8 @@ public interface ReleaseTaskContract {
 
     interface Presenter extends BaseContract.Presenter {
 
+        void loadCardInformation();
+
         void releaseWaterTask(ReleaseWaterTaskRequest request);
 
         void releaseLostFoundTask(ReleaseLostFoundTaskRequest request);
