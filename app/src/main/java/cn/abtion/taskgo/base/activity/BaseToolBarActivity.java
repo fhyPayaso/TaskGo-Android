@@ -39,8 +39,6 @@ public abstract class BaseToolBarActivity extends BaseActivity {
     }
 
 
-
-
     /**
      * 获取带toolbar的基类页面View
      *
@@ -77,6 +75,7 @@ public abstract class BaseToolBarActivity extends BaseActivity {
 
     /**
      * 响应菜单项的点击事件
+     *
      * @param item
      * @return
      */
@@ -120,10 +119,11 @@ public abstract class BaseToolBarActivity extends BaseActivity {
 
     /**
      * 自定义右上角图标
+     *
      * @param resId
      */
     protected void setToolBarMenu(int resId) {
-        if(mToolBar != null) {
+        if (mToolBar != null) {
             ImageView imageView = mToolBar.findViewById(R.id.img_toolbar_menu);
             imageView.setImageResource(resId);
         }

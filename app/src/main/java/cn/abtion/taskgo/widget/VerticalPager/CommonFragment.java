@@ -74,19 +74,4 @@ public class CommonFragment extends Fragment implements DragLayout.GotoDetailLis
     public void bindData(String imageUrl) {
         this.imageUrl = imageUrl;
     }
-
-
-
-
-
-    /**
-     * 展示物品任务详细信息
-     * @param context
-     * @param dialog
-     * @param response
-     */
-    public static void showLostFoundTaskInfo(Context context, final DialogUtil.CustomAlertDialog dialog, LostFoundTaskResponse response) {
-
-
-    }
 }

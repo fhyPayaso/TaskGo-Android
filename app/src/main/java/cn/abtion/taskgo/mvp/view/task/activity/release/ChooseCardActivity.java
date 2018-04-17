@@ -2,7 +2,9 @@ package cn.abtion.taskgo.mvp.view.task.activity.release;
 
 import android.content.Context;
 import android.content.Intent;
+import android.os.Binder;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentStatePagerAdapter;
 import android.support.v4.view.ViewPager;
@@ -10,6 +12,7 @@ import android.text.Html;
 import android.view.View;
 import android.widget.TextView;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -63,6 +66,7 @@ public class ChooseCardActivity extends BaseToolBarPresenterActivity {
     protected void initView() {
         setActivityTitle("发布任务");
         fillViewPager();
+
     }
 
     @Override

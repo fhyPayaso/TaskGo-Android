@@ -24,7 +24,6 @@ public class BasePresenter<T extends BaseContract.View> implements BaseContract.
 
         //将V层的引用捆绑到P层
         this.mView = mView;
-
         //将P层自身捆绑到V层
         this.mView.setPresenter(this);
     }
@@ -46,8 +45,5 @@ public class BasePresenter<T extends BaseContract.View> implements BaseContract.
 
         //销毁P层对V层的引用
         mView = null;
-
     }
-
-
 }

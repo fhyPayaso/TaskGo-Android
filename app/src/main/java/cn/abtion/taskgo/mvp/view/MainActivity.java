@@ -55,8 +55,6 @@ public class MainActivity extends BaseNoBarActivity {
     @Override
     protected void initView() {
 
-        //首页禁止侧滑返回
-        setSwipeBackEnable(false);
         onLyMenuHomeClicked();
     }
 

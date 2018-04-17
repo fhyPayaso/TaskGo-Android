@@ -21,9 +21,6 @@ import de.hdodenhof.circleimageview.CircleImageView;
  */
 public class MyFollowListAdapter extends BaseRecyclerViewAdapter<MyFollowModel> {
 
-
-    private Context mContext;
-
     public MyFollowListAdapter(Context context, List<MyFollowModel> list) {
         super(context, list);
         mContext = context;
@@ -32,7 +29,6 @@ public class MyFollowListAdapter extends BaseRecyclerViewAdapter<MyFollowModel> 
     @Override
     public BaseViewHolder<MyFollowModel> onCreateViewHolder(ViewGroup parent, int viewType) {
         View view = mInflater.inflate(R.layout.item_my_follow, parent, false);
-
         return new ItemHolder(view);
     }
 
@@ -43,8 +39,6 @@ public class MyFollowListAdapter extends BaseRecyclerViewAdapter<MyFollowModel> 
         @BindView(R.id.txt_my_follow_name)
         TextView mTxtMyFollowName;
 
-
-
         public ItemHolder(View itemView) {
             super(itemView);
         }
@@ -53,7 +47,6 @@ public class MyFollowListAdapter extends BaseRecyclerViewAdapter<MyFollowModel> 
         protected void onBind(MyFollowModel myFollowModel, int position) {
             mTxtMyFollowName.setText(myFollowModel.getName()==null?"N/A":myFollowModel.getName());
             Glide.with(mContext).load(myFollowModel.getAvatar()).into(mImgMyFollowAvatar);
-
         }
     }
 }

@@ -11,6 +11,7 @@ android {
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
 
 
+        multiDexEnabled true
 
         useLibrary 'org.apache.http.legacy'
 
@@ -90,8 +91,7 @@ dependencies {
     annotationProcessor 'com.jakewharton:butterknife-compiler:8.8.1'
     //日期选择器
     compile 'com.contrarywind:Android-PickerView:3.2.5'
-    //侧滑返回
-    compile 'me.imid.swipebacklayout.lib:library:1.1.0'
+
 
 
 

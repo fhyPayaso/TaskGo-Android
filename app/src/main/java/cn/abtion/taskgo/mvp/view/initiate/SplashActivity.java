@@ -23,8 +23,7 @@ import cn.abtion.taskgo.mvp.view.account.LoginActivity;
  * email fanhongyu@hrsoft.net.
  */
 
-public class SplashActivity extends BaseNoBarPresenterActivity<SplashContract.Presenter> implements SplashContract
-        .View {
+public class SplashActivity extends BaseNoBarPresenterActivity<SplashContract.Presenter> implements SplashContract.View {
 
 
     @Override

@@ -8,7 +8,6 @@ package cn.abtion.taskgo.base.contract;
 
 public interface BaseContract {
 
-
     interface Presenter {
 
         /**
@@ -26,5 +25,4 @@ public interface BaseContract {
          */
         void setPresenter(T presenter);
     }
-
 }

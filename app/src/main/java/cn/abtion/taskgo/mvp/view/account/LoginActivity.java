@@ -10,6 +10,7 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.hyphenate.EMCallBack;
 import com.hyphenate.chat.EMClient;
@@ -95,6 +96,9 @@ public class LoginActivity extends BaseNoBarPresenterActivity<LoginContract.Pres
      */
     @Override
     public void onLoginSuccess(String token) {
+
+
+
         CacheUtil.putString(CacheKey.TOKEN, token);
         ToastUtil.showToast("登录成功");
         MainActivity.startActivity(LoginActivity.this);
