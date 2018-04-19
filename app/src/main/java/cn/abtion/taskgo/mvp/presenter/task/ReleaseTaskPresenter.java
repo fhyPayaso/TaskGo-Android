@@ -45,19 +45,19 @@ public class ReleaseTaskPresenter extends BasePresenter<ReleaseTaskContract.View
     @SuppressWarnings("unchecked")
     public void releaseWaterTask(ReleaseWaterTaskRequest request) {
 
-        if (isDataTrue(request)) {
-            RetrofitFactory
-                    .getRetrofitService()
-                    .releaseWaterTask(request)
-                    .subscribeOn(Schedulers.io())
-                    .observeOn(AndroidSchedulers.mainThread())
-                    .subscribe(new BaseObserver() {
-                        @Override
-                        public void onDataSuccess(ApiResponse response) {
-                            mView.onReleaseSuccess();
-                        }
-                    });
-        }
+//        if (isDataTrue(request)) {
+//            RetrofitFactory
+//                    .getRetrofitService()
+//                    .releaseWaterTask(request)
+//                    .subscribeOn(Schedulers.io())
+//                    .observeOn(AndroidSchedulers.mainThread())
+//                    .subscribe(new BaseObserver() {
+//                        @Override
+//                        public void onDataSuccess(ApiResponse response) {
+//                            mView.onReleaseSuccess();
+//                        }
+//                    });
+//        }
     }
 
     @Override
@@ -79,26 +79,7 @@ public class ReleaseTaskPresenter extends BasePresenter<ReleaseTaskContract.View
         }
     }
 
-    /**
-     * 水任务字段检查
-     *
-     * @param request
-     * @return
-     */
-    private boolean isDataTrue(ReleaseWaterTaskRequest request) {
 
-        boolean flag = true;
-        String address = request.getAddress();
-
-        if (address.equals("")) {
-            mView.onReleaseFailed("请填宿舍号");
-            flag = false;
-        } else if (address.length() !=4 || !RegexpUtils.checkAllNumber(address)) {
-            mView.onReleaseFailed("宿舍号格式错误");
-            flag = false;
-        }
-        return flag;
-    }
 
     /**
      * 物品任务字段检查

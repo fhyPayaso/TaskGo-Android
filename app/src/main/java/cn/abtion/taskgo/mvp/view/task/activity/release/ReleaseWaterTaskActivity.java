@@ -2,8 +2,10 @@ package cn.abtion.taskgo.mvp.view.task.activity.release;
 
 import android.content.Context;
 import android.content.Intent;
+import android.os.Bundle;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import butterknife.BindView;
 import butterknife.OnClick;
@@ -11,9 +13,11 @@ import cn.abtion.taskgo.R;
 import cn.abtion.taskgo.base.activity.BaseToolBarActivity;
 import cn.abtion.taskgo.base.activity.BaseToolBarPresenterActivity;
 import cn.abtion.taskgo.mvp.contract.task.ReleaseTaskContract;
+import cn.abtion.taskgo.mvp.model.task.model.WaterTaskInfoModel;
 import cn.abtion.taskgo.mvp.model.task.request.ReleaseWaterTaskRequest;
 import cn.abtion.taskgo.mvp.presenter.task.ReleaseTaskPresenter;
 
+import cn.abtion.taskgo.utils.RegexpUtils;
 import cn.abtion.taskgo.utils.ToastUtil;
 
 /**
@@ -21,7 +25,6 @@ import cn.abtion.taskgo.utils.ToastUtil;
  * @since 18/1/26 17:42.
  * email fanhongyu@hrsoft.net.
  */
-
 public class ReleaseWaterTaskActivity extends BaseToolBarActivity {
 
 
@@ -29,18 +32,31 @@ public class ReleaseWaterTaskActivity extends BaseToolBarActivity {
     TextView txtTypeSend;
     @BindView(R.id.txt_type_self)
     TextView txtTypeSelf;
-    @BindView(R.id.txt_total_money)
-    TextView txtTotalMoney;
     @BindView(R.id.edit_address_number)
     EditText editAddressNumber;
     @BindView(R.id.btn_release_task)
     TextView btnReleaseTask;
 
+    /**
+     * 送水上门类型
+     */
+    public static final int WATER_TASK_SEND = 0;
 
     /**
-     * 默认为0代表送水上门，1代表自取
+     * 自取类型
      */
-    private String waterTaskType = "0";
+    public static final int WATER_TASK_SELF = 1;
+
+    /**
+     * 当前水任务类型
+     */
+    private int mCurrentType = 0;
+
+
+    /**
+     * 宿舍号
+     */
+    private String mAddressNumber;
 
 
     @Override
@@ -77,8 +93,7 @@ public class ReleaseWaterTaskActivity extends BaseToolBarActivity {
 
         txtTypeSend.setSelected(true);
         txtTypeSelf.setSelected(false);
-        txtTotalMoney.setText(R.string.txt_nine_rmb);
-        waterTaskType = "0";
+        mCurrentType = WATER_TASK_SEND;
     }
 
     /**
@@ -89,35 +104,45 @@ public class ReleaseWaterTaskActivity extends BaseToolBarActivity {
 
         txtTypeSelf.setSelected(true);
         txtTypeSend.setSelected(false);
-        txtTotalMoney.setText(R.string.txt_eight_rmb);
-        waterTaskType = "1";
+        mCurrentType = WATER_TASK_SELF;
     }
-
-//    /**
-//     * 发布成功回调
-//     */
-//    @Override
-//    public void onReleaseSuccess() {
-//        ToastUtil.showToast("发布成功");
-//        finish();
-//    }
-//
-//    /**
-//     * 发布失败打印错误信息
-//     *
-//     * @param errorMessage
-//     */
-//    @Override
-//    public void onReleaseFailed(String errorMessage) {
-//        ToastUtil.showToast(errorMessage);
-//    }
 
 
     @OnClick(R.id.btn_release_task)
     public void onViewClicked() {
-//        mPresenter.releaseWaterTask(new ReleaseWaterTaskRequest(editAddressNumber.getText().toString().trim(),
-//                waterTaskType));
+        mAddressNumber = editAddressNumber.getText().toString().trim();
+        if (isDataTrue()) {
 
-        ChooseCardActivity.startActivity(this);
+
+            WaterTaskInfoModel infoModel = new WaterTaskInfoModel();
+            infoModel.setAddressNumber(mAddressNumber);
+            infoModel.setWaterType(mCurrentType);
+            infoModel.setMoney(mCurrentType == WATER_TASK_SEND ? 9 : 8);
+
+
+            Bundle bundle = new Bundle();
+            bundle.putInt(ChooseCardActivity.BUNDLE_KEY_TASK_TYPE, ChooseCardActivity.TASK_WATER);
+            bundle.putSerializable(ChooseCardActivity.BUNDLE_KEY_WATER_TASK_INFO, infoModel);
+            ChooseCardActivity.startActivity(this, bundle);
+        }
+    }
+
+
+    /**
+     * 水任务字段检查
+     *
+     * @return
+     */
+    private boolean isDataTrue() {
+
+        boolean flag = true;
+        if (mAddressNumber.equals("")) {
+            ToastUtil.showToast("请填宿舍号");
+            flag = false;
+        } else if (mAddressNumber.length() != 4 || !RegexpUtils.checkAllNumber(mAddressNumber)) {
+            ToastUtil.showToast("宿舍号格式错误");
+            flag = false;
+        }
+        return flag;
     }
 }

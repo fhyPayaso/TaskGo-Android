@@ -92,6 +92,8 @@ dependencies {
     //日期选择器
     compile 'com.contrarywind:Android-PickerView:3.2.5'
 
+    compile 'me.imid.swipebacklayout.lib:library:1.1.0'
+
 
 
 
