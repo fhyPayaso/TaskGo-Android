@@ -13,6 +13,8 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import java.util.List;
+
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
@@ -21,6 +23,7 @@ import cn.abtion.taskgo.base.activity.BaseToolBarPresenterActivity;
 import cn.abtion.taskgo.base.data.DataCallBack;
 import cn.abtion.taskgo.data.UpLoadHelper;
 import cn.abtion.taskgo.mvp.contract.task.ReleaseTaskContract;
+import cn.abtion.taskgo.mvp.model.task.model.ChooseCardModel;
 import cn.abtion.taskgo.mvp.model.task.request.ReleaseLostFoundTaskRequest;
 import cn.abtion.taskgo.mvp.presenter.task.ReleaseTaskPresenter;
 import cn.abtion.taskgo.utils.DialogUtil;
@@ -227,6 +230,11 @@ public class ReleaseLostFoundTaskActivity extends BaseToolBarPresenterActivity<R
                     break;
             }
         }
+    }
+
+    @Override
+    public void loadCardInfoSuccess(List<ChooseCardModel> models) {
+
     }
 
     @Override

@@ -12,9 +12,11 @@ import butterknife.OnClick;
 import cn.abtion.taskgo.R;
 import cn.abtion.taskgo.base.activity.BaseToolBarActivity;
 import cn.abtion.taskgo.base.activity.BaseToolBarPresenterActivity;
+import cn.abtion.taskgo.mvp.contract.task.FillTaskInfoContract;
 import cn.abtion.taskgo.mvp.contract.task.ReleaseTaskContract;
 import cn.abtion.taskgo.mvp.model.task.model.WaterTaskInfoModel;
 import cn.abtion.taskgo.mvp.model.task.request.ReleaseWaterTaskRequest;
+import cn.abtion.taskgo.mvp.presenter.task.FillTaskInfoPresenter;
 import cn.abtion.taskgo.mvp.presenter.task.ReleaseTaskPresenter;
 
 import cn.abtion.taskgo.utils.RegexpUtils;
@@ -25,7 +27,8 @@ import cn.abtion.taskgo.utils.ToastUtil;
  * @since 18/1/26 17:42.
  * email fanhongyu@hrsoft.net.
  */
-public class ReleaseWaterTaskActivity extends BaseToolBarActivity {
+public class ReleaseWaterTaskActivity extends BaseToolBarPresenterActivity<FillTaskInfoContract.Presenter> implements
+        FillTaskInfoContract.View {
 
 
     @BindView(R.id.txt_type_send)
@@ -52,11 +55,10 @@ public class ReleaseWaterTaskActivity extends BaseToolBarActivity {
      */
     private int mCurrentType = 0;
 
-
     /**
-     * 宿舍号
+     * 任务信息
      */
-    private String mAddressNumber;
+    private WaterTaskInfoModel mInfoModel;
 
 
     @Override
@@ -110,39 +112,29 @@ public class ReleaseWaterTaskActivity extends BaseToolBarActivity {
 
     @OnClick(R.id.btn_release_task)
     public void onViewClicked() {
-        mAddressNumber = editAddressNumber.getText().toString().trim();
-        if (isDataTrue()) {
-
-
-            WaterTaskInfoModel infoModel = new WaterTaskInfoModel();
-            infoModel.setAddressNumber(mAddressNumber);
-            infoModel.setWaterType(mCurrentType);
-            infoModel.setMoney(mCurrentType == WATER_TASK_SEND ? 9 : 8);
-
-
-            Bundle bundle = new Bundle();
-            bundle.putInt(ChooseCardActivity.BUNDLE_KEY_TASK_TYPE, ChooseCardActivity.TASK_WATER);
-            bundle.putSerializable(ChooseCardActivity.BUNDLE_KEY_WATER_TASK_INFO, infoModel);
-            ChooseCardActivity.startActivity(this, bundle);
-        }
+        mInfoModel = new WaterTaskInfoModel();
+        mInfoModel.setAddressNumber(editAddressNumber.getText().toString().trim());
+        mInfoModel.setWaterType(mCurrentType);
+        mInfoModel.setMoney(mCurrentType == WATER_TASK_SEND ? 9 : 8);
+        mPresenter.checkWaterTaskInfo(mInfoModel);
     }
 
 
-    /**
-     * 水任务字段检查
-     *
-     * @return
-     */
-    private boolean isDataTrue() {
+    @Override
+    public void onDataTrue() {
+        Bundle bundle = new Bundle();
+        bundle.putInt(ChooseCardActivity.BUNDLE_KEY_TASK_TYPE, ChooseCardActivity.TASK_WATER);
+        bundle.putSerializable(ChooseCardActivity.BUNDLE_KEY_WATER_TASK_INFO, mInfoModel);
+        ChooseCardActivity.startActivity(this, bundle);
+    }
 
-        boolean flag = true;
-        if (mAddressNumber.equals("")) {
-            ToastUtil.showToast("请填宿舍号");
-            flag = false;
-        } else if (mAddressNumber.length() != 4 || !RegexpUtils.checkAllNumber(mAddressNumber)) {
-            ToastUtil.showToast("宿舍号格式错误");
-            flag = false;
-        }
-        return flag;
+    @Override
+    public void onDataFalse(String error) {
+        ToastUtil.showToast(error);
+    }
+
+    @Override
+    public FillTaskInfoContract.Presenter initPresenter() {
+        return new FillTaskInfoPresenter(this);
     }
 }
