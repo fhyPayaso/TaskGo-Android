@@ -1,14 +1,20 @@
 package cn.abtion.taskgo.mvp.view.task.activity.release;
 
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.view.ViewPager;
 import android.util.Log;
-import android.view.View;
+import android.view.Gravity;
+import android.view.ViewGroup;
+import android.view.Window;
+import android.view.WindowManager;
+import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.BindView;
@@ -21,6 +27,7 @@ import cn.abtion.taskgo.mvp.model.task.model.ChooseCardModel;
 import cn.abtion.taskgo.mvp.model.task.model.LostFoundTaskInfoModel;
 import cn.abtion.taskgo.mvp.model.task.model.WaterTaskInfoModel;
 import cn.abtion.taskgo.mvp.presenter.task.ReleaseTaskPresenter;
+import cn.abtion.taskgo.utils.DialogUtil;
 import cn.abtion.taskgo.utils.ToastUtil;
 import cn.abtion.taskgo.widget.cardpager.AlphaTransformer;
 
@@ -48,6 +55,8 @@ public class ChooseCardActivity extends BaseToolBarPresenterActivity<ReleaseTask
     TextView txtReleaseTask;
     @BindView(R.id.vp_card_pager)
     ViewPager vpCardPager;
+    @BindView(R.id.txt_set_task_money)
+    TextView txtSetTaskMoney;
     private int sTaskType;
     private List<ChooseCardModel> mCardModelList;
     private WaterTaskInfoModel mWaterTaskInfoModel;
@@ -87,7 +96,7 @@ public class ChooseCardActivity extends BaseToolBarPresenterActivity<ReleaseTask
 
         vpCardPager.setOffscreenPageLimit(3);
         vpCardPager.setPageTransformer(false, new AlphaTransformer());
-        CardFragmentPagerAdapter adapter = new CardFragmentPagerAdapter(getSupportFragmentManager(), models);
+        CardPagerAdapter adapter = new CardPagerAdapter(getSupportFragmentManager(), models);
         vpCardPager.setAdapter(adapter);
     }
 
@@ -144,12 +153,51 @@ public class ChooseCardActivity extends BaseToolBarPresenterActivity<ReleaseTask
     }
 
     @OnClick(R.id.txt_release_task)
-    public void onViewClicked() {
+    public void onTxtReleaseTaskClicked() {
+
         Log.i("card", "onViewClicked: 卡片1 选择 :" + mCardModelList.get(0).getChooseNumber() + ",剩余 :" + mCardModelList.get
                 (0).getHaveNumber());
         Log.i("card", "onViewClicked: 卡片2 选择 :" + mCardModelList.get(1).getChooseNumber() + ",剩余 :" +
                 mCardModelList.get(1).getHaveNumber());
         Log.i("card", "onViewClicked: 卡片3 选择 :" + mCardModelList.get(2).getChooseNumber() + ",剩余 :" +
                 mCardModelList.get(2).getHaveNumber());
+    }
+
+    @OnClick(R.id.txt_set_task_money)
+    public void onTxtSetMoneyClicked() {
+
+        getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_PAN);
+        final EditText editText = new EditText(this);
+        LinearLayout.LayoutParams editTextViewParams = new LinearLayout.LayoutParams(ViewGroup.LayoutParams
+                .MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+        editText.setGravity(Gravity.CENTER);
+        editTextViewParams.setMargins(50, 0, 50, 0);
+        editText.setLayoutParams(editTextViewParams);
+
+
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+
+
+        AlertDialog dialog = builder.setTitle("设置金额")
+                .setView(editText)
+                .setPositiveButton("确认", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        txtTaskMoney.setText(editText.getText().toString().trim());
+                    }
+                })
+                .setNegativeButton("取消", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+
+                    }
+                }).create();
+
+        dialog.getWindow().clearFlags(WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE | WindowManager.LayoutParams
+                .FLAG_ALT_FOCUSABLE_IM);
+        dialog.getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_RESIZE |
+                WindowManager.LayoutParams.SOFT_INPUT_STATE_HIDDEN);
+
+        dialog.show();
     }
 }

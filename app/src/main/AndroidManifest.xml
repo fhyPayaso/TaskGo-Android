@@ -86,7 +86,9 @@
         <activity android:name=".mvp.view.task.activity.my.ChooseFinishUserListActivity"/>
         <activity android:name=".mvp.view.account.ForgetPasswordActivity"/>
         <activity android:name=".mvp.view.mine.activity.PersonalPageActivity"/>
-        <activity android:name=".mvp.view.task.activity.release.ChooseCardActivity"/>
+        <activity android:name=".mvp.view.task.activity.release.ChooseCardActivity"
+            android:windowSoftInputMode="adjustPan">
+        </activity>
 
         <activity android:name=".mvp.view.initiate.GuideActivity"/>
         <activity android:name=".mvp.view.initiate.SplashActivity">

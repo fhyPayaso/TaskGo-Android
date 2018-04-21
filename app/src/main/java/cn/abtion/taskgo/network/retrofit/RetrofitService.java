@@ -49,6 +49,7 @@ public interface RetrofitService {
     @POST("user/login")
     Observable<ApiResponse<TokenResponse>> login(@Body LoginRequestModel loginRequest);
 
+
     /**
      * 修改密码接口
      *
@@ -89,6 +90,7 @@ public interface RetrofitService {
 
     /**
      * 个人主页面信息
+     *
      * @return
      */
     @GET("user/info/show")
@@ -96,6 +98,7 @@ public interface RetrofitService {
 
     /**
      * 关注某人
+     *
      * @param followerId
      * @return
      */
@@ -104,6 +107,7 @@ public interface RetrofitService {
 
     /**
      * 取消关注
+     *
      * @param unFollowId
      * @return
      */
@@ -112,6 +116,7 @@ public interface RetrofitService {
 
     /**
      * 获取关注列表
+     *
      * @return
      */
     @GET("user/getFollowers")
@@ -119,6 +124,7 @@ public interface RetrofitService {
 
     /**
      * 获取粉丝列表
+     *
      * @return
      */
     @GET("user/getFollowings")
@@ -126,6 +132,7 @@ public interface RetrofitService {
 
     /**
      * 更新个人信息
+     *
      * @param UpdateInformationModel
      * @return
      */
@@ -134,11 +141,12 @@ public interface RetrofitService {
 
     /**
      * 获得个人主页信息
+     *
      * @param userId
      * @return
      */
     @GET("user/info/show/{user_id}")
-    Call<ApiResponse<PersonalPageModel>> getPersonalPageInformation(@Path("user_id")String userId);
+    Call<ApiResponse<PersonalPageModel>> getPersonalPageInformation(@Path("user_id") String userId);
 
 
     /**
@@ -148,7 +156,8 @@ public interface RetrofitService {
      * @return
      */
     @GET("user/checkToken/{token}")
-    Observable<ApiResponse> checkToke(@Path("token") String token);
+    Call<ApiResponse> checkToken(@Path("token") String token);
+
 
     /**
      * 加载水任务列表

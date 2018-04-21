@@ -22,9 +22,12 @@ import cn.abtion.taskgo.R;
 import cn.abtion.taskgo.base.activity.BaseToolBarPresenterActivity;
 import cn.abtion.taskgo.base.data.DataCallBack;
 import cn.abtion.taskgo.data.UpLoadHelper;
+import cn.abtion.taskgo.mvp.contract.task.FillTaskInfoContract;
 import cn.abtion.taskgo.mvp.contract.task.ReleaseTaskContract;
 import cn.abtion.taskgo.mvp.model.task.model.ChooseCardModel;
+import cn.abtion.taskgo.mvp.model.task.model.LostFoundTaskInfoModel;
 import cn.abtion.taskgo.mvp.model.task.request.ReleaseLostFoundTaskRequest;
+import cn.abtion.taskgo.mvp.presenter.task.FillTaskInfoPresenter;
 import cn.abtion.taskgo.mvp.presenter.task.ReleaseTaskPresenter;
 import cn.abtion.taskgo.utils.DialogUtil;
 import cn.abtion.taskgo.utils.FileUtil;
@@ -36,8 +39,8 @@ import cn.abtion.taskgo.utils.ToastUtil;
  * email fanhongyu@hrsoft.net.
  */
 
-public class ReleaseLostFoundTaskActivity extends BaseToolBarPresenterActivity<ReleaseTaskContract.Presenter>
-        implements ReleaseTaskContract.View, DataCallBack.Callback<String> {
+public class ReleaseLostFoundTaskActivity extends BaseToolBarPresenterActivity<FillTaskInfoContract.Presenter>
+        implements FillTaskInfoContract.View, DataCallBack.Callback<String> {
 
     @BindView(R.id.edit_item_name)
     EditText mEditItemName;
@@ -53,10 +56,14 @@ public class ReleaseLostFoundTaskActivity extends BaseToolBarPresenterActivity<R
     EditText mEditItemPlace;
 
 
+    public static final int TASK_LOST = 0;
+    public static final int TASK_FOUND = 1;
+
+
     /**
      * 0代表丢了东西，1代表捡到东西
      */
-    private String lostFoundTaskType = "0";
+    private int lostFoundTaskType = TASK_LOST;
     /**
      * 0代表不需要上传图片，1代表需要上传图片
      */
@@ -69,10 +76,8 @@ public class ReleaseLostFoundTaskActivity extends BaseToolBarPresenterActivity<R
     private String photoPath;
 
 
-    @Override
-    public ReleaseTaskContract.Presenter initPresenter() {
-        return new ReleaseTaskPresenter(this);
-    }
+    private LostFoundTaskInfoModel mInfoModel;
+
 
     @Override
     protected int getLayoutId() {
@@ -81,10 +86,10 @@ public class ReleaseLostFoundTaskActivity extends BaseToolBarPresenterActivity<R
 
     @Override
     protected void initVariable() {
-
         //获得权限
         FileUtil.verifyStoragePermissions(ReleaseLostFoundTaskActivity.this);
     }
+
 
     @Override
     protected void initView() {
@@ -97,6 +102,11 @@ public class ReleaseLostFoundTaskActivity extends BaseToolBarPresenterActivity<R
     @Override
     protected void loadData() {
 
+    }
+
+    @Override
+    public FillTaskInfoContract.Presenter initPresenter() {
+        return new FillTaskInfoPresenter(this);
     }
 
 
@@ -114,19 +124,82 @@ public class ReleaseLostFoundTaskActivity extends BaseToolBarPresenterActivity<R
 
     @OnClick(R.id.txt_type_lost)
     public void onTxtTypeLostClicked() {
-
         mTxtTypeLost.setSelected(true);
         mTxtTypeFound.setSelected(false);
-        lostFoundTaskType = "0";
+        lostFoundTaskType = TASK_LOST;
     }
 
     @OnClick(R.id.txt_type_found)
     public void onTxtTypeFoundClicked() {
-
         mTxtTypeLost.setSelected(false);
         mTxtTypeFound.setSelected(true);
-        lostFoundTaskType = "1";
+        lostFoundTaskType = TASK_FOUND;
     }
+
+
+    @OnClick(R.id.btn_release_task)
+    public void onBtnReleaseTaskClicked() {
+
+        mProgressDialog = new DialogUtil().new NativeProgressDialog();
+        mProgressDialog
+                .initDialog(ReleaseLostFoundTaskActivity.this)
+                .setMessage("请稍后")
+                .showDialog();
+
+
+        mInfoModel = new LostFoundTaskInfoModel();
+        mInfoModel.setName(mEditItemName.getText().toString().trim());
+        mInfoModel.setPlace(mEditItemPlace.getText().toString().trim());
+        mInfoModel.setLostFoundType(lostFoundTaskType);
+        mInfoModel.setRemark(mEditTaskInformation.getText().toString().trim());
+        if (!hasImg) {
+            mPresenter.checkLostFoundTaskInfo(mInfoModel);
+        } else {
+            UpLoadHelper.upLoadImgToQiNiu(photoPath, this);
+        }
+    }
+
+
+    /**
+     * 图片上传成功
+     *
+     * @param s 图片外链
+     */
+    @Override
+    public void onDataLoaded(String s) {
+        mInfoModel.setWithImg(true);
+        mInfoModel.setImgUrl(s);
+        mPresenter.checkLostFoundTaskInfo(mInfoModel);
+    }
+
+    /**
+     * 图片上传失败
+     *
+     * @param error
+     */
+    @Override
+    public void onFailedLoaded(int error) {
+        ToastUtil.showToast(error);
+    }
+
+
+    /**
+     * 信息格式正确
+     */
+    @Override
+    public void onDataTrue() {
+
+        Bundle bundle = new Bundle();
+        bundle.putInt(ChooseCardActivity.BUNDLE_KEY_TASK_TYPE, ChooseCardActivity.TASK_LOST_FOUND);
+        bundle.putSerializable(ChooseCardActivity.BUNDLE_KEY_WATER_TASK_INFO, mInfoModel);
+        ChooseCardActivity.startActivity(this, bundle);
+    }
+
+    @Override
+    public void onDataFalse(String error) {
+        ToastUtil.showToast(error);
+    }
+
 
     /**
      * 显示底部dialog
@@ -188,27 +261,6 @@ public class ReleaseLostFoundTaskActivity extends BaseToolBarPresenterActivity<R
     }
 
 
-    @OnClick(R.id.btn_release_task)
-    public void onBtnReleaseTaskClicked() {
-
-        mProgressDialog = new DialogUtil().new NativeProgressDialog();
-        mProgressDialog
-                .initDialog(ReleaseLostFoundTaskActivity.this)
-                .setMessage("请稍后")
-                .showDialog();
-
-
-        if (!hasImg) {
-
-            mPresenter.releaseLostFoundTask(new ReleaseLostFoundTaskRequest(mEditItemName.getText().toString().trim()
-                    , lostFoundTaskType, "no_picture"
-                    , mEditItemPlace.getText().toString().trim()
-                    , mEditTaskInformation.getText().toString().trim()));
-        } else {
-            UpLoadHelper.upLoadImgToQiNiu(photoPath, this);
-        }
-    }
-
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
@@ -230,47 +282,5 @@ public class ReleaseLostFoundTaskActivity extends BaseToolBarPresenterActivity<R
                     break;
             }
         }
-    }
-
-    @Override
-    public void loadCardInfoSuccess(List<ChooseCardModel> models) {
-
-    }
-
-    @Override
-    public void onReleaseSuccess() {
-        mProgressDialog.hideDialog();
-        ToastUtil.showToast("发布成功");
-        finish();
-    }
-
-    @Override
-    public void onReleaseFailed(String errorMessage) {
-        ToastUtil.showToast(errorMessage);
-    }
-
-
-    /**
-     * 图片上传成功
-     *
-     * @param s 图片外链
-     */
-    @Override
-    public void onDataLoaded(String s) {
-
-        mPresenter.releaseLostFoundTask(new ReleaseLostFoundTaskRequest(mEditItemName.getText().toString().trim()
-                , lostFoundTaskType, s
-                , mEditItemPlace.getText().toString().trim()
-                , mEditTaskInformation.getText().toString().trim()));
-    }
-
-    /**
-     * 图片上传失败
-     *
-     * @param error
-     */
-    @Override
-    public void onFailedLoaded(int error) {
-        ToastUtil.showToast(error);
     }
 }
