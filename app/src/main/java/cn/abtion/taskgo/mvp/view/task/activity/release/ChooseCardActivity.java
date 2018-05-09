@@ -57,6 +57,7 @@ public class ChooseCardActivity extends BaseToolBarPresenterActivity<ReleaseTask
     ViewPager vpCardPager;
     @BindView(R.id.txt_set_task_money)
     TextView txtSetTaskMoney;
+
     private int sTaskType;
     private List<ChooseCardModel> mCardModelList;
     private WaterTaskInfoModel mWaterTaskInfoModel;

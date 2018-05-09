@@ -10,8 +10,8 @@ import cn.abtion.taskgo.base.contract.BaseContract;
  * email fanhongyu@hrsoft.net.
  */
 
-public abstract class BasePresenterFragment <Presenter extends BaseContract.Presenter> extends BaseFragment
-        implements BaseContract.View<Presenter>{
+public abstract class BasePresenterFragment<Presenter extends BaseContract.Presenter> extends BaseFragment
+        implements BaseContract.View<Presenter> {
 
 
     /**
@@ -42,10 +42,5 @@ public abstract class BasePresenterFragment <Presenter extends BaseContract.Pres
     public void setPresenter(Presenter presenter) {
         this.mPresenter = presenter;
     }
-
-
-
-
-
 
 }

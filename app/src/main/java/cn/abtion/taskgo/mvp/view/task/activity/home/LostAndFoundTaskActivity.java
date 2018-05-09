@@ -119,14 +119,14 @@ public class LostAndFoundTaskActivity extends BaseToolBarActivity {
         TextView txtItemName = view.findViewById(R.id.txt_item_name);
         TextView txtPlace = view.findViewById(R.id.txt_item_place);
         TextView txtLostFoundType = view.findViewById(R.id.txt_item_task_type);
-        TextView txtRmark = view.findViewById(R.id.txt_remark_information);
+        TextView txtRemark = view.findViewById(R.id.txt_remark_information);
         TextView btnConfirm = view.findViewById(R.id.btn_information_confirm);
         ImageView imageView = view.findViewById(R.id.img_item_photo);
 
         txtItemName.setText(response.getName() == null ? "" : response.getName());
         txtLostFoundType.setText(response.getType() == 0 ? "寻物启事" : "失物招领");
         txtPlace.setText(response.getPlace() == null ? "" : response.getPlace());
-        txtRmark.setText(response.getRemarks() == null ? "" : response.getRemarks());
+        txtRemark.setText(response.getRemarks() == null ? "" : response.getRemarks());
         if(response.getPicture_url()!= null && response.getPicture_url().length() >10) {
             Glide.with(context).load(response.getPicture_url()).into(imageView);
         }

@@ -60,12 +60,6 @@ public class CardFragment extends BaseFragment {
     @Override
     protected void initView() {
 
-        haveCardNumber = mChooseCardModel.getHaveNumber();
-        chooseCardNumber = mChooseCardModel.getChooseNumber();
-
-        Glide.with(getContext()).load(mChooseCardModel.getCardImgUrl()).into(imgCard);
-        txtHaveCardNumber.setText(String.valueOf(haveCardNumber));
-        txtChooseCardNumber.setText(String.valueOf(chooseCardNumber));
     }
 
     @Override
@@ -120,5 +114,13 @@ public class CardFragment extends BaseFragment {
 
     public void setChooseCardModel(ChooseCardModel chooseCardModel) {
         mChooseCardModel = chooseCardModel;
+
+
+        haveCardNumber = mChooseCardModel.getHaveNumber();
+        chooseCardNumber = mChooseCardModel.getChooseNumber();
+
+        Glide.with(getContext()).load(mChooseCardModel.getCardImgUrl()).into(imgCard);
+        txtHaveCardNumber.setText(String.valueOf(haveCardNumber));
+        txtChooseCardNumber.setText(String.valueOf(chooseCardNumber));
     }
 }

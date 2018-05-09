@@ -27,8 +27,7 @@ import cn.abtion.taskgo.utils.ToastUtil;
  * @since 18/1/26 17:42.
  * email fanhongyu@hrsoft.net.
  */
-public class ReleaseWaterTaskActivity extends BaseToolBarPresenterActivity<FillTaskInfoContract.Presenter> implements
-        FillTaskInfoContract.View {
+public class ReleaseWaterTaskActivity extends BaseToolBarPresenterActivity<FillTaskInfoContract.Presenter> implements FillTaskInfoContract.View {
 
 
     @BindView(R.id.txt_type_send)

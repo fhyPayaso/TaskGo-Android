@@ -388,10 +388,6 @@ public final class DialogUtil {
             nativeProgressDialog.dismiss();
             return this;
         }
-
-
     }
-
-
 }
 
